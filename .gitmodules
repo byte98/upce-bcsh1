@@ -1,0 +1,9 @@
+[submodule "HW01"]
+	path = HW01
+	url = https://github.com/upce-fei-course-icshp-bcsh1-2223/exercise-01-byte98.git
+[submodule "HW02"]
+	path = HW02
+	url = https://github.com/upce-fei-course-icshp-bcsh1-2223/exercise-02-byte98.git
+[submodule "HW03"]
+	path = HW03
+	url = https://github.com/upce-fei-course-icshp-bcsh1-2223/exercise-03-byte98.git
