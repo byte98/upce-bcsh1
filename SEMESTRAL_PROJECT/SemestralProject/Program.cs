@@ -1,3 +1,5 @@
+using SemestralProject.Forms;
+
 namespace SemestralProject
 {
     internal static class Program

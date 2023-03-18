@@ -40,5 +40,14 @@ namespace SemestralProject.Visual
         {
             pictureBox.Image = (Image)this.image;
         }
+
+        /// <summary>
+        /// Gets image representation of icon
+        /// </summary>
+        /// <returns>Image representation of icon</returns>
+        public Image GetImage()
+        {
+            return (Image)this.image;
+        }
     }
 }

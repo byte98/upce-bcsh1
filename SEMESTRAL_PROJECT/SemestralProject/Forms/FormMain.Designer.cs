@@ -1,8 +1,8 @@
 ﻿using SemestralProject.Visual;
 
-namespace SemestralProject
+namespace SemestralProject.Forms
 {
-    partial class FormMain
+    internal partial class FormMain: Form
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,6 +30,7 @@ namespace SemestralProject
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panelItemsControl = new System.Windows.Forms.Panel();
             this.radioButtonIS = new System.Windows.Forms.RadioButton();
             this.tabPageIS = new System.Windows.Forms.TabPage();
@@ -50,8 +51,9 @@ namespace SemestralProject
             this.panelItemsControl.Controls.Add(this.radioButtonIS);
             this.panelItemsControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelItemsControl.Location = new System.Drawing.Point(0, 0);
+            this.panelItemsControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelItemsControl.Name = "panelItemsControl";
-            this.panelItemsControl.Size = new System.Drawing.Size(782, 30);
+            this.panelItemsControl.Size = new System.Drawing.Size(684, 22);
             this.panelItemsControl.TabIndex = 1;
             // 
             // radioButtonIS
@@ -62,8 +64,9 @@ namespace SemestralProject
             this.radioButtonIS.FlatAppearance.BorderSize = 0;
             this.radioButtonIS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radioButtonIS.Location = new System.Drawing.Point(0, 0);
+            this.radioButtonIS.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButtonIS.Name = "radioButtonIS";
-            this.radioButtonIS.Size = new System.Drawing.Size(173, 30);
+            this.radioButtonIS.Size = new System.Drawing.Size(142, 25);
             this.radioButtonIS.TabIndex = 2;
             this.radioButtonIS.TabStop = true;
             this.radioButtonIS.Text = "INFORMAČNÍ SYSTÉMY";
@@ -73,10 +76,11 @@ namespace SemestralProject
             // 
             this.tabPageIS.Controls.Add(this.panelISContent);
             this.tabPageIS.Controls.Add(this.panelISControls);
-            this.tabPageIS.Location = new System.Drawing.Point(4, 29);
+            this.tabPageIS.Location = new System.Drawing.Point(4, 24);
+            this.tabPageIS.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageIS.Name = "tabPageIS";
-            this.tabPageIS.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageIS.Size = new System.Drawing.Size(774, 490);
+            this.tabPageIS.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPageIS.Size = new System.Drawing.Size(676, 365);
             this.tabPageIS.TabIndex = 0;
             this.tabPageIS.Text = "INFORMAČNÍ SYSTÉMY";
             this.tabPageIS.UseVisualStyleBackColor = true;
@@ -85,17 +89,19 @@ namespace SemestralProject
             // 
             this.panelISContent.Controls.Add(this.listViewIS);
             this.panelISContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelISContent.Location = new System.Drawing.Point(3, 92);
+            this.panelISContent.Location = new System.Drawing.Point(3, 82);
+            this.panelISContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelISContent.Name = "panelISContent";
-            this.panelISContent.Size = new System.Drawing.Size(768, 395);
+            this.panelISContent.Size = new System.Drawing.Size(670, 281);
             this.panelISContent.TabIndex = 1;
             // 
             // listViewIS
             // 
             this.listViewIS.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewIS.Location = new System.Drawing.Point(0, 0);
+            this.listViewIS.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewIS.Name = "listViewIS";
-            this.listViewIS.Size = new System.Drawing.Size(768, 395);
+            this.listViewIS.Size = new System.Drawing.Size(670, 281);
             this.listViewIS.TabIndex = 0;
             this.listViewIS.UseCompatibleStateImageBehavior = false;
             // 
@@ -103,9 +109,10 @@ namespace SemestralProject
             // 
             this.panelISControls.Controls.Add(this.buttonAddIS);
             this.panelISControls.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelISControls.Location = new System.Drawing.Point(3, 3);
+            this.panelISControls.Location = new System.Drawing.Point(3, 2);
+            this.panelISControls.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelISControls.Name = "panelISControls";
-            this.panelISControls.Size = new System.Drawing.Size(768, 89);
+            this.panelISControls.Size = new System.Drawing.Size(670, 80);
             this.panelISControls.TabIndex = 0;
             // 
             // buttonAddIS
@@ -113,9 +120,10 @@ namespace SemestralProject
             this.buttonAddIS.FlatAppearance.BorderSize = 0;
             this.buttonAddIS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAddIS.Image = global::SemestralProject.Resources.is_add;
-            this.buttonAddIS.Location = new System.Drawing.Point(3, 3);
+            this.buttonAddIS.Location = new System.Drawing.Point(3, 2);
+            this.buttonAddIS.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAddIS.Name = "buttonAddIS";
-            this.buttonAddIS.Size = new System.Drawing.Size(94, 86);
+            this.buttonAddIS.Size = new System.Drawing.Size(82, 80);
             this.buttonAddIS.TabIndex = 0;
             this.buttonAddIS.Text = "Přidat nový IS";
             this.buttonAddIS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -126,19 +134,22 @@ namespace SemestralProject
             // 
             this.tabControlContent.Controls.Add(this.tabPageIS);
             this.tabControlContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlContent.Location = new System.Drawing.Point(0, 30);
+            this.tabControlContent.Location = new System.Drawing.Point(0, 22);
+            this.tabControlContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControlContent.Name = "tabControlContent";
             this.tabControlContent.SelectedIndex = 0;
-            this.tabControlContent.Size = new System.Drawing.Size(782, 523);
+            this.tabControlContent.Size = new System.Drawing.Size(684, 393);
             this.tabControlContent.TabIndex = 2;
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 553);
+            this.ClientSize = new System.Drawing.Size(684, 415);
             this.Controls.Add(this.tabControlContent);
             this.Controls.Add(this.panelItemsControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormMain";
             this.Text = "Správce distribucí datových souborů";
             this.Activated += new System.EventHandler(this.FormMain_Activated);

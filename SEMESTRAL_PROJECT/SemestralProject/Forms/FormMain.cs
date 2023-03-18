@@ -1,43 +1,16 @@
+using SemestralProject.Forms;
+using SemestralProject.Persistence;
 using System.Transactions;
 using System.Windows.Forms;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Color = System.Drawing.Color;
 
-namespace SemestralProject
+namespace SemestralProject.Forms
 {
-    public partial class FormMain : Form
+    internal partial class FormMain : Form
     {
-        /// <summary>
-        /// Actual accent color of system
-        /// </summary>
-        public static Color AccentColor
-        {
-            get
-            {
-                var uiSettings = new UISettings();
-                var accent = uiSettings.GetColorValue(UIColorType.Accent);
-                return Color.FromArgb(accent.A, accent.R, accent.G, accent.B);
-            }
-        }
-
-        /// <summary>
-        /// Actual text color according to accent color
-        /// </summary>
-        public static Color TextColor
-        {
-            get
-            {
-                Color accent = FormMain.AccentColor;
-                int colorNr = accent.R * accent.G * accent.B;
-                Color reti = Color.Black;
-                if (colorNr < (127 * 127 * 127))
-                {
-                    reti = Color.White;
-                }
-                return reti;
-            }
-        }
+        
 
         public FormMain()
         {
@@ -53,7 +26,7 @@ namespace SemestralProject
         /// </summary>
         private void InitializeTopPanel()
         {
-            this.panelItemsControl.BackColor = FormMain.AccentColor;
+            this.panelItemsControl.BackColor = Configuration.AccentColor;
             this.DisplaySelectedItem();
         }
 
@@ -64,7 +37,7 @@ namespace SemestralProject
         {
             foreach (Control control in this.panelItemsControl.Controls)
             {
-                control.ForeColor = FormMain.TextColor;
+                control.ForeColor = Configuration.TextColor;
                 if (control is RadioButton)
                 {
                     RadioButton rb = (RadioButton)control;
@@ -87,7 +60,7 @@ namespace SemestralProject
 
         private void buttonAddIS_Click(object sender, EventArgs e)
         {
-            Dialogs.FormAddIS dialog = new Dialogs.FormAddIS();
+            Forms.FormAddIS dialog = new Forms.FormAddIS();
             dialog.ShowDialog();
         }
 
@@ -98,7 +71,7 @@ namespace SemestralProject
 
         private void FormMain_Activated(object sender, EventArgs e)
         {
-            this.panelItemsControl.BackColor = FormMain.AccentColor;
+            this.panelItemsControl.BackColor = Configuration.AccentColor;
         }
     }
 }

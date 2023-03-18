@@ -1,10 +1,12 @@
-﻿using System;
+﻿using SemestralProject.Forms;
+using System;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.ViewManagement;
 
 namespace SemestralProject.Persistence
 {
@@ -22,6 +24,37 @@ namespace SemestralProject.Persistence
         /// Flag, whether configuration will be saved after any change
         /// </summary>
         private const bool AutoSave = true;
+
+        /// <summary>
+        /// Actual accent color of system
+        /// </summary>
+        public static Color AccentColor
+        {
+            get
+            {
+                var uiSettings = new UISettings();
+                var accent = uiSettings.GetColorValue(UIColorType.Accent);
+                return Color.FromArgb(accent.A, accent.R, accent.G, accent.B);
+            }
+        }
+
+        /// <summary>
+        /// Actual text color according to accent color
+        /// </summary>
+        public static Color TextColor
+        {
+            get
+            {
+                Color accent = Configuration.AccentColor;
+                int colorNr = accent.R * accent.G * accent.B;
+                Color reti = Color.Black;
+                if (colorNr < (127 * 127 * 127))
+                {
+                    reti = Color.White;
+                }
+                return reti;
+            }
+        }
 
         /// <summary>
         /// Separator of each configuration item in configuration file
