@@ -9,7 +9,7 @@ namespace SemestralProject.Data
     /// <summary>
     /// Class representing passenger information system
     /// </summary>
-    internal class InformationSystem: AbstractMutable
+    internal class InformationSystem
     {
 
     }

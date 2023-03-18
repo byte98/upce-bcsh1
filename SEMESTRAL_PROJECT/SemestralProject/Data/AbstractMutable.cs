@@ -7,37 +7,46 @@ using System.Threading.Tasks;
 namespace SemestralProject.Data
 {
     /// <summary>
-    /// Class which abstracts all mutable objects
+    /// Class which abstractcs all common properties of mutable objects 
     /// </summary>
-    internal class AbstractMutable : IMutable
+    public abstract class AbstractMutable : IMutable
     {
-        public string[] Properties => new string[0];
-
         public event IMutable.MutableObjectChangedEventHandler? MutableObjectChanged;
 
-        public virtual DataType? GetDataType(string property)
+        
+
+        /// <summary>
+        /// Invokes event which informs about object change
+        /// </summary>
+        /// <param name="property">Name of property which has been changed</param>
+        protected void InvokeEvent(string property)
         {
-            return null;
+            IMutable.MutableObjectChangedEventArgs args = new IMutable.MutableObjectChangedEventArgs
+            {
+                Target = this,
+                Property = property
+            };
+            this.MutableObjectChanged?.Invoke(this, args);
         }
 
-        public virtual bool IsReadOnly(string property)
+        public void Set(string property, int value)
         {
-            return true;
+           
         }
 
-        public virtual void Set(string property, int value)
+        public void Set(string property, string value)
         {
-            // NOP
+            
         }
 
-        public virtual void Set(string property, string value)
+        public void Set(string property, double value)
         {
-            // NOP
+            
         }
 
-        public virtual void SetEnum(string enumName, string value)
+        public void SetEnum(string enumName, string value)
         {
-            // NOP
+            
         }
     }
 }

@@ -83,6 +83,15 @@ namespace SemestralProject.Persistence
             }
             return reti;
         }
+        
+        /// <summary>
+        /// Gets all available icons
+        /// </summary>
+        /// <returns>All icons stored in file storage</returns>
+        public Icon[] GetAllIcons()
+        {
+            return this.icons.ToArray();
+        }
 
         /// <summary>
         /// Loads content of storage

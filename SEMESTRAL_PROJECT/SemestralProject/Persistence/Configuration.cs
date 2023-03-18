@@ -21,7 +21,7 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Flag, whether configuration will be saved after any change
         /// </summary>
-        private const bool AutoSave = false;
+        private const bool AutoSave = true;
 
         /// <summary>
         /// Separator of each configuration item in configuration file
