@@ -28,20 +28,74 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.progressBarLoad = new SemestralProject.Forms.ControlLoadProgerssBar();
+            this.labelCopyright = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // progressBarLoad
+            // 
+            this.progressBarLoad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(0)))), ((int)(((byte)(96)))));
+            this.progressBarLoad.ForeColor = System.Drawing.Color.White;
+            this.progressBarLoad.Location = new System.Drawing.Point(0, 167);
+            this.progressBarLoad.Name = "progressBarLoad";
+            this.progressBarLoad.Size = new System.Drawing.Size(600, 10);
+            this.progressBarLoad.Step = 1;
+            this.progressBarLoad.TabIndex = 0;
+            this.progressBarLoad.Value = 50;
+            // 
+            // labelCopyright
+            // 
+            this.labelCopyright.AutoSize = true;
+            this.labelCopyright.BackColor = System.Drawing.Color.Transparent;
+            this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.labelCopyright.ForeColor = System.Drawing.Color.White;
+            this.labelCopyright.Location = new System.Drawing.Point(0, 180);
+            this.labelCopyright.Name = "labelCopyright";
+            this.labelCopyright.Size = new System.Drawing.Size(50, 20);
+            this.labelCopyright.TabIndex = 2;
+            this.labelCopyright.Text = "label1";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox1.Image = global::SemestralProject.Resources.TITLE;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(600, 167);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // FormLoad
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(600, 200);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.labelCopyright);
+            this.Controls.Add(this.progressBarLoad);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormLoad";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormLoad";
+            this.Load += new System.EventHandler(this.FormLoad_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private ControlLoadProgerssBar progressBarLoad;
+        private Label labelCopyright;
+        private PictureBox pictureBox1;
     }
 }

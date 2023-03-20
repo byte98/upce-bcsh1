@@ -17,7 +17,7 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Reference to instance of storage of files
         /// </summary>
-        private static FileStorage instance = null;
+        private static FileStorage? instance = null;
 
         /// <summary>
         /// Dictionary with all stored icons
@@ -25,7 +25,12 @@ namespace SemestralProject.Persistence
         private readonly List<Icon> icons;
 
         /// <summary>
-        /// Instance of storage of files
+        /// Path to file storage
+        /// </summary>
+        private readonly string path;
+
+        /// <summary>
+        /// Default instance of storage of files
         /// </summary>
         public static FileStorage Instance
         {
@@ -33,7 +38,7 @@ namespace SemestralProject.Persistence
             {
                 if (FileStorage.instance == null)
                 {
-                    FileStorage.instance = new FileStorage();
+                    FileStorage.instance = new FileStorage(Configuration.StorageFile);
                 }
                 return FileStorage.instance;
             }
@@ -42,10 +47,11 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Creates new storage of program files
         /// </summary>
-        private FileStorage()
+        /// <param name="path">Path to file where files will be stored</param>
+        public FileStorage(string path)
         {
             this.icons = new List<Icon>();
-            this.Load();
+            this.path = path;
         }
 
         /// <summary>
@@ -58,7 +64,7 @@ namespace SemestralProject.Persistence
             if (File.Exists(path))
             {
                 FileInfo fi = new FileInfo(path);
-                string destination = Configuration.TempDir + Path.DirectorySeparatorChar + "_fs" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + name + fi.Extension;
+                string destination = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + name + fi.Extension;
                 File.Copy(path, destination, true);
                 this.Save();
                 this.icons.Add(new Icon(name, destination));
@@ -96,20 +102,26 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Loads content of storage
         /// </summary>
-        private void Load()
+        public async void Load()
         {
             if (File.Exists(Configuration.StorageFile))
             {
-                string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_fs";
-                ZipFile.ExtractToDirectory(Configuration.StorageFile, output);
-                this.icons.Clear();
-                
-                // Load icons
-                foreach(string file in Directory.GetFiles(output + Path.DirectorySeparatorChar + "[ICONS]"))
-                {
-                    FileInfo fi = new FileInfo(file);
-                    this.icons.Add(new Icon(fi.Name, file));
-                }
+                string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS";
+                Task task = new Task(async () => {
+                    Configuration.CreateTemp();
+                    await Task.Run(() => {
+                        ZipFile.ExtractToDirectory(Configuration.StorageFile, output);
+                    }); 
+                    this.icons.Clear();
+
+                    // Load icons
+                    foreach (string file in Directory.GetFiles(output + Path.DirectorySeparatorChar + "[ICONS]"))
+                    {
+                        FileInfo fi = new FileInfo(file);
+                        this.icons.Add(new Icon(fi.Name, file));
+                    }
+                });
+                await task;
             }
         }
 
@@ -122,7 +134,7 @@ namespace SemestralProject.Persistence
             {
                 File.Delete(Configuration.StorageFile);
             }
-            ZipFile.CreateFromDirectory(Configuration.TempDir + Path.DirectorySeparatorChar + "_fs", Configuration.StorageFile);
+            ZipFile.CreateFromDirectory(Configuration.TempDir + Path.DirectorySeparatorChar + "_FS", Configuration.StorageFile);
         }
     }
 }

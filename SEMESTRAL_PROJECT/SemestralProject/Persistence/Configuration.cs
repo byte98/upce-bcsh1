@@ -18,7 +18,7 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Name of file where configuration is saved
         /// </summary>
-        private const string ConfigFile = "config.ini";
+        private const string ConfigFile = "CONFIG.INI";
 
         /// <summary>
         /// Flag, whether configuration will be saved after any change
@@ -69,7 +69,7 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Directory for temporary files
         /// </summary>
-        public const string TempDir = "./~$tmp";
+        public const string TempDir = "./~$TMP";
 
         /// <summary>
         /// Flag, whether configuration represents actual state of configuration file
@@ -115,12 +115,34 @@ namespace SemestralProject.Persistence
         }
 
         /// <summary>
+        /// File containing data storage
+        /// </summary>
+        private static string dataFile = "db.dat";
+
+        /// <summary>
+        /// Path to file containing data storage
+        /// </summary>
+        public static string DataFile
+        {
+            get
+            {
+                return Configuration.dataFile;
+            }
+            set
+            {
+                Configuration.dataFile = value;
+                ConfigurationChanged?.Invoke();
+            }
+        }
+
+        /// <summary>
         /// Saves configuration into file
         /// </summary>
         public static void Save()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("STORAGE_FILE").Append(Configuration.ValueSeparator).Append(Configuration.StorageFile).Append(Configuration.Separator);
+            sb.Append("DATA_FILE").Append(Configuration.ValueSeparator).Append(Configuration.DataFile).Append(Configuration.Separator);
             File.WriteAllText(sb.ToString(), Configuration.ConfigFile);
             Configuration.Loaded = true;
         }
@@ -142,6 +164,7 @@ namespace SemestralProject.Persistence
                         switch(parts[0].Trim().ToUpper())
                         {
                             case "STORAGE_FILE": Configuration.StorageFile = parts[1]; break;
+                            case "DATA_FILE":    Configuration.DataFile    = parts[1]; break;
                         }
                     }
                 }
@@ -156,7 +179,7 @@ namespace SemestralProject.Persistence
             if (Directory.Exists(Configuration.TempDir) == false)
             {
                 DirectoryInfo di = Directory.CreateDirectory(Configuration.TempDir);
-                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden | FileAttributes.Temporary;
+                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
             }
         }
 

@@ -73,5 +73,12 @@ namespace SemestralProject.Forms
         {
             this.panelItemsControl.BackColor = Configuration.AccentColor;
         }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            FormLoad form = new FormLoad(this);
+            this.Hide();
+            form.ShowDialog();
+        }
     }
 }
