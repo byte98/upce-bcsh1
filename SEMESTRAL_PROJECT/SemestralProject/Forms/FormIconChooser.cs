@@ -16,6 +16,16 @@ namespace SemestralProject.Forms
         /// </summary>
         private ControlIconsChooser content;
 
+        /// <summary>
+        /// Name or path to selected icon
+        /// </summary>
+        public string SelectedIcon => content.SelectedIcon;
+
+        /// <summary>
+        /// Flag, whether <see cref="SelectedIcon"/> contains path (TRUE) or name (FALSE)
+        /// </summary>
+        public bool IsPath => content.IsPath;
+
         public FormIconChooser(): base("Výběr ikony", "Vyberte ikonu", SemestralProject.Resources.icons_chooser)
         {
             this.content = new ControlIconsChooser();

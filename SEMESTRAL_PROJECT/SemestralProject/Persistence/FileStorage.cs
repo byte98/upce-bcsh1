@@ -20,6 +20,21 @@ namespace SemestralProject.Persistence
         private static FileStorage? instance = null;
 
         /// <summary>
+        /// Alphabet used to generating unique names
+        /// </summary>
+        private const string NameAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+        /// <summary>
+        /// Minimal length of generated name
+        /// </summary>
+        private const int NameMin = 8;
+
+        /// <summary>
+        /// Maximal length of generated name
+        /// </summary>
+        private const int NameMax = 64;
+
+        /// <summary>
         /// Dictionary with all stored icons
         /// </summary>
         private readonly List<Icon> icons;
@@ -102,26 +117,31 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Loads content of storage
         /// </summary>
-        public async void Load()
+        public void Load()
         {
+            string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS";
+            Configuration.CreateTemp();
+            if (Directory.Exists(output))
+            {
+                Directory.Delete(output, true);
+            }
             if (File.Exists(Configuration.StorageFile))
             {
-                string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS";
-                Task task = new Task(async () => {
-                    Configuration.CreateTemp();
-                    await Task.Run(() => {
-                        ZipFile.ExtractToDirectory(Configuration.StorageFile, output);
-                    }); 
-                    this.icons.Clear();
+                ZipFile.ExtractToDirectory(Configuration.StorageFile, output);
 
-                    // Load icons
-                    foreach (string file in Directory.GetFiles(output + Path.DirectorySeparatorChar + "[ICONS]"))
-                    {
-                        FileInfo fi = new FileInfo(file);
-                        this.icons.Add(new Icon(fi.Name, file));
-                    }
-                });
-                await task;
+                // Load icons
+                this.icons.Clear();
+                foreach (string file in Directory.GetFiles(output + Path.DirectorySeparatorChar + "[ICONS]"))
+                {
+                    FileInfo fi = new FileInfo(file);
+                    this.icons.Add(new Icon(fi.Name, file));
+                }
+            }
+            else
+            {
+                Directory.CreateDirectory(output);
+                string iconsFolder = output + Path.DirectorySeparatorChar + "[ICONS]";
+                Directory.CreateDirectory(iconsFolder);
             }
         }
 
@@ -135,6 +155,40 @@ namespace SemestralProject.Persistence
                 File.Delete(Configuration.StorageFile);
             }
             ZipFile.CreateFromDirectory(Configuration.TempDir + Path.DirectorySeparatorChar + "_FS", Configuration.StorageFile);
+        }
+
+        /// <summary>
+        /// Generates unique icon name
+        /// </summary>
+        /// <returns>Unique name for icon</returns>
+        public string GenerateUniqueIcon()
+        {
+            Random random = new Random();
+            int length = random.Next(FileStorage.NameMin, FileStorage.NameMax + 1);
+            string reti;
+            do
+            {
+                reti = FileStorage.GenerateRandomString(length, FileStorage.NameAlphabet);
+            }
+            while(this.GetIcon(reti) != null);
+            return reti;
+        }
+
+        /// <summary>
+        /// Generates random string
+        /// </summary>
+        /// <param name="length">Desired length of string</param>
+        /// <param name="alphabet">Alphabet used to generate string</param>
+        /// <returns>Pseudo-randomly generated string</returns>
+        private static string GenerateRandomString(int length, string alphabet)
+        {
+            StringBuilder reti = new StringBuilder();
+            Random random = new Random();
+            for (int i = 0; i < length; i++)
+            {
+                reti.Append(alphabet[random.Next(0, alphabet.Length)]);
+            }
+            return reti.ToString();
         }
     }
 }

@@ -96,7 +96,7 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// File containing file storage
         /// </summary>
-        private static string storageFile = "fs.dat";
+        private static string storageFile = "FS.DAT";
 
         /// <summary>
         /// Property handler of file containing file storage
@@ -117,7 +117,7 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// File containing data storage
         /// </summary>
-        private static string dataFile = "db.dat";
+        private static string dataFile = "DB.DAT";
 
         /// <summary>
         /// Path to file containing data storage

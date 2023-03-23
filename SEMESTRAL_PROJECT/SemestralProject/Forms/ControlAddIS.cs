@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using SemestralProject.Persistence;
+using Icon = SemestralProject.Visual.Icon;
 
 namespace SemestralProject.Forms
 {
-    public partial class ControlAddIS : UserControl
+    internal partial class ControlAddIS : UserControl
     {
+        /// <summary>
+        /// Icon of new information system
+        /// </summary>
+        public Icon ISIcon { get; private set; }
+
         /// <summary>
         /// Name of information system
         /// </summary>
@@ -50,6 +48,20 @@ namespace SemestralProject.Forms
         {
             Forms.FormIconChooser dialog = new Forms.FormIconChooser();
             dialog.ShowDialog();
+            if (dialog.DialogResult== DialogResult.OK)
+            {
+                if (dialog.IsPath)
+                {
+                    string name = FileStorage.Instance.GenerateUniqueIcon();
+                    FileStorage.Instance.AddIcon(name, dialog.SelectedIcon);
+                    this.ISIcon = FileStorage.Instance.GetIcon(name);
+                }
+                else
+                {
+                    this.ISIcon = FileStorage.Instance.GetIcon(dialog.SelectedIcon);
+                    this.buttonIcon.Image = this.ISIcon.GetImage();
+                }
+            }
         }
     }
 }
