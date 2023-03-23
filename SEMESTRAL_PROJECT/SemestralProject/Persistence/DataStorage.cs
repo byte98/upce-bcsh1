@@ -78,7 +78,7 @@ namespace SemestralProject.Persistence
         public void LoadInformationSystems()
         {
             this.InformationSystems = new List<InformationSystem>();
-            string file = Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + DataStorage.ISFile;
+            string file = Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.ISFile;
             if (File.Exists(file))
             {
                 XmlDocument doc = new XmlDocument();
@@ -103,7 +103,21 @@ namespace SemestralProject.Persistence
                 XmlElement created = doc.CreateElement(string.Empty, "CREATED", string.Empty);
                 created.Value = informationSystem.Created.ToString("dd-MM-yyyy HH:mm:ss");
                 infS.AppendChild(created);
+                XmlElement updated = doc.CreateElement(string.Empty, "UPDATED", string.Empty);
+                updated.Value = informationSystem.Updated.ToString("dd-MM-yyyy HH:mm:ss");
+                infS.AppendChild(updated);
+                XmlElement icon = doc.CreateElement(string.Empty, "ICON", string.Empty);
+                icon.Value = informationSystem.Icon.Name;
+                infS.AppendChild(icon);
+                XmlElement name = doc.CreateElement(string.Empty, "NAME", string.Empty);
+                name.Value = informationSystem.Name;
+                infS.AppendChild(name);
+                XmlElement desc = doc.CreateElement(string.Empty, "DESCRIPTION", string.Empty);
+                desc.Value = informationSystem.Description;
+                infS.AppendChild(desc);
+                iss.AppendChild(infS);
             }
+            doc.Save(Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.ISFile);
         }
 
         /// <summary>
@@ -115,6 +129,8 @@ namespace SemestralProject.Persistence
             {
                 File.Delete(Configuration.DataFile);
             }
+            this.SaveInformationSystems();
+            ZipFile.CreateFromDirectory(Configuration.TempDir + "_DB", this.path);
         }
     }
 }

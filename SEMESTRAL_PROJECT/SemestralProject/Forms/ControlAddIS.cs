@@ -50,12 +50,16 @@ namespace SemestralProject.Forms
         {
             Forms.FormIconChooser dialog = new Forms.FormIconChooser();
             dialog.ShowDialog();
-            if (dialog.DialogResult== DialogResult.OK)
+            if (dialog.DialogResult == DialogResult.OK)
             {
                 if (dialog.IsPath)
                 {
-                    string name = FileStorage.Instance.GenerateUniqueIcon();
-                    this.ISIcon = FileStorage.Instance.AddIcon(name, dialog.SelectedIcon);
+                    FormWait wait = new FormWait(() =>
+                    {
+                        string name = FileStorage.Instance.GenerateUniqueIcon();
+                        this.ISIcon = FileStorage.Instance.AddIcon(name, dialog.SelectedIcon);
+                    });
+                    wait.ShowDialog();
                 }
                 else
                 {

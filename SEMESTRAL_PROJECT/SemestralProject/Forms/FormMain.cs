@@ -61,7 +61,10 @@ namespace SemestralProject.Forms
         private void buttonAddIS_Click(object sender, EventArgs e)
         {
             Forms.FormAddIS dialog = new Forms.FormAddIS();
-            dialog.ShowDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                
+            }
         }
 
         private void FormMain_Deactivate(object sender, EventArgs e)

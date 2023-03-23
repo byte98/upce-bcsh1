@@ -1,8 +1,10 @@
-﻿using System;
+﻿using SemestralProject.Persistence;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Icon = SemestralProject.Visual.Icon;
 
 namespace SemestralProject.Data
 {
@@ -20,20 +22,59 @@ namespace SemestralProject.Data
         /// Date and time when information system has been lastly updated
         /// </summary>
         public DateTime Updated { get; private set; }
-        
+
         /// <summary>
         /// Icon of information system
         /// </summary>
-        public Icon Icon { get; private set; }
+        public Icon Icon { get; private set; } = FileStorage.Instance.GetIcon(FileStorage.DefaultIconType.IS);
 
         /// <summary>
         /// Name of information system
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; private set; } = string.Empty;
 
         /// <summary>
         /// Description of information system
         /// </summary>
-        public string Description { get; private set; }
+        public string Description { get; private set; } = string.Empty;
+
+        /// <summary>
+        /// Creates new information system
+        /// </summary>
+        public InformationSystem() : this(DateTime.Now, DateTime.Now, FileStorage.Instance.GetIcon(FileStorage.DefaultIconType.IS), string.Empty, string.Empty) { }
+
+        /// <summary>
+        /// Creates new information system
+        /// </summary>
+        /// <param name="icon">Icon of information system</param>
+        /// <param name="name">Name of information system</param>
+        /// <param name="description">Description of information system</param>
+        public InformationSystem(Icon icon, string name, string description): this(DateTime.Now, DateTime.Now, icon, name, description) { }
+
+        /// <summary>
+        /// Creates new information system
+        /// </summary>
+        /// <param name="created">Date and time of creation of information system</param>
+        /// <param name="icon">Icon of information system</param>
+        /// <param name="name">Name of information system</param>
+        /// <param name="description">Description of information system</param>
+        public InformationSystem(DateTime created, Icon icon, string name, string description): this(created, DateTime.Now, icon, name, description) { }
+        
+        /// <summary>
+        /// Creates new information system
+        /// </summary>
+        /// <param name="created">Date and time of creation of information system</param>
+        /// <param name="updated">Date and time of last modification of information system</param>
+        /// <param name="icon">Icon of information system</param>
+        /// <param name="name">Name of information system</param>
+        /// <param name="description">Description of information system</param>
+        public InformationSystem(DateTime created, DateTime updated, Icon icon, string name, string description)
+        {
+            this.Created = created;
+            this.Updated = updated;
+            this.Icon = icon;
+            this.Name = name;
+            this.Description = description;
+        }
     }
 }

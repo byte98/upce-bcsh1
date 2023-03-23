@@ -55,10 +55,9 @@
             // label
             // 
             this.label.AutoSize = true;
-            this.label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label.Location = new System.Drawing.Point(66, 32);
+            this.label.Location = new System.Drawing.Point(66, 40);
             this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(163, 28);
+            this.label.Size = new System.Drawing.Size(123, 20);
             this.label.TabIndex = 2;
             this.label.Text = "Počkejte prosím...";
             // 
@@ -81,6 +80,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Počkejte prosím";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.FormWait_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

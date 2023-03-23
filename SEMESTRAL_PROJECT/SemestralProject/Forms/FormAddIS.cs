@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Icon = SemestralProject.Visual.Icon;  
 
 namespace SemestralProject.Forms
 {
@@ -47,6 +48,11 @@ namespace SemestralProject.Forms
         }
 
         /// <summary>
+        /// Icon of information system
+        /// </summary>
+        public Icon ISIcon { get; private set; }
+
+        /// <summary>
         /// Creates new add information system dialog
         /// </summary>
         public FormAddIS(): base("Přidat informační systém", "Nový informační systém", SemestralProject.Resources.is_add)
@@ -54,6 +60,7 @@ namespace SemestralProject.Forms
             this.content = new ControlAddIS();
             this.AddControl(this.content);
             this.Icon = SemestralProject.Resources.addis;
+            this.ISIcon = this.content.ISIcon;
         }
     }
 }

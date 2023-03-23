@@ -103,7 +103,7 @@ namespace SemestralProject.Persistence
             {
                 name = name.ToUpper();
                 FileInfo fi = new FileInfo(path);
-                string destination = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + name.ToUpper() + fi.Extension;
+                string destination = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + name.ToUpper() + fi.Extension.ToUpper();
                 File.Copy(path, destination, true);
                 this.Save();
                 reti = new Icon(name, destination);
