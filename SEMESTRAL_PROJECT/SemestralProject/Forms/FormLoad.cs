@@ -45,13 +45,22 @@ namespace SemestralProject.Forms
         private async void FormLoad_Load(object sender, EventArgs e)
         {
             this.progressBarLoad.Value = 10;
-            FileStorage fs = FileStorage.Instance;
+            this.labelState.Text = "Načítám soubory...";
+            FileStorage fs = FileStorage.Instance; 
             await Task.Run(() =>
             {
                 fs.Load();
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
+            });
+            this.progressBarLoad.Value = 30;
+            this.labelState.Text = "Načítám ikony...";
+            await Task.Run(() =>
+            {
+                fs.LoadIcons();
+                Thread.Sleep(500);
             });
             this.progressBarLoad.Value = 100;
+            this.labelState.Text = "Hotovo";
             await Task.Run(() => {
                 Thread.Sleep(1000);
             });

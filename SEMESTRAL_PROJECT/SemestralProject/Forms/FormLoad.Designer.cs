@@ -31,6 +31,7 @@
             this.progressBarLoad = new SemestralProject.Forms.ControlLoadProgerssBar();
             this.labelCopyright = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelState = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,12 +69,24 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
+            // labelState
+            // 
+            this.labelState.AutoSize = true;
+            this.labelState.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(0)))), ((int)(((byte)(96)))));
+            this.labelState.ForeColor = System.Drawing.Color.White;
+            this.labelState.Location = new System.Drawing.Point(12, 147);
+            this.labelState.Name = "labelState";
+            this.labelState.Size = new System.Drawing.Size(74, 20);
+            this.labelState.TabIndex = 4;
+            this.labelState.Text = "Načítám...";
+            // 
             // FormLoad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(600, 200);
+            this.Controls.Add(this.labelState);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.labelCopyright);
             this.Controls.Add(this.progressBarLoad);
@@ -97,5 +110,6 @@
         private ControlLoadProgerssBar progressBarLoad;
         private Label labelCopyright;
         private PictureBox pictureBox1;
+        private Label labelState;
     }
 }

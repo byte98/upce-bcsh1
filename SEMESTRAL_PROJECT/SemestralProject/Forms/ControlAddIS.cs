@@ -60,8 +60,8 @@ namespace SemestralProject.Forms
                 else
                 {
                     this.ISIcon = FileStorage.Instance.GetIcon(dialog.SelectedIcon, FileStorage.DefaultIconType.IS);
-                    this.buttonIcon.Image = this.ISIcon.GetImage();
                 }
+                this.buttonIcon.Image = this.ISIcon.GetImage();
             }
         }
     }

@@ -39,10 +39,10 @@ namespace SemestralProject.Forms
             this.SelectedIcon = string.Empty;
             this.IsPath = false;
             this.controlBrowseButtonBrowseIcons.FileFilter = "Obrázek|*.BMP;*.GIF;*.JPG;*.JPEG;*.PNG";
-            
             this.listViewIcons.Items.Clear();
             this.listViewIcons.LargeImageList = new ImageList();
             this.listViewIcons.LargeImageList.ImageSize = new Size(64, 64);
+            this.listViewIcons.LargeImageList.ColorDepth = ColorDepth.Depth32Bit;
             foreach(string? key in this.systemImageList.Images.Keys)
             {
                 this.listViewIcons.LargeImageList.Images.Add(key, this.systemImageList.Images[key]);

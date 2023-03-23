@@ -40,10 +40,10 @@ namespace SemestralProject.Persistence
         /// </summary>
         private static FileStorage? instance = null;
 
-        /// <summary>
+        /// <summary>č
         /// Alphabet used to generating unique names
         /// </summary>
-        private const string NameAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        private const string NameAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         /// <summary>
         /// Minimal length of generated name
@@ -101,8 +101,9 @@ namespace SemestralProject.Persistence
             Icon reti = new Icon(FileStorage.DefaultIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon);
             if (File.Exists(path))
             {
+                name = name.ToUpper();
                 FileInfo fi = new FileInfo(path);
-                string destination = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + name + fi.Extension;
+                string destination = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + name.ToUpper() + fi.Extension;
                 File.Copy(path, destination, true);
                 this.Save();
                 reti = new Icon(name, destination);
@@ -181,17 +182,9 @@ namespace SemestralProject.Persistence
             {
                 Directory.Delete(output, true);
             }
-            if (File.Exists(Configuration.StorageFile))
+            if (File.Exists(this.path))
             {
-                ZipFile.ExtractToDirectory(Configuration.StorageFile, output);
-
-                // Load icons
-                this.icons.Clear();
-                foreach (string file in Directory.GetFiles(output + Path.DirectorySeparatorChar + "[ICONS]"))
-                {
-                    FileInfo fi = new FileInfo(file);
-                    this.icons.Add(new Icon(fi.Name, file));
-                }
+                ZipFile.ExtractToDirectory(this.path, output);
             }
             else
             {
@@ -202,15 +195,29 @@ namespace SemestralProject.Persistence
         }
 
         /// <summary>
+        /// Loads icons (this needs to be called after <see cref="Load"/> is called!)
+        /// </summary>
+        public void LoadIcons()
+        {
+            string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS";
+            this.icons.Clear();
+            foreach (string file in Directory.GetFiles(output + Path.DirectorySeparatorChar + "[ICONS]"))
+            {
+                FileInfo fi = new FileInfo(file);
+                this.icons.Add(new Icon(fi.Name, file));
+            }
+        }
+
+        /// <summary>
         /// Saves content of storage
         /// </summary>
         private void Save()
         {
-            if (File.Exists(Configuration.StorageFile))
+            if (File.Exists(this.path))
             {
-                File.Delete(Configuration.StorageFile);
+                File.Delete(this.path);
             }
-            ZipFile.CreateFromDirectory(Configuration.TempDir + Path.DirectorySeparatorChar + "_FS", Configuration.StorageFile);
+            ZipFile.CreateFromDirectory(Configuration.TempDir + Path.DirectorySeparatorChar + "_FS", this.path);
         }
 
         /// <summary>
