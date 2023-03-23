@@ -15,6 +15,27 @@ namespace SemestralProject.Persistence
     internal class FileStorage
     {
         /// <summary>
+        /// Enumeration of all available default icons
+        /// </summary>
+        public enum DefaultIconType
+        {
+            /// <summary>
+            /// Icon of information system
+            /// </summary>
+            IS
+        }
+
+        /// <summary>
+        /// Name of file with default icon
+        /// </summary>
+        private const string DefaultIcon = "__DEFAULT.PNG";
+
+        /// <summary>
+        /// Name of file with default icon of information system
+        /// </summary>
+        private const string DefaultISIcon = "__DEFAULT_IS.PNG";
+
+        /// <summary>
         /// Reference to instance of storage of files
         /// </summary>
         private static FileStorage? instance = null;
@@ -74,16 +95,20 @@ namespace SemestralProject.Persistence
         /// </summary>
         /// <param name="name">Name of icon</param>
         /// <param name="path">Path to file containing icon</param>
-        public void AddIcon(string name, string path)
+        /// <returns>Icon added to file storage</returns>
+        public Icon AddIcon(string name, string path)
         {
+            Icon reti = new Icon(FileStorage.DefaultIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon);
             if (File.Exists(path))
             {
                 FileInfo fi = new FileInfo(path);
                 string destination = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + name + fi.Extension;
                 File.Copy(path, destination, true);
                 this.Save();
-                this.icons.Add(new Icon(name, destination));
+                reti = new Icon(name, destination);
+                this.icons.Add(reti);
             }
+            return reti;
         }
 
         /// <summary>
@@ -101,6 +126,37 @@ namespace SemestralProject.Persistence
                     reti = icon;
                     break;
                 }
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets icon stored in storage
+        /// </summary>
+        /// <param name="type">Type of data for which icon is requested</param>
+        /// <returns>Default icon for requested type of data</returns>
+        public Icon GetIcon(FileStorage.DefaultIconType type)
+        {
+            Icon reti = new Icon(FileStorage.DefaultIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon);
+            switch (type)
+            {
+                case DefaultIconType.IS: reti = new Icon(FileStorage.DefaultISIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultISIcon); break;
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets icon stored in storage
+        /// </summary>
+        /// <param name="name">Name of icon</param>
+        /// <param name="type">Type of data for which icon is requested</param>
+        /// <returns>Icon from storage with specified name or default icon for specified type</returns>
+        public Icon GetIcon(string name, FileStorage.DefaultIconType type)
+        {
+            Icon? reti = this.GetIcon(name);
+            if (reti == null)
+            {
+                reti = this.GetIcon(type);
             }
             return reti;
         }

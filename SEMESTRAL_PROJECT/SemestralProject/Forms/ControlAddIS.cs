@@ -42,6 +42,8 @@ namespace SemestralProject.Forms
         public ControlAddIS()
         {
             InitializeComponent();
+            this.ISIcon = FileStorage.Instance.GetIcon(FileStorage.DefaultIconType.IS);
+            this.buttonIcon.Image = this.ISIcon.GetImage();
         }
 
         private void buttonIcon_Click(object sender, EventArgs e)
@@ -53,12 +55,11 @@ namespace SemestralProject.Forms
                 if (dialog.IsPath)
                 {
                     string name = FileStorage.Instance.GenerateUniqueIcon();
-                    FileStorage.Instance.AddIcon(name, dialog.SelectedIcon);
-                    this.ISIcon = FileStorage.Instance.GetIcon(name);
+                    this.ISIcon = FileStorage.Instance.AddIcon(name, dialog.SelectedIcon);
                 }
                 else
                 {
-                    this.ISIcon = FileStorage.Instance.GetIcon(dialog.SelectedIcon);
+                    this.ISIcon = FileStorage.Instance.GetIcon(dialog.SelectedIcon, FileStorage.DefaultIconType.IS);
                     this.buttonIcon.Image = this.ISIcon.GetImage();
                 }
             }
