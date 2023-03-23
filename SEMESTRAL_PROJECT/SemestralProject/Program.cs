@@ -1,5 +1,3 @@
-using SemestralProject.Forms;
-
 namespace SemestralProject
 {
     internal static class Program
@@ -13,7 +11,7 @@ namespace SemestralProject
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new FormMain());
+            Application.Run(new Forms.FormMain());
         }
     }
 }

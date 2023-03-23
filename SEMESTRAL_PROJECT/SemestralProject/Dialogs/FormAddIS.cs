@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SemestralProject.Persistence;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,8 +16,8 @@ namespace SemestralProject.Dialogs
         public FormAddIS()
         {
             InitializeComponent();
-            this.panelHeader.BackColor = FormMain.AccentColor;
-            this.panelHeader.ForeColor = FormMain.TextColor;
+            this.panelHeader.BackColor = Configuration.AccentColor;
+            this.panelHeader.ForeColor = Configuration.TextColor;
         }
 
         private void FormAddIS_Deactivate(object sender, EventArgs e)
@@ -26,7 +27,7 @@ namespace SemestralProject.Dialogs
 
         private void FormAddIS_Activated(object sender, EventArgs e)
         {
-            this.panelHeader.BackColor = FormMain.AccentColor;
+            this.panelHeader.BackColor = Configuration.AccentColor;
         }
     }
 }

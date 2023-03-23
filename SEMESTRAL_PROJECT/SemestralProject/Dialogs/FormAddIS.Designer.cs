@@ -71,7 +71,6 @@
             // 
             // pictureBoxHeaderIcon
             // 
-            this.pictureBoxHeaderIcon.Image = global::SemestralProject.Resources.is_add_64;
             this.pictureBoxHeaderIcon.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxHeaderIcon.Name = "pictureBoxHeaderIcon";
             this.pictureBoxHeaderIcon.Size = new System.Drawing.Size(64, 64);
