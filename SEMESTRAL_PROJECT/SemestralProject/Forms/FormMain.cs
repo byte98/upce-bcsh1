@@ -94,6 +94,7 @@ namespace SemestralProject.Forms
             FormLoad form = new FormLoad(this);
             this.Hide();
             form.ShowDialog();
+            this.isView.RefreshView();
         }
     }
 }

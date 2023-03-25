@@ -30,28 +30,32 @@
         {
             this.listViewContent = new System.Windows.Forms.ListView();
             this.columnHeaderName = new System.Windows.Forms.ColumnHeader();
-            this.columnHeaderModified = new System.Windows.Forms.ColumnHeader();
+            this.columnHeaderDescription = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
             // listViewContent
             // 
             this.listViewContent.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderName,
-            this.columnHeaderModified});
+            this.columnHeaderDescription});
             this.listViewContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewContent.FullRowSelect = true;
             this.listViewContent.Location = new System.Drawing.Point(0, 0);
             this.listViewContent.Name = "listViewContent";
             this.listViewContent.Size = new System.Drawing.Size(150, 150);
             this.listViewContent.TabIndex = 0;
             this.listViewContent.UseCompatibleStateImageBehavior = false;
+            this.listViewContent.View = System.Windows.Forms.View.Details;
             // 
             // columnHeaderName
             // 
             this.columnHeaderName.Text = "Název";
+            this.columnHeaderName.Width = 31;
             // 
-            // columnHeaderModified
+            // columnHeaderDescription
             // 
-            this.columnHeaderModified.Text = "Naposledy upraveno";
+            this.columnHeaderDescription.Text = "Popis";
+            this.columnHeaderDescription.Width = 149;
             // 
             // ControlISView
             // 
@@ -67,6 +71,6 @@
 
         private ListView listViewContent;
         private ColumnHeader columnHeaderName;
-        private ColumnHeader columnHeaderModified;
+        private ColumnHeader columnHeaderDescription;
     }
 }

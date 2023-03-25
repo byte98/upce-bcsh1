@@ -22,7 +22,7 @@ namespace SemestralProject.Forms
         /// <summary>
         /// Size of small images
         /// </summary>
-        private const int ImageSmall = 16;
+        private const int ImageSmall = 24;
 
         /// <summary>
         /// Size of large images
@@ -67,16 +67,20 @@ namespace SemestralProject.Forms
                     largeImageList.Images.Add(icon.Name, icon.GetImage());
                     smallImageList.Images.Add(icon.Name, icon.GetImage());
                 }
+                this.listViewContent.SmallImageList = smallImageList;
+                this.listViewContent.LargeImageList = largeImageList;
 
                 // Show all information systems
                 InformationSystemsHandler handler = new InformationSystemsHandler(this.DataStorage, this.FileStorage);
                 foreach(InformationSystem system in handler)
                 {
-                    string[] data = new string[] { system.Name, system.Updated.ToString()};
-                    ListViewItem item = new ListViewItem(data, system.Icon.Name);
+                    ListViewItem item = new ListViewItem(system.Name, system.Icon.Name);
+                    item.SubItems.Add(system.Description);
                     this.listViewContent.Items.Add(item);
                 }
             }
+            this.listViewContent.Columns[0].Width = -2;
+            this.listViewContent.Columns[1].Width = -2;
         }
     }
 }

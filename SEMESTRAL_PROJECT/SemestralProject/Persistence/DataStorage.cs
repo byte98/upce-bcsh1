@@ -97,7 +97,7 @@ namespace SemestralProject.Persistence
             {
                 if (DataStorage.instance == null)
                 {
-                    DataStorage.instance = new DataStorage(Configuration.DataFile);
+                    DataStorage.instance = new DataStorage(Configuration.DataFile, FileStorage.Instance);
                 }
                 return DataStorage.instance;
             }
@@ -109,6 +109,11 @@ namespace SemestralProject.Persistence
         private readonly string path;
 
         /// <summary>
+        /// Reference to storage of files
+        /// </summary>
+        private readonly FileStorage fileStorage;
+
+        /// <summary>
         /// List of all available information systems
         /// </summary>
         public List<InformationSystem> InformationSystems { get; set; }
@@ -117,10 +122,12 @@ namespace SemestralProject.Persistence
         /// Creates new data storage
         /// </summary>
         /// <param name="path">Path to file with data</param>
-        public DataStorage(string path)
+        /// <param name="fileStorage">Storage of data</param>
+        public DataStorage(string path, FileStorage fileStorage)
         {
             this.path = path;
             this.InformationSystems = new List<InformationSystem>();
+            this.fileStorage = fileStorage;
         }
 
         /// <summary>
@@ -172,7 +179,27 @@ namespace SemestralProject.Persistence
                                     updtList != null && credList.Count >= 1
                                )
                             {
-
+                                XmlElement? nameElement = (XmlElement?)nameList[0];
+                                XmlElement? iconElement = (XmlElement?)iconList[0];
+                                XmlElement? descElement = (XmlElement?)descList[0];
+                                XmlElement? credElement = (XmlElement?)credList[0];
+                                XmlElement? updtElement = (XmlElement?)updtList[0];
+                                if (
+                                        nameElement != null &&
+                                        iconElement != null &&
+                                        descElement != null &&
+                                        credElement != null &&
+                                        updtElement != null
+                                   )
+                                {
+                                    this.InformationSystems.Add(new InformationSystem(
+                                        DateTime.ParseExact(credElement.InnerText, DataStorage.XML._Date, null),
+                                        DateTime.ParseExact(updtElement.InnerText, DataStorage.XML._Date, null),
+                                        this.fileStorage.GetIcon(iconElement.InnerText, FileStorage.DefaultIconType.IS),
+                                        nameElement.InnerText,
+                                        descElement.InnerText
+                                    ));
+                                }
                             }
                         }
                     }
