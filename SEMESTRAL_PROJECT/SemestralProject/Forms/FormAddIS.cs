@@ -26,10 +26,6 @@ namespace SemestralProject.Forms
             {
                 return this.content.ISName;
             }
-            set
-            {
-                this.content.ISName = value;
-            }
         }
 
         /// <summary>
@@ -41,16 +37,18 @@ namespace SemestralProject.Forms
             {
                 return this.content.ISDescription;
             }
-            set
-            {
-                this.content.ISDescription = value;
-            }
         }
 
         /// <summary>
         /// Icon of information system
         /// </summary>
-        public Icon ISIcon { get; private set; }
+        public Icon ISIcon
+        {
+            get
+            {
+                return this.content.ISIcon;
+            }
+        }
 
         /// <summary>
         /// Creates new add information system dialog
@@ -60,7 +58,6 @@ namespace SemestralProject.Forms
             this.content = new ControlAddIS();
             this.AddControl(this.content);
             this.Icon = SemestralProject.Resources.addis;
-            this.ISIcon = this.content.ISIcon;
         }
     }
 }

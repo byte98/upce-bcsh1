@@ -40,6 +40,11 @@ namespace SemestralProject.Forms
         public FileStorage? FileStorage { private get; set; }
 
         /// <summary>
+        /// Selected information system
+        /// </summary>
+        public InformationSystem? SelectedSystem { get; private set; } = null;
+
+        /// <summary>
         /// Creates new viewer of all information systems
         /// </summary>
         public ControlISView()
@@ -81,6 +86,18 @@ namespace SemestralProject.Forms
             }
             this.listViewContent.Columns[0].Width = -2;
             this.listViewContent.Columns[1].Width = -2;
+        }
+
+        private void listViewContent_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listViewContent.SelectedItems.Count < 1)
+            {
+                this.SelectedSystem = null;
+            }
+            else
+            {
+                
+            }
         }
     }
 }

@@ -51,6 +51,11 @@ namespace SemestralProject.Persistence
                 public const string _Root = "INFORMATION_SYSTEM";
 
                 /// <summary>
+                /// XML element holding identifier of information system
+                /// </summary>
+                public const string Id = "ID";
+
+                /// <summary>
                 /// XML element holding name of information system
                 /// </summary>
                 public const string Name = "NAME";
@@ -166,12 +171,14 @@ namespace SemestralProject.Persistence
                     {
                         if (isElem.Name == DataStorage.XML.InformationSystem._Root)
                         {
+                            XmlNodeList? idenList = isElem.GetElementsByTagName(DataStorage.XML.InformationSystem.Id);
                             XmlNodeList? nameList = isElem.GetElementsByTagName(DataStorage.XML.InformationSystem.Name);
                             XmlNodeList? iconList = isElem.GetElementsByTagName(DataStorage.XML.InformationSystem.Icon);
                             XmlNodeList? descList = isElem.GetElementsByTagName(DataStorage.XML.InformationSystem.Description);
                             XmlNodeList? credList = isElem.GetElementsByTagName(DataStorage.XML.InformationSystem.Created);
                             XmlNodeList? updtList = isElem.GetElementsByTagName(DataStorage.XML.InformationSystem.Updated);
                             if (
+                                    idenList != null && idenList.Count >= 1 &&
                                     nameList != null && nameList.Count >= 1 &&
                                     iconList != null && iconList.Count >= 1 &&
                                     descList != null && descList.Count >= 1 &&
@@ -179,12 +186,14 @@ namespace SemestralProject.Persistence
                                     updtList != null && credList.Count >= 1
                                )
                             {
+                                XmlElement? idenElement = (XmlElement?)idenList[0];
                                 XmlElement? nameElement = (XmlElement?)nameList[0];
                                 XmlElement? iconElement = (XmlElement?)iconList[0];
                                 XmlElement? descElement = (XmlElement?)descList[0];
                                 XmlElement? credElement = (XmlElement?)credList[0];
                                 XmlElement? updtElement = (XmlElement?)updtList[0];
                                 if (
+                                        idenElement != null &&
                                         nameElement != null &&
                                         iconElement != null &&
                                         descElement != null &&
@@ -193,6 +202,7 @@ namespace SemestralProject.Persistence
                                    )
                                 {
                                     this.InformationSystems.Add(new InformationSystem(
+                                        idenElement.InnerText,
                                         DateTime.ParseExact(credElement.InnerText, DataStorage.XML._Date, null),
                                         DateTime.ParseExact(updtElement.InnerText, DataStorage.XML._Date, null),
                                         this.fileStorage.GetIcon(iconElement.InnerText, FileStorage.DefaultIconType.IS),
@@ -221,6 +231,9 @@ namespace SemestralProject.Persistence
             foreach(InformationSystem informationSystem in this.InformationSystems)
             {
                 XmlElement infS = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem._Root, string.Empty);
+                XmlElement id = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem.Id, string.Empty);
+                id.InnerText = informationSystem.ID;
+                infS.AppendChild(id);
                 XmlElement created = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem.Created, string.Empty);
                 created.InnerText = informationSystem.Created.ToString(DataStorage.XML._Date);
                 infS.AppendChild(created);

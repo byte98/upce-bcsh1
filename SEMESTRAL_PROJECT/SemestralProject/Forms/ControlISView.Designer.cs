@@ -35,17 +35,20 @@
             // 
             // listViewContent
             // 
+            this.listViewContent.AllowColumnReorder = true;
             this.listViewContent.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderName,
             this.columnHeaderDescription});
             this.listViewContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewContent.FullRowSelect = true;
             this.listViewContent.Location = new System.Drawing.Point(0, 0);
+            this.listViewContent.MultiSelect = false;
             this.listViewContent.Name = "listViewContent";
             this.listViewContent.Size = new System.Drawing.Size(150, 150);
             this.listViewContent.TabIndex = 0;
             this.listViewContent.UseCompatibleStateImageBehavior = false;
             this.listViewContent.View = System.Windows.Forms.View.Details;
+            this.listViewContent.SelectedIndexChanged += new System.EventHandler(this.listViewContent_SelectedIndexChanged);
             // 
             // columnHeaderName
             // 

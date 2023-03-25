@@ -1,4 +1,5 @@
-﻿using SemestralProject.Visual;
+﻿using SemestralProject.Utils;
+using SemestralProject.Visual;
 using System;
 using System.Collections.Generic;
 using System.IO.Compression;
@@ -231,27 +232,11 @@ namespace SemestralProject.Persistence
             string reti;
             do
             {
-                reti = FileStorage.GenerateRandomString(length, FileStorage.NameAlphabet);
+                reti = StringUtils.Random(FileStorage.NameAlphabet, length);
             }
             while(this.GetIcon(reti) != null);
             return reti;
         }
 
-        /// <summary>
-        /// Generates random string
-        /// </summary>
-        /// <param name="length">Desired length of string</param>
-        /// <param name="alphabet">Alphabet used to generate string</param>
-        /// <returns>Pseudo-randomly generated string</returns>
-        private static string GenerateRandomString(int length, string alphabet)
-        {
-            StringBuilder reti = new StringBuilder();
-            Random random = new Random();
-            for (int i = 0; i < length; i++)
-            {
-                reti.Append(alphabet[random.Next(0, alphabet.Length)]);
-            }
-            return reti.ToString();
-        }
     }
 }

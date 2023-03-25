@@ -1,6 +1,7 @@
 ﻿using SemestralProject.Data;
 using SemestralProject.Forms;
 using SemestralProject.Persistence;
+using SemestralProject.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,21 @@ namespace SemestralProject.Handlers
         /// Reference to default instance of handler of information systems
         /// </summary>
         private static InformationSystemsHandler? instance;
+
+        /// <summary>
+        /// Alphabet containing valid characters for generating identifiers
+        /// </summary>
+        private const string IDAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        /// <summary>
+        /// Minimal length of identifier
+        /// </summary>
+        private const int IDMinLength = 8;
+
+        /// <summary>
+        /// Maximal length of identifier
+        /// </summary>
+        private const int IDMaxLength = 16;
 
         /// <summary>
         /// Default instance of handler of information systems
@@ -64,17 +80,52 @@ namespace SemestralProject.Handlers
         /// <param name="icon">Icon of information system</param>
         /// <param name="description">Description of information system</param>
         /// <returns></returns>
-        public InformationSystem CreateInformationSystem(string name, string icon, string description)
+        public InformationSystem? CreateInformationSystem(string name, string icon, string description)
         {
-            InformationSystem reti = null;
+            InformationSystem? reti = null;
             FormWait wait = new FormWait(() => {
                 Icon i = this.fileStorage.GetIcon(icon, FileStorage.DefaultIconType.IS);
-                InformationSystem system = new InformationSystem(i, name, description);
+                InformationSystem system = new InformationSystem(this.GenerateIdentifier(), i, name, description);
                 this.dataStorage.InformationSystems.Add(system);
                 this.dataStorage.Save();
                 reti = system;
             });
             wait.ShowDialog();
+            return reti;
+        }
+
+        /// <summary>
+        /// Generates identifier of information system
+        /// </summary>
+        /// <returns>Unique identifier of information system</returns>
+        private string GenerateIdentifier()
+        {
+            string reti;
+            do
+            {
+                reti = "IS_" + StringUtils.Random(InformationSystemsHandler.IDAlphabet, InformationSystemsHandler.IDMinLength, InformationSystemsHandler.IDMaxLength);
+            }
+            while(this.GetByID(reti) != null);
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets information system by its identifier
+        /// </summary>
+        /// <param name="id">Identifier of information system</param>
+        /// <returns>Information system with defined identifier or <c>null</c>, if there is no such system</returns>
+        public InformationSystem? GetByID(string id)
+        {
+            InformationSystem? reti = null;
+            List<InformationSystem> systems = this.dataStorage.InformationSystems;
+            foreach (InformationSystem system in systems)
+            {
+                if (system.ID == id)
+                {
+                    reti = system;
+                    break;
+                }
+            }
             return reti;
         }
 

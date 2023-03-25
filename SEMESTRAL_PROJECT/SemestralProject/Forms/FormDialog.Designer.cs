@@ -46,24 +46,22 @@
             this.panelHeader.Controls.Add(this.pictureBoxHeaderIcon);
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
-            this.panelHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(434, 37);
+            this.panelHeader.Size = new System.Drawing.Size(496, 49);
             this.panelHeader.TabIndex = 0;
             // 
             // labelHeader
             // 
             this.labelHeader.AutoSize = true;
             this.labelHeader.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelHeader.Location = new System.Drawing.Point(38, 7);
+            this.labelHeader.Location = new System.Drawing.Point(43, 9);
             this.labelHeader.Name = "labelHeader";
-            this.labelHeader.Size = new System.Drawing.Size(213, 25);
+            this.labelHeader.Size = new System.Drawing.Size(0, 32);
             this.labelHeader.TabIndex = 2;
             // 
             // pictureBoxHeaderIcon
             // 
-            this.pictureBoxHeaderIcon.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxHeaderIcon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBoxHeaderIcon.Location = new System.Drawing.Point(0, 8);
             this.pictureBoxHeaderIcon.Name = "pictureBoxHeaderIcon";
             this.pictureBoxHeaderIcon.Size = new System.Drawing.Size(32, 32);
             this.pictureBoxHeaderIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -76,20 +74,19 @@
             this.panelDialogButtons.Controls.Add(this.buttonCancel);
             this.panelDialogButtons.Controls.Add(this.buttonOK);
             this.panelDialogButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelDialogButtons.Location = new System.Drawing.Point(0, 451);
-            this.panelDialogButtons.Margin = new System.Windows.Forms.Padding(3, 16, 3, 2);
+            this.panelDialogButtons.Location = new System.Drawing.Point(0, 601);
+            this.panelDialogButtons.Margin = new System.Windows.Forms.Padding(3, 21, 3, 3);
             this.panelDialogButtons.Name = "panelDialogButtons";
-            this.panelDialogButtons.Size = new System.Drawing.Size(434, 60);
+            this.panelDialogButtons.Size = new System.Drawing.Size(496, 80);
             this.panelDialogButtons.TabIndex = 1;
             // 
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(153, 21);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonCancel.Location = new System.Drawing.Point(175, 28);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(130, 30);
+            this.buttonCancel.Size = new System.Drawing.Size(149, 40);
             this.buttonCancel.TabIndex = 1;
             this.buttonCancel.Text = "Storno";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -98,10 +95,9 @@
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(289, 21);
-            this.buttonOK.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonOK.Location = new System.Drawing.Point(330, 28);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(133, 30);
+            this.buttonOK.Size = new System.Drawing.Size(152, 40);
             this.buttonOK.TabIndex = 0;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -111,24 +107,24 @@
             this.flowLayoutPanelContent.AutoSize = true;
             this.flowLayoutPanelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelContent.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelContent.Location = new System.Drawing.Point(0, 37);
+            this.flowLayoutPanelContent.Location = new System.Drawing.Point(0, 49);
+            this.flowLayoutPanelContent.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.flowLayoutPanelContent.Name = "flowLayoutPanelContent";
-            this.flowLayoutPanelContent.Size = new System.Drawing.Size(434, 414);
+            this.flowLayoutPanelContent.Size = new System.Drawing.Size(496, 552);
             this.flowLayoutPanelContent.TabIndex = 2;
             // 
             // FormDialog
             // 
             this.AcceptButton = this.buttonOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(434, 511);
+            this.ClientSize = new System.Drawing.Size(496, 681);
             this.Controls.Add(this.flowLayoutPanelContent);
             this.Controls.Add(this.panelDialogButtons);
             this.Controls.Add(this.panelHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormDialog";
