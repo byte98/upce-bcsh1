@@ -27,14 +27,19 @@ namespace SemestralProject.Persistence
         }
 
         /// <summary>
+        /// Extension of default icons files
+        /// </summary>
+        private const string DefaultIconExt = ".BMP";
+
+        /// <summary>
         /// Name of file with default icon
         /// </summary>
-        private const string DefaultIcon = "__DEFAULT.PNG";
+        private const string DefaultIcon = "__DEFAULT";
 
         /// <summary>
         /// Name of file with default icon of information system
         /// </summary>
-        private const string DefaultISIcon = "__DEFAULT_IS.PNG";
+        private const string DefaultISIcon = "__DEFAULT_IS";
 
         /// <summary>
         /// Reference to instance of storage of files
@@ -99,7 +104,7 @@ namespace SemestralProject.Persistence
         /// <returns>Icon added to file storage</returns>
         public Icon AddIcon(string name, string path)
         {
-            Icon reti = new Icon(FileStorage.DefaultIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon);
+            Icon reti = new Icon(FileStorage.DefaultIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon + FileStorage.DefaultIconExt);
             if (File.Exists(path))
             {
                 name = name.ToUpper();
@@ -139,10 +144,10 @@ namespace SemestralProject.Persistence
         /// <returns>Default icon for requested type of data</returns>
         public Icon GetIcon(FileStorage.DefaultIconType type)
         {
-            Icon reti = new Icon(FileStorage.DefaultIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon);
+            Icon reti = new Icon(FileStorage.DefaultIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon + FileStorage.DefaultIconExt);
             switch (type)
             {
-                case DefaultIconType.IS: reti = new Icon(FileStorage.DefaultISIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultISIcon); break;
+                case DefaultIconType.IS: reti = new Icon(FileStorage.DefaultISIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultISIcon + FileStorage.DefaultIconExt); break;
             }
             return reti;
         }
@@ -205,7 +210,7 @@ namespace SemestralProject.Persistence
             foreach (string file in Directory.GetFiles(output + Path.DirectorySeparatorChar + "[ICONS]"))
             {
                 FileInfo fi = new FileInfo(file);
-                this.icons.Add(new Icon(fi.Name, file));
+                this.icons.Add(new Icon(Path.GetFileNameWithoutExtension(fi.FullName), file));
             }
         }
 

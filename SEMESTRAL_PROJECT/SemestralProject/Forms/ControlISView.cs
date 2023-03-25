@@ -82,6 +82,7 @@ namespace SemestralProject.Forms
                     ListViewItem item = new ListViewItem(system.Name, system.Icon.Name);
                     item.SubItems.Add(system.Description);
                     this.listViewContent.Items.Add(item);
+                    item.Tag = system.ID;
                 }
             }
             this.listViewContent.Columns[0].Width = -2;
@@ -94,9 +95,10 @@ namespace SemestralProject.Forms
             {
                 this.SelectedSystem = null;
             }
-            else
+            else if (this.DataStorage != null && this.FileStorage != null && this.listViewContent.SelectedItems != null && this.listViewContent.SelectedItems[0] != null && this.listViewContent.SelectedItems[0].Tag != null && this.listViewContent.SelectedItems[0].Tag.ToString() != null)
             {
-                
+                InformationSystemsHandler handler = new InformationSystemsHandler(this.DataStorage, this.FileStorage);
+                this.SelectedSystem = handler.GetByID(this.listViewContent.SelectedItems[0].Tag.ToString());
             }
         }
     }
