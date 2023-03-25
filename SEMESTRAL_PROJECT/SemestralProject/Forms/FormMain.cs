@@ -1,4 +1,5 @@
 using SemestralProject.Forms;
+using SemestralProject.Handlers;
 using SemestralProject.Persistence;
 using System.Transactions;
 using System.Windows.Forms;
@@ -10,7 +11,11 @@ namespace SemestralProject.Forms
 {
     internal partial class FormMain : Form
     {
-        
+
+        /// <summary>
+        /// Viewer of information systems
+        /// </summary>
+        private readonly ControlISView isView;
 
         public FormMain()
         {
@@ -19,6 +24,12 @@ namespace SemestralProject.Forms
             this.tabControlContent.Appearance = TabAppearance.FlatButtons;
             this.tabControlContent.ItemSize = new Size(0, 1);
             this.tabControlContent.SizeMode = TabSizeMode.Fixed;
+            this.isView = new ControlISView();
+            this.isView.Dock = DockStyle.Fill;
+            this.isView.DataStorage = DataStorage.Instance;
+            this.isView.FileStorage = FileStorage.Instance;
+            this.panelISContent.Controls.Add(this.isView);
+            this.isView.RefreshView();
         }
 
         /// <summary>
@@ -63,7 +74,8 @@ namespace SemestralProject.Forms
             Forms.FormAddIS dialog = new Forms.FormAddIS();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                
+                InformationSystemsHandler.Instance.CreateInformationSystem(dialog.ISName, dialog.ISIcon.Name, dialog.ISDescription);
+                this.isView.RefreshView();
             }
         }
 

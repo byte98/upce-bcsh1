@@ -14,6 +14,70 @@ namespace SemestralProject.Persistence
     /// </summary>
     internal class DataStorage
     {
+        #region XML DEFINITIONS
+        /// <summary>
+        /// Class which holds names of XML elements used in XML files
+        /// </summary>
+        private static class XML
+        {
+            /// <summary>
+            /// Format of date and time used to store data in XML files
+            /// </summary>
+            public const string _Date = "dd-MM-yyyy HH:mm:ss";
+
+            /// <summary>
+            /// Definition of version of XML standard
+            /// </summary>
+            public const string _Version = "1.0";
+
+            /// <summary>
+            /// Character set of XML file
+            /// </summary>
+            public const string _Charset = "UTF-8";
+
+            /// <summary>
+            /// XML element holding all information systems
+            /// </summary>
+            public const string InformationSystems = "INFORMATION_SYSTEMS";
+
+            /// <summary>
+            /// Class which holds names of XML elements used to store information systems
+            /// </summary>
+            internal static class InformationSystem
+            {
+                /// <summary>
+                /// XML element holding all information about information system
+                /// </summary>
+                public const string _Root = "INFORMATION_SYSTEM";
+
+                /// <summary>
+                /// XML element holding name of information system
+                /// </summary>
+                public const string Name = "NAME";
+
+                /// <summary>
+                /// XML element holding icon of information system
+                /// </summary>
+                public const string Icon = "ICON";
+
+                /// <summary>
+                /// XML element holding description of information system
+                /// </summary>
+                public const string Description = "DESCRIPTION";
+
+                /// <summary>
+                /// XML element holding date and time of creation of information system
+                /// </summary>
+                public const string Created = "CREATED";
+
+                /// <summary>
+                /// XML element holding date and time of last update of information system
+                /// </summary>
+                public const string Updated = "UPDATED";
+            }
+        }
+        #endregion
+
         /// <summary>
         /// Reference to instance of data storage
         /// </summary>
@@ -64,9 +128,14 @@ namespace SemestralProject.Persistence
         /// </summary>
         public void Load()
         {
+            string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_DB";
+            if (Directory.Exists(output))
+            {
+                Directory.Delete(output, true);
+            }
+            Directory.CreateDirectory(output);
             if (File.Exists(this.path))
             {
-                string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_DB";
                 ZipFile.ExtractToDirectory(this.path, output);
             }
         }
@@ -83,6 +152,31 @@ namespace SemestralProject.Persistence
             {
                 XmlDocument doc = new XmlDocument();
                 doc.Load(file);
+                XmlElement? root = doc.DocumentElement;
+                if (root != null)
+                {
+                    foreach(XmlElement isElem in root.ChildNodes)
+                    {
+                        if (isElem.Name == DataStorage.XML.InformationSystem._Root)
+                        {
+                            XmlNodeList? nameList = isElem.GetElementsByTagName(DataStorage.XML.InformationSystem.Name);
+                            XmlNodeList? iconList = isElem.GetElementsByTagName(DataStorage.XML.InformationSystem.Icon);
+                            XmlNodeList? descList = isElem.GetElementsByTagName(DataStorage.XML.InformationSystem.Description);
+                            XmlNodeList? credList = isElem.GetElementsByTagName(DataStorage.XML.InformationSystem.Created);
+                            XmlNodeList? updtList = isElem.GetElementsByTagName(DataStorage.XML.InformationSystem.Updated);
+                            if (
+                                    nameList != null && nameList.Count >= 1 &&
+                                    iconList != null && iconList.Count >= 1 &&
+                                    descList != null && descList.Count >= 1 &&
+                                    credList != null && credList.Count >= 1 &&
+                                    updtList != null && credList.Count >= 1
+                               )
+                            {
+
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -92,28 +186,28 @@ namespace SemestralProject.Persistence
         private void SaveInformationSystems()
         {
             XmlDocument doc = new XmlDocument();
-            XmlDeclaration declaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+            XmlDeclaration declaration = doc.CreateXmlDeclaration(DataStorage.XML._Version, DataStorage.XML._Charset, null);
             XmlElement? root = doc.DocumentElement;
             doc.InsertBefore(declaration, root);
-            XmlElement iss = doc.CreateElement(string.Empty, "INFORMATION-SYSTEMS", string.Empty);
+            XmlElement iss = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystems, string.Empty);
             doc.AppendChild(iss);
             foreach(InformationSystem informationSystem in this.InformationSystems)
             {
-                XmlElement infS = doc.CreateElement(string.Empty, "INFORMATION-SYSTEM", string.Empty);
-                XmlElement created = doc.CreateElement(string.Empty, "CREATED", string.Empty);
-                created.Value = informationSystem.Created.ToString("dd-MM-yyyy HH:mm:ss");
+                XmlElement infS = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem._Root, string.Empty);
+                XmlElement created = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem.Created, string.Empty);
+                created.InnerText = informationSystem.Created.ToString(DataStorage.XML._Date);
                 infS.AppendChild(created);
-                XmlElement updated = doc.CreateElement(string.Empty, "UPDATED", string.Empty);
-                updated.Value = informationSystem.Updated.ToString("dd-MM-yyyy HH:mm:ss");
+                XmlElement updated = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem.Updated, string.Empty);
+                updated.InnerText = informationSystem.Updated.ToString(DataStorage.XML._Date);
                 infS.AppendChild(updated);
-                XmlElement icon = doc.CreateElement(string.Empty, "ICON", string.Empty);
-                icon.Value = informationSystem.Icon.Name;
+                XmlElement icon = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem.Icon, string.Empty);
+                icon.InnerText = informationSystem.Icon.Name;
                 infS.AppendChild(icon);
-                XmlElement name = doc.CreateElement(string.Empty, "NAME", string.Empty);
-                name.Value = informationSystem.Name;
+                XmlElement name = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem.Name, string.Empty);
+                name.InnerText = informationSystem.Name;
                 infS.AppendChild(name);
-                XmlElement desc = doc.CreateElement(string.Empty, "DESCRIPTION", string.Empty);
-                desc.Value = informationSystem.Description;
+                XmlElement desc = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem.Description, string.Empty);
+                desc.InnerText = informationSystem.Description;
                 infS.AppendChild(desc);
                 iss.AppendChild(infS);
             }
@@ -130,7 +224,7 @@ namespace SemestralProject.Persistence
                 File.Delete(Configuration.DataFile);
             }
             this.SaveInformationSystems();
-            ZipFile.CreateFromDirectory(Configuration.TempDir + "_DB", this.path);
+            ZipFile.CreateFromDirectory(Configuration.TempDir + Path.DirectorySeparatorChar + "_DB", this.path);
         }
     }
 }

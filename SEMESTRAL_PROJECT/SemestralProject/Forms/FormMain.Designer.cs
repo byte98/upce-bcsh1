@@ -35,13 +35,11 @@ namespace SemestralProject.Forms
             this.radioButtonIS = new System.Windows.Forms.RadioButton();
             this.tabPageIS = new System.Windows.Forms.TabPage();
             this.panelISContent = new System.Windows.Forms.Panel();
-            this.listViewIS = new System.Windows.Forms.ListView();
             this.panelISControls = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAddIS = new System.Windows.Forms.Button();
             this.tabControlContent = new System.Windows.Forms.TabControl();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
-            this.panelISContent.SuspendLayout();
             this.panelISControls.SuspendLayout();
             this.tabControlContent.SuspendLayout();
             this.SuspendLayout();
@@ -84,21 +82,11 @@ namespace SemestralProject.Forms
             // 
             // panelISContent
             // 
-            this.panelISContent.Controls.Add(this.listViewIS);
             this.panelISContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelISContent.Location = new System.Drawing.Point(3, 110);
             this.panelISContent.Name = "panelISContent";
             this.panelISContent.Size = new System.Drawing.Size(768, 378);
             this.panelISContent.TabIndex = 1;
-            // 
-            // listViewIS
-            // 
-            this.listViewIS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewIS.Location = new System.Drawing.Point(0, 0);
-            this.listViewIS.Name = "listViewIS";
-            this.listViewIS.Size = new System.Drawing.Size(768, 378);
-            this.listViewIS.TabIndex = 0;
-            this.listViewIS.UseCompatibleStateImageBehavior = false;
             // 
             // panelISControls
             // 
@@ -149,7 +137,6 @@ namespace SemestralProject.Forms
             this.panelItemsControl.ResumeLayout(false);
             this.panelItemsControl.PerformLayout();
             this.tabPageIS.ResumeLayout(false);
-            this.panelISContent.ResumeLayout(false);
             this.panelISControls.ResumeLayout(false);
             this.tabControlContent.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -164,6 +151,5 @@ namespace SemestralProject.Forms
         private FlowLayoutPanel panelISControls;
         private Button buttonAddIS;
         private Panel panelISContent;
-        private ListView listViewIS;
     }
 }

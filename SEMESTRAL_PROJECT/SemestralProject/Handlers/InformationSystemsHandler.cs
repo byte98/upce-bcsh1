@@ -2,6 +2,7 @@
 using SemestralProject.Forms;
 using SemestralProject.Persistence;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace SemestralProject.Handlers
     /// <summary>
     /// Class which enables manipulation with information systems handler
     /// </summary>
-    internal class InformationSystemsHandler
+    internal class InformationSystemsHandler: IEnumerable
     {
         /// <summary>
         /// Reference to storage of data (where information systems will be saved)
@@ -75,6 +76,14 @@ namespace SemestralProject.Handlers
             });
             wait.ShowDialog();
             return reti;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            foreach(InformationSystem system in this.dataStorage.InformationSystems)
+            {
+                yield return system;
+            }
         }
     }
 }

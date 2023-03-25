@@ -59,6 +59,19 @@ namespace SemestralProject.Forms
                 fs.LoadIcons();
                 Thread.Sleep(500);
             });
+            this.progressBarLoad.Value = 50;
+            DataStorage ds = DataStorage.Instance;
+            this.labelState.Text = "Načítám data...";
+            await Task.Run(() => {
+                ds.Load();
+                Thread.Sleep(500);
+            });
+            this.progressBarLoad.Value = 60;
+            this.labelState.Text = "Načítám informační systémy...";
+            await Task.Run(() => {
+                ds.LoadInformationSystems();
+                Thread.Sleep(500);
+            });
             this.progressBarLoad.Value = 100;
             this.labelState.Text = "Hotovo";
             await Task.Run(() => {
