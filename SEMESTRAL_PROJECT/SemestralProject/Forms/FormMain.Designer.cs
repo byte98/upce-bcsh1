@@ -43,10 +43,15 @@ namespace SemestralProject.Forms
             this.buttonDeleteIS = new System.Windows.Forms.Button();
             this.splitterISControls = new System.Windows.Forms.Splitter();
             this.controlViewSizeButtonIS = new SemestralProject.Forms.ControlViewSizeButton();
+            this.panelISSearch = new System.Windows.Forms.Panel();
+            this.textBoxISSearch = new System.Windows.Forms.TextBox();
+            this.buttonISCancelSearch = new System.Windows.Forms.Button();
+            this.buttonISSearch = new System.Windows.Forms.Button();
             this.tabControlContent = new System.Windows.Forms.TabControl();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
             this.panelISControls.SuspendLayout();
+            this.panelISSearch.SuspendLayout();
             this.tabControlContent.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,6 +108,7 @@ namespace SemestralProject.Forms
             this.panelISControls.Controls.Add(this.buttonDeleteIS);
             this.panelISControls.Controls.Add(this.splitterISControls);
             this.panelISControls.Controls.Add(this.controlViewSizeButtonIS);
+            this.panelISControls.Controls.Add(this.panelISSearch);
             this.panelISControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelISControls.Location = new System.Drawing.Point(3, 3);
             this.panelISControls.Name = "panelISControls";
@@ -187,7 +193,7 @@ namespace SemestralProject.Forms
             this.splitterISControls.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.splitterISControls.Location = new System.Drawing.Point(503, 3);
             this.splitterISControls.Name = "splitterISControls";
-            this.splitterISControls.Size = new System.Drawing.Size(1, 94);
+            this.splitterISControls.Size = new System.Drawing.Size(1, 104);
             this.splitterISControls.TabIndex = 4;
             this.splitterISControls.TabStop = false;
             // 
@@ -197,6 +203,53 @@ namespace SemestralProject.Forms
             this.controlViewSizeButtonIS.Name = "controlViewSizeButtonIS";
             this.controlViewSizeButtonIS.Size = new System.Drawing.Size(188, 94);
             this.controlViewSizeButtonIS.TabIndex = 6;
+            // 
+            // panelISSearch
+            // 
+            this.panelISSearch.Controls.Add(this.textBoxISSearch);
+            this.panelISSearch.Controls.Add(this.buttonISCancelSearch);
+            this.panelISSearch.Controls.Add(this.buttonISSearch);
+            this.panelISSearch.Location = new System.Drawing.Point(704, 3);
+            this.panelISSearch.Name = "panelISSearch";
+            this.panelISSearch.Size = new System.Drawing.Size(253, 104);
+            this.panelISSearch.TabIndex = 7;
+            // 
+            // textBoxISSearch
+            // 
+            this.textBoxISSearch.Location = new System.Drawing.Point(3, 3);
+            this.textBoxISSearch.Name = "textBoxISSearch";
+            this.textBoxISSearch.PlaceholderText = "Hledat";
+            this.textBoxISSearch.Size = new System.Drawing.Size(247, 27);
+            this.textBoxISSearch.TabIndex = 0;
+            // 
+            // buttonISCancelSearch
+            // 
+            this.buttonISCancelSearch.Enabled = false;
+            this.buttonISCancelSearch.FlatAppearance.BorderSize = 0;
+            this.buttonISCancelSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonISCancelSearch.Image = global::SemestralProject.Resources.search_cancel;
+            this.buttonISCancelSearch.Location = new System.Drawing.Point(129, 36);
+            this.buttonISCancelSearch.Name = "buttonISCancelSearch";
+            this.buttonISCancelSearch.Size = new System.Drawing.Size(120, 58);
+            this.buttonISCancelSearch.TabIndex = 1;
+            this.buttonISCancelSearch.Text = "Zrušit hledání";
+            this.buttonISCancelSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonISCancelSearch.UseVisualStyleBackColor = true;
+            this.buttonISCancelSearch.Click += new System.EventHandler(this.buttonISCancelSearch_Click);
+            // 
+            // buttonISSearch
+            // 
+            this.buttonISSearch.FlatAppearance.BorderSize = 0;
+            this.buttonISSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonISSearch.Image = global::SemestralProject.Resources.search;
+            this.buttonISSearch.Location = new System.Drawing.Point(3, 36);
+            this.buttonISSearch.Name = "buttonISSearch";
+            this.buttonISSearch.Size = new System.Drawing.Size(120, 58);
+            this.buttonISSearch.TabIndex = 1;
+            this.buttonISSearch.Text = "Hledat";
+            this.buttonISSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonISSearch.UseVisualStyleBackColor = true;
+            this.buttonISSearch.Click += new System.EventHandler(this.buttonISSearch_Click);
             // 
             // tabControlContent
             // 
@@ -225,6 +278,8 @@ namespace SemestralProject.Forms
             this.panelItemsControl.PerformLayout();
             this.tabPageIS.ResumeLayout(false);
             this.panelISControls.ResumeLayout(false);
+            this.panelISSearch.ResumeLayout(false);
+            this.panelISSearch.PerformLayout();
             this.tabControlContent.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -244,5 +299,9 @@ namespace SemestralProject.Forms
         private Splitter splitterISControls;
         private Button buttonEditIS;
         private ControlViewSizeButton controlViewSizeButtonIS;
+        private TextBox textBoxISSearch;
+        private Button buttonISSearch;
+        private Panel panelISSearch;
+        private Button buttonISCancelSearch;
     }
 }

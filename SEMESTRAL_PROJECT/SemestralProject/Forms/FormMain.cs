@@ -169,5 +169,25 @@ namespace SemestralProject.Forms
                 }
             }
         }
+
+        private void buttonISSearch_Click(object sender, EventArgs e)
+        {
+            if (this.isView != null)
+            {
+                this.isView.Search = this.textBoxISSearch.Text;
+                this.buttonISCancelSearch.Enabled = true;
+            }
+
+        }
+
+        private void buttonISCancelSearch_Click(object sender, EventArgs e)
+        {
+            if (this.isView != null)
+            {
+                this.isView.Search = null;
+                this.isView.RefreshView();
+                this.buttonISCancelSearch.Enabled = false;
+            }
+        }
     }
 }

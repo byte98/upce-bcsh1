@@ -69,6 +69,27 @@ namespace SemestralProject.Forms
         public InformationSystem? SelectedSystem { get; private set; } = null;
 
         /// <summary>
+        /// Attribute holding actual search phrase
+        /// </summary>
+        private string? search = null;
+
+        /// <summary>
+        /// Phrase which will be searched
+        /// </summary>
+        public string? Search
+        {
+            private get
+            {
+                return this.search;
+            }
+            set
+            {
+                this.search = value;
+                this.SearchData();
+            }
+        }
+
+        /// <summary>
         /// Counter of displayed information systems
         /// </summary>
         public int SystemsCount
@@ -87,6 +108,43 @@ namespace SemestralProject.Forms
         {
             InitializeComponent();
             this.RefreshView();
+        }
+
+        /// <summary>
+        /// Searches data
+        /// </summary>
+        private void SearchData()
+        {
+            if (this.Search == null)
+            {
+                this.RefreshView();
+            }
+            else
+            {
+                this.listViewContent.Items.Clear();
+                List<InformationSystem> list = new List<InformationSystem>();
+                FormWait wait = new FormWait(() => {
+                    if (this.DataStorage!= null)
+                    {
+                        foreach (InformationSystem system in this.DataStorage.InformationSystems)
+                        {
+                            if (system.Name.ToLower().Trim().Contains(this.Search.ToLower().Trim()))
+                            {
+                                list.Add(system);
+                            }
+                        }
+                    }
+                });
+                wait.ShowDialog();
+                foreach (InformationSystem system in list)
+                {
+                    ListViewItem item = new ListViewItem(system.Name, system.Icon.Name);
+                    item.SubItems.Add(system.Description);
+                    this.listViewContent.Items.Add(item);
+                    item.Tag = system.ID;
+                }
+                this.listViewContent.Refresh();
+            }
         }
 
         /// <summary>
