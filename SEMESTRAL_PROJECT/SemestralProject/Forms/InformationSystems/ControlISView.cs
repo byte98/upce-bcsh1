@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Icon = SemestralProject.Visual.Icon;
 
-namespace SemestralProject.Forms
+namespace SemestralProject.Forms.InformationSystems
 {
     /// <summary>
     /// Class which displays all information systems

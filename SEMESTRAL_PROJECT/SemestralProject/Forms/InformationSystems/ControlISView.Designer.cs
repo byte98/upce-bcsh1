@@ -1,4 +1,4 @@
-﻿namespace SemestralProject.Forms
+﻿namespace SemestralProject.Forms.InformationSystems
 {
     internal partial class ControlISView
     {

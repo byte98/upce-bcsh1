@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SemestralProject.Forms
+namespace SemestralProject.Forms.InformationSystems
 {
     /// <summary>
     /// Class representing dialog with information about information system

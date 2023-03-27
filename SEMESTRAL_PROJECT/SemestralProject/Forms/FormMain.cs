@@ -1,11 +1,14 @@
 ﻿using SemestralProject.Forms;
 using SemestralProject.Handlers;
 using SemestralProject.Persistence;
+using System.Runtime.CompilerServices;
 using System.Transactions;
 using System.Windows.Forms;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Color = System.Drawing.Color;
+using SemestralProject.Forms.InformationSystems;
+using SemestralProject.Forms.Maps;
 
 namespace SemestralProject.Forms
 {
@@ -64,6 +67,7 @@ namespace SemestralProject.Forms
             foreach (Control control in this.panelItemsControl.Controls)
             {
                 control.ForeColor = Configuration.TextColor;
+                control.BackColor = Configuration.AccentColor;
                 if (control is RadioButton)
                 {
                     RadioButton rb = (RadioButton)control;
@@ -71,6 +75,11 @@ namespace SemestralProject.Forms
                     {
                         rb.BackColor = Color.FromKnownColor(KnownColor.ControlLight);
                         rb.ForeColor = Color.Black;
+                        switch(rb.Text.Trim().ToUpper())
+                        {
+                            case "INFORMAČNÍ SYSTÉMY": this.tabControlContent.SelectedTab = this.tabPageIS; break;
+                            case "OBLASTI": this.tabControlContent.SelectedTab = this.tabPageMaps; break;
+                        }    
                     }
                 }
             }
@@ -86,7 +95,7 @@ namespace SemestralProject.Forms
 
         private void buttonAddIS_Click(object sender, EventArgs e)
         {
-            Forms.FormAddIS dialog = new Forms.FormAddIS();
+            FormAddIS dialog = new FormAddIS();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 InformationSystemsHandler.Instance.CreateInformationSystem(dialog.ISName, dialog.ISIcon.Name, dialog.ISDescription);
@@ -187,6 +196,15 @@ namespace SemestralProject.Forms
                 this.isView.Search = null;
                 this.isView.RefreshView();
                 this.buttonISCancelSearch.Enabled = false;
+            }
+        }
+
+        private void buttonMapAdd_Click(object sender, EventArgs e)
+        {
+            FormAddMap dialog = new FormAddMap();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+
             }
         }
     }

@@ -9,10 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Forms\ControlEditIS.cs">
+    <Compile Update="Forms\InformationSystems\ControlEditIS.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Forms\FormEditIS.cs">
+    <Compile Update="Forms\InformationSystems\FormEditIS.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Resources.Designer.cs">

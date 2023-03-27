@@ -52,11 +52,18 @@ namespace SemestralProject.Forms
                 fs.Load();
                 Thread.Sleep(500);
             });
-            this.progressBarLoad.Value = 30;
+            this.progressBarLoad.Value = 20;
             this.labelState.Text = "Načítám ikony...";
             await Task.Run(() =>
             {
                 fs.LoadIcons();
+                Thread.Sleep(500);
+            });
+            this.progressBarLoad.Value = 30;
+            this.labelState.Text = "Načítám obrázky...";
+            await Task.Run(() =>
+            {
+                fs.LoadPictures();
                 Thread.Sleep(500);
             });
             this.progressBarLoad.Value = 50;

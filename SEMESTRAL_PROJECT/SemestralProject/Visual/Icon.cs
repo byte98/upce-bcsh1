@@ -38,16 +38,16 @@ namespace SemestralProject.Visual
         /// <param name="pictureBox">Picture box in which icon will be displayed</param>
         public void Display(PictureBox pictureBox)
         {
-            pictureBox.Image = (Image)this.image;
+            pictureBox.Image = (System.Drawing.Image)this.image;
         }
 
         /// <summary>
         /// Gets image representation of icon
         /// </summary>
         /// <returns>Image representation of icon</returns>
-        public Image GetImage()
+        public System.Drawing.Image GetImage()
         {
-            return (Image)this.image;
+            return (System.Drawing.Image)this.image;
         }
     }
 }

@@ -23,13 +23,18 @@ namespace SemestralProject.Persistence
             /// <summary>
             /// Icon of information system
             /// </summary>
-            IS
+            IS,
+
+            /// <summary>
+            /// Icon of map
+            /// </summary>
+            MAP
         }
 
         /// <summary>
-        /// Extension of default icons files
+        /// Extension of default files
         /// </summary>
-        private const string DefaultIconExt = ".BMP";
+        private const string DefaultExt = ".BMP";
 
         /// <summary>
         /// Name of file with default icon
@@ -40,6 +45,16 @@ namespace SemestralProject.Persistence
         /// Name of file with default icon of information system
         /// </summary>
         private const string DefaultISIcon = "__DEFAULT_IS";
+
+        /// <summary>
+        /// Name of file with default icon of map
+        /// </summary>
+        private const string DefaultMapIcon = "__DEFAULT_MAP";
+
+        /// <summary>
+        /// Name of file with default picture
+        /// </summary>
+        private const string DefaultPicture = "__DEFAULT";
 
         /// <summary>
         /// Reference to instance of storage of files
@@ -62,9 +77,14 @@ namespace SemestralProject.Persistence
         private const int NameMax = 64;
 
         /// <summary>
-        /// Dictionary with all stored icons
+        /// List with all stored icons
         /// </summary>
         private readonly List<Icon> icons;
+
+        /// <summary>
+        /// List with all stored pictures
+        /// </summary>
+        private readonly List<Picture> pictures;
 
         /// <summary>
         /// Path to file storage
@@ -93,9 +113,78 @@ namespace SemestralProject.Persistence
         public FileStorage(string path)
         {
             this.icons = new List<Icon>();
+            this.pictures = new List<Picture>();
             this.path = path;
         }
 
+        #region File manipulation
+        /// <summary>
+        /// Loads content of storage
+        /// </summary>
+        public void Load()
+        {
+            string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS";
+            Configuration.CreateTemp();
+            if (Directory.Exists(output))
+            {
+                Directory.Delete(output, true);
+            }
+            if (File.Exists(this.path))
+            {
+                ZipFile.ExtractToDirectory(this.path, output);
+            }
+            else
+            {
+                Directory.CreateDirectory(output);
+                string iconsFolder = output + Path.DirectorySeparatorChar + "[ICONS]";
+                Directory.CreateDirectory(iconsFolder);
+                string picturesFolder = output + Path.DirectorySeparatorChar + "[PICTURES]";
+                Directory.CreateDirectory(picturesFolder);
+            }
+        }
+
+        /// <summary>
+        /// Loads icons (this needs to be called after <see cref="Load"/> is called!)
+        /// </summary>
+        public void LoadIcons()
+        {
+            string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS";
+            this.icons.Clear();
+            foreach (string file in Directory.GetFiles(output + Path.DirectorySeparatorChar + "[ICONS]"))
+            {
+                FileInfo fi = new FileInfo(file);
+                this.icons.Add(new Icon(Path.GetFileNameWithoutExtension(fi.FullName), file));
+            }
+        }
+
+        /// <summary>
+        /// Loads pictures (this needs to be called after <see cref="Load"/> is called!)
+        /// </summary>
+        public void LoadPictures()
+        {
+            string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[PICTURES]";
+            this.pictures.Clear();
+            foreach(string file in Directory.GetFiles(output))
+            {
+                FileInfo fi = new FileInfo(file);
+                this.pictures.Add(new Picture(file));
+            }
+        }
+
+        /// <summary>
+        /// Saves content of storage
+        /// </summary>
+        private void Save()
+        {
+            if (File.Exists(this.path))
+            {
+                File.Delete(this.path);
+            }
+            ZipFile.CreateFromDirectory(Configuration.TempDir + Path.DirectorySeparatorChar + "_FS", this.path);
+        }
+        #endregion
+
+        #region Icons
         /// <summary>
         /// Adds icon to file storage
         /// </summary>
@@ -104,7 +193,7 @@ namespace SemestralProject.Persistence
         /// <returns>Icon added to file storage</returns>
         public Icon AddIcon(string name, string path)
         {
-            Icon reti = new Icon(FileStorage.DefaultIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon + FileStorage.DefaultIconExt);
+            Icon reti = new Icon(FileStorage.DefaultIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon + FileStorage.DefaultExt);
             if (File.Exists(path))
             {
                 name = name.ToUpper();
@@ -144,10 +233,11 @@ namespace SemestralProject.Persistence
         /// <returns>Default icon for requested type of data</returns>
         public Icon GetIcon(FileStorage.DefaultIconType type)
         {
-            Icon reti = new Icon(FileStorage.DefaultIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon + FileStorage.DefaultIconExt);
+            Icon reti = new Icon(FileStorage.DefaultIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon + FileStorage.DefaultExt);
             switch (type)
             {
-                case DefaultIconType.IS: reti = new Icon(FileStorage.DefaultISIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultISIcon + FileStorage.DefaultIconExt); break;
+                case DefaultIconType.IS:  reti = new Icon(FileStorage.DefaultISIcon,  Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultISIcon + FileStorage.DefaultExt); break;
+                case DefaultIconType.MAP: reti = new Icon(FileStorage.DefaultMapIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultMapIcon + FileStorage.DefaultExt); break;
             }
             return reti;
         }
@@ -167,7 +257,7 @@ namespace SemestralProject.Persistence
             }
             return reti;
         }
-        
+
         /// <summary>
         /// Gets all available icons
         /// </summary>
@@ -175,55 +265,6 @@ namespace SemestralProject.Persistence
         public Icon[] GetAllIcons()
         {
             return this.icons.ToArray();
-        }
-
-        /// <summary>
-        /// Loads content of storage
-        /// </summary>
-        public void Load()
-        {
-            string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS";
-            Configuration.CreateTemp();
-            if (Directory.Exists(output))
-            {
-                Directory.Delete(output, true);
-            }
-            if (File.Exists(this.path))
-            {
-                ZipFile.ExtractToDirectory(this.path, output);
-            }
-            else
-            {
-                Directory.CreateDirectory(output);
-                string iconsFolder = output + Path.DirectorySeparatorChar + "[ICONS]";
-                Directory.CreateDirectory(iconsFolder);
-            }
-        }
-
-        /// <summary>
-        /// Loads icons (this needs to be called after <see cref="Load"/> is called!)
-        /// </summary>
-        public void LoadIcons()
-        {
-            string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS";
-            this.icons.Clear();
-            foreach (string file in Directory.GetFiles(output + Path.DirectorySeparatorChar + "[ICONS]"))
-            {
-                FileInfo fi = new FileInfo(file);
-                this.icons.Add(new Icon(Path.GetFileNameWithoutExtension(fi.FullName), file));
-            }
-        }
-
-        /// <summary>
-        /// Saves content of storage
-        /// </summary>
-        private void Save()
-        {
-            if (File.Exists(this.path))
-            {
-                File.Delete(this.path);
-            }
-            ZipFile.CreateFromDirectory(Configuration.TempDir + Path.DirectorySeparatorChar + "_FS", this.path);
         }
 
         /// <summary>
@@ -242,6 +283,100 @@ namespace SemestralProject.Persistence
             while(this.GetIcon(reti) != null);
             return reti;
         }
+        #endregion
+
+        #region Pictures
+        /// <summary>
+        /// Gets all available pictures
+        /// </summary>
+        /// <returns>Array with all available pictures</returns>
+        public Picture[] GetPictures()
+        {
+            return this.pictures.ToArray();
+        }
+
+        /// <summary>
+        /// Gets picture
+        /// </summary>
+        /// <param name="name">Name of picture</param>
+        /// <returns>Picture with defined name or <c>null</c>, if there is no such picture</returns>
+        public Picture? GetPicture(string name)
+        {
+            Picture? reti = null;
+            foreach(Picture picture in this.pictures)
+            {
+                if (picture.Name == name)
+                {
+                    reti = picture;
+                    break;
+                }
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets picture with no <c>null</c> return option
+        /// </summary>
+        /// <param name="name">Name of picture</param>
+        /// <returns>Picture with defined name or default picture</returns>
+        public Picture GetPictureChecked(string? name)
+        {
+            Picture reti = new Picture(Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[PICTURES]" + Path.DirectorySeparatorChar + FileStorage.DefaultPicture + FileStorage.DefaultExt);
+            if (name != null)
+            {
+                foreach (Picture picture in this.pictures)
+                {
+                    if (picture.Name == name)
+                    {
+                        reti = picture;
+                        break;
+                    }
+                }
+            }
+            return reti;
+        }
+        
+        /// <summary>
+        /// Adds picture to file storage
+        /// </summary>
+        /// <param name="path">Path to file with picture</param>
+        /// <returns>Picture added to file storage</returns>
+        public Picture AddPicture(string path)
+        {
+            string destination = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[PICTURES]" + Path.DirectorySeparatorChar;
+            string name = this.GenerateUniquePicture();
+            destination += name;
+            FileInfo fi = new FileInfo(path);
+            destination += fi.Extension.ToUpper();
+            if (File.Exists(path))
+            {
+                File.Copy(path, destination, true);
+            }
+            this.Save();
+            Picture reti = new Picture(destination, name);
+            this.pictures.Add(reti);
+            return reti;
+        }
+
+        /// <summary>
+        /// Generates unique name for picture
+        /// </summary>
+        /// <returns>Pseudo-random unique name for picture</returns>
+        private string GenerateUniquePicture()
+        {
+            string reti;
+            do
+            {
+                reti = StringUtils.Random(
+                        FileStorage.NameAlphabet,
+                        FileStorage.NameMin,
+                        FileStorage.NameMax
+                    );
+            }
+            while(this.GetPicture(reti) != null);
+            return reti;
+        }
+        #endregion
 
     }
 }

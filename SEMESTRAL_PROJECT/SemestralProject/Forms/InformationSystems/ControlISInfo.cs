@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SemestralProject.Forms
+namespace SemestralProject.Forms.InformationSystems
 {
     internal partial class ControlISInfo : UserControl
     {
@@ -49,7 +49,7 @@ namespace SemestralProject.Forms
         {
             if (this.informationSystem != null)
             {
-                this.pictureBoxIcon.Image = this.informationSystem.Icon.GetImage();
+                this.informationSystem.Icon.Display(this.pictureBoxIcon);
                 this.labelName.Text = this.informationSystem.Name;
                 this.textBoxDescription.Text = this.informationSystem.Description;
                 this.textBoxCreated.Text = this.informationSystem.Created.ToString();

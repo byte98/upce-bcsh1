@@ -1,22 +1,21 @@
-﻿using SemestralProject.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Icon = SemestralProject.Visual.Icon;  
 
-namespace SemestralProject.Forms
+namespace SemestralProject.Forms.InformationSystems
 {
     /// <summary>
-    /// Class representing edit information system dialog
+    /// Class representing add information system dialog
     /// </summary>
-    internal class FormEditIS: FormDialog
+    internal class FormAddIS: FormDialog
     {
         /// <summary>
         /// Reference to content of dialog
         /// </summary>
-        private ControlEditIS content;
+        private ControlAddIS content;
 
         /// <summary>
         /// Name of information system
@@ -52,22 +51,12 @@ namespace SemestralProject.Forms
         }
 
         /// <summary>
-        /// Information system which is being edited
+        /// Creates new add information system dialog
         /// </summary>
-        public InformationSystem InformationSystem { get; init; }
-
-        /// <summary>
-        /// Creates new edit information system dialog
-        /// </summary>
-        /// <param name="system">System which will be edited</param>
-        public FormEditIS(InformationSystem system): base("Upravit informační systém", "Úprava informačního systému", SemestralProject.Resources.is_edit)
+        public FormAddIS(): base("Přidat informační systém", "Nový informační systém", SemestralProject.Resources.is_add)
         {
-            this.InformationSystem = system;
-            this.content = new ControlEditIS();
+            this.content = new ControlAddIS();
             this.AddControl(this.content);
-            this.content.ISName = this.InformationSystem.Name;
-            this.content.ISIcon = this.InformationSystem.Icon;
-            this.content.ISDescription = this.InformationSystem.Description;
             this.Icon = SemestralProject.Resources.addis;
         }
     }

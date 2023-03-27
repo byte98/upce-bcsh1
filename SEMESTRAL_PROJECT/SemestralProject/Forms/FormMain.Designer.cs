@@ -32,6 +32,7 @@ namespace SemestralProject.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panelItemsControl = new System.Windows.Forms.Panel();
+            this.radioButtonMaps = new System.Windows.Forms.RadioButton();
             this.radioButtonIS = new System.Windows.Forms.RadioButton();
             this.tabPageIS = new System.Windows.Forms.TabPage();
             this.panelISContent = new System.Windows.Forms.Panel();
@@ -48,21 +49,42 @@ namespace SemestralProject.Forms
             this.buttonISCancelSearch = new System.Windows.Forms.Button();
             this.buttonISSearch = new System.Windows.Forms.Button();
             this.tabControlContent = new System.Windows.Forms.TabControl();
+            this.tabPageMaps = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanelMapsControls = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonMapAdd = new System.Windows.Forms.Button();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
             this.panelISControls.SuspendLayout();
             this.panelISSearch.SuspendLayout();
             this.tabControlContent.SuspendLayout();
+            this.tabPageMaps.SuspendLayout();
+            this.flowLayoutPanelMapsControls.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelItemsControl
             // 
+            this.panelItemsControl.Controls.Add(this.radioButtonMaps);
             this.panelItemsControl.Controls.Add(this.radioButtonIS);
             this.panelItemsControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelItemsControl.Location = new System.Drawing.Point(0, 0);
             this.panelItemsControl.Name = "panelItemsControl";
             this.panelItemsControl.Size = new System.Drawing.Size(1348, 29);
             this.panelItemsControl.TabIndex = 1;
+            // 
+            // radioButtonMaps
+            // 
+            this.radioButtonMaps.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonMaps.AutoSize = true;
+            this.radioButtonMaps.FlatAppearance.BorderSize = 0;
+            this.radioButtonMaps.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButtonMaps.Location = new System.Drawing.Point(179, -1);
+            this.radioButtonMaps.Name = "radioButtonMaps";
+            this.radioButtonMaps.Size = new System.Drawing.Size(76, 30);
+            this.radioButtonMaps.TabIndex = 3;
+            this.radioButtonMaps.TabStop = true;
+            this.radioButtonMaps.Text = "OBLASTI";
+            this.radioButtonMaps.UseVisualStyleBackColor = true;
+            this.radioButtonMaps.CheckedChanged += new System.EventHandler(this.PanelItemsControlItemClicked);
             // 
             // radioButtonIS
             // 
@@ -78,6 +100,7 @@ namespace SemestralProject.Forms
             this.radioButtonIS.TabStop = true;
             this.radioButtonIS.Text = "INFORMAČNÍ SYSTÉMY";
             this.radioButtonIS.UseVisualStyleBackColor = true;
+            this.radioButtonIS.CheckedChanged += new System.EventHandler(this.PanelItemsControlItemClicked);
             // 
             // tabPageIS
             // 
@@ -254,12 +277,46 @@ namespace SemestralProject.Forms
             // tabControlContent
             // 
             this.tabControlContent.Controls.Add(this.tabPageIS);
+            this.tabControlContent.Controls.Add(this.tabPageMaps);
             this.tabControlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlContent.Location = new System.Drawing.Point(0, 29);
             this.tabControlContent.Name = "tabControlContent";
             this.tabControlContent.SelectedIndex = 0;
             this.tabControlContent.Size = new System.Drawing.Size(1348, 692);
             this.tabControlContent.TabIndex = 2;
+            // 
+            // tabPageMaps
+            // 
+            this.tabPageMaps.Controls.Add(this.flowLayoutPanelMapsControls);
+            this.tabPageMaps.Location = new System.Drawing.Point(4, 29);
+            this.tabPageMaps.Name = "tabPageMaps";
+            this.tabPageMaps.Size = new System.Drawing.Size(1340, 659);
+            this.tabPageMaps.TabIndex = 1;
+            this.tabPageMaps.Text = "OBLASTI";
+            this.tabPageMaps.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanelMapsControls
+            // 
+            this.flowLayoutPanelMapsControls.Controls.Add(this.buttonMapAdd);
+            this.flowLayoutPanelMapsControls.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanelMapsControls.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanelMapsControls.Name = "flowLayoutPanelMapsControls";
+            this.flowLayoutPanelMapsControls.Size = new System.Drawing.Size(1340, 107);
+            this.flowLayoutPanelMapsControls.TabIndex = 0;
+            // 
+            // buttonMapAdd
+            // 
+            this.buttonMapAdd.FlatAppearance.BorderSize = 0;
+            this.buttonMapAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMapAdd.Image = global::SemestralProject.Resources.map_add;
+            this.buttonMapAdd.Location = new System.Drawing.Point(3, 3);
+            this.buttonMapAdd.Name = "buttonMapAdd";
+            this.buttonMapAdd.Size = new System.Drawing.Size(94, 94);
+            this.buttonMapAdd.TabIndex = 0;
+            this.buttonMapAdd.Text = "Přidat oblast";
+            this.buttonMapAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonMapAdd.UseVisualStyleBackColor = true;
+            this.buttonMapAdd.Click += new System.EventHandler(this.buttonMapAdd_Click);
             // 
             // FormMain
             // 
@@ -281,6 +338,8 @@ namespace SemestralProject.Forms
             this.panelISSearch.ResumeLayout(false);
             this.panelISSearch.PerformLayout();
             this.tabControlContent.ResumeLayout(false);
+            this.tabPageMaps.ResumeLayout(false);
+            this.flowLayoutPanelMapsControls.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -303,5 +362,9 @@ namespace SemestralProject.Forms
         private Button buttonISSearch;
         private Panel panelISSearch;
         private Button buttonISCancelSearch;
+        private RadioButton radioButtonMaps;
+        private TabPage tabPageMaps;
+        private FlowLayoutPanel flowLayoutPanelMapsControls;
+        private Button buttonMapAdd;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace SemestralProject.Forms
+﻿namespace SemestralProject.Forms.InformationSystems
 {
     partial class ControlISInfo
     {

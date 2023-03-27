@@ -1,14 +1,30 @@
 ﻿using SemestralProject.Persistence;
 using Icon = SemestralProject.Visual.Icon;
 
-namespace SemestralProject.Forms
+namespace SemestralProject.Forms.InformationSystems
 {
-    internal partial class ControlAddIS : UserControl
+    internal partial class ControlEditIS : UserControl
     {
         /// <summary>
-        /// Icon of new information system
+        /// Attribute which holds icon of information system
         /// </summary>
-        public Icon ISIcon { get; private set; }
+        private Icon isIcon
+        {
+            get
+            {
+                return this.isIcon;
+            }
+            set
+            {
+                this.isIcon = value;
+                this.buttonIcon.Image = this.isIcon.GetImage();
+            }
+        }
+
+        /// <summary>
+        /// Icon of information system
+        /// </summary>
+        public Icon ISIcon { get; set; }
 
         /// <summary>
         /// Name of information system
@@ -39,7 +55,7 @@ namespace SemestralProject.Forms
                 this.textBoxDescription.Text = value;
             }
         }
-        public ControlAddIS()
+        public ControlEditIS()
         {
             InitializeComponent();
             this.ISIcon = FileStorage.Instance.GetIcon(FileStorage.DefaultIconType.IS);
