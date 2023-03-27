@@ -53,6 +53,7 @@ namespace SemestralProject.Forms
                 this.buttonRemoveIS.Enabled = (args.SelectedSystem != null);
                 this.buttonEditIS.Enabled = (args.SelectedSystem != null);
             });
+            this.controlViewSizeButtonIS.DataView = this.isView;
         }
 
         /// <summary>

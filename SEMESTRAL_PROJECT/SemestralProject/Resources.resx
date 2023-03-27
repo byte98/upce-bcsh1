@@ -133,6 +133,27 @@
   <data name="icons_chooser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\icons_chooser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons_details" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icons_details.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_l" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icons_l.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_list" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icons_list.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_m" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icons_m.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_s" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icons_s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_tiles" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icons_tiles.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons_xl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icons_xl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_addis" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\icon_addis.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

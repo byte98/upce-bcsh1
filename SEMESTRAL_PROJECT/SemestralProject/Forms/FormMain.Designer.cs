@@ -42,6 +42,7 @@ namespace SemestralProject.Forms
             this.buttonRemoveIS = new System.Windows.Forms.Button();
             this.buttonDeleteIS = new System.Windows.Forms.Button();
             this.splitterISControls = new System.Windows.Forms.Splitter();
+            this.controlViewSizeButtonIS = new SemestralProject.Forms.ControlViewSizeButton();
             this.tabControlContent = new System.Windows.Forms.TabControl();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
@@ -101,6 +102,7 @@ namespace SemestralProject.Forms
             this.panelISControls.Controls.Add(this.buttonRemoveIS);
             this.panelISControls.Controls.Add(this.buttonDeleteIS);
             this.panelISControls.Controls.Add(this.splitterISControls);
+            this.panelISControls.Controls.Add(this.controlViewSizeButtonIS);
             this.panelISControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelISControls.Location = new System.Drawing.Point(3, 3);
             this.panelISControls.Name = "panelISControls";
@@ -114,7 +116,7 @@ namespace SemestralProject.Forms
             this.buttonAddIS.Image = global::SemestralProject.Resources.is_add;
             this.buttonAddIS.Location = new System.Drawing.Point(3, 3);
             this.buttonAddIS.Name = "buttonAddIS";
-            this.buttonAddIS.Size = new System.Drawing.Size(94, 107);
+            this.buttonAddIS.Size = new System.Drawing.Size(94, 94);
             this.buttonAddIS.TabIndex = 0;
             this.buttonAddIS.Text = "Přidat nový IS";
             this.buttonAddIS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -129,7 +131,7 @@ namespace SemestralProject.Forms
             this.buttonInfoIS.Image = global::SemestralProject.Resources.is_info;
             this.buttonInfoIS.Location = new System.Drawing.Point(103, 3);
             this.buttonInfoIS.Name = "buttonInfoIS";
-            this.buttonInfoIS.Size = new System.Drawing.Size(94, 107);
+            this.buttonInfoIS.Size = new System.Drawing.Size(94, 94);
             this.buttonInfoIS.TabIndex = 1;
             this.buttonInfoIS.Text = "Informace o IS";
             this.buttonInfoIS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -144,7 +146,7 @@ namespace SemestralProject.Forms
             this.buttonEditIS.Image = global::SemestralProject.Resources.is_edit;
             this.buttonEditIS.Location = new System.Drawing.Point(203, 3);
             this.buttonEditIS.Name = "buttonEditIS";
-            this.buttonEditIS.Size = new System.Drawing.Size(94, 107);
+            this.buttonEditIS.Size = new System.Drawing.Size(94, 94);
             this.buttonEditIS.TabIndex = 5;
             this.buttonEditIS.Text = "Upravit vybraný IS";
             this.buttonEditIS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -159,7 +161,7 @@ namespace SemestralProject.Forms
             this.buttonRemoveIS.Image = global::SemestralProject.Resources.is_remove;
             this.buttonRemoveIS.Location = new System.Drawing.Point(303, 3);
             this.buttonRemoveIS.Name = "buttonRemoveIS";
-            this.buttonRemoveIS.Size = new System.Drawing.Size(94, 107);
+            this.buttonRemoveIS.Size = new System.Drawing.Size(94, 94);
             this.buttonRemoveIS.TabIndex = 2;
             this.buttonRemoveIS.Text = "Smazat vybraný IS";
             this.buttonRemoveIS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -173,7 +175,7 @@ namespace SemestralProject.Forms
             this.buttonDeleteIS.Image = global::SemestralProject.Resources.is_delete;
             this.buttonDeleteIS.Location = new System.Drawing.Point(403, 3);
             this.buttonDeleteIS.Name = "buttonDeleteIS";
-            this.buttonDeleteIS.Size = new System.Drawing.Size(94, 107);
+            this.buttonDeleteIS.Size = new System.Drawing.Size(94, 94);
             this.buttonDeleteIS.TabIndex = 3;
             this.buttonDeleteIS.Text = "Smazat všechny IS";
             this.buttonDeleteIS.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -185,9 +187,16 @@ namespace SemestralProject.Forms
             this.splitterISControls.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.splitterISControls.Location = new System.Drawing.Point(503, 3);
             this.splitterISControls.Name = "splitterISControls";
-            this.splitterISControls.Size = new System.Drawing.Size(1, 107);
+            this.splitterISControls.Size = new System.Drawing.Size(1, 94);
             this.splitterISControls.TabIndex = 4;
             this.splitterISControls.TabStop = false;
+            // 
+            // controlViewSizeButtonIS
+            // 
+            this.controlViewSizeButtonIS.Location = new System.Drawing.Point(510, 3);
+            this.controlViewSizeButtonIS.Name = "controlViewSizeButtonIS";
+            this.controlViewSizeButtonIS.Size = new System.Drawing.Size(188, 94);
+            this.controlViewSizeButtonIS.TabIndex = 6;
             // 
             // tabControlContent
             // 
@@ -234,5 +243,6 @@ namespace SemestralProject.Forms
         private Button buttonDeleteIS;
         private Splitter splitterISControls;
         private Button buttonEditIS;
+        private ControlViewSizeButton controlViewSizeButtonIS;
     }
 }

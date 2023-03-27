@@ -1,6 +1,7 @@
 ﻿using SemestralProject.Data;
 using SemestralProject.Handlers;
 using SemestralProject.Persistence;
+using SemestralProject.Visual;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,7 @@ namespace SemestralProject.Forms
     /// <summary>
     /// Class which displays all information systems
     /// </summary>
-    internal partial class ControlISView : UserControl
+    internal partial class ControlISView : UserControl, IView
     {
         /// <summary>
         /// Class holding arguments of event 'information system changed'
@@ -139,6 +140,11 @@ namespace SemestralProject.Forms
                 this.SelectedSystem = handler.GetByID(this.listViewContent?.SelectedItems[0].Tag.ToString());
             }
             this.ISChanged?.Invoke(this, new ISChangedEventArgs() { SelectedSystem = this.SelectedSystem });
+        }
+
+        public void SetItemsSize(View itemsSize)
+        {
+            this.listViewContent.View = itemsSize;
         }
     }
 }
