@@ -16,12 +16,12 @@ namespace SemestralProject.Forms
         /// <summary>
         /// Icon displayed in header area of dialog
         /// </summary>
-        protected Bitmap headerIcon;
+        protected Bitmap? headerIcon;
 
         /// <summary>
         /// Icon which is displayed in header area of dialog
         /// </summary>
-        public Bitmap HeaderIcon
+        public Bitmap? HeaderIcon
         {
             get
             {
@@ -80,6 +80,14 @@ namespace SemestralProject.Forms
             this.HeaderIcon = icon;
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        }
+
+        /// <summary>
+        /// Hides cancel button
+        /// </summary>
+        protected void HideCancelButton()
+        {
+            this.buttonCancel.Visible = false;
         }
 
         private void FormAddIS_Deactivate(object sender, EventArgs e)

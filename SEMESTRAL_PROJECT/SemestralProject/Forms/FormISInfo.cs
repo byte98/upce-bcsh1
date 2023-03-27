@@ -26,13 +26,13 @@ namespace SemestralProject.Forms
         /// Creates new dialog with information about system
         /// </summary>
         /// <param name="system">Information system which details will be displayed</param>
-        public FormISInfo(InformationSystem system) : base("Informace o systému", "Informace o systému", SemestralProject.Resources.icon_default)
+        public FormISInfo(InformationSystem system) : base("Informace o systému", "Informace o systému", SemestralProject.Resources.is_info)
         {
-            base.InitializeComponent();
             this.system = system;
             this.content = new ControlISInfo();
             this.AddControl(this.content);
             this.content.InformationSystem = this.system;
+            this.HideCancelButton();
         }
     }
 }

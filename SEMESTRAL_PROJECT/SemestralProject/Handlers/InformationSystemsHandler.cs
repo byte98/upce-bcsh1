@@ -95,6 +95,59 @@ namespace SemestralProject.Handlers
         }
 
         /// <summary>
+        /// Edits information system
+        /// </summary>
+        /// <param name="system">Information system which will be edited</param>
+        /// <param name="name">New name of information system</param>
+        /// <param name="icon">new icon of information system</param>
+        /// <param name="description">New description of information system</param>
+        public void EditInformationSystem(InformationSystem system, string name, Icon icon, string description)
+        {
+            FormWait wait = new FormWait(() =>
+            {
+                system.Edit(name, icon, description);
+                if (this.dataStorage.InformationSystems.Contains(system) == false)
+                {
+                    this.dataStorage.InformationSystems.Add(system);
+                }
+                this.dataStorage.Save();
+            });
+            wait.ShowDialog();
+        }
+
+        /// <summary>
+        /// Removes information system from application
+        /// </summary>
+        /// <param name="system">Information system which will be removed</param>
+        public void RemoveInformationSystem(InformationSystem system)
+        {
+            FormWait wait = new FormWait(() =>
+            {
+                List<InformationSystem> systems = this.dataStorage.InformationSystems;
+                if (systems.Contains(system))
+                {
+                    systems.Remove(system);
+                }
+                this.dataStorage.InformationSystems = systems;
+                this.dataStorage.Save();
+            });
+            wait.ShowDialog();
+        }
+
+        /// <summary>
+        /// Deletes all available information systems
+        /// </summary>
+        public void DeleteSystems()
+        {
+            FormWait wait = new FormWait(() =>
+            {
+                this.dataStorage.InformationSystems = new List<InformationSystem>();
+                this.dataStorage.Save();
+            });
+            wait.ShowDialog();
+        }
+
+        /// <summary>
         /// Generates identifier of information system
         /// </summary>
         /// <returns>Unique identifier of information system</returns>

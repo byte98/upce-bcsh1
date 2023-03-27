@@ -14,17 +14,22 @@ namespace SemestralProject.Forms
     internal partial class ControlISInfo : UserControl
     {
         /// <summary>
+        /// Attribute which represents information system visible in control
+        /// </summary>
+        private InformationSystem? informationSystem;
+
+        /// <summary>
         /// Information system visible in control
         /// </summary>
         public InformationSystem? InformationSystem
         {
             private get
             {
-                return InformationSystem;
+                return this.informationSystem;
             }
             set
             {
-                this.InformationSystem = value;
+                this.informationSystem = value;
                 this.InitializeInformationSystem();
             }
         }
@@ -42,13 +47,13 @@ namespace SemestralProject.Forms
         /// </summary>
         private void InitializeInformationSystem()
         {
-            if (this.InformationSystem != null)
+            if (this.informationSystem != null)
             {
-                this.pictureBoxIcon.Image = this.InformationSystem.Icon.GetImage();
-                this.labelName.Text = this.InformationSystem.Name;
-                this.textBoxDescription.Text = this.InformationSystem.Description;
-                this.textBoxCreated.Text = this.InformationSystem.Created.ToString();
-                this.textBoxUpdated.Text = this.InformationSystem.Updated.ToString();
+                this.pictureBoxIcon.Image = this.informationSystem.Icon.GetImage();
+                this.labelName.Text = this.informationSystem.Name;
+                this.textBoxDescription.Text = this.informationSystem.Description;
+                this.textBoxCreated.Text = this.informationSystem.Created.ToString();
+                this.textBoxUpdated.Text = this.informationSystem.Updated.ToString();
             }
         }
     }

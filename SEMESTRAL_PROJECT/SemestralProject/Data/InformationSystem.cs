@@ -86,5 +86,19 @@ namespace SemestralProject.Data
             this.Name = name;
             this.Description = description;
         }
+
+        /// <summary>
+        /// Edits information system
+        /// </summary>
+        /// <param name="name">New name of information system</param>
+        /// <param name="icon">New icon of information system</param>
+        /// <param name="description">New description of information system</param>
+        public void Edit(string name, Icon icon, string description)
+        {
+            this.Name = name;
+            this.Icon = icon;
+            this.Description = description;
+            this.Updated = DateTime.Now;
+        }
     }
 }

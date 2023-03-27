@@ -163,9 +163,9 @@ namespace SemestralProject {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap is_add_64 {
+        public static System.Drawing.Bitmap is_default {
             get {
-                object obj = ResourceManager.GetObject("is_add_64", resourceCulture);
+                object obj = ResourceManager.GetObject("is_default", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +173,39 @@ namespace SemestralProject {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap is_default {
+        public static System.Drawing.Bitmap is_delete {
             get {
-                object obj = ResourceManager.GetObject("is_default", resourceCulture);
+                object obj = ResourceManager.GetObject("is_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap is_edit {
+            get {
+                object obj = ResourceManager.GetObject("is_edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap is_info {
+            get {
+                object obj = ResourceManager.GetObject("is_info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap is_remove {
+            get {
+                object obj = ResourceManager.GetObject("is_remove", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -20,6 +20,29 @@ namespace SemestralProject.Forms
     internal partial class ControlISView : UserControl
     {
         /// <summary>
+        /// Class holding arguments of event 'information system changed'
+        /// </summary>
+        internal class ISChangedEventArgs: EventArgs
+        {
+            /// <summary>
+            /// Selected information system or <c>null</c> if no system is selected
+            /// </summary>
+            public InformationSystem? SelectedSystem { get; init; }
+        }
+
+        /// <summary>
+        /// Delegate which handles event 'information system changed'
+        /// </summary>
+        /// <param name="sender">Sender of event</param>
+        /// <param name="e">Arguments of event</param>
+        public delegate void ISChangedEventHandler(object sender, ISChangedEventArgs e);
+
+        /// <summary>
+        /// Event of change of selected information system
+        /// </summary>
+        public event ISChangedEventHandler? ISChanged;
+
+        /// <summary>
         /// Size of small images
         /// </summary>
         private const int ImageSmall = 24;
@@ -43,6 +66,18 @@ namespace SemestralProject.Forms
         /// Selected information system
         /// </summary>
         public InformationSystem? SelectedSystem { get; private set; } = null;
+
+        /// <summary>
+        /// Counter of displayed information systems
+        /// </summary>
+        public int SystemsCount
+        {
+            get
+            {
+                return this.listViewContent.Items.Count;
+            }
+        }
+
 
         /// <summary>
         /// Creates new viewer of all information systems
@@ -87,6 +122,9 @@ namespace SemestralProject.Forms
             }
             this.listViewContent.Columns[0].Width = -2;
             this.listViewContent.Columns[1].Width = -2;
+            this.listViewContent.SelectedIndices.Clear();
+            this.SelectedSystem = null;
+            this.ISChanged?.Invoke(this, new ISChangedEventArgs() { SelectedSystem = null });
         }
 
         private void listViewContent_SelectedIndexChanged(object sender, EventArgs e)
@@ -98,8 +136,9 @@ namespace SemestralProject.Forms
             else if (this.DataStorage != null && this.FileStorage != null && this.listViewContent.SelectedItems != null && this.listViewContent.SelectedItems[0] != null && this.listViewContent.SelectedItems[0].Tag != null && this.listViewContent.SelectedItems[0].Tag.ToString() != null)
             {
                 InformationSystemsHandler handler = new InformationSystemsHandler(this.DataStorage, this.FileStorage);
-                this.SelectedSystem = handler.GetByID(this.listViewContent.SelectedItems[0].Tag.ToString());
+                this.SelectedSystem = handler.GetByID(this.listViewContent?.SelectedItems[0].Tag.ToString());
             }
+            this.ISChanged?.Invoke(this, new ISChangedEventArgs() { SelectedSystem = this.SelectedSystem });
         }
     }
 }
