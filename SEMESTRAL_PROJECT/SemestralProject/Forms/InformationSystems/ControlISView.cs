@@ -188,14 +188,15 @@ namespace SemestralProject.Forms.InformationSystems
 
         private void listViewContent_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.listViewContent.SelectedItems.Count < 1)
-            {
-                this.SelectedSystem = null;
-            }
-            else if (this.DataStorage != null && this.FileStorage != null && this.listViewContent.SelectedItems != null && this.listViewContent.SelectedItems[0] != null && this.listViewContent.SelectedItems[0].Tag != null && this.listViewContent.SelectedItems[0].Tag.ToString() != null)
+            this.SelectedSystem = null; 
+            if (this.DataStorage != null && this.FileStorage != null && this.listViewContent.SelectedItems.Count > 0)
             {
                 InformationSystemsHandler handler = new InformationSystemsHandler(this.DataStorage, this.FileStorage);
-                this.SelectedSystem = handler.GetByID(this.listViewContent?.SelectedItems[0].Tag.ToString());
+                string? id = this.listViewContent.SelectedItems[0].Tag.ToString();
+                if (id != null)
+                {
+                    this.SelectedSystem = handler.GetByID(id);
+                }
             }
             this.ISChanged?.Invoke(this, new ISChangedEventArgs() { SelectedSystem = this.SelectedSystem });
         }

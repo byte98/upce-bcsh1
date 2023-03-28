@@ -79,6 +79,12 @@ namespace SemestralProject.Forms
                 ds.LoadInformationSystems();
                 Thread.Sleep(500);
             });
+            this.progressBarLoad.Value = 70;
+            this.labelState.Text = "Načítám oblasti...";
+            await Task.Run(() => {
+                ds.LoadMaps();
+                Thread.Sleep(500);
+            });
             this.progressBarLoad.Value = 100;
             this.labelState.Text = "Hotovo";
             await Task.Run(() => {

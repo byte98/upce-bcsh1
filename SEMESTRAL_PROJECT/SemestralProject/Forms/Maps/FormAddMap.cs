@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SemestralProject.Visual;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,21 @@ namespace SemestralProject.Forms.Maps
         /// Control representing content of dialog
         /// </summary>
         private readonly ControlAddMap content;
+
+        /// <summary>
+        /// Name of map
+        /// </summary>
+        public string MapName => this.content.MapName;
+
+        /// <summary>
+        /// Description of map
+        /// </summary>
+        public string MapDescription => this.content.MapDescription;
+
+        /// <summary>
+        /// Picture of map
+        /// </summary>
+        public Picture MapPicture => this.content.MapPicture;
 
         /// <summary>
         /// Creates new dialog for adding new map

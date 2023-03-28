@@ -41,6 +41,11 @@ namespace SemestralProject.Persistence
             public const string InformationSystems = "INFORMATION_SYSTEMS";
 
             /// <summary>
+            /// XML element holding all maps
+            /// </summary>
+            public const string Maps = "MAPS";
+
+            /// <summary>
             /// Class which holds names of XML elements used to store information systems
             /// </summary>
             internal static class InformationSystem
@@ -80,6 +85,47 @@ namespace SemestralProject.Persistence
                 /// </summary>
                 public const string Updated = "UPDATED";
             }
+
+            /// <summary>
+            /// Class which holds definitions of XML elements for storing maps
+            /// </summary>
+            internal static class Map
+            {
+                /// <summary>
+                /// Root element holding all information about map
+                /// </summary>
+                public const string _Root = "MAP";
+
+                /// <summary>
+                /// XML element holding identifier of map
+                /// </summary>
+                public const string Id = "ID";
+
+                /// <summary>
+                /// XML element holding name of map
+                /// </summary>
+                public const string Name = "NAME";
+
+                /// <summary>
+                /// XML element holding desription of map
+                /// </summary>
+                public const string Description = "DESCRIPITON";
+
+                /// <summary>
+                /// XML element holding picture of map
+                /// </summary>
+                public const string Picture = "PICTURE";
+
+                /// <summary>
+                /// XML element holding date and time of creation of map
+                /// </summary>
+                public const string Created = "CREATED";
+
+                /// <summary>
+                /// XML element holding date and time of last update of map
+                /// </summary>
+                public const string Updated = "UPDATED";
+            }
         }
         #endregion
 
@@ -92,6 +138,11 @@ namespace SemestralProject.Persistence
         /// File containing something like a database of information systems
         /// </summary>
         private const string ISFile = "INFORMATION_SYSTEMS.XML";
+
+        /// <summary>
+        /// File containing something like a database of maps
+        /// </summary>
+        private const string MapFile = "MAPS.XML";
 
         /// <summary>
         /// Reference to default instance of data storage
@@ -124,6 +175,11 @@ namespace SemestralProject.Persistence
         public List<InformationSystem> InformationSystems { get; set; }
 
         /// <summary>
+        /// List of all available maps
+        /// </summary>
+        public List<Map> Maps { get; set; }
+
+        /// <summary>
         /// Creates new data storage
         /// </summary>
         /// <param name="path">Path to file with data</param>
@@ -132,6 +188,7 @@ namespace SemestralProject.Persistence
         {
             this.path = path;
             this.InformationSystems = new List<InformationSystem>();
+            this.Maps = new List<Map>();
             this.fileStorage = fileStorage;
         }
 
@@ -167,7 +224,7 @@ namespace SemestralProject.Persistence
                 XmlElement? root = doc.DocumentElement;
                 if (root != null)
                 {
-                    foreach(XmlElement isElem in root.ChildNodes)
+                    foreach (XmlElement isElem in root.ChildNodes)
                     {
                         if (isElem.Name == DataStorage.XML.InformationSystem._Root)
                         {
@@ -218,6 +275,67 @@ namespace SemestralProject.Persistence
         }
 
         /// <summary>
+        /// Loads maps from storage
+        /// (this needs to be called AFTER <see cref="Load"/>!)
+        /// </summary>
+        public void LoadMaps()
+        {
+            this.Maps = new List<Map>();
+            string file = Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.MapFile;
+            if (File.Exists(file))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(file);
+                XmlElement? root = doc.DocumentElement;
+                if (root != null)
+                {
+                    foreach (XmlElement mapElem in root.ChildNodes)
+                    {
+                        if (mapElem.Name == DataStorage.XML.Map._Root)
+                        {
+                            XmlNodeList? idenList = mapElem.GetElementsByTagName(DataStorage.XML.Map.Id);
+                            XmlNodeList? nameList = mapElem.GetElementsByTagName(DataStorage.XML.Map.Name);
+                            XmlNodeList? descList = mapElem.GetElementsByTagName(DataStorage.XML.Map.Description);
+                            XmlNodeList? pictList = mapElem.GetElementsByTagName(DataStorage.XML.Map.Picture);
+                            XmlNodeList? credList = mapElem.GetElementsByTagName(DataStorage.XML.Map.Created);
+                            XmlNodeList? updtList = mapElem.GetElementsByTagName(DataStorage.XML.Map.Updated);
+                            if (idenList != null && idenList.Count >= 1 &&
+                                nameList != null && nameList.Count >= 1 &&
+                                descList != null && descList.Count >= 1 &&
+                                pictList != null && pictList.Count >= 1 &&
+                                credList != null && credList.Count >= 1 &&
+                                updtList != null && updtList.Count >= 1)
+                            {
+                                XmlElement? idenElem = (XmlElement?)idenList[0];
+                                XmlElement? nameElem = (XmlElement?)nameList[0];
+                                XmlElement? descElem = (XmlElement?)descList[0];
+                                XmlElement? pictElem = (XmlElement?)pictList[0];
+                                XmlElement? credElem = (XmlElement?)credList[0];
+                                XmlElement? updtElem = (XmlElement?)updtList[0];
+                                if (idenElem != null &&
+                                    nameElem != null &&
+                                    descElem != null &&
+                                    pictElem != null &&
+                                    credElem != null &&
+                                    updtElem != null)
+                                {
+                                    this.Maps.Add(new Map(
+                                            idenElem.InnerText,
+                                            DateTime.ParseExact(credElem.InnerText, DataStorage.XML._Date, null),
+                                            DateTime.ParseExact(updtElem.InnerText, DataStorage.XML._Date, null),
+                                            nameElem.InnerText,
+                                            descElem.InnerText,
+                                            this.fileStorage.GetPictureChecked(pictElem.InnerText)
+                                        ));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Saves information systems into XML
         /// </summary>
         private void SaveInformationSystems()
@@ -228,7 +346,7 @@ namespace SemestralProject.Persistence
             doc.InsertBefore(declaration, root);
             XmlElement iss = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystems, string.Empty);
             doc.AppendChild(iss);
-            foreach(InformationSystem informationSystem in this.InformationSystems)
+            foreach (InformationSystem informationSystem in this.InformationSystems)
             {
                 XmlElement infS = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem._Root, string.Empty);
                 XmlElement id = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem.Id, string.Empty);
@@ -255,6 +373,43 @@ namespace SemestralProject.Persistence
         }
 
         /// <summary>
+        /// Saves maps into XML
+        /// </summary>
+        private void SaveMaps()
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlDeclaration declaration = doc.CreateXmlDeclaration(DataStorage.XML._Version, DataStorage.XML._Charset, null);
+            XmlElement? root = doc.DocumentElement;
+            doc.InsertBefore(declaration, root);
+            XmlElement maps = doc.CreateElement(string.Empty, DataStorage.XML.Maps, string.Empty);
+            doc.AppendChild(maps);
+            foreach(Map map in this.Maps)
+            {
+                XmlElement mapElem = doc.CreateElement(string.Empty, DataStorage.XML.Map._Root, string.Empty);
+                XmlElement id = doc.CreateElement(string.Empty, DataStorage.XML.Map.Id, string.Empty);
+                id.InnerText = map.ID;
+                mapElem.AppendChild(id);
+                XmlElement name = doc.CreateElement(string.Empty, DataStorage.XML.Map.Name, string.Empty);
+                name.InnerText = map.Name;
+                mapElem.AppendChild(name);
+                XmlElement description = doc.CreateElement(string.Empty, DataStorage.XML.Map.Description, string.Empty);
+                description.InnerText = map.Description;
+                mapElem.AppendChild(description);
+                XmlElement created = doc.CreateElement(string.Empty, DataStorage.XML.Map.Created, string.Empty);
+                created.InnerText = map.Created.ToString(DataStorage.XML._Date);
+                mapElem.AppendChild(created);
+                XmlElement updated = doc.CreateElement(string.Empty, DataStorage.XML.Map.Updated, string.Empty);
+                updated.InnerText = map.Updated.ToString(DataStorage.XML._Date);
+                mapElem.AppendChild(updated);
+                XmlElement picture = doc.CreateElement(string.Empty, DataStorage.XML.Map.Picture, string.Empty);
+                picture.InnerText = map.Picture.Name;
+                mapElem.AppendChild(picture);
+                maps.AppendChild(mapElem);
+            }
+            doc.Save(Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.MapFile);
+        }
+
+        /// <summary>
         /// Saves content of storage
         /// </summary>
         public void Save()
@@ -264,6 +419,7 @@ namespace SemestralProject.Persistence
                 File.Delete(Configuration.DataFile);
             }
             this.SaveInformationSystems();
+            this.SaveMaps();
             ZipFile.CreateFromDirectory(Configuration.TempDir + Path.DirectorySeparatorChar + "_DB", this.path);
         }
     }

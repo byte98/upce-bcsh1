@@ -1,16 +1,16 @@
-﻿namespace SemestralProject.Forms.InformationSystems
+﻿namespace SemestralProject.Forms.Maps
 {
-    partial class ControlEditIS
+    partial class ControlEditMap
     {
         /// <summary> 
-        /// Vyžaduje se proměnná návrháře.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary> 
-        /// Uvolněte všechny používané prostředky.
+        /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">hodnota true, když by se měl spravovaný prostředek odstranit; jinak false.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Kód vygenerovaný pomocí Návrháře komponent
+        #region Component Designer generated code
 
         /// <summary> 
-        /// Metoda vyžadovaná pro podporu Návrháře - neupravovat
-        /// obsah této metody v editoru kódu.
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -32,8 +32,8 @@
             this.labelName = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.labelSpace1 = new System.Windows.Forms.Label();
-            this.labelIcon = new System.Windows.Forms.Label();
-            this.buttonIcon = new System.Windows.Forms.Button();
+            this.labelPicture = new System.Windows.Forms.Label();
+            this.buttonPicture = new System.Windows.Forms.Button();
             this.labelSpace2 = new System.Windows.Forms.Label();
             this.labelDescription = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
@@ -46,8 +46,8 @@
             this.flowLayoutPanelContent.Controls.Add(this.labelName);
             this.flowLayoutPanelContent.Controls.Add(this.textBoxName);
             this.flowLayoutPanelContent.Controls.Add(this.labelSpace1);
-            this.flowLayoutPanelContent.Controls.Add(this.labelIcon);
-            this.flowLayoutPanelContent.Controls.Add(this.buttonIcon);
+            this.flowLayoutPanelContent.Controls.Add(this.labelPicture);
+            this.flowLayoutPanelContent.Controls.Add(this.buttonPicture);
             this.flowLayoutPanelContent.Controls.Add(this.labelSpace2);
             this.flowLayoutPanelContent.Controls.Add(this.labelDescription);
             this.flowLayoutPanelContent.Controls.Add(this.textBoxDescription);
@@ -56,8 +56,8 @@
             this.flowLayoutPanelContent.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanelContent.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.flowLayoutPanelContent.Name = "flowLayoutPanelContent";
-            this.flowLayoutPanelContent.Size = new System.Drawing.Size(377, 465);
-            this.flowLayoutPanelContent.TabIndex = 0;
+            this.flowLayoutPanelContent.Size = new System.Drawing.Size(385, 581);
+            this.flowLayoutPanelContent.TabIndex = 1;
             // 
             // labelName
             // 
@@ -86,32 +86,32 @@
             this.labelSpace1.Size = new System.Drawing.Size(0, 20);
             this.labelSpace1.TabIndex = 2;
             // 
-            // labelIcon
+            // labelPicture
             // 
-            this.labelIcon.AutoSize = true;
-            this.labelIcon.Location = new System.Drawing.Point(3, 75);
-            this.labelIcon.Name = "labelIcon";
-            this.labelIcon.Size = new System.Drawing.Size(45, 20);
-            this.labelIcon.TabIndex = 3;
-            this.labelIcon.Text = "Ikona";
+            this.labelPicture.AutoSize = true;
+            this.labelPicture.Location = new System.Drawing.Point(3, 75);
+            this.labelPicture.Name = "labelPicture";
+            this.labelPicture.Size = new System.Drawing.Size(64, 20);
+            this.labelPicture.TabIndex = 3;
+            this.labelPicture.Text = "Obrázek";
             // 
-            // buttonIcon
+            // buttonPicture
             // 
-            this.buttonIcon.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonIcon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonIcon.Image = global::SemestralProject.Resources.is_default;
-            this.buttonIcon.Location = new System.Drawing.Point(3, 99);
-            this.buttonIcon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.buttonIcon.Name = "buttonIcon";
-            this.buttonIcon.Size = new System.Drawing.Size(370, 116);
-            this.buttonIcon.TabIndex = 4;
-            this.buttonIcon.UseVisualStyleBackColor = true;
-            this.buttonIcon.Click += new System.EventHandler(this.buttonIcon_Click);
+            this.buttonPicture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonPicture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPicture.Image = global::SemestralProject.Resources.picture_default;
+            this.buttonPicture.Location = new System.Drawing.Point(3, 99);
+            this.buttonPicture.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonPicture.Name = "buttonPicture";
+            this.buttonPicture.Size = new System.Drawing.Size(370, 234);
+            this.buttonPicture.TabIndex = 4;
+            this.buttonPicture.UseVisualStyleBackColor = true;
+            this.buttonPicture.Click += new System.EventHandler(this.buttonPicture_Click);
             // 
             // labelSpace2
             // 
             this.labelSpace2.AutoSize = true;
-            this.labelSpace2.Location = new System.Drawing.Point(3, 219);
+            this.labelSpace2.Location = new System.Drawing.Point(3, 337);
             this.labelSpace2.Name = "labelSpace2";
             this.labelSpace2.Size = new System.Drawing.Size(0, 20);
             this.labelSpace2.TabIndex = 5;
@@ -119,7 +119,7 @@
             // labelDescription
             // 
             this.labelDescription.AutoSize = true;
-            this.labelDescription.Location = new System.Drawing.Point(3, 239);
+            this.labelDescription.Location = new System.Drawing.Point(3, 357);
             this.labelDescription.Name = "labelDescription";
             this.labelDescription.Size = new System.Drawing.Size(44, 20);
             this.labelDescription.TabIndex = 6;
@@ -128,21 +128,20 @@
             // textBoxDescription
             // 
             this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Right;
-            this.textBoxDescription.Location = new System.Drawing.Point(3, 263);
+            this.textBoxDescription.Location = new System.Drawing.Point(3, 381);
             this.textBoxDescription.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.Size = new System.Drawing.Size(370, 193);
             this.textBoxDescription.TabIndex = 7;
             // 
-            // ControlEditIS
+            // ControlEditMap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanelContent);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "ControlEditIS";
-            this.Size = new System.Drawing.Size(377, 465);
+            this.Name = "ControlEditMap";
+            this.Size = new System.Drawing.Size(385, 581);
             this.flowLayoutPanelContent.ResumeLayout(false);
             this.flowLayoutPanelContent.PerformLayout();
             this.ResumeLayout(false);
@@ -156,8 +155,8 @@
         private Label labelName;
         private TextBox textBoxName;
         private Label labelSpace1;
-        private Label labelIcon;
-        private Button buttonIcon;
+        private Label labelPicture;
+        private Button buttonPicture;
         private Label labelSpace2;
         private Label labelDescription;
         private TextBox textBoxDescription;

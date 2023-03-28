@@ -22,12 +22,12 @@ namespace SemestralProject.Forms
         /// <summary>
         /// Name of map
         /// </summary>
-        public string MapName { get; private set; } = string.Empty;
+        public string MapName => this.textBoxName.Text;
 
         /// <summary>
         /// Description of map
         /// </summary>
-        public string MapDescription { get; private set; } = string.Empty;
+        public string MapDescription => this.textBoxDescription.Text;
 
         public ControlAddMap()
         {

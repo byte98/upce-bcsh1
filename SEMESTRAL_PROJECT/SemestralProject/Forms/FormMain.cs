@@ -20,6 +20,11 @@ namespace SemestralProject.Forms
         /// </summary>
         private ControlISView? isView;
 
+        /// <summary>
+        /// Viewer of maps
+        /// </summary>
+        private ControlMapsView? mapsView;
+
         public FormMain()
         {
             this.InitializeComponent();
@@ -28,6 +33,7 @@ namespace SemestralProject.Forms
             this.tabControlContent.ItemSize = new Size(0, 1);
             this.tabControlContent.SizeMode = TabSizeMode.Fixed;
             this.InitializeIS();
+            this.InitializeMaps();
         }
 
         /// <summary>
@@ -57,6 +63,27 @@ namespace SemestralProject.Forms
                 this.buttonEditIS.Enabled = (args.SelectedSystem != null);
             });
             this.controlViewSizeButtonIS.DataView = this.isView;
+        }
+
+        /// <summary>
+        /// Initializes maps page
+        /// </summary>
+        private void InitializeMaps()
+        {
+            this.mapsView = new ControlMapsView();
+            this.mapsView.Dock = DockStyle.Fill;
+            this.panelMapsContent.Controls.Add(this.mapsView);
+            this.mapsView?.RefreshView();
+            if (this.mapsView!= null) // Why is there this condition only Visual Studio knows (yes, without this line, warning 'it may be null' shows up)
+            {
+                this.mapsView.MapChangedEvent += new ControlMapsView.MapChangedEventHandler(delegate (object sender, ControlMapsView.MapChangedEventArgs args)
+                {
+                    this.buttonMapInfo.Enabled = (args.SelectedMap != null);
+                    this.buttonMapRemove.Enabled = (args.SelectedMap != null);
+                    this.buttonMapEdit.Enabled = (args.SelectedMap != null);
+                });
+            }
+            this.controlViewSizeButtonMaps.DataView = this.mapsView;
         }
 
         /// <summary>
@@ -119,6 +146,7 @@ namespace SemestralProject.Forms
             this.Hide();
             form.ShowDialog();
             this.isView?.RefreshView();
+            this.mapsView?.RefreshView();
         }
 
         private void buttonInfoIS_Click(object sender, EventArgs e)
@@ -204,7 +232,58 @@ namespace SemestralProject.Forms
             FormAddMap dialog = new FormAddMap();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
+                MapsHandler handler = MapsHandler.Instance;
+                handler.CreateMap(dialog.MapName, dialog.MapDescription, dialog.MapPicture);
+                this.mapsView?.RefreshView();
+            }
+        }
 
+        private void buttonMapInfo_Click(object sender, EventArgs e)
+        {
+            if (this.mapsView?.SelectedMap != null)
+            {
+                FormInfoMap dialog = new FormInfoMap(this.mapsView?.SelectedMap);
+                dialog.ShowDialog();
+            }
+        }
+
+        private void buttonMapEdit_Click(object sender, EventArgs e)
+        {
+            if (this.mapsView?.SelectedMap != null)
+            {
+                FormEditMap dialog = new FormEditMap(this.mapsView.SelectedMap);
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    MapsHandler handler = MapsHandler.Instance;
+                    if (dialog.MapName != null && dialog.MapDescription != null && dialog.MapPicture != null)
+                    {
+                        handler.UpdateMap(this.mapsView.SelectedMap, dialog.MapName, dialog.MapDescription, dialog.MapPicture);
+                        this.mapsView.RefreshView();
+                    }
+                }
+            }
+        }
+
+        private void buttonMapRemove_Click(object sender, EventArgs e)
+        {
+            if (this.mapsView?.SelectedMap != null)
+            {
+                if (MessageBox.Show("Opravdu chcete odstranit oblast " + this.mapsView.SelectedMap.Name + "?" + Environment.NewLine + "Tato akce je nevratná.", "Odstranit oblast", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    MapsHandler handler = MapsHandler.Instance;
+                    handler.RemoveMap(this.mapsView.SelectedMap);
+                    this.mapsView.RefreshView();
+                }
+            }
+        }
+
+        private void buttonMapDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Opravdu chcete odstranit všechny oblasti?" + Environment.NewLine + "Počet oblastí k odstranění: " + this.mapsView?.MapsCount + Environment.NewLine + "Tato akce je nevratná.", "Smazat všechny oblasti", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                MapsHandler handler = MapsHandler.Instance;
+                handler.DeleteMaps();
+                this.mapsView?.RefreshView();
             }
         }
     }

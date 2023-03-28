@@ -42,16 +42,26 @@ namespace SemestralProject.Forms
             this.buttonEditIS = new System.Windows.Forms.Button();
             this.buttonRemoveIS = new System.Windows.Forms.Button();
             this.buttonDeleteIS = new System.Windows.Forms.Button();
-            this.splitterISControls = new System.Windows.Forms.Splitter();
+            this.splitterISControls1 = new System.Windows.Forms.Splitter();
             this.controlViewSizeButtonIS = new SemestralProject.Forms.ControlViewSizeButton();
+            this.splitterISControls2 = new System.Windows.Forms.Splitter();
             this.panelISSearch = new System.Windows.Forms.Panel();
             this.textBoxISSearch = new System.Windows.Forms.TextBox();
             this.buttonISCancelSearch = new System.Windows.Forms.Button();
             this.buttonISSearch = new System.Windows.Forms.Button();
+            this.splitterISControls3 = new System.Windows.Forms.Splitter();
             this.tabControlContent = new System.Windows.Forms.TabControl();
             this.tabPageMaps = new System.Windows.Forms.TabPage();
+            this.panelMapsContent = new System.Windows.Forms.Panel();
             this.flowLayoutPanelMapsControls = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonMapAdd = new System.Windows.Forms.Button();
+            this.buttonMapInfo = new System.Windows.Forms.Button();
+            this.buttonMapEdit = new System.Windows.Forms.Button();
+            this.buttonMapRemove = new System.Windows.Forms.Button();
+            this.buttonMapDelete = new System.Windows.Forms.Button();
+            this.splitterMapControls1 = new System.Windows.Forms.Splitter();
+            this.controlViewSizeButtonMaps = new SemestralProject.Forms.ControlViewSizeButton();
+            this.splitterMapControls2 = new System.Windows.Forms.Splitter();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
             this.panelISControls.SuspendLayout();
@@ -129,12 +139,15 @@ namespace SemestralProject.Forms
             this.panelISControls.Controls.Add(this.buttonEditIS);
             this.panelISControls.Controls.Add(this.buttonRemoveIS);
             this.panelISControls.Controls.Add(this.buttonDeleteIS);
-            this.panelISControls.Controls.Add(this.splitterISControls);
+            this.panelISControls.Controls.Add(this.splitterISControls1);
             this.panelISControls.Controls.Add(this.controlViewSizeButtonIS);
+            this.panelISControls.Controls.Add(this.splitterISControls2);
             this.panelISControls.Controls.Add(this.panelISSearch);
+            this.panelISControls.Controls.Add(this.splitterISControls3);
             this.panelISControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelISControls.Location = new System.Drawing.Point(3, 3);
             this.panelISControls.Name = "panelISControls";
+            this.panelISControls.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.panelISControls.Size = new System.Drawing.Size(1334, 107);
             this.panelISControls.TabIndex = 0;
             // 
@@ -211,14 +224,15 @@ namespace SemestralProject.Forms
             this.buttonDeleteIS.UseVisualStyleBackColor = true;
             this.buttonDeleteIS.Click += new System.EventHandler(this.buttonDeleteIS_Click);
             // 
-            // splitterISControls
+            // splitterISControls1
             // 
-            this.splitterISControls.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.splitterISControls.Location = new System.Drawing.Point(503, 3);
-            this.splitterISControls.Name = "splitterISControls";
-            this.splitterISControls.Size = new System.Drawing.Size(1, 104);
-            this.splitterISControls.TabIndex = 4;
-            this.splitterISControls.TabStop = false;
+            this.splitterISControls1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterISControls1.Location = new System.Drawing.Point(503, 3);
+            this.splitterISControls1.Name = "splitterISControls1";
+            this.splitterISControls1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.splitterISControls1.Size = new System.Drawing.Size(1, 104);
+            this.splitterISControls1.TabIndex = 4;
+            this.splitterISControls1.TabStop = false;
             // 
             // controlViewSizeButtonIS
             // 
@@ -227,12 +241,21 @@ namespace SemestralProject.Forms
             this.controlViewSizeButtonIS.Size = new System.Drawing.Size(188, 94);
             this.controlViewSizeButtonIS.TabIndex = 6;
             // 
+            // splitterISControls2
+            // 
+            this.splitterISControls2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterISControls2.Location = new System.Drawing.Point(704, 3);
+            this.splitterISControls2.Name = "splitterISControls2";
+            this.splitterISControls2.Size = new System.Drawing.Size(1, 104);
+            this.splitterISControls2.TabIndex = 8;
+            this.splitterISControls2.TabStop = false;
+            // 
             // panelISSearch
             // 
             this.panelISSearch.Controls.Add(this.textBoxISSearch);
             this.panelISSearch.Controls.Add(this.buttonISCancelSearch);
             this.panelISSearch.Controls.Add(this.buttonISSearch);
-            this.panelISSearch.Location = new System.Drawing.Point(704, 3);
+            this.panelISSearch.Location = new System.Drawing.Point(711, 3);
             this.panelISSearch.Name = "panelISSearch";
             this.panelISSearch.Size = new System.Drawing.Size(253, 104);
             this.panelISSearch.TabIndex = 7;
@@ -274,6 +297,15 @@ namespace SemestralProject.Forms
             this.buttonISSearch.UseVisualStyleBackColor = true;
             this.buttonISSearch.Click += new System.EventHandler(this.buttonISSearch_Click);
             // 
+            // splitterISControls3
+            // 
+            this.splitterISControls3.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterISControls3.Location = new System.Drawing.Point(970, 3);
+            this.splitterISControls3.Name = "splitterISControls3";
+            this.splitterISControls3.Size = new System.Drawing.Size(1, 104);
+            this.splitterISControls3.TabIndex = 9;
+            this.splitterISControls3.TabStop = false;
+            // 
             // tabControlContent
             // 
             this.tabControlContent.Controls.Add(this.tabPageIS);
@@ -287,6 +319,7 @@ namespace SemestralProject.Forms
             // 
             // tabPageMaps
             // 
+            this.tabPageMaps.Controls.Add(this.panelMapsContent);
             this.tabPageMaps.Controls.Add(this.flowLayoutPanelMapsControls);
             this.tabPageMaps.Location = new System.Drawing.Point(4, 29);
             this.tabPageMaps.Name = "tabPageMaps";
@@ -295,9 +328,24 @@ namespace SemestralProject.Forms
             this.tabPageMaps.Text = "OBLASTI";
             this.tabPageMaps.UseVisualStyleBackColor = true;
             // 
+            // panelMapsContent
+            // 
+            this.panelMapsContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMapsContent.Location = new System.Drawing.Point(0, 107);
+            this.panelMapsContent.Name = "panelMapsContent";
+            this.panelMapsContent.Size = new System.Drawing.Size(1340, 552);
+            this.panelMapsContent.TabIndex = 1;
+            // 
             // flowLayoutPanelMapsControls
             // 
             this.flowLayoutPanelMapsControls.Controls.Add(this.buttonMapAdd);
+            this.flowLayoutPanelMapsControls.Controls.Add(this.buttonMapInfo);
+            this.flowLayoutPanelMapsControls.Controls.Add(this.buttonMapEdit);
+            this.flowLayoutPanelMapsControls.Controls.Add(this.buttonMapRemove);
+            this.flowLayoutPanelMapsControls.Controls.Add(this.buttonMapDelete);
+            this.flowLayoutPanelMapsControls.Controls.Add(this.splitterMapControls1);
+            this.flowLayoutPanelMapsControls.Controls.Add(this.controlViewSizeButtonMaps);
+            this.flowLayoutPanelMapsControls.Controls.Add(this.splitterMapControls2);
             this.flowLayoutPanelMapsControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanelMapsControls.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanelMapsControls.Name = "flowLayoutPanelMapsControls";
@@ -317,6 +365,90 @@ namespace SemestralProject.Forms
             this.buttonMapAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonMapAdd.UseVisualStyleBackColor = true;
             this.buttonMapAdd.Click += new System.EventHandler(this.buttonMapAdd_Click);
+            // 
+            // buttonMapInfo
+            // 
+            this.buttonMapInfo.Enabled = false;
+            this.buttonMapInfo.FlatAppearance.BorderSize = 0;
+            this.buttonMapInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMapInfo.Image = global::SemestralProject.Resources.map_info;
+            this.buttonMapInfo.Location = new System.Drawing.Point(103, 3);
+            this.buttonMapInfo.Name = "buttonMapInfo";
+            this.buttonMapInfo.Size = new System.Drawing.Size(94, 94);
+            this.buttonMapInfo.TabIndex = 1;
+            this.buttonMapInfo.Text = "Informace o oblasti";
+            this.buttonMapInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonMapInfo.UseVisualStyleBackColor = true;
+            this.buttonMapInfo.Click += new System.EventHandler(this.buttonMapInfo_Click);
+            // 
+            // buttonMapEdit
+            // 
+            this.buttonMapEdit.Enabled = false;
+            this.buttonMapEdit.FlatAppearance.BorderSize = 0;
+            this.buttonMapEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMapEdit.Image = global::SemestralProject.Resources.map_edit;
+            this.buttonMapEdit.Location = new System.Drawing.Point(203, 3);
+            this.buttonMapEdit.Name = "buttonMapEdit";
+            this.buttonMapEdit.Size = new System.Drawing.Size(94, 94);
+            this.buttonMapEdit.TabIndex = 2;
+            this.buttonMapEdit.Text = "Upravit oblast";
+            this.buttonMapEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonMapEdit.UseVisualStyleBackColor = true;
+            this.buttonMapEdit.Click += new System.EventHandler(this.buttonMapEdit_Click);
+            // 
+            // buttonMapRemove
+            // 
+            this.buttonMapRemove.Enabled = false;
+            this.buttonMapRemove.FlatAppearance.BorderSize = 0;
+            this.buttonMapRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMapRemove.Image = global::SemestralProject.Resources.map_remove;
+            this.buttonMapRemove.Location = new System.Drawing.Point(303, 3);
+            this.buttonMapRemove.Name = "buttonMapRemove";
+            this.buttonMapRemove.Size = new System.Drawing.Size(94, 94);
+            this.buttonMapRemove.TabIndex = 3;
+            this.buttonMapRemove.Text = "Smazat oblast";
+            this.buttonMapRemove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonMapRemove.UseVisualStyleBackColor = true;
+            this.buttonMapRemove.Click += new System.EventHandler(this.buttonMapRemove_Click);
+            // 
+            // buttonMapDelete
+            // 
+            this.buttonMapDelete.FlatAppearance.BorderSize = 0;
+            this.buttonMapDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMapDelete.Image = global::SemestralProject.Resources.map_delete;
+            this.buttonMapDelete.Location = new System.Drawing.Point(403, 3);
+            this.buttonMapDelete.Name = "buttonMapDelete";
+            this.buttonMapDelete.Size = new System.Drawing.Size(94, 94);
+            this.buttonMapDelete.TabIndex = 4;
+            this.buttonMapDelete.Text = "Smazat všechno";
+            this.buttonMapDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonMapDelete.UseVisualStyleBackColor = true;
+            this.buttonMapDelete.Click += new System.EventHandler(this.buttonMapDelete_Click);
+            // 
+            // splitterMapControls1
+            // 
+            this.splitterMapControls1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterMapControls1.Location = new System.Drawing.Point(503, 3);
+            this.splitterMapControls1.Name = "splitterMapControls1";
+            this.splitterMapControls1.Size = new System.Drawing.Size(1, 94);
+            this.splitterMapControls1.TabIndex = 5;
+            this.splitterMapControls1.TabStop = false;
+            // 
+            // controlViewSizeButtonMaps
+            // 
+            this.controlViewSizeButtonMaps.Location = new System.Drawing.Point(510, 3);
+            this.controlViewSizeButtonMaps.Name = "controlViewSizeButtonMaps";
+            this.controlViewSizeButtonMaps.Size = new System.Drawing.Size(188, 94);
+            this.controlViewSizeButtonMaps.TabIndex = 6;
+            // 
+            // splitterMapControls2
+            // 
+            this.splitterMapControls2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterMapControls2.Location = new System.Drawing.Point(704, 3);
+            this.splitterMapControls2.Name = "splitterMapControls2";
+            this.splitterMapControls2.Size = new System.Drawing.Size(1, 94);
+            this.splitterMapControls2.TabIndex = 7;
+            this.splitterMapControls2.TabStop = false;
             // 
             // FormMain
             // 
@@ -355,7 +487,7 @@ namespace SemestralProject.Forms
         private Button buttonInfoIS;
         private Button buttonRemoveIS;
         private Button buttonDeleteIS;
-        private Splitter splitterISControls;
+        private Splitter splitterISControls1;
         private Button buttonEditIS;
         private ControlViewSizeButton controlViewSizeButtonIS;
         private TextBox textBoxISSearch;
@@ -366,5 +498,15 @@ namespace SemestralProject.Forms
         private TabPage tabPageMaps;
         private FlowLayoutPanel flowLayoutPanelMapsControls;
         private Button buttonMapAdd;
+        private Panel panelMapsContent;
+        private Button buttonMapInfo;
+        private Button buttonMapEdit;
+        private Button buttonMapRemove;
+        private Button buttonMapDelete;
+        private Splitter splitterISControls2;
+        private Splitter splitterISControls3;
+        private Splitter splitterMapControls1;
+        private ControlViewSizeButton controlViewSizeButtonMaps;
+        private Splitter splitterMapControls2;
     }
 }
