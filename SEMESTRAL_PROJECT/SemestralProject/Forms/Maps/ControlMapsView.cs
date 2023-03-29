@@ -78,6 +78,27 @@ namespace SemestralProject.Forms.Maps
         public int MapsCount => this.listViewContent.Items.Count;
 
         /// <summary>
+        /// Attribute which holds actual search phrase
+        /// </summary>
+        private string? search;
+
+        /// <summary>
+        /// Actual search phrase
+        /// </summary>
+        public string? Search
+        {
+            get
+            {
+                return this.search;
+            }
+            set
+            {
+                this.search = value;
+                this.SearchData();
+            }
+        }
+
+        /// <summary>
         /// List of displayed maps
         /// </summary>
         private readonly List<Map> mapList;
@@ -97,6 +118,32 @@ namespace SemestralProject.Forms.Maps
             DataStorage ds = DataStorage.Instance;
             this.mapList.AddRange(ds.Maps);
             this.DisplayMaps();
+        }
+        
+        /// <summary>
+        /// Search data using actual search phrase
+        /// </summary>
+        private void SearchData()
+        {
+            if (this.Search == null)
+            {
+                this.RefreshView();
+            }
+            else
+            {
+                this.mapList.Clear();
+                FormWait wait = new FormWait(() =>
+                {
+                    foreach(Map map in DataStorage.Instance.Maps)
+                    {
+                        if (map.Name.ToLower().Trim().Contains(this.Search.ToLower().Trim()))
+                        {
+                            this.mapList.Add(map);
+                        }
+                    }
+                });
+                this.DisplayMaps();
+            }
         }
 
         /// <summary>

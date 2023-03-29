@@ -62,6 +62,10 @@ namespace SemestralProject.Forms
             this.splitterMapControls1 = new System.Windows.Forms.Splitter();
             this.controlViewSizeButtonMaps = new SemestralProject.Forms.ControlViewSizeButton();
             this.splitterMapControls2 = new System.Windows.Forms.Splitter();
+            this.panelMapSearch = new System.Windows.Forms.Panel();
+            this.textBoxMapSearch = new System.Windows.Forms.TextBox();
+            this.buttonMapCancelSearch = new System.Windows.Forms.Button();
+            this.buttonMapSearch = new System.Windows.Forms.Button();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
             this.panelISControls.SuspendLayout();
@@ -69,6 +73,7 @@ namespace SemestralProject.Forms
             this.tabControlContent.SuspendLayout();
             this.tabPageMaps.SuspendLayout();
             this.flowLayoutPanelMapsControls.SuspendLayout();
+            this.panelMapSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelItemsControl
@@ -346,6 +351,7 @@ namespace SemestralProject.Forms
             this.flowLayoutPanelMapsControls.Controls.Add(this.splitterMapControls1);
             this.flowLayoutPanelMapsControls.Controls.Add(this.controlViewSizeButtonMaps);
             this.flowLayoutPanelMapsControls.Controls.Add(this.splitterMapControls2);
+            this.flowLayoutPanelMapsControls.Controls.Add(this.panelMapSearch);
             this.flowLayoutPanelMapsControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanelMapsControls.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanelMapsControls.Name = "flowLayoutPanelMapsControls";
@@ -430,7 +436,7 @@ namespace SemestralProject.Forms
             this.splitterMapControls1.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.splitterMapControls1.Location = new System.Drawing.Point(503, 3);
             this.splitterMapControls1.Name = "splitterMapControls1";
-            this.splitterMapControls1.Size = new System.Drawing.Size(1, 94);
+            this.splitterMapControls1.Size = new System.Drawing.Size(1, 104);
             this.splitterMapControls1.TabIndex = 5;
             this.splitterMapControls1.TabStop = false;
             // 
@@ -446,9 +452,56 @@ namespace SemestralProject.Forms
             this.splitterMapControls2.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.splitterMapControls2.Location = new System.Drawing.Point(704, 3);
             this.splitterMapControls2.Name = "splitterMapControls2";
-            this.splitterMapControls2.Size = new System.Drawing.Size(1, 94);
+            this.splitterMapControls2.Size = new System.Drawing.Size(1, 104);
             this.splitterMapControls2.TabIndex = 7;
             this.splitterMapControls2.TabStop = false;
+            // 
+            // panelMapSearch
+            // 
+            this.panelMapSearch.Controls.Add(this.textBoxMapSearch);
+            this.panelMapSearch.Controls.Add(this.buttonMapCancelSearch);
+            this.panelMapSearch.Controls.Add(this.buttonMapSearch);
+            this.panelMapSearch.Location = new System.Drawing.Point(711, 3);
+            this.panelMapSearch.Name = "panelMapSearch";
+            this.panelMapSearch.Size = new System.Drawing.Size(253, 104);
+            this.panelMapSearch.TabIndex = 8;
+            // 
+            // textBoxMapSearch
+            // 
+            this.textBoxMapSearch.Location = new System.Drawing.Point(3, 3);
+            this.textBoxMapSearch.Name = "textBoxMapSearch";
+            this.textBoxMapSearch.PlaceholderText = "Hledat";
+            this.textBoxMapSearch.Size = new System.Drawing.Size(247, 27);
+            this.textBoxMapSearch.TabIndex = 0;
+            // 
+            // buttonMapCancelSearch
+            // 
+            this.buttonMapCancelSearch.Enabled = false;
+            this.buttonMapCancelSearch.FlatAppearance.BorderSize = 0;
+            this.buttonMapCancelSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMapCancelSearch.Image = global::SemestralProject.Resources.search_cancel;
+            this.buttonMapCancelSearch.Location = new System.Drawing.Point(129, 36);
+            this.buttonMapCancelSearch.Name = "buttonMapCancelSearch";
+            this.buttonMapCancelSearch.Size = new System.Drawing.Size(120, 58);
+            this.buttonMapCancelSearch.TabIndex = 1;
+            this.buttonMapCancelSearch.Text = "Zrušit hledání";
+            this.buttonMapCancelSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonMapCancelSearch.UseVisualStyleBackColor = true;
+            this.buttonMapCancelSearch.Click += new System.EventHandler(this.buttonMapCancelSearch_Click);
+            // 
+            // buttonMapSearch
+            // 
+            this.buttonMapSearch.FlatAppearance.BorderSize = 0;
+            this.buttonMapSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMapSearch.Image = global::SemestralProject.Resources.search;
+            this.buttonMapSearch.Location = new System.Drawing.Point(3, 36);
+            this.buttonMapSearch.Name = "buttonMapSearch";
+            this.buttonMapSearch.Size = new System.Drawing.Size(120, 58);
+            this.buttonMapSearch.TabIndex = 1;
+            this.buttonMapSearch.Text = "Hledat";
+            this.buttonMapSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonMapSearch.UseVisualStyleBackColor = true;
+            this.buttonMapSearch.Click += new System.EventHandler(this.buttonMapSearch_Click);
             // 
             // FormMain
             // 
@@ -472,6 +525,8 @@ namespace SemestralProject.Forms
             this.tabControlContent.ResumeLayout(false);
             this.tabPageMaps.ResumeLayout(false);
             this.flowLayoutPanelMapsControls.ResumeLayout(false);
+            this.panelMapSearch.ResumeLayout(false);
+            this.panelMapSearch.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -508,5 +563,9 @@ namespace SemestralProject.Forms
         private Splitter splitterMapControls1;
         private ControlViewSizeButton controlViewSizeButtonMaps;
         private Splitter splitterMapControls2;
+        private Panel panelMapSearch;
+        private TextBox textBoxMapSearch;
+        private Button buttonMapCancelSearch;
+        private Button buttonMapSearch;
     }
 }

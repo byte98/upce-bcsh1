@@ -286,5 +286,23 @@ namespace SemestralProject.Forms
                 this.mapsView?.RefreshView();
             }
         }
+
+        private void buttonMapSearch_Click(object sender, EventArgs e)
+        {
+            if (this.mapsView != null)
+            {
+                this.mapsView.Search = this.textBoxMapSearch.Text;
+                this.buttonMapCancelSearch.Enabled = true;
+            }
+        }
+
+        private void buttonMapCancelSearch_Click(object sender, EventArgs e)
+        {
+            if (this.mapsView != null)
+            {
+                this.mapsView.Search = null;
+                this.buttonMapCancelSearch.Enabled = false;
+            }
+        }
     }
 }
