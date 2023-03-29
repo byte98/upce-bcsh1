@@ -136,12 +136,15 @@ namespace SemestralProject.Forms.Maps
                 {
                     foreach(Map map in DataStorage.Instance.Maps)
                     {
-                        if (map.Name.ToLower().Trim().Contains(this.Search.ToLower().Trim()))
+                        string mapName = map.Name.ToLower().Trim();
+                        string searchName = this.Search.ToLower().Trim();
+                        if (mapName.Contains(searchName))
                         {
                             this.mapList.Add(map);
                         }
                     }
                 });
+                wait.ShowDialog();
                 this.DisplayMaps();
             }
         }

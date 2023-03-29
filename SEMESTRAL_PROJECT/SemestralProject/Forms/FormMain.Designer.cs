@@ -66,6 +66,8 @@ namespace SemestralProject.Forms
             this.textBoxMapSearch = new System.Windows.Forms.TextBox();
             this.buttonMapCancelSearch = new System.Windows.Forms.Button();
             this.buttonMapSearch = new System.Windows.Forms.Button();
+            this.splitterMapControls3 = new System.Windows.Forms.Splitter();
+            this.radioButtonManufacturers = new System.Windows.Forms.RadioButton();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
             this.panelISControls.SuspendLayout();
@@ -78,6 +80,7 @@ namespace SemestralProject.Forms
             // 
             // panelItemsControl
             // 
+            this.panelItemsControl.Controls.Add(this.radioButtonManufacturers);
             this.panelItemsControl.Controls.Add(this.radioButtonMaps);
             this.panelItemsControl.Controls.Add(this.radioButtonIS);
             this.panelItemsControl.Dock = System.Windows.Forms.DockStyle.Top;
@@ -352,6 +355,7 @@ namespace SemestralProject.Forms
             this.flowLayoutPanelMapsControls.Controls.Add(this.controlViewSizeButtonMaps);
             this.flowLayoutPanelMapsControls.Controls.Add(this.splitterMapControls2);
             this.flowLayoutPanelMapsControls.Controls.Add(this.panelMapSearch);
+            this.flowLayoutPanelMapsControls.Controls.Add(this.splitterMapControls3);
             this.flowLayoutPanelMapsControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanelMapsControls.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanelMapsControls.Name = "flowLayoutPanelMapsControls";
@@ -503,6 +507,29 @@ namespace SemestralProject.Forms
             this.buttonMapSearch.UseVisualStyleBackColor = true;
             this.buttonMapSearch.Click += new System.EventHandler(this.buttonMapSearch_Click);
             // 
+            // splitterMapControls3
+            // 
+            this.splitterMapControls3.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterMapControls3.Location = new System.Drawing.Point(970, 3);
+            this.splitterMapControls3.Name = "splitterMapControls3";
+            this.splitterMapControls3.Size = new System.Drawing.Size(1, 104);
+            this.splitterMapControls3.TabIndex = 9;
+            this.splitterMapControls3.TabStop = false;
+            // 
+            // radioButtonManufacturers
+            // 
+            this.radioButtonManufacturers.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonManufacturers.AutoSize = true;
+            this.radioButtonManufacturers.FlatAppearance.BorderSize = 0;
+            this.radioButtonManufacturers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButtonManufacturers.Location = new System.Drawing.Point(261, 0);
+            this.radioButtonManufacturers.Name = "radioButtonManufacturers";
+            this.radioButtonManufacturers.Size = new System.Drawing.Size(78, 30);
+            this.radioButtonManufacturers.TabIndex = 4;
+            this.radioButtonManufacturers.TabStop = true;
+            this.radioButtonManufacturers.Text = "VÝROBCI";
+            this.radioButtonManufacturers.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -567,5 +594,7 @@ namespace SemestralProject.Forms
         private TextBox textBoxMapSearch;
         private Button buttonMapCancelSearch;
         private Button buttonMapSearch;
+        private Splitter splitterMapControls3;
+        private RadioButton radioButtonManufacturers;
     }
 }
