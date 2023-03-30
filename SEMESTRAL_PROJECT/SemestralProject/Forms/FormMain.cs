@@ -129,6 +129,7 @@ namespace SemestralProject.Forms
         private void buttonAddIS_Click(object sender, EventArgs e)
         {
             this.informationSystemsController.Create();
+            this.isView.RefreshView();
         }
 
         private void FormMain_Deactivate(object sender, EventArgs e)
@@ -153,13 +154,10 @@ namespace SemestralProject.Forms
 
         private void buttonInfoIS_Click(object sender, EventArgs e)
         {
-            /*
-            if (this.isView?.SelectedSystem != null)
+            if (this.isView.SelectedData != null)
             {
-                FormISInfo dialog = new FormISInfo(this.isView.SelectedSystem);
-                dialog.ShowDialog();
+                this.informationSystemsController.Info(this.isView.SelectedData);
             }
-            */
         }
 
         private void buttonRemoveIS_Click(object sender, EventArgs e)
@@ -203,18 +201,11 @@ namespace SemestralProject.Forms
 
         private void buttonEditIS_Click(object sender, EventArgs e)
         {
-            /*
-            if (this.isView?.SelectedSystem != null)
+            if (this.isView.SelectedData != null)
             {
-                FormEditIS form = new FormEditIS(this.isView.SelectedSystem);
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    InformationSystemsHandler systemsHandler = InformationSystemsHandler.Instance;
-                    systemsHandler.EditInformationSystem(this.isView.SelectedSystem, form.ISName, form.ISIcon, form.ISDescription);
-                    this.isView?.RefreshView();
-                }
+                this.informationSystemsController.Edit(this.isView.SelectedData);
+                this.isView.RefreshView();
             }
-            */
         }
 
         private void buttonISSearch_Click(object sender, EventArgs e)

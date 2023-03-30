@@ -126,10 +126,33 @@ namespace SemestralProject.Controllers
         /// <param name="id">Identifier of information system which will be edited</param>
         public void Edit(string id)
         {
-            InformationSystem? system = this.GetById(id); 
+            InformationSystem? system = this.GetById(id);
             if (system != null)
             {
-                
+                FormISEdit dialog = new FormISEdit(system, this.context);
+                if (dialog.ShowDialog() == DialogResult.OK && dialog.ISName != null && dialog.ISDescription != null && dialog.ISIcon != null)
+                {
+                    FormWait wait = new FormWait(() =>
+                    {
+                        system.Edit(dialog.ISName, dialog.ISDescription, dialog.ISIcon);
+                        this.dataStorage.Save();
+                    }, this.context);
+                    wait.ShowDialog();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Shows information about information system
+        /// </summary>
+        /// <param name="id">Identifier of information system</param>
+        public void Info(string id)
+        {
+            InformationSystem? system = this.GetById(id);
+            if (system != null)
+            {
+                FormISInfo dialog = new FormISInfo(system, this.context);
+                dialog.ShowDialog();
             }
         }
     }
