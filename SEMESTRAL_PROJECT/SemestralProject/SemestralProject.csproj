@@ -9,12 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Forms\InformationSystems\ControlEditIS.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Forms\InformationSystems\FormEditIS.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

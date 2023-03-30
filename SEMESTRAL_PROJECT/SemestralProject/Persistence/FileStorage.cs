@@ -57,11 +57,6 @@ namespace SemestralProject.Persistence
         private const string DefaultPicture = "__DEFAULT";
 
         /// <summary>
-        /// Reference to instance of storage of files
-        /// </summary>
-        private static FileStorage? instance = null;
-
-        /// <summary>č
         /// Alphabet used to generating unique names
         /// </summary>
         private const string NameAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -92,26 +87,18 @@ namespace SemestralProject.Persistence
         private readonly string path;
 
         /// <summary>
-        /// Default instance of storage of files
+        /// Reference to configuration of application
         /// </summary>
-        public static FileStorage Instance
-        {
-            get
-            {
-                if (FileStorage.instance == null)
-                {
-                    FileStorage.instance = new FileStorage(Configuration.StorageFile);
-                }
-                return FileStorage.instance;
-            }
-        }
+        private readonly Configuration configuration;
 
         /// <summary>
         /// Creates new storage of program files
         /// </summary>
         /// <param name="path">Path to file where files will be stored</param>
-        public FileStorage(string path)
+        /// <param name="configuration">Reference to configuration of system</param>
+        public FileStorage(string path, Configuration configuration)
         {
+            this.configuration = configuration;
             this.icons = new List<Icon>();
             this.pictures = new List<Picture>();
             this.path = path;
@@ -123,8 +110,8 @@ namespace SemestralProject.Persistence
         /// </summary>
         public void Load()
         {
-            string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS";
-            Configuration.CreateTemp();
+            string output = this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS";
+            this.configuration.CreateTemp();
             if (Directory.Exists(output))
             {
                 Directory.Delete(output, true);
@@ -148,7 +135,7 @@ namespace SemestralProject.Persistence
         /// </summary>
         public void LoadIcons()
         {
-            string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS";
+            string output = this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS";
             this.icons.Clear();
             foreach (string file in Directory.GetFiles(output + Path.DirectorySeparatorChar + "[ICONS]"))
             {
@@ -162,7 +149,7 @@ namespace SemestralProject.Persistence
         /// </summary>
         public void LoadPictures()
         {
-            string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[PICTURES]";
+            string output = this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[PICTURES]";
             this.pictures.Clear();
             foreach(string file in Directory.GetFiles(output))
             {
@@ -180,7 +167,7 @@ namespace SemestralProject.Persistence
             {
                 File.Delete(this.path);
             }
-            ZipFile.CreateFromDirectory(Configuration.TempDir + Path.DirectorySeparatorChar + "_FS", this.path);
+            ZipFile.CreateFromDirectory(this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS", this.path);
         }
         #endregion
 
@@ -188,17 +175,17 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Adds icon to file storage
         /// </summary>
-        /// <param name="name">Name of icon</param>
         /// <param name="path">Path to file containing icon</param>
         /// <returns>Icon added to file storage</returns>
-        public Icon AddIcon(string name, string path)
+        public Icon AddIcon(string path)
         {
-            Icon reti = new Icon(FileStorage.DefaultIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon + FileStorage.DefaultExt);
+            Icon reti = new Icon(FileStorage.DefaultIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon + FileStorage.DefaultExt);
             if (File.Exists(path))
             {
+                string name = this.GenerateUniqueIcon();
                 name = name.ToUpper();
                 FileInfo fi = new FileInfo(path);
-                string destination = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + name.ToUpper() + fi.Extension.ToUpper();
+                string destination = this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + name.ToUpper() + fi.Extension.ToUpper();
                 File.Copy(path, destination, true);
                 this.Save();
                 reti = new Icon(name, destination);
@@ -233,11 +220,11 @@ namespace SemestralProject.Persistence
         /// <returns>Default icon for requested type of data</returns>
         public Icon GetIcon(FileStorage.DefaultIconType type)
         {
-            Icon reti = new Icon(FileStorage.DefaultIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon + FileStorage.DefaultExt);
+            Icon reti = new Icon(FileStorage.DefaultIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon + FileStorage.DefaultExt);
             switch (type)
             {
-                case DefaultIconType.IS:  reti = new Icon(FileStorage.DefaultISIcon,  Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultISIcon + FileStorage.DefaultExt); break;
-                case DefaultIconType.MAP: reti = new Icon(FileStorage.DefaultMapIcon, Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultMapIcon + FileStorage.DefaultExt); break;
+                case DefaultIconType.IS:  reti = new Icon(FileStorage.DefaultISIcon,  this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultISIcon + FileStorage.DefaultExt); break;
+                case DefaultIconType.MAP: reti = new Icon(FileStorage.DefaultMapIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultMapIcon + FileStorage.DefaultExt); break;
             }
             return reti;
         }
@@ -271,7 +258,7 @@ namespace SemestralProject.Persistence
         /// Generates unique icon name
         /// </summary>
         /// <returns>Unique name for icon</returns>
-        public string GenerateUniqueIcon()
+        private string GenerateUniqueIcon()
         {
             Random random = new Random();
             int length = random.Next(FileStorage.NameMin, FileStorage.NameMax + 1);
@@ -321,7 +308,7 @@ namespace SemestralProject.Persistence
         /// <returns>Picture with defined name or default picture</returns>
         public Picture GetPictureChecked(string? name)
         {
-            Picture reti = new Picture(Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[PICTURES]" + Path.DirectorySeparatorChar + FileStorage.DefaultPicture + FileStorage.DefaultExt);
+            Picture reti = new Picture(this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[PICTURES]" + Path.DirectorySeparatorChar + FileStorage.DefaultPicture + FileStorage.DefaultExt);
             if (name != null)
             {
                 foreach (Picture picture in this.pictures)
@@ -343,7 +330,7 @@ namespace SemestralProject.Persistence
         /// <returns>Picture added to file storage</returns>
         public Picture AddPicture(string path)
         {
-            string destination = Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[PICTURES]" + Path.DirectorySeparatorChar;
+            string destination = this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[PICTURES]" + Path.DirectorySeparatorChar;
             string name = this.GenerateUniquePicture();
             destination += name;
             FileInfo fi = new FileInfo(path);

@@ -32,7 +32,7 @@
             this.labelAvailable = new System.Windows.Forms.Label();
             this.tableLayoutPanelPictureView = new System.Windows.Forms.TableLayoutPanel();
             this.labelSpace = new System.Windows.Forms.Label();
-            this.controlBrowseButton = new SemestralProject.Forms.ControlBrowseButton();
+            this.controlBrowseButton = new SemestralProject.Forms.ControlBrowseButton(this.Context);
             this.flowLayoutPanelContent.SuspendLayout();
             this.SuspendLayout();
             // 

@@ -2,7 +2,7 @@
 
 namespace SemestralProject.Forms
 {
-    internal partial class FormMain: Form
+    internal partial class FormMain: Form, IForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -43,7 +43,7 @@ namespace SemestralProject.Forms
             this.buttonRemoveIS = new System.Windows.Forms.Button();
             this.buttonDeleteIS = new System.Windows.Forms.Button();
             this.splitterISControls1 = new System.Windows.Forms.Splitter();
-            this.controlViewSizeButtonIS = new SemestralProject.Forms.ControlViewSizeButton();
+            this.controlViewSizeButtonIS = new SemestralProject.Forms.ControlViewSizeButton(this.Context);
             this.splitterISControls2 = new System.Windows.Forms.Splitter();
             this.panelISSearch = new System.Windows.Forms.Panel();
             this.textBoxISSearch = new System.Windows.Forms.TextBox();
@@ -60,7 +60,7 @@ namespace SemestralProject.Forms
             this.buttonMapRemove = new System.Windows.Forms.Button();
             this.buttonMapDelete = new System.Windows.Forms.Button();
             this.splitterMapControls1 = new System.Windows.Forms.Splitter();
-            this.controlViewSizeButtonMaps = new SemestralProject.Forms.ControlViewSizeButton();
+            this.controlViewSizeButtonMaps = new SemestralProject.Forms.ControlViewSizeButton(this.Context);
             this.splitterMapControls2 = new System.Windows.Forms.Splitter();
             this.panelMapSearch = new System.Windows.Forms.Panel();
             this.textBoxMapSearch = new System.Windows.Forms.TextBox();

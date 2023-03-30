@@ -4,15 +4,18 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SemestralProject.Persistence;
+using SemestralProject.Utils;
+using SemestralProject.Visual;
 using Icon = SemestralProject.Visual.Icon;
 
 namespace SemestralProject.Forms
 {
-    public partial class ControlIconsChooser : UserControl
+    internal partial class ControlIconsChooser : UserControl, IControl
     {
         /// <summary>
         /// Name or path to selected icon
@@ -29,13 +32,16 @@ namespace SemestralProject.Forms
         /// </summary>
         private ImageList systemImageList;
 
+        public Context Context { get; init; }
+
         /// <summary>
         /// Creates new icons chooser
         /// </summary>
-        public ControlIconsChooser()
+        public ControlIconsChooser(Context context)
         {
+            this.Context = context;
             this.InitializeComponent();
-            this.systemImageList = ControlIconsChooser.InitializeSystemImageList();
+            this.systemImageList = this.InitializeSystemImageList();
             this.SelectedIcon = string.Empty;
             this.IsPath = false;
             this.controlBrowseButtonBrowseIcons.FileFilter = "Obrázek|*.BMP;*.GIF;*.JPG;*.JPEG;*.PNG";
@@ -53,10 +59,10 @@ namespace SemestralProject.Forms
         /// <summary>
         /// Initializes image list with system icons
         /// </summary>
-        private static ImageList InitializeSystemImageList()
+        private ImageList InitializeSystemImageList()
         {
             ImageList reti = new ImageList();
-            foreach(Icon icon in FileStorage.Instance.GetAllIcons())
+            foreach(Icon icon in this.Context.FileStorage.GetAllIcons())
             {
                 reti.Images.Add(icon.Name, icon.GetImage());
             }

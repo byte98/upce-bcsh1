@@ -1,4 +1,5 @@
-﻿using SemestralProject.Persistence;
+﻿using SemestralProject.Controllers;
+using SemestralProject.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace SemestralProject.Utils
         /// <summary>
         /// Configuration of system
         /// </summary>
-        //public Configuration Configuration { get; set; }
+        public Configuration Configuration { get; init; }
 
         /// <summary>
         /// Storage of files
@@ -33,10 +34,12 @@ namespace SemestralProject.Utils
         /// </summary>
         /// <param name="fileStorage">Storage of files</param>
         /// <param name="dataStorage">Storage of data</param>
-        public Context(FileStorage fileStorage, DataStorage dataStorage)
+        /// <param name="configuration">Configuration of system</param>
+        public Context(FileStorage fileStorage, DataStorage dataStorage, Configuration configuration)
         {
             this.FileStorage = fileStorage;
             this.DataStorage = dataStorage;
+            this.Configuration = configuration;
         }
     }
 }

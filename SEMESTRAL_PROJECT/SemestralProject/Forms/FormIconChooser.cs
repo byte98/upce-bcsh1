@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SemestralProject.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,9 @@ namespace SemestralProject.Forms
         /// </summary>
         public bool IsPath => content.IsPath;
 
-        public FormIconChooser(): base("Výběr ikony", "Vyberte ikonu", SemestralProject.Resources.icons_chooser)
+        public FormIconChooser(Context context): base("Výběr ikony", "Vyberte ikonu", SemestralProject.Resources.icons_chooser, context)
         {
-            this.content = new ControlIconsChooser();
+            this.content = new ControlIconsChooser(this.Context);
             this.AddControl(this.content);
             this.Icon = SemestralProject.Resources.iconchooser;
         }

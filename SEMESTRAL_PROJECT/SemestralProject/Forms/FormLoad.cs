@@ -1,4 +1,6 @@
 ﻿using SemestralProject.Persistence;
+using SemestralProject.Utils;
+using SemestralProject.Visual;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +13,7 @@ using System.Windows.Forms;
 
 namespace SemestralProject.Forms
 {
-    internal partial class FormLoad : Form
+    internal partial class FormLoad : Form, IForm
     {
         /// <summary>
         /// Year of program release
@@ -24,11 +26,65 @@ namespace SemestralProject.Forms
         private readonly FormMain parent;
 
         /// <summary>
+        /// Struct which holds item in loading sequence
+        /// </summary>
+        private struct LoadSequenceItem
+        {
+            /// <summary>
+            /// Weight of item in sequence (incrementation value of progress)
+            /// </summary>
+            public ushort Weight { get; set; }
+
+            /// <summary>
+            /// Name of item
+            /// </summary>
+            public string Name { get; set; }
+
+            /// <summary>
+            /// Action which will be performed during loading
+            /// </summary>
+            public Action Action { get; set; }
+
+            /// <summary>
+            /// Creates new item from loading sequence
+            /// </summary>
+            /// <param name="weight">Weight of item in sequence</param>
+            /// <param name="name">Name of item</param>
+            /// <param name="action">Action which will be performed during loading</param>
+            public LoadSequenceItem(ushort weight, string name, Action action)
+            {
+                this.Weight = weight;
+                this.Name = name;
+                this.Action = action;
+            }
+        }
+
+        /// <summary>
+        /// Minimal time in sleep when loading sequence is running
+        /// </summary>
+        private const int SleepMin = 200;
+
+        /// <summary>
+        /// Maximal time in sleep when loading sequence is running
+        /// </summary>
+        private const int SleepMax = 1000;
+
+        public Context Context { get; init; }
+
+        /// <summary>
+        /// Loading sequence of program
+        /// </summary>
+        private readonly List<LoadSequenceItem> loadingSequence;
+
+        /// <summary>
         /// Creates new loading form
         /// </summary>
         /// <param name="parent">Form controlling behaviour of whole application</param>
-        public FormLoad(FormMain parent)
+        public FormLoad(FormMain parent, Context context)
         {
+            this.Context = context;
+            this.loadingSequence = new List<LoadSequenceItem>();
+            this.BuildSequence();
             InitializeComponent();
             this.parent = parent;
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
@@ -42,54 +98,65 @@ namespace SemestralProject.Forms
             this.labelCopyright.BringToFront();
         }
 
+        /// <summary>
+        /// Builds steps necessary to complete loading of program
+        /// </summary>
+        private void BuildSequence()
+        {
+            this.loadingSequence.Clear();
+            this.loadingSequence.Add(new LoadSequenceItem(10, "Načítám...", () => { }));
+            this.loadingSequence.Add(new LoadSequenceItem(15, "Načítám soubory...", () =>
+            {
+                this.Context.FileStorage.Load();
+            }));
+            this.loadingSequence.Add(new LoadSequenceItem(15, "Načítám ikony...", () =>
+            {
+                this.Context.FileStorage.LoadIcons();
+            }));
+            this.loadingSequence.Add(new LoadSequenceItem(15, "Načítám obrázky...", () =>
+            {
+                this.Context.FileStorage.LoadPictures();
+            }));
+            this.loadingSequence.Add(new LoadSequenceItem(15, "Načítám data...", () =>
+            {
+                this.Context.DataStorage.Load();
+            }));
+            this.loadingSequence.Add(new LoadSequenceItem(15, "Načítám informační systémy...", () =>
+            {
+                this.Context.DataStorage.LoadInformationSystems();
+            }));
+            this.loadingSequence.Add(new LoadSequenceItem(15, "Načítám oblasti...", () =>
+            {
+                this.Context.DataStorage.LoadMaps();
+            }));
+        }
+
+        /// <summary>
+        /// Gets random number for thread sleep
+        /// </summary>
+        /// <returns>Pseudo-random integer in specified interval</returns>
+        private int RandomSleepTime()
+        {
+            Random random = new Random();
+            return random.Next(FormLoad.SleepMin, FormLoad.SleepMax + 1);
+        }
+
         private async void FormLoad_Load(object sender, EventArgs e)
         {
-            this.progressBarLoad.Value = 10;
-            this.labelState.Text = "Načítám soubory...";
-            FileStorage fs = FileStorage.Instance; 
-            await Task.Run(() =>
+            this.progressBarLoad.Value = 0;
+            foreach(LoadSequenceItem item in this.loadingSequence)
             {
-                fs.Load();
-                Thread.Sleep(500);
-            });
-            this.progressBarLoad.Value = 20;
-            this.labelState.Text = "Načítám ikony...";
-            await Task.Run(() =>
-            {
-                fs.LoadIcons();
-                Thread.Sleep(500);
-            });
-            this.progressBarLoad.Value = 30;
-            this.labelState.Text = "Načítám obrázky...";
-            await Task.Run(() =>
-            {
-                fs.LoadPictures();
-                Thread.Sleep(500);
-            });
-            this.progressBarLoad.Value = 50;
-            DataStorage ds = DataStorage.Instance;
-            this.labelState.Text = "Načítám data...";
-            await Task.Run(() => {
-                ds.Load();
-                Thread.Sleep(500);
-            });
-            this.progressBarLoad.Value = 60;
-            this.labelState.Text = "Načítám informační systémy...";
-            await Task.Run(() => {
-                ds.LoadInformationSystems();
-                Thread.Sleep(500);
-            });
-            this.progressBarLoad.Value = 70;
-            this.labelState.Text = "Načítám oblasti...";
-            await Task.Run(() => {
-                ds.LoadMaps();
-                Thread.Sleep(500);
-            });
+                this.labelState.Text = item.Name;
+                await (Task.Run(() =>
+                {
+                    item.Action.Invoke();
+                    Thread.Sleep(this.RandomSleepTime());
+                }));
+                this.progressBarLoad.Value += (int)item.Weight;
+            }
             this.progressBarLoad.Value = 100;
             this.labelState.Text = "Hotovo";
-            await Task.Run(() => {
-                Thread.Sleep(1000);
-            });
+            await Task.Run(() => { Thread.Sleep(this.RandomSleepTime()); });
             this.parent.Show();
             this.Close();
         }

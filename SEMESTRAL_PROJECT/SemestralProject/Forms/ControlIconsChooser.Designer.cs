@@ -31,7 +31,7 @@
             this.flowLayoutPanelContent = new System.Windows.Forms.FlowLayoutPanel();
             this.labelAvailable = new System.Windows.Forms.Label();
             this.listViewIcons = new System.Windows.Forms.ListView();
-            this.controlBrowseButtonBrowseIcons = new SemestralProject.Forms.ControlBrowseButton();
+            this.controlBrowseButtonBrowseIcons = new SemestralProject.Forms.ControlBrowseButton(this.Context);
             this.flowLayoutPanelContent.SuspendLayout();
             this.SuspendLayout();
             // 

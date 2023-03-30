@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SemestralProject.Utils;
+using SemestralProject.Visual;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,19 +12,22 @@ using System.Windows.Forms;
 
 namespace SemestralProject.Forms
 {
-    internal partial class FormWait : Form
+    internal partial class FormWait : Form, IForm
     {
         /// <summary>
         /// Action which will be done during form displayed
         /// </summary>
         private readonly Action action;
-        
+
+        public Context Context { get; init; }
+
         /// <summary>
         /// Creates new waiting form
         /// </summary>
         /// <param name="action">Action which needs to be done during form displayed</param>
-        public FormWait(Action action)
+        public FormWait(Action action, Context context)
         {
+            this.Context = context;
             InitializeComponent();
             this.action = action;
         }

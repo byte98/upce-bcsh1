@@ -17,7 +17,7 @@ namespace SemestralProject.Data
         /// <summary>
         /// Icon of data
         /// </summary>
-        public Icon? Icon{ get; protected set; }
+        public Icon Icon{ get; protected set; }
 
         /// <summary>
         /// Creates new data with icon

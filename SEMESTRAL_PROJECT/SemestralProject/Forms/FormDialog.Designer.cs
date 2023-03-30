@@ -1,6 +1,8 @@
-﻿namespace SemestralProject.Forms
+﻿using SemestralProject.Visual;
+
+namespace SemestralProject.Forms
 {
-    abstract partial class FormDialog: Form
+    abstract partial class FormDialog: Form, IForm
     {
         /// <summary>
         /// Required designer variable.

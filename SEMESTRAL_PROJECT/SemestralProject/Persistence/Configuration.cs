@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Graphics.Printing.Workflow;
 using Windows.UI.ViewManagement;
 
 namespace SemestralProject.Persistence
@@ -13,7 +14,7 @@ namespace SemestralProject.Persistence
     /// <summary>
     /// Class which holds configuration of program
     /// </summary>
-    internal static class Configuration
+    internal class Configuration
     {
         /// <summary>
         /// Name of file where configuration is saved
@@ -28,7 +29,7 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Actual accent color of system
         /// </summary>
-        public static Color AccentColor
+        public Color AccentColor
         {
             get
             {
@@ -41,11 +42,11 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Actual text color according to accent color
         /// </summary>
-        public static Color TextColor
+        public Color TextColor
         {
             get
             {
-                Color accent = Configuration.AccentColor;
+                Color accent = this.AccentColor;
                 int colorNr = accent.R * accent.G * accent.B;
                 Color reti = Color.Black;
                 if (colorNr < (127 * 127 * 127))
@@ -69,12 +70,12 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Directory for temporary files
         /// </summary>
-        public const string TempDir = "./~$TMP";
+        public string TempDir => "./~$TMP";
 
         /// <summary>
         /// Flag, whether configuration represents actual state of configuration file
         /// </summary>
-        public static bool Loaded { get; private set; } = false;
+        public bool Loaded { get; private set; } = false;
 
         /// <summary>
         /// Delegate of configuration change event
@@ -84,101 +85,46 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Configuration change event
         /// </summary>
-        public static event ConfigurationChangedEventHandler? ConfigurationChanged = delegate
+        public event ConfigurationChangedEventHandler? ConfigurationChanged;
+
+        /// <summary>
+        /// Path to file with configuration
+        /// </summary>
+        private readonly string configFile;
+        
+        /// <summary>
+        /// Creates new handler of configuration
+        /// </summary>
+        /// <param name="path">Path to file with configuration</param>
+        public Configuration(string path)
         {
-            Configuration.Loaded = false;
-            if (Configuration.AutoSave == true)
-            {
-                Configuration.Save();
-            }
-        };
-
-        /// <summary>
-        /// File containing file storage
-        /// </summary>
-        private static string storageFile = "FS.DAT";
-
-        /// <summary>
-        /// Property handler of file containing file storage
-        /// </summary>
-        public static string StorageFile
-        {
-            get
-            { 
-                return Configuration.storageFile;
-            }
-            set
-            {
-                Configuration.storageFile = value;
-                ConfigurationChanged?.Invoke();
-            }
-        }
-
-        /// <summary>
-        /// File containing data storage
-        /// </summary>
-        private static string dataFile = "DB.DAT";
-
-        /// <summary>
-        /// Path to file containing data storage
-        /// </summary>
-        public static string DataFile
-        {
-            get
-            {
-                return Configuration.dataFile;
-            }
-            set
-            {
-                Configuration.dataFile = value;
-                ConfigurationChanged?.Invoke();
-            }
+            this.configFile = path;
         }
 
         /// <summary>
         /// Saves configuration into file
         /// </summary>
-        public static void Save()
+        public void Save()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("STORAGE_FILE").Append(Configuration.ValueSeparator).Append(Configuration.StorageFile).Append(Configuration.Separator);
-            sb.Append("DATA_FILE").Append(Configuration.ValueSeparator).Append(Configuration.DataFile).Append(Configuration.Separator);
-            File.WriteAllText(sb.ToString(), Configuration.ConfigFile);
-            Configuration.Loaded = true;
+            // TODO
         }
 
         /// <summary>
         /// Loads configuration from file
         /// </summary>
-        public static void Load()
+        public void Load()
         {
-            if (File.Exists(Configuration.ConfigFile))
-            {
-                string content = File.ReadAllText(Configuration.ConfigFile);
-
-                foreach (string item in content.Split(Configuration.Separator))
-                {
-                    string[] parts = item.Split(Configuration.ValueSeparator);
-                    if (parts.Length == 2)
-                    {
-                        switch(parts[0].Trim().ToUpper())
-                        {
-                            case "STORAGE_FILE": Configuration.StorageFile = parts[1]; break;
-                            case "DATA_FILE":    Configuration.DataFile    = parts[1]; break;
-                        }
-                    }
-                }
-            }
+            // TODO
         }
 
         /// <summary>
         /// Creates temporary directory
         /// </summary>
-        public static void CreateTemp()
+        public void CreateTemp()
         {
-            if (Directory.Exists(Configuration.TempDir) == false)
+            if (Directory.Exists(this.TempDir) == false)
             {
-                DirectoryInfo di = Directory.CreateDirectory(Configuration.TempDir);
+                DirectoryInfo di = Directory.CreateDirectory(this.TempDir);
                 di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
             }
         }
@@ -186,11 +132,11 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Deletes temporary directory
         /// </summary>
-        public static void DeleteTemp()
+        public void DeleteTemp()
         {
-            if (Directory.Exists(Configuration.TempDir))
+            if (Directory.Exists(this.TempDir))
             {
-                Directory.Delete(Configuration.TempDir, true);
+                Directory.Delete(this.TempDir, true);
             }
         }
     }

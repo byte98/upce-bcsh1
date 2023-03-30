@@ -1,4 +1,5 @@
 ﻿using SemestralProject.Persistence;
+using SemestralProject.Utils;
 using SemestralProject.Visual;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace SemestralProject.Forms
 {
-    public partial class ControlPictureChooser : UserControl
+    internal partial class ControlPictureChooser : UserControl, IControl
     {
         /// <summary>
         /// Number of columns in control
@@ -45,8 +46,11 @@ namespace SemestralProject.Forms
         /// </summary>
         public bool SelectedIsPath { get; private set; } = false;
 
-        public ControlPictureChooser()
+        public Context Context { get; init; }
+
+        public ControlPictureChooser(Context context)
         {
+            this.Context = context;
             InitializeComponent();
             this.pictures = new List<(Picture, bool, string)>();
             this.InitializePictures();
@@ -59,7 +63,7 @@ namespace SemestralProject.Forms
             if (ctrl is Button)
             {
                 Button btn = (Button)ctrl;
-                btn.FlatAppearance.BorderColor = Configuration.AccentColor;
+                btn.FlatAppearance.BorderColor = this.Context.Configuration.AccentColor;
                 btn.Text = "";
             }
         }
@@ -69,7 +73,7 @@ namespace SemestralProject.Forms
         /// </summary>
         private void InitializePictures()
         {
-            foreach(Picture picture in FileStorage.Instance.GetPictures())
+            foreach(Picture picture in this.Context.FileStorage.GetPictures())
             {
                 this.pictures.Add((picture, false, picture.Name));
             }
@@ -115,7 +119,7 @@ namespace SemestralProject.Forms
                 button.BackgroundImageLayout = ImageLayout.Stretch;
                 button.Tag = picture;
                 button.Font = new Font(new FontFamily("Segoe UI Symbol"), 16f, FontStyle.Bold, GraphicsUnit.Pixel);
-                button.ForeColor = Configuration.AccentColor;
+                button.ForeColor = this.Context.Configuration.AccentColor;
                 button.Click += this.PictureButtonClicked;
                 button.TextAlign = ContentAlignment.BottomRight;
                 this.tableLayoutPanelPictureView.Controls.Add(button);
@@ -136,7 +140,7 @@ namespace SemestralProject.Forms
                     btn.Text = string.Empty;
                     if (btn == sender)
                     {
-                        btn.FlatAppearance.BorderColor = Configuration.AccentColor;
+                        btn.FlatAppearance.BorderColor = this.Context.Configuration.AccentColor;
                         btn.Text = "";
                         (Picture picture, bool isPath, string nameOrPath) tag = ((Picture picture, bool isPath, string nameOrPath))btn.Tag;
                         this.SelectedIsPath = tag.isPath;

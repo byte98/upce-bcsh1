@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SemestralProject.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,9 +30,9 @@ namespace SemestralProject.Forms
         /// <summary>
         /// Creates new dialog for choosing pictures
         /// </summary>
-        public FormPictureChooser(): base("Výběr obrázku", "Vyberte obrázek", SemestralProject.Resources.is_default)
+        public FormPictureChooser(Context context): base("Výběr obrázku", "Vyberte obrázek", SemestralProject.Resources.is_default, context)
         {
-            this.content = new ControlPictureChooser();
+            this.content = new ControlPictureChooser(this.Context);
             this.AddControl(content);
         }
     }

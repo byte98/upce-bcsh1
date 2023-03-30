@@ -1,4 +1,6 @@
 ﻿using SemestralProject.Persistence;
+using SemestralProject.Utils;
+using SemestralProject.Visual;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +13,7 @@ using System.Windows.Forms;
 
 namespace SemestralProject.Forms
 {
-    internal abstract partial class FormDialog : Form
+    internal abstract partial class FormDialog : Form, IForm
     {
         /// <summary>
         /// Icon displayed in header area of dialog
@@ -64,17 +66,23 @@ namespace SemestralProject.Forms
             }
         }
 
+        public Context Context { get; init; }
+
         /// <summary>
         /// Creates new dialog
         /// </summary>
         /// <param name="title">Title of dialog</param>
         /// <param name="header">Header of dialog</param>
         /// <param name="icon">Icon of dialog</param>
-        public FormDialog(string title, string header, Bitmap icon)
+        public FormDialog(string title, string header, Bitmap icon, Context context)
         {
+            this.Context = context;
             InitializeComponent();
-            this.panelHeader.BackColor = Configuration.AccentColor;
-            this.panelHeader.ForeColor = Configuration.TextColor;
+            if (this.Context!= null)
+            {
+                this.panelHeader.BackColor = this.Context.Configuration.AccentColor;
+                this.panelHeader.ForeColor = this.Context.Configuration.TextColor;
+            }
             this.Text = title;
             this.HeaderText = header; 
             this.HeaderIcon = icon;
@@ -97,7 +105,10 @@ namespace SemestralProject.Forms
 
         private void FormAddIS_Activated(object sender, EventArgs e)
         {
-            this.panelHeader.BackColor = Configuration.AccentColor;
+            if (this.Context!= null)
+            {
+                this.panelHeader.BackColor = this.Context.Configuration.AccentColor;
+            }
         }
     }
 }

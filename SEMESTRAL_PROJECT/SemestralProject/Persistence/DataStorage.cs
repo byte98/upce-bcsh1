@@ -144,20 +144,6 @@ namespace SemestralProject.Persistence
         /// </summary>
         private const string MapFile = "MAPS.XML";
 
-        /// <summary>
-        /// Reference to default instance of data storage
-        /// </summary>
-        public static DataStorage Instance
-        {
-            get
-            {
-                if (DataStorage.instance == null)
-                {
-                    DataStorage.instance = new DataStorage(Configuration.DataFile, FileStorage.Instance);
-                }
-                return DataStorage.instance;
-            }
-        }
 
         /// <summary>
         /// Path to file with data storage
@@ -168,6 +154,11 @@ namespace SemestralProject.Persistence
         /// Reference to storage of files
         /// </summary>
         private readonly FileStorage fileStorage;
+
+        /// <summary>
+        /// Reference to configuration of system
+        /// </summary>
+        private readonly Configuration configuration;
 
         /// <summary>
         /// List of all available information systems
@@ -184,8 +175,10 @@ namespace SemestralProject.Persistence
         /// </summary>
         /// <param name="path">Path to file with data</param>
         /// <param name="fileStorage">Storage of data</param>
-        public DataStorage(string path, FileStorage fileStorage)
+        /// <param name="configuration">Configuration of application</param>
+        public DataStorage(string path, FileStorage fileStorage, Configuration configuration)
         {
+            this.configuration = configuration;
             this.path = path;
             this.InformationSystems = new List<InformationSystem>();
             this.Maps = new List<Map>();
@@ -197,7 +190,7 @@ namespace SemestralProject.Persistence
         /// </summary>
         public void Load()
         {
-            string output = Configuration.TempDir + Path.DirectorySeparatorChar + "_DB";
+            string output = this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB";
             if (Directory.Exists(output))
             {
                 Directory.Delete(output, true);
@@ -216,7 +209,7 @@ namespace SemestralProject.Persistence
         public void LoadInformationSystems()
         {
             this.InformationSystems = new List<InformationSystem>();
-            string file = Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.ISFile;
+            string file = this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.ISFile;
             if (File.Exists(file))
             {
                 XmlDocument doc = new XmlDocument();
@@ -260,11 +253,11 @@ namespace SemestralProject.Persistence
                                 {
                                     this.InformationSystems.Add(new InformationSystem(
                                         idenElement.InnerText,
-                                        DateTime.ParseExact(credElement.InnerText, DataStorage.XML._Date, null),
-                                        DateTime.ParseExact(updtElement.InnerText, DataStorage.XML._Date, null),
-                                        this.fileStorage.GetIcon(iconElement.InnerText, FileStorage.DefaultIconType.IS),
                                         nameElement.InnerText,
-                                        descElement.InnerText
+                                        descElement.InnerText,
+                                        this.fileStorage.GetIcon(iconElement.InnerText, FileStorage.DefaultIconType.IS),
+                                        DateTime.ParseExact(credElement.InnerText, DataStorage.XML._Date, null),
+                                        DateTime.ParseExact(updtElement.InnerText, DataStorage.XML._Date, null)
                                     ));
                                 }
                             }
@@ -281,7 +274,7 @@ namespace SemestralProject.Persistence
         public void LoadMaps()
         {
             this.Maps = new List<Map>();
-            string file = Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.MapFile;
+            string file = this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.MapFile;
             if (File.Exists(file))
             {
                 XmlDocument doc = new XmlDocument();
@@ -350,7 +343,7 @@ namespace SemestralProject.Persistence
             {
                 XmlElement infS = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem._Root, string.Empty);
                 XmlElement id = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem.Id, string.Empty);
-                id.InnerText = informationSystem.ID;
+                id.InnerText = informationSystem.Id;
                 infS.AppendChild(id);
                 XmlElement created = doc.CreateElement(string.Empty, DataStorage.XML.InformationSystem.Created, string.Empty);
                 created.InnerText = informationSystem.Created.ToString(DataStorage.XML._Date);
@@ -369,7 +362,7 @@ namespace SemestralProject.Persistence
                 infS.AppendChild(desc);
                 iss.AppendChild(infS);
             }
-            doc.Save(Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.ISFile);
+            doc.Save(this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.ISFile);
         }
 
         /// <summary>
@@ -406,7 +399,7 @@ namespace SemestralProject.Persistence
                 mapElem.AppendChild(picture);
                 maps.AppendChild(mapElem);
             }
-            doc.Save(Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.MapFile);
+            doc.Save(this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.MapFile);
         }
 
         /// <summary>
@@ -414,13 +407,13 @@ namespace SemestralProject.Persistence
         /// </summary>
         public void Save()
         {
-            if (File.Exists(Configuration.DataFile))
+            if (File.Exists(this.path))
             {
-                File.Delete(Configuration.DataFile);
+                File.Delete(this.path);
             }
             this.SaveInformationSystems();
             this.SaveMaps();
-            ZipFile.CreateFromDirectory(Configuration.TempDir + Path.DirectorySeparatorChar + "_DB", this.path);
+            ZipFile.CreateFromDirectory(this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB", this.path);
         }
     }
 }

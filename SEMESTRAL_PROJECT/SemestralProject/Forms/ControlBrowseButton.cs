@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SemestralProject.Utils;
+using SemestralProject.Visual;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +12,7 @@ using System.Windows.Forms;
 
 namespace SemestralProject.Forms
 {
-    internal partial class ControlBrowseButton : UserControl
+    internal partial class ControlBrowseButton : UserControl, IControl
     {
         /// <summary>
         /// Class representing arguments of file selection event
@@ -33,7 +35,7 @@ namespace SemestralProject.Forms
         /// <summary>
         /// File selection event
         /// </summary>
-        public event FileSelectedHandler FileSelectedEvent;
+        public event FileSelectedHandler? FileSelectedEvent;
 
         /// <summary>
         /// Result of dialog
@@ -60,11 +62,14 @@ namespace SemestralProject.Forms
             }
         }
 
+        public Context Context {get; init; }
+
         /// <summary>
         /// Creates new browse for file button
         /// </summary>
-        public ControlBrowseButton()
+        public ControlBrowseButton(Context context)
         {
+            this.Context = context;
             InitializeComponent();
             this.openFileDialogBrowse.Filter = "Všechny soubory | *.*";
             this.SelectedFile = string.Empty;

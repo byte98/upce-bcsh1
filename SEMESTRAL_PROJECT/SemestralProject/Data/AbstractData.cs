@@ -14,27 +14,27 @@ namespace SemestralProject.Data
         /// <summary>
         /// Identifier of data
         /// </summary>
-        public string? Id { get; init; }
+        public string Id { get; init; }
 
         /// <summary>
         /// Name of data
         /// </summary>
-        public string? Name { get; protected set; }
+        public string Name { get; protected set; }
 
         /// <summary>
         /// Description of data
         /// </summary>
-        public string? Description { get; protected set; }
+        public string Description { get; protected set; }
 
         /// <summary>
         /// Date and time of creation of data
         /// </summary>
-        public DateTime? Created { get; init; }
+        public DateTime Created { get; init; }
 
         /// <summary>
         /// Date and time of last update of data
         /// </summary>
-        public DateTime? Updated { get; protected set;}
+        public DateTime Updated { get; protected set;}
 
         /// <summary>
         /// Creates new data item

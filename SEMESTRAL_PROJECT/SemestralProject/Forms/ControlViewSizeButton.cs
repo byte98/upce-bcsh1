@@ -1,4 +1,5 @@
-﻿using SemestralProject.Visual;
+﻿using SemestralProject.Utils;
+using SemestralProject.Visual;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,15 +12,18 @@ using System.Windows.Forms;
 
 namespace SemestralProject.Forms
 {
-    internal partial class ControlViewSizeButton : UserControl
+    internal partial class ControlViewSizeButton : UserControl, IControl
     {
         /// <summary>
         /// View of data which will be controlled by this control
         /// </summary>
         public IView? DataView {private get; set; }
 
-        public ControlViewSizeButton()
+        public Context Context { get; init; }
+
+        public ControlViewSizeButton(Context context)
         {
+            this.Context = context;
             InitializeComponent();
         }
 

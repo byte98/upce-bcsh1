@@ -11,94 +11,28 @@ namespace SemestralProject.Data
     /// <summary>
     /// Class representing passenger information system
     /// </summary>
-    internal class InformationSystem
+    internal class InformationSystem : AbstractIconData
     {
         /// <summary>
-        /// Date and time when information system has been created
-        /// </summary>
-        public DateTime Created { get; private init; }
-
-        /// <summary>
-        /// Date and time when information system has been lastly updated
-        /// </summary>
-        public DateTime Updated { get; private set; }
-
-        /// <summary>
-        /// Icon of information system
-        /// </summary>
-        public Icon Icon { get; private set; } = FileStorage.Instance.GetIcon(FileStorage.DefaultIconType.IS);
-
-        /// <summary>
-        /// Name of information system
-        /// </summary>
-        public string Name { get; private set; } = string.Empty;
-
-        /// <summary>
-        /// Description of information system
-        /// </summary>
-        public string Description { get; private set; } = string.Empty;
-
-        /// <summary>
-        /// Identifier of information system
-        /// </summary>
-        public string ID { get; private init; }
-
-        /// <summary>
-        /// Creates new information system
-        /// </summary>
-        /// <param name="id">Identifier of informations system</param>
-        public InformationSystem(string id) : this(id, DateTime.Now, DateTime.Now, FileStorage.Instance.GetIcon(FileStorage.DefaultIconType.IS), string.Empty, string.Empty) { }
-
-        /// <summary>
         /// Creates new information system
         /// </summary>
         /// <param name="id">Identifier of information system</param>
-        /// <param name="icon">Icon of information system</param>
         /// <param name="name">Name of information system</param>
         /// <param name="description">Description of information system</param>
-        public InformationSystem(string id, Icon icon, string name, string description): this(id, DateTime.Now, DateTime.Now, icon, name, description) { }
+        /// <param name="icon">Icon of information system</param>
+        public InformationSystem(string id, string name, string description, Icon icon)
+            : base(id, name, description, icon) { }
 
         /// <summary>
         /// Creates new information system
         /// </summary>
         /// <param name="id">Identifier of information system</param>
+        /// <param name="name">Name of information system</param>
+        /// <param name="description">Description of information system</param>
+        /// <param name="icon">Icon of information system</param>
         /// <param name="created">Date and time of creation of information system</param>
-        /// <param name="icon">Icon of information system</param>
-        /// <param name="name">Name of information system</param>
-        /// <param name="description">Description of information system</param>
-        public InformationSystem(string id, DateTime created, Icon icon, string name, string description): this(id, created, DateTime.Now, icon, name, description) { }
-        
-        /// <summary>
-        /// Creates new information system
-        /// </summary>
-        /// <param name="id">Identifier of information system</param>
-        /// <param name="created">Date and time of creation of information system</param>
-        /// <param name="updated">Date and time of last modification of information system</param>
-        /// <param name="icon">Icon of information system</param>
-        /// <param name="name">Name of information system</param>
-        /// <param name="description">Description of information system</param>
-        public InformationSystem(string id, DateTime created, DateTime updated, Icon icon, string name, string description)
-        {
-            this.ID = id;
-            this.Created = created;
-            this.Updated = updated;
-            this.Icon = icon;
-            this.Name = name;
-            this.Description = description;
-        }
-
-        /// <summary>
-        /// Edits information system
-        /// </summary>
-        /// <param name="name">New name of information system</param>
-        /// <param name="icon">New icon of information system</param>
-        /// <param name="description">New description of information system</param>
-        public void Edit(string name, Icon icon, string description)
-        {
-            this.Name = name;
-            this.Icon = icon;
-            this.Description = description;
-            this.Updated = DateTime.Now;
-        }
+        /// <param name="updated">ate and time of last update of information systems</param>
+        public InformationSystem(string id, string name, string description, Icon icon, DateTime created, DateTime updated)
+            : base(id, name, description, icon, created, updated) { }
     }
 }
