@@ -59,14 +59,16 @@ namespace SemestralProject.Forms
         {
             this.isView.Dock = DockStyle.Fill;
             this.panelISContent.Controls.Add(this.isView);
+            ControlViewSizeButton isSizeButton = new ControlViewSizeButton(this.Context);
+            this.panelISSizeButton.Controls.Add(isSizeButton);
+            isSizeButton.Dock = DockStyle.Fill;
             this.isView.SelectedDataChanged += new ControlDataIconView.SelectedDataChangedEventHandler(delegate (object sender, ControlDataIconView.SelectedDataChangedEventArgs args)
             {
                 this.buttonInfoIS.Enabled = (args.SelectedData != null);
                 this.buttonRemoveIS.Enabled = (args.SelectedData != null);
                 this.buttonEditIS.Enabled = (args.SelectedData != null);
             });
-            this.controlViewSizeButtonIS.DataView = this.isView;
-        
+            isSizeButton.DataView= this.isView;
         }
 
         /// <summary>
