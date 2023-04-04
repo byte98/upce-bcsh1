@@ -10,13 +10,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SemestralProject.Visual.IAbstractDataView;
 
 namespace SemestralProject.Forms
 {
     /// <summary>
     /// Class representing viewer of data with icons
     /// </summary>
-    internal partial class ControlDataIconView : UserControl, IControl, IView
+    internal partial class ControlDataIconView : UserControl, IControl, IAbstractDataView
     {
         /// <summary>
         /// Size of small icons
@@ -39,6 +40,15 @@ namespace SemestralProject.Forms
         private List<AbstractIconData> visibleData;
 
         /// <summary>
+        /// Attribute which holds actually selected data
+        /// </summary>
+        private string? selectedData;
+
+        public string? SelectedData => this.selectedData;
+
+        public event SelectedDataChangedEventHandler? SelectedDataChanged;
+
+        /// <summary>
         /// All visible data
         /// </summary>
         public List<AbstractIconData> VisibleData
@@ -53,35 +63,6 @@ namespace SemestralProject.Forms
                 this.RefreshView();
             }
         }
-
-        /// <summary>
-        /// Class which holds arguments of selected data changed event
-        /// </summary>
-        public class SelectedDataChangedEventArgs: EventArgs
-        {
-            /// <summary>
-            /// Identifier of actually selected data or <c>NULL</c> if not data is selected
-            /// </summary>
-            public string? SelectedData { get; set; }
-        }
-
-        /// <summary>
-        /// Handler of selected data changed event
-        /// </summary>
-        /// <param name="sender">Sender of event</param>
-        /// <param name="e">rguments of event</param>
-        public delegate void SelectedDataChangedEventHandler(object sender, SelectedDataChangedEventArgs e);
-
-        /// <summary>
-        /// Event triggered when selected data has changed
-        /// </summary>
-        public event SelectedDataChangedEventHandler? SelectedDataChanged;
-
-        /// <summary>
-        /// Identifier of actually selected data in view
-        /// or <c>NULL</c> if no data is selected
-        /// </summary>
-        public string? SelectedData { get; private set; }
 
         /// <summary>
         /// Creates new viewer of data with icons
@@ -140,11 +121,11 @@ namespace SemestralProject.Forms
         {
             if (this.listViewContent.SelectedItems.Count > 0)
             {
-                this.SelectedData = this.listViewContent.SelectedItems[0].Tag.ToString();
+                this.selectedData = this.listViewContent.SelectedItems[0].Tag.ToString();
             }
             else
             {
-                this.SelectedData = null;
+                this.selectedData = null;
             }
             this.SelectedDataChanged?.Invoke(this, new SelectedDataChangedEventArgs() { SelectedData = this.SelectedData });
         }

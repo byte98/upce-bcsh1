@@ -54,7 +54,7 @@ namespace SemestralProject.Forms
         /// </summary>
         private List<AbstractPictureData> visibleData;
 
-        public event IAbstractDataView.SelectedDataChangedEventHandler? SelectedDataChanged;
+        public event SelectedDataChangedEventHandler? SelectedDataChanged;
 
         /// <summary>
         /// All visible data

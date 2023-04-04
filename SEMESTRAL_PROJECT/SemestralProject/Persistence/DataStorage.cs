@@ -130,11 +130,6 @@ namespace SemestralProject.Persistence
         #endregion
 
         /// <summary>
-        /// Reference to instance of data storage
-        /// </summary>
-        private static DataStorage? instance;
-
-        /// <summary>
         /// File containing something like a database of information systems
         /// </summary>
         private const string ISFile = "INFORMATION_SYSTEMS.XML";
@@ -380,7 +375,7 @@ namespace SemestralProject.Persistence
             {
                 XmlElement mapElem = doc.CreateElement(string.Empty, DataStorage.XML.Map._Root, string.Empty);
                 XmlElement id = doc.CreateElement(string.Empty, DataStorage.XML.Map.Id, string.Empty);
-                id.InnerText = map.ID;
+                id.InnerText = map.Id;
                 mapElem.AppendChild(id);
                 XmlElement name = doc.CreateElement(string.Empty, DataStorage.XML.Map.Name, string.Empty);
                 name.InnerText = map.Name;

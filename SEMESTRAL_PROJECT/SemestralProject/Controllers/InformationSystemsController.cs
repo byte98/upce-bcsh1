@@ -155,5 +155,83 @@ namespace SemestralProject.Controllers
                 dialog.ShowDialog();
             }
         }
+
+        /// <summary>
+        /// Removes information system
+        /// </summary>
+        /// <param name="id">Identifier of information system</param>
+        public void Remove(string id)
+        {
+            InformationSystem? system = this.GetById(id);
+            if (system != null)
+            {
+                if (MessageBox.Show(
+                        "Opravdu chcete odstranit informační systém " + system.Name + "?" + Environment.NewLine + 
+                        "Tato akce je nevratná.",
+                        "Ostranit informační systém",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question,
+                        MessageBoxDefaultButton.Button2
+                    ) == DialogResult.Yes)
+                {
+                    FormWait wait = new FormWait(() =>
+                    {
+                        if (this.dataStorage.InformationSystems.Contains(system))
+                        {
+                            this.dataStorage.InformationSystems.Remove(system);
+                        }
+                        this.dataStorage.Save();
+                        system = null;
+                    }, this.context);
+                    wait.ShowDialog();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Deletes all information systems
+        /// </summary>
+        public void Delete()
+        {
+            if (MessageBox.Show(
+                        "Opravdu chcete odstranit všechny informační systémy?" + Environment.NewLine +
+                        "Počet informačních sysémů, které budou odstraněny: " + this.dataStorage.InformationSystems.Count + Environment.NewLine +
+                        "Tato akce je nevratná.",
+                        "Ostranit informační systém",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question,
+                        MessageBoxDefaultButton.Button2
+                    ) == DialogResult.Yes)
+            {
+                FormWait wait = new FormWait(() =>
+                {
+                    this.dataStorage.InformationSystems.Clear();
+                    this.dataStorage.Save();
+                }, this.context);
+                wait.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        /// Searches information systems
+        /// </summary>
+        /// <param name="phrase">Phrase which will be searched</param>
+        /// <returns>List of information systems which matches phrase</returns>
+        public List<InformationSystem> Search(string phrase)
+        {
+            List<InformationSystem> reti = new List<InformationSystem>();
+            FormWait wait = new FormWait(() =>
+            {
+                foreach (InformationSystem system in this.dataStorage.InformationSystems)
+                {
+                    if (system.Matches(phrase))
+                    {
+                        reti.Add(system);
+                    }
+                }
+            }, this.context);
+            wait.ShowDialog();
+            return reti;
+        }
     }
 }

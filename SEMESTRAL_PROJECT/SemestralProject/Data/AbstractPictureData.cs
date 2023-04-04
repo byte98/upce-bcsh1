@@ -15,7 +15,7 @@ namespace SemestralProject.Data
         /// <summary>
         /// Picture of data
         /// </summary>
-        public Picture? Picture { get; private set; }
+        public Picture Picture { get; private set; }
 
         /// <summary>
         /// Creates new data with picture

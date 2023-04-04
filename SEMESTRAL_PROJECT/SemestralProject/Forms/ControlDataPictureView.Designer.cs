@@ -50,6 +50,7 @@
             this.listViewContent.TabIndex = 1;
             this.listViewContent.UseCompatibleStateImageBehavior = false;
             this.listViewContent.View = System.Windows.Forms.View.Details;
+            this.listViewContent.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewContent_ItemSelectionChanged);
             // 
             // columnHeaderName
             // 

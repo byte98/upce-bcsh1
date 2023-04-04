@@ -9,6 +9,7 @@ using System.Transactions;
 using System.Windows.Forms;
 using Windows.UI;
 using Windows.UI.ViewManagement;
+using static SemestralProject.Visual.IAbstractDataView;
 using Color = System.Drawing.Color;
 namespace SemestralProject.Forms
 {
@@ -19,13 +20,27 @@ namespace SemestralProject.Forms
         /// <summary>
         /// Viewer of information systems
         /// </summary>
-        private ControlDataIconView isView;
+        private readonly ControlDataIconView isView;
 
         /// <summary>
         /// Controller of information systems data
         /// </summary>
         private readonly InformationSystemsController informationSystemsController;
 
+        /// <summary>
+        /// Controller of maps data
+        /// </summary>
+        private readonly MapsController mapsController;
+
+        /// <summary>
+        /// Viewer of maps
+        /// </summary>
+        private ControlDataPictureView mapsView;
+
+        /// <summary>
+        /// Creates new main form of application
+        /// </summary>
+        /// <param name="context">Wrapper of all application resources</param>
         public FormMain(Context context)
         {
             this.Context = context;
@@ -35,9 +50,11 @@ namespace SemestralProject.Forms
             this.tabControlContent.ItemSize = new Size(0, 1);
             this.tabControlContent.SizeMode = TabSizeMode.Fixed;
             this.isView = new ControlDataIconView(this.Context);
+            this.mapsView = new ControlDataPictureView(this.Context);
             this.InitializeIS();
             this.InitializeMaps();
             this.informationSystemsController = new InformationSystemsController(this.Context);
+            this.mapsController = new MapsController(this.Context);
         }
 
         /// <summary>
@@ -62,13 +79,13 @@ namespace SemestralProject.Forms
             ControlViewSizeButton isSizeButton = new ControlViewSizeButton(this.Context);
             this.panelISSizeButton.Controls.Add(isSizeButton);
             isSizeButton.Dock = DockStyle.Fill;
-            this.isView.SelectedDataChanged += new ControlDataIconView.SelectedDataChangedEventHandler(delegate (object sender, ControlDataIconView.SelectedDataChangedEventArgs args)
+            this.isView.SelectedDataChanged += new SelectedDataChangedEventHandler(delegate (object sender, SelectedDataChangedEventArgs args)
             {
                 this.buttonInfoIS.Enabled = (args.SelectedData != null);
                 this.buttonRemoveIS.Enabled = (args.SelectedData != null);
                 this.buttonEditIS.Enabled = (args.SelectedData != null);
             });
-            isSizeButton.DataView= this.isView;
+            isSizeButton.DataView = this.isView;
         }
 
         /// <summary>
@@ -76,22 +93,18 @@ namespace SemestralProject.Forms
         /// </summary>
         private void InitializeMaps()
         {
-            /*
-            this.mapsView = new ControlMapsView();
             this.mapsView.Dock = DockStyle.Fill;
-            this.panelMapsContent.Controls.Add(this.mapsView);
-            this.mapsView?.RefreshView();
-            if (this.mapsView!= null) // Why is there this condition only Visual Studio knows (yes, without this line, warning 'it may be null' shows up)
+            this.panelMapContent.Controls.Add(this.mapsView);
+            ControlViewSizeButton mapSizeButton = new ControlViewSizeButton(this.Context);
+            this.panelMapSizeButton.Controls.Add(mapSizeButton);
+            mapSizeButton.Dock = DockStyle.Fill;
+            this.mapsView.SelectedDataChanged += new SelectedDataChangedEventHandler(delegate (object sender, SelectedDataChangedEventArgs args)
             {
-                this.mapsView.MapChangedEvent += new ControlMapsView.MapChangedEventHandler(delegate (object sender, ControlMapsView.MapChangedEventArgs args)
-                {
-                    this.buttonMapInfo.Enabled = (args.SelectedMap != null);
-                    this.buttonMapRemove.Enabled = (args.SelectedMap != null);
-                    this.buttonMapEdit.Enabled = (args.SelectedMap != null);
-                });
-            }
-            this.controlViewSizeButtonMaps.DataView = this.mapsView;
-            */
+                this.buttonInfoMap.Enabled = (args.SelectedData != null);
+                this.buttonRemoveMap.Enabled = (args.SelectedData != null);
+                this.buttonEditMap.Enabled = (args.SelectedData != null);
+            });
+            mapSizeButton.DataView = this.mapsView;
         }
 
         /// <summary>
@@ -152,7 +165,9 @@ namespace SemestralProject.Forms
             this.Hide();
             form.ShowDialog();
             this.isView.VisibleData = this.Context.DataStorage.InformationSystems.OfType<AbstractIconData>().ToList();
+            this.mapsView.VisibleData = this.Context.DataStorage.Maps.OfType<AbstractPictureData>().ToList(); 
         }
+        
 
         private void buttonInfoIS_Click(object sender, EventArgs e)
         {
@@ -164,41 +179,15 @@ namespace SemestralProject.Forms
 
         private void buttonRemoveIS_Click(object sender, EventArgs e)
         {
-            /*
-            if (this.isView?.SelectedSystem != null)
+            if (this.isView.SelectedData != null)
             {
-                if (MessageBox.Show(
-                    "Opravdu chcete odstranit informační systém " + this.isView.SelectedSystem.Name + " ?" + Environment.NewLine + "Tato akce je nevratná.",
-                    "Smazat vybraný IS",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question,
-                    MessageBoxDefaultButton.Button2
-                    ) == DialogResult.Yes)
-                {
-                    InformationSystemsHandler systemsHandler = InformationSystemsHandler.Instance;
-                    systemsHandler.RemoveInformationSystem(this.isView.SelectedSystem);
-                    this.isView.RefreshView();
-                }
+                this.informationSystemsController.Remove(this.isView.SelectedData);
             }
-            */
         }
 
         private void buttonDeleteIS_Click(object sender, EventArgs e)
         {
-            /*
-            if (MessageBox.Show(
-                    "Opravdu chcete odstranit všechny informační systémy? Bude odstraněno " + this.isView?.SystemsCount + " informačních systémů." + Environment.NewLine + "Tato akce je nevratná.",
-                    "Smazat všechny IS",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question,
-                    MessageBoxDefaultButton.Button2
-                ) == DialogResult.Yes)
-            {
-                InformationSystemsHandler systemsHandler = InformationSystemsHandler.Instance;
-                systemsHandler.DeleteSystems();
-                this.isView?.RefreshView();
-            }
-            */
+            this.informationSystemsController.Delete();
         }
 
         private void buttonEditIS_Click(object sender, EventArgs e)
@@ -212,118 +201,16 @@ namespace SemestralProject.Forms
 
         private void buttonISSearch_Click(object sender, EventArgs e)
         {
-            /*
-            if (this.isView != null)
-            {
-                this.isView.Search = this.textBoxISSearch.Text;
-                this.buttonISCancelSearch.Enabled = true;
-            }
-            */
-
+            this.isView.VisibleData = this.informationSystemsController.Search(this.textBoxISSearch.Text).OfType<AbstractIconData>().ToList();
+            this.buttonISCancelSearch.Enabled = true;
         }
 
         private void buttonISCancelSearch_Click(object sender, EventArgs e)
         {
-            /*
-            if (this.isView != null)
-            {
-                this.isView.Search = null;
-                this.isView.RefreshView();
-                this.buttonISCancelSearch.Enabled = false;
-            }
-            */
+            this.isView.VisibleData = this.Context.DataStorage.InformationSystems.OfType<AbstractIconData>().ToList();
+            this.buttonISCancelSearch.Enabled = false;
+            this.textBoxISSearch.Text = string.Empty;
         }
 
-        private void buttonMapAdd_Click(object sender, EventArgs e)
-        {
-            /*
-            FormAddMap dialog = new FormAddMap();
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                MapsHandler handler = MapsHandler.Instance;
-                handler.CreateMap(dialog.MapName, dialog.MapDescription, dialog.MapPicture);
-                this.mapsView?.RefreshView();
-            }
-            */
-        }
-
-        private void buttonMapInfo_Click(object sender, EventArgs e)
-        {
-            /*
-            if (this.mapsView?.SelectedMap != null)
-            {
-                FormInfoMap dialog = new FormInfoMap(this.mapsView?.SelectedMap);
-                dialog.ShowDialog();
-            }
-            */
-        }
-
-        private void buttonMapEdit_Click(object sender, EventArgs e)
-        {
-            /*
-            if (this.mapsView?.SelectedMap != null)
-            {
-                FormEditMap dialog = new FormEditMap(this.mapsView.SelectedMap);
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    MapsHandler handler = MapsHandler.Instance;
-                    if (dialog.MapName != null && dialog.MapDescription != null && dialog.MapPicture != null)
-                    {
-                        handler.UpdateMap(this.mapsView.SelectedMap, dialog.MapName, dialog.MapDescription, dialog.MapPicture);
-                        this.mapsView.RefreshView();
-                    }
-                }
-            }
-            */
-        }
-
-        private void buttonMapRemove_Click(object sender, EventArgs e)
-        {
-            /*
-            if (this.mapsView?.SelectedMap != null)
-            {
-                if (MessageBox.Show("Opravdu chcete odstranit oblast " + this.mapsView.SelectedMap.Name + "?" + Environment.NewLine + "Tato akce je nevratná.", "Odstranit oblast", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-                    MapsHandler handler = MapsHandler.Instance;
-                    handler.RemoveMap(this.mapsView.SelectedMap);
-                    this.mapsView.RefreshView();
-                }
-            }
-            */
-        }
-
-        private void buttonMapDelete_Click(object sender, EventArgs e)
-        {
-            /*
-            if (MessageBox.Show("Opravdu chcete odstranit všechny oblasti?" + Environment.NewLine + "Počet oblastí k odstranění: " + this.mapsView?.MapsCount + Environment.NewLine + "Tato akce je nevratná.", "Smazat všechny oblasti", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-            {
-                MapsHandler handler = MapsHandler.Instance;
-                handler.DeleteMaps();
-                this.mapsView?.RefreshView();
-            }
-            */
-        }
-
-        private void buttonMapSearch_Click(object sender, EventArgs e)
-        {
-            /*
-            if (this.mapsView != null)
-            {
-                this.mapsView.Search = this.textBoxMapSearch.Text;
-                this.buttonMapCancelSearch.Enabled = true;
-            }
-            */
-        }
-
-        private void buttonMapCancelSearch_Click(object sender, EventArgs e)
-        {
-            /*
-            if (this.mapsView != null)
-            {
-                this.mapsView.Search = null;
-                this.buttonMapCancelSearch.Enabled = false;
-            }
-            */
-        }
     }
 }

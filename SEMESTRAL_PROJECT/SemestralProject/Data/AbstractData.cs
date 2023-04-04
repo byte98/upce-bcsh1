@@ -12,6 +12,11 @@ namespace SemestralProject.Data
     internal abstract class AbstractData
     {
         /// <summary>
+        /// Flag, whether during searching description will be also checked (<c>TRUE</c>) or not (<c>FALSE</c>)
+        /// </summary>
+        private const bool CheckDescription = true;
+
+        /// <summary>
         /// Identifier of data
         /// </summary>
         public string Id { get; init; }
@@ -71,6 +76,45 @@ namespace SemestralProject.Data
             this.Name = name;
             this.Description = description;
             this.Updated = DateTime.Now;
+        }
+
+        /// <summary>
+        /// Checks, whether data matches searched phrase
+        /// </summary>
+        /// <param name="phrase">Searched phrase</param>
+        /// <returns><c>TRUE</c>, if data matches searched phrase, <c>FALSE</c> otherwise</returns>
+        public virtual bool Matches(string phrase)
+        {
+            bool reti = false;
+            Func<string, string> transformString = new Func<string, string>((string input) =>
+            {
+                StringBuilder reti = new StringBuilder();
+                input = input.Trim().ToLower();
+                foreach(char c in input)
+                {
+                    if (char.IsPunctuation(c) == false && char.IsWhiteSpace(c) == false)
+                    {
+                        reti.Append(c);
+                    }
+                }
+                return reti.ToString();
+            });
+            if (transformString(this.Name).Contains(transformString(phrase)))
+            {
+                reti = true;
+            }
+            else if (AbstractData.CheckDescription == true)
+            {
+                foreach(string word in this.Description.Split(" "))
+                {
+                    if (transformString(word).Contains(transformString(phrase)))
+                    {
+                        reti = true;
+                        break;
+                    }
+                }
+            }
+            return reti;
         }
     }
 }

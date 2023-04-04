@@ -33,5 +33,10 @@ namespace SemestralProject.Visual
         /// Event triggered when selected data has changed
         /// </summary>
         public event SelectedDataChangedEventHandler? SelectedDataChanged;
+
+        /// <summary>
+        /// Actually selected data
+        /// </summary>
+        public string? SelectedData { get;}
     }
 }
