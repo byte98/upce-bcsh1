@@ -13,6 +13,9 @@ using System.Windows.Forms;
 
 namespace SemestralProject.Forms
 {
+    /// <summary>
+    /// Class which represents control used to create and edit data with pictures
+    /// </summary>
     internal partial class ControlDataPicture : UserControl, IControl
     {
         /// <summary>
@@ -98,7 +101,7 @@ namespace SemestralProject.Forms
                 {
                     this.DataPicture = this.Context.FileStorage.GetPictureChecked(dialog.SelectedPicture);
                 }
-                this.buttonPicture.Image = this.DataPicture?.GetImage();
+                this.buttonPicture.BackgroundImage = this.DataPicture?.GetImage();
             }
         }
     }

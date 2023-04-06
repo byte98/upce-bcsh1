@@ -1,6 +1,7 @@
 ﻿using SemestralProject.Data;
 using SemestralProject.Forms;
 using SemestralProject.Forms.InformationSystems;
+using SemestralProject.Forms.Maps;
 using SemestralProject.Persistence;
 using SemestralProject.Utils;
 using System;
@@ -62,18 +63,18 @@ namespace SemestralProject.Controllers
         /// </summary>
         public void Create()
         {
-            FormISAdd dialog = new FormISAdd(context);
+            FormMapAdd dialog = new FormMapAdd(this.context);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 FormWait wait = new FormWait(() =>
                 {
-                    if (dialog.ISName != null && dialog.ISDescription != null && dialog.ISIcon != null)
+                    if (dialog.MapName != null && dialog.MapDescription != null && dialog.MapPicture != null)
                     {
-                        this.dataStorage.InformationSystems.Add(new InformationSystem(
+                        this.dataStorage.Maps.Add(new Map(
                                 this.GenerateId(),
-                                dialog.ISName,
-                                dialog.ISDescription,
-                                dialog.ISIcon
+                                dialog.MapName,
+                                dialog.MapDescription,
+                                dialog.MapPicture
                             ));
                         this.dataStorage.Save();
                     }
@@ -126,22 +127,19 @@ namespace SemestralProject.Controllers
         /// <param name="id">Identifier of map which will be edited</param>
         public void Edit(string id)
         {
-            /*
-            Map? system = this.GetById(id);
-            if (system != null)
+            Map? map = this.GetById(id);
+            if (map != null)
             {
-                FormISEdit dialog = new FormISEdit(system, this.context);
-                if (dialog.ShowDialog() == DialogResult.OK && dialog.ISName != null && dialog.ISDescription != null && dialog.ISIcon != null)
+                FormMapEdit dialog = new FormMapEdit(map, this.context);
+                if (dialog.ShowDialog() == DialogResult.OK && dialog.MapName!= null && dialog.MapDescription != null && dialog.MapPicture != null)
                 {
                     FormWait wait = new FormWait(() =>
                     {
-                        system.Edit(dialog.ISName, dialog.ISDescription, dialog.ISIcon);
+                        map.Edit(dialog.MapName, dialog.MapDescription, dialog.MapPicture);
                         this.dataStorage.Save();
                     }, this.context);
-                    wait.ShowDialog();
                 }
             }
-            */
         }
 
         /// <summary>
@@ -150,14 +148,90 @@ namespace SemestralProject.Controllers
         /// <param name="id">Identifier of information system</param>
         public void Info(string id)
         {
-            /*
-            InformationSystem? system = this.GetById(id);
-            if (system != null)
+            Map? map = this.GetById(id);
+            if (map != null )
             {
-                FormISInfo dialog = new FormISInfo(system, this.context);
+                FormMapInfo dialog = new FormMapInfo(map, this.context);
                 dialog.ShowDialog();
             }
-            */
+        }
+
+        /// <summary>
+        /// Removes map
+        /// </summary>
+        /// <param name="id">Identifier of map</param>
+        public void Remove(string id)
+        {
+            Map? map = this.GetById(id);
+            if (map != null)
+            {
+                if (MessageBox.Show(
+                        "Opravdu chcete odstranit oblast " + map.Name + "?" + Environment.NewLine +
+                        "Tato akce je nevratná.",
+                        "Ostranit oblst",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question,
+                        MessageBoxDefaultButton.Button2
+                    ) == DialogResult.Yes)
+                {
+                    FormWait wait = new FormWait(() =>
+                    {
+                        if (this.dataStorage.Maps.Contains(map))
+                        {
+                            this.dataStorage.Maps.Remove(map);
+                        }
+                        this.dataStorage.Save();
+                        map = null;
+                    }, this.context);
+                    wait.ShowDialog();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Deletes all maps
+        /// </summary>
+        public void Delete()
+        {
+            if (MessageBox.Show(
+                        "Opravdu chcete smazat všechny oblasti?" + Environment.NewLine +
+                        "Počet oblastí, které budou smazány: " + this.dataStorage.InformationSystems.Count + Environment.NewLine +
+                        "Tato akce je nevratná.",
+                        "Smazat oblasti",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question,
+                        MessageBoxDefaultButton.Button2
+                    ) == DialogResult.Yes)
+            {
+                FormWait wait = new FormWait(() =>
+                {
+                    this.dataStorage.Maps.Clear();
+                    this.dataStorage.Save();
+                }, this.context);
+                wait.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        /// Searches maps
+        /// </summary>
+        /// <param name="phrase">Phrase which will be searched</param>
+        /// <returns>List of maps which matches phrase</returns>
+        public List<Map> Search(string phrase)
+        {
+            List<Map> reti = new List<Map>();
+            FormWait wait = new FormWait(() =>
+            {
+                foreach (Map map in this.dataStorage.Maps)
+                {
+                    if (map.Matches(phrase))
+                    {
+                        reti.Add(map);
+                    }
+                }
+            }, this.context);
+            wait.ShowDialog();
+            return reti;
         }
     }
 }

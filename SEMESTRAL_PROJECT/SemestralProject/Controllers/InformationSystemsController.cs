@@ -194,10 +194,10 @@ namespace SemestralProject.Controllers
         public void Delete()
         {
             if (MessageBox.Show(
-                        "Opravdu chcete odstranit všechny informační systémy?" + Environment.NewLine +
-                        "Počet informačních sysémů, které budou odstraněny: " + this.dataStorage.InformationSystems.Count + Environment.NewLine +
+                        "Opravdu chcete smazat všechny informační systémy?" + Environment.NewLine +
+                        "Počet informačních systémů, které budou smazány: " + this.dataStorage.InformationSystems.Count + Environment.NewLine +
                         "Tato akce je nevratná.",
-                        "Ostranit informační systém",
+                        "Smazat všechny informační systémy",
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question,
                         MessageBoxDefaultButton.Button2

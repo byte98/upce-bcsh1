@@ -144,7 +144,7 @@ namespace SemestralProject.Forms
         private void buttonAddIS_Click(object sender, EventArgs e)
         {
             this.informationSystemsController.Create();
-            this.isView.RefreshView();
+            this.RefreshIsView();
         }
 
         private void FormMain_Deactivate(object sender, EventArgs e)
@@ -167,6 +167,14 @@ namespace SemestralProject.Forms
             this.isView.VisibleData = this.Context.DataStorage.InformationSystems.OfType<AbstractIconData>().ToList();
             this.mapsView.VisibleData = this.Context.DataStorage.Maps.OfType<AbstractPictureData>().ToList(); 
         }
+
+        /// <summary>
+        /// Refreshes viewer of information systems
+        /// </summary>
+        private void RefreshIsView()
+        {
+            this.isView.VisibleData = this.Context.DataStorage.InformationSystems.OfType<AbstractIconData>().ToList();
+        }
         
 
         private void buttonInfoIS_Click(object sender, EventArgs e)
@@ -182,12 +190,14 @@ namespace SemestralProject.Forms
             if (this.isView.SelectedData != null)
             {
                 this.informationSystemsController.Remove(this.isView.SelectedData);
+                this.RefreshIsView();
             }
         }
 
         private void buttonDeleteIS_Click(object sender, EventArgs e)
         {
             this.informationSystemsController.Delete();
+            this.RefreshIsView();
         }
 
         private void buttonEditIS_Click(object sender, EventArgs e)
@@ -195,7 +205,7 @@ namespace SemestralProject.Forms
             if (this.isView.SelectedData != null)
             {
                 this.informationSystemsController.Edit(this.isView.SelectedData);
-                this.isView.RefreshView();
+                this.RefreshIsView();
             }
         }
 
@@ -212,5 +222,63 @@ namespace SemestralProject.Forms
             this.textBoxISSearch.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Refresehes viewer of maps
+        /// </summary>
+        private void RefreshMapView()
+        {
+            this.mapsView.VisibleData = this.Context.DataStorage.Maps.OfType<AbstractPictureData>().ToList();
+        }
+
+        private void buttonAddMap_Click(object sender, EventArgs e)
+        {
+            this.mapsController.Create();
+            this.RefreshMapView();
+        }
+
+        private void buttonInfoMap_Click(object sender, EventArgs e)
+        {
+            if (this.mapsView.SelectedData != null)
+            {
+                this.mapsController.Info(this.mapsView.SelectedData);
+            }
+        }
+
+        private void buttonEditMap_Click(object sender, EventArgs e)
+        {
+            if (this.mapsView.SelectedData != null)
+            {
+                this.mapsController.Edit(this.mapsView.SelectedData);
+                this.RefreshMapView();
+            }
+        }
+
+        private void buttonRemoveMap_Click(object sender, EventArgs e)
+        {
+            if (this.mapsView.SelectedData != null)
+            {
+                this.mapsController.Remove(this.mapsView.SelectedData);
+                this.RefreshMapView();
+            }
+        }
+
+        private void buttonDeleteMap_Click(object sender, EventArgs e)
+        {
+            this.mapsController.Delete();
+            this.RefreshMapView();
+        }
+
+        private void buttonMapSearch_Click(object sender, EventArgs e)
+        {
+            this.mapsView.VisibleData = this.mapsController.Search(this.textBoxMapSearch.Text).OfType<AbstractPictureData>().ToList();
+            this.buttonMapCancelSearch.Enabled = true;
+        }
+
+        private void buttonMapCancelSearch_Click(object sender, EventArgs e)
+        {
+            this.RefreshMapView();
+            this.textBoxMapSearch.Text = string.Empty;
+            this.buttonMapCancelSearch.Enabled = false;
+        }
     }
 }

@@ -390,6 +390,7 @@ namespace SemestralProject.Forms
             this.buttonAddMap.Text = "Přidat oblast";
             this.buttonAddMap.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonAddMap.UseVisualStyleBackColor = true;
+            this.buttonAddMap.Click += new System.EventHandler(this.buttonAddMap_Click);
             // 
             // buttonInfoMap
             // 
@@ -404,6 +405,7 @@ namespace SemestralProject.Forms
             this.buttonInfoMap.Text = "Informace o oblasti";
             this.buttonInfoMap.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonInfoMap.UseVisualStyleBackColor = true;
+            this.buttonInfoMap.Click += new System.EventHandler(this.buttonInfoMap_Click);
             // 
             // buttonEditMap
             // 
@@ -418,6 +420,7 @@ namespace SemestralProject.Forms
             this.buttonEditMap.Text = "Upravit oblast";
             this.buttonEditMap.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonEditMap.UseVisualStyleBackColor = true;
+            this.buttonEditMap.Click += new System.EventHandler(this.buttonEditMap_Click);
             // 
             // buttonRemoveMap
             // 
@@ -432,6 +435,7 @@ namespace SemestralProject.Forms
             this.buttonRemoveMap.Text = "Smazat oblast";
             this.buttonRemoveMap.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonRemoveMap.UseVisualStyleBackColor = true;
+            this.buttonRemoveMap.Click += new System.EventHandler(this.buttonRemoveMap_Click);
             // 
             // buttonDeleteMap
             // 
@@ -445,6 +449,7 @@ namespace SemestralProject.Forms
             this.buttonDeleteMap.Text = "Smazat všechno";
             this.buttonDeleteMap.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonDeleteMap.UseVisualStyleBackColor = true;
+            this.buttonDeleteMap.Click += new System.EventHandler(this.buttonDeleteMap_Click);
             // 
             // splitterMapControls1
             // 
@@ -503,6 +508,7 @@ namespace SemestralProject.Forms
             this.buttonMapCancelSearch.Text = "Zrušit hledání";
             this.buttonMapCancelSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonMapCancelSearch.UseVisualStyleBackColor = true;
+            this.buttonMapCancelSearch.Click += new System.EventHandler(this.buttonMapCancelSearch_Click);
             // 
             // buttonMapSearch
             // 
@@ -516,6 +522,7 @@ namespace SemestralProject.Forms
             this.buttonMapSearch.Text = "Hledat";
             this.buttonMapSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonMapSearch.UseVisualStyleBackColor = true;
+            this.buttonMapSearch.Click += new System.EventHandler(this.buttonMapSearch_Click);
             // 
             // splitterMapControls3
             // 
