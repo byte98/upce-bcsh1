@@ -19,3 +19,6 @@
 [submodule "HW07"]
 	path = HW07
 	url = https://github.com/upce-fei-course-icshp-bcsh1-2223/exercise-07-byte98.git
+[submodule "HW08"]
+	path = HW08
+	url = https://github.com/upce-fei-course-icshp-bcsh1-2223/exercise-08-byte98.git
