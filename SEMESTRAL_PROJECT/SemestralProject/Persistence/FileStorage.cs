@@ -28,7 +28,12 @@ namespace SemestralProject.Persistence
             /// <summary>
             /// Icon of map
             /// </summary>
-            MAP
+            MAP,
+
+            /// <summary>
+            /// Icon of manufacturer
+            /// </summary>
+            MANUFACTURER
         }
 
         /// <summary>
@@ -50,6 +55,11 @@ namespace SemestralProject.Persistence
         /// Name of file with default icon of map
         /// </summary>
         private const string DefaultMapIcon = "__DEFAULT_MAP";
+
+        /// <summary>
+        /// Name of file with default icon of manufacturer
+        /// </summary>
+        private const string DefaultManufacturerIcon = "__DEFAULT_MANUFACTURER";
 
         /// <summary>
         /// Name of file with default picture
@@ -223,8 +233,9 @@ namespace SemestralProject.Persistence
             Icon reti = new Icon(FileStorage.DefaultIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon + FileStorage.DefaultExt);
             switch (type)
             {
-                case DefaultIconType.IS:  reti = new Icon(FileStorage.DefaultISIcon,  this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultISIcon + FileStorage.DefaultExt); break;
-                case DefaultIconType.MAP: reti = new Icon(FileStorage.DefaultMapIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultMapIcon + FileStorage.DefaultExt); break;
+                case DefaultIconType.IS:           reti = new Icon(FileStorage.DefaultISIcon,  this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultISIcon + FileStorage.DefaultExt);           break;
+                case DefaultIconType.MAP:          reti = new Icon(FileStorage.DefaultMapIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultMapIcon + FileStorage.DefaultExt);          break;
+                case DefaultIconType.MANUFACTURER: reti = new Icon(FileStorage.DefaultMapIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultManufacturerIcon + FileStorage.DefaultExt); break;
             }
             return reti;
         }
@@ -261,7 +272,7 @@ namespace SemestralProject.Persistence
         private string GenerateUniqueIcon()
         {
             Random random = new Random();
-            int length = random.Next(FileStorage.NameMin, FileStorage.NameMax + 1);
+            uint length = (uint)random.Next(FileStorage.NameMin, FileStorage.NameMax + 1);
             string reti;
             do
             {

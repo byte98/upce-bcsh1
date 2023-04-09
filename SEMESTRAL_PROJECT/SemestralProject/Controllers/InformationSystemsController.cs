@@ -14,48 +14,13 @@ namespace SemestralProject.Controllers
     /// <summary>
     /// Controller of information systems
     /// </summary>
-    internal class InformationSystemsController
+    internal class InformationSystemsController: AbstractController
     {
-        /// <summary>
-        /// Alphabet with valid characters for identifiers
-        /// </summary>
-        private const string IdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTVUWXYZ";
-
-        /// <summary>
-        /// Minimal length of identifiers
-        /// </summary>
-        private const int IdMinLength = 8;
-
-        /// <summary>
-        /// Maximal length of identifiers
-        /// </summary>
-        private const int IdMaxLength = 16;
-
-        /// <summary>
-        /// Reference to storage of files
-        /// </summary>
-        private readonly FileStorage fileStorage;
-
-        /// <summary>
-        /// Reference to storage of data
-        /// </summary>
-        private readonly DataStorage dataStorage;
-
-        /// <summary>
-        /// Wrapper of all programs resources
-        /// </summary>
-        private readonly Context context;
-
         /// <summary>
         /// Creates new controller of information systems
         /// </summary>
         /// <param name="context">Wrapper of all programs resources</param>
-        public InformationSystemsController(Context context)
-        {
-            this.context = context;
-            this.fileStorage = this.context.FileStorage;
-            this.dataStorage = this.context.DataStorage;
-        }
+        public InformationSystemsController(Context context) : base(context) { }
 
         /// <summary>
         /// Performs creation of new information system
@@ -69,13 +34,13 @@ namespace SemestralProject.Controllers
                 {
                     if (dialog.ISName != null && dialog.ISDescription != null && dialog.ISIcon != null)
                     {
-                        this.dataStorage.InformationSystems.Add(new InformationSystem(
+                        this.context.DataStorage.InformationSystems.Add(new InformationSystem(
                                 this.GenerateId(),
                                 dialog.ISName,
                                 dialog.ISDescription,
                                 dialog.ISIcon
                             ));
-                        this.dataStorage.Save();
+                        this.context.DataStorage.Save();
                     }
                 }, this.context);
                 wait.ShowDialog();
@@ -91,11 +56,7 @@ namespace SemestralProject.Controllers
             string reti = string.Empty;
             do
             {
-                reti = StringUtils.Random(
-                        InformationSystemsController.IdAlphabet,
-                        InformationSystemsController.IdMinLength,
-                        InformationSystemsController.IdMaxLength
-                    );
+                reti = this.GenerateIdentifier("IS_");
             }
             while(this.GetById(reti) != null );
             return reti;
@@ -109,7 +70,7 @@ namespace SemestralProject.Controllers
         public InformationSystem? GetById(string id)
         {
             InformationSystem? reti = null;
-            foreach(InformationSystem system in this.dataStorage.InformationSystems)
+            foreach(InformationSystem system in this.context.DataStorage.InformationSystems)
             {
                 if (system.Id == id)
                 {
@@ -135,7 +96,7 @@ namespace SemestralProject.Controllers
                     FormWait wait = new FormWait(() =>
                     {
                         system.Edit(dialog.ISName, dialog.ISDescription, dialog.ISIcon);
-                        this.dataStorage.Save();
+                        this.context.DataStorage.Save();
                     }, this.context);
                     wait.ShowDialog();
                 }
@@ -176,11 +137,11 @@ namespace SemestralProject.Controllers
                 {
                     FormWait wait = new FormWait(() =>
                     {
-                        if (this.dataStorage.InformationSystems.Contains(system))
+                        if (this.context.DataStorage.InformationSystems.Contains(system))
                         {
-                            this.dataStorage.InformationSystems.Remove(system);
+                            this.context.DataStorage.InformationSystems.Remove(system);
                         }
-                        this.dataStorage.Save();
+                        this.context.DataStorage.Save();
                         system = null;
                     }, this.context);
                     wait.ShowDialog();
@@ -195,7 +156,7 @@ namespace SemestralProject.Controllers
         {
             if (MessageBox.Show(
                         "Opravdu chcete smazat všechny informační systémy?" + Environment.NewLine +
-                        "Počet informačních systémů, které budou smazány: " + this.dataStorage.InformationSystems.Count + Environment.NewLine +
+                        "Počet informačních systémů, které budou smazány: " + this.context.DataStorage.InformationSystems.Count + Environment.NewLine +
                         "Tato akce je nevratná.",
                         "Smazat všechny informační systémy",
                         MessageBoxButtons.YesNo,
@@ -205,8 +166,8 @@ namespace SemestralProject.Controllers
             {
                 FormWait wait = new FormWait(() =>
                 {
-                    this.dataStorage.InformationSystems.Clear();
-                    this.dataStorage.Save();
+                    this.context.DataStorage.InformationSystems.Clear();
+                    this.context.DataStorage.Save();
                 }, this.context);
                 wait.ShowDialog();
             }
@@ -222,7 +183,7 @@ namespace SemestralProject.Controllers
             List<InformationSystem> reti = new List<InformationSystem>();
             FormWait wait = new FormWait(() =>
             {
-                foreach (InformationSystem system in this.dataStorage.InformationSystems)
+                foreach (InformationSystem system in this.context.DataStorage.InformationSystems)
                 {
                     if (system.Matches(phrase))
                     {

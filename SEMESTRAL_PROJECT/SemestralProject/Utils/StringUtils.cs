@@ -18,7 +18,7 @@ namespace SemestralProject.Utils
         /// <param name="alphabet">Alphabet used to generate string</param>
         /// <param name="length">Desired length of string</param>
         /// <returns>Pseudo-randomly generated string</returns>
-        public static string Random(string alphabet, int length)
+        public static string Random(string alphabet, uint length)
         {
             StringBuilder reti = new StringBuilder();
             Random random = new Random();
@@ -36,10 +36,10 @@ namespace SemestralProject.Utils
         /// <param name="minLength">Minimal length of string</param>
         /// <param name="maxLength">Maximal length of string</param>
         /// <returns>Pseudo-randomly generated string</returns>
-        public static string Random(string alphabet, int minLength, int maxLength)
+        public static string Random(string alphabet, uint minLength, uint maxLength)
         {
             Random random = new Random();
-            return StringUtils.Random(alphabet, random.Next(minLength, maxLength + 1));
+            return StringUtils.Random(alphabet, (uint)random.Next((int)minLength, (int)maxLength + 1));
         }
     }
 }

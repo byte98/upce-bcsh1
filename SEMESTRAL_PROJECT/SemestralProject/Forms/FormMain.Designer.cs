@@ -68,6 +68,22 @@ namespace SemestralProject.Forms
             this.buttonMapCancelSearch = new System.Windows.Forms.Button();
             this.buttonMapSearch = new System.Windows.Forms.Button();
             this.splitterMapControls3 = new System.Windows.Forms.Splitter();
+            this.tabPageManufacturers = new System.Windows.Forms.TabPage();
+            this.panelManufacturerContent = new System.Windows.Forms.Panel();
+            this.panelManufacturerControls = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonAddManufacturer = new System.Windows.Forms.Button();
+            this.buttonInfoManufacturer = new System.Windows.Forms.Button();
+            this.buttonEditManufacturer = new System.Windows.Forms.Button();
+            this.buttonRemoveManufacturer = new System.Windows.Forms.Button();
+            this.buttonDeleteManufacturer = new System.Windows.Forms.Button();
+            this.splitterManufacturerControls1 = new System.Windows.Forms.Splitter();
+            this.panelManufacturerSizeControl = new System.Windows.Forms.Panel();
+            this.splitterManufacturerControls2 = new System.Windows.Forms.Splitter();
+            this.panelManufacturerSearch = new System.Windows.Forms.Panel();
+            this.textBoxManufacturerSearch = new System.Windows.Forms.TextBox();
+            this.buttonManufacturerCancelSearch = new System.Windows.Forms.Button();
+            this.buttonManufacturerSearch = new System.Windows.Forms.Button();
+            this.splitterManufacturerControls3 = new System.Windows.Forms.Splitter();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
             this.panelISControls.SuspendLayout();
@@ -76,6 +92,9 @@ namespace SemestralProject.Forms
             this.tabPageMaps.SuspendLayout();
             this.panelMapsControls.SuspendLayout();
             this.panelMapSearch.SuspendLayout();
+            this.tabPageManufacturers.SuspendLayout();
+            this.panelManufacturerControls.SuspendLayout();
+            this.panelManufacturerSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelItemsControl
@@ -102,6 +121,7 @@ namespace SemestralProject.Forms
             this.radioButtonManufacturers.TabStop = true;
             this.radioButtonManufacturers.Text = "VÝROBCI";
             this.radioButtonManufacturers.UseVisualStyleBackColor = true;
+            this.radioButtonManufacturers.CheckedChanged += new System.EventHandler(this.PanelItemsControlItemClicked);
             // 
             // radioButtonMaps
             // 
@@ -332,6 +352,7 @@ namespace SemestralProject.Forms
             // 
             this.tabControlContent.Controls.Add(this.tabPageIS);
             this.tabControlContent.Controls.Add(this.tabPageMaps);
+            this.tabControlContent.Controls.Add(this.tabPageManufacturers);
             this.tabControlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlContent.Location = new System.Drawing.Point(0, 29);
             this.tabControlContent.Name = "tabControlContent";
@@ -533,6 +554,194 @@ namespace SemestralProject.Forms
             this.splitterMapControls3.TabIndex = 9;
             this.splitterMapControls3.TabStop = false;
             // 
+            // tabPageManufacturers
+            // 
+            this.tabPageManufacturers.Controls.Add(this.panelManufacturerContent);
+            this.tabPageManufacturers.Controls.Add(this.panelManufacturerControls);
+            this.tabPageManufacturers.Location = new System.Drawing.Point(4, 29);
+            this.tabPageManufacturers.Name = "tabPageManufacturers";
+            this.tabPageManufacturers.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageManufacturers.Size = new System.Drawing.Size(1340, 659);
+            this.tabPageManufacturers.TabIndex = 2;
+            this.tabPageManufacturers.Text = "VÝROBCI";
+            this.tabPageManufacturers.UseVisualStyleBackColor = true;
+            // 
+            // panelManufacturerContent
+            // 
+            this.panelManufacturerContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelManufacturerContent.Location = new System.Drawing.Point(3, 110);
+            this.panelManufacturerContent.Name = "panelManufacturerContent";
+            this.panelManufacturerContent.Size = new System.Drawing.Size(1334, 546);
+            this.panelManufacturerContent.TabIndex = 3;
+            // 
+            // panelManufacturerControls
+            // 
+            this.panelManufacturerControls.Controls.Add(this.buttonAddManufacturer);
+            this.panelManufacturerControls.Controls.Add(this.buttonInfoManufacturer);
+            this.panelManufacturerControls.Controls.Add(this.buttonEditManufacturer);
+            this.panelManufacturerControls.Controls.Add(this.buttonRemoveManufacturer);
+            this.panelManufacturerControls.Controls.Add(this.buttonDeleteManufacturer);
+            this.panelManufacturerControls.Controls.Add(this.splitterManufacturerControls1);
+            this.panelManufacturerControls.Controls.Add(this.panelManufacturerSizeControl);
+            this.panelManufacturerControls.Controls.Add(this.splitterManufacturerControls2);
+            this.panelManufacturerControls.Controls.Add(this.panelManufacturerSearch);
+            this.panelManufacturerControls.Controls.Add(this.splitterManufacturerControls3);
+            this.panelManufacturerControls.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelManufacturerControls.Location = new System.Drawing.Point(3, 3);
+            this.panelManufacturerControls.Name = "panelManufacturerControls";
+            this.panelManufacturerControls.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.panelManufacturerControls.Size = new System.Drawing.Size(1334, 107);
+            this.panelManufacturerControls.TabIndex = 2;
+            // 
+            // buttonAddManufacturer
+            // 
+            this.buttonAddManufacturer.FlatAppearance.BorderSize = 0;
+            this.buttonAddManufacturer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddManufacturer.Image = global::SemestralProject.Resources.manufacturers_add;
+            this.buttonAddManufacturer.Location = new System.Drawing.Point(3, 3);
+            this.buttonAddManufacturer.Name = "buttonAddManufacturer";
+            this.buttonAddManufacturer.Size = new System.Drawing.Size(94, 94);
+            this.buttonAddManufacturer.TabIndex = 0;
+            this.buttonAddManufacturer.Text = "Přidat výrobce";
+            this.buttonAddManufacturer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonAddManufacturer.UseVisualStyleBackColor = true;
+            this.buttonAddManufacturer.Click += new System.EventHandler(this.buttonAddManufacturer_Click);
+            // 
+            // buttonInfoManufacturer
+            // 
+            this.buttonInfoManufacturer.Enabled = false;
+            this.buttonInfoManufacturer.FlatAppearance.BorderSize = 0;
+            this.buttonInfoManufacturer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonInfoManufacturer.Image = global::SemestralProject.Resources.manufacturers_info;
+            this.buttonInfoManufacturer.Location = new System.Drawing.Point(103, 3);
+            this.buttonInfoManufacturer.Name = "buttonInfoManufacturer";
+            this.buttonInfoManufacturer.Size = new System.Drawing.Size(94, 94);
+            this.buttonInfoManufacturer.TabIndex = 1;
+            this.buttonInfoManufacturer.Text = "Informace o výrobci";
+            this.buttonInfoManufacturer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonInfoManufacturer.UseVisualStyleBackColor = true;
+            // 
+            // buttonEditManufacturer
+            // 
+            this.buttonEditManufacturer.Enabled = false;
+            this.buttonEditManufacturer.FlatAppearance.BorderSize = 0;
+            this.buttonEditManufacturer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEditManufacturer.Image = global::SemestralProject.Resources.manufacturers_edit;
+            this.buttonEditManufacturer.Location = new System.Drawing.Point(203, 3);
+            this.buttonEditManufacturer.Name = "buttonEditManufacturer";
+            this.buttonEditManufacturer.Size = new System.Drawing.Size(94, 94);
+            this.buttonEditManufacturer.TabIndex = 5;
+            this.buttonEditManufacturer.Text = "Upravit výrobce";
+            this.buttonEditManufacturer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonEditManufacturer.UseVisualStyleBackColor = true;
+            // 
+            // buttonRemoveManufacturer
+            // 
+            this.buttonRemoveManufacturer.Enabled = false;
+            this.buttonRemoveManufacturer.FlatAppearance.BorderSize = 0;
+            this.buttonRemoveManufacturer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRemoveManufacturer.Image = global::SemestralProject.Resources.manufacturers_remove;
+            this.buttonRemoveManufacturer.Location = new System.Drawing.Point(303, 3);
+            this.buttonRemoveManufacturer.Name = "buttonRemoveManufacturer";
+            this.buttonRemoveManufacturer.Size = new System.Drawing.Size(94, 94);
+            this.buttonRemoveManufacturer.TabIndex = 2;
+            this.buttonRemoveManufacturer.Text = "Smazat výrobce";
+            this.buttonRemoveManufacturer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonRemoveManufacturer.UseVisualStyleBackColor = true;
+            // 
+            // buttonDeleteManufacturer
+            // 
+            this.buttonDeleteManufacturer.FlatAppearance.BorderSize = 0;
+            this.buttonDeleteManufacturer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDeleteManufacturer.Image = global::SemestralProject.Resources.manufacturers_delete;
+            this.buttonDeleteManufacturer.Location = new System.Drawing.Point(403, 3);
+            this.buttonDeleteManufacturer.Name = "buttonDeleteManufacturer";
+            this.buttonDeleteManufacturer.Size = new System.Drawing.Size(94, 94);
+            this.buttonDeleteManufacturer.TabIndex = 3;
+            this.buttonDeleteManufacturer.Text = "Smazat všechno";
+            this.buttonDeleteManufacturer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonDeleteManufacturer.UseVisualStyleBackColor = true;
+            // 
+            // splitterManufacturerControls1
+            // 
+            this.splitterManufacturerControls1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterManufacturerControls1.Location = new System.Drawing.Point(503, 3);
+            this.splitterManufacturerControls1.Name = "splitterManufacturerControls1";
+            this.splitterManufacturerControls1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.splitterManufacturerControls1.Size = new System.Drawing.Size(1, 104);
+            this.splitterManufacturerControls1.TabIndex = 4;
+            this.splitterManufacturerControls1.TabStop = false;
+            // 
+            // panelManufacturerSizeControl
+            // 
+            this.panelManufacturerSizeControl.Location = new System.Drawing.Point(510, 3);
+            this.panelManufacturerSizeControl.Name = "panelManufacturerSizeControl";
+            this.panelManufacturerSizeControl.Size = new System.Drawing.Size(188, 94);
+            this.panelManufacturerSizeControl.TabIndex = 10;
+            // 
+            // splitterManufacturerControls2
+            // 
+            this.splitterManufacturerControls2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterManufacturerControls2.Location = new System.Drawing.Point(704, 3);
+            this.splitterManufacturerControls2.Name = "splitterManufacturerControls2";
+            this.splitterManufacturerControls2.Size = new System.Drawing.Size(1, 104);
+            this.splitterManufacturerControls2.TabIndex = 8;
+            this.splitterManufacturerControls2.TabStop = false;
+            // 
+            // panelManufacturerSearch
+            // 
+            this.panelManufacturerSearch.Controls.Add(this.textBoxManufacturerSearch);
+            this.panelManufacturerSearch.Controls.Add(this.buttonManufacturerCancelSearch);
+            this.panelManufacturerSearch.Controls.Add(this.buttonManufacturerSearch);
+            this.panelManufacturerSearch.Location = new System.Drawing.Point(711, 3);
+            this.panelManufacturerSearch.Name = "panelManufacturerSearch";
+            this.panelManufacturerSearch.Size = new System.Drawing.Size(253, 104);
+            this.panelManufacturerSearch.TabIndex = 7;
+            // 
+            // textBoxManufacturerSearch
+            // 
+            this.textBoxManufacturerSearch.Location = new System.Drawing.Point(3, 3);
+            this.textBoxManufacturerSearch.Name = "textBoxManufacturerSearch";
+            this.textBoxManufacturerSearch.PlaceholderText = "Hledat";
+            this.textBoxManufacturerSearch.Size = new System.Drawing.Size(247, 27);
+            this.textBoxManufacturerSearch.TabIndex = 0;
+            // 
+            // buttonManufacturerCancelSearch
+            // 
+            this.buttonManufacturerCancelSearch.Enabled = false;
+            this.buttonManufacturerCancelSearch.FlatAppearance.BorderSize = 0;
+            this.buttonManufacturerCancelSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonManufacturerCancelSearch.Image = global::SemestralProject.Resources.search_cancel;
+            this.buttonManufacturerCancelSearch.Location = new System.Drawing.Point(129, 36);
+            this.buttonManufacturerCancelSearch.Name = "buttonManufacturerCancelSearch";
+            this.buttonManufacturerCancelSearch.Size = new System.Drawing.Size(120, 58);
+            this.buttonManufacturerCancelSearch.TabIndex = 1;
+            this.buttonManufacturerCancelSearch.Text = "Zrušit hledání";
+            this.buttonManufacturerCancelSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonManufacturerCancelSearch.UseVisualStyleBackColor = true;
+            // 
+            // buttonManufacturerSearch
+            // 
+            this.buttonManufacturerSearch.FlatAppearance.BorderSize = 0;
+            this.buttonManufacturerSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonManufacturerSearch.Image = global::SemestralProject.Resources.search;
+            this.buttonManufacturerSearch.Location = new System.Drawing.Point(3, 36);
+            this.buttonManufacturerSearch.Name = "buttonManufacturerSearch";
+            this.buttonManufacturerSearch.Size = new System.Drawing.Size(120, 58);
+            this.buttonManufacturerSearch.TabIndex = 1;
+            this.buttonManufacturerSearch.Text = "Hledat";
+            this.buttonManufacturerSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonManufacturerSearch.UseVisualStyleBackColor = true;
+            // 
+            // splitterManufacturerControls3
+            // 
+            this.splitterManufacturerControls3.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterManufacturerControls3.Location = new System.Drawing.Point(970, 3);
+            this.splitterManufacturerControls3.Name = "splitterManufacturerControls3";
+            this.splitterManufacturerControls3.Size = new System.Drawing.Size(1, 104);
+            this.splitterManufacturerControls3.TabIndex = 9;
+            this.splitterManufacturerControls3.TabStop = false;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -557,6 +766,10 @@ namespace SemestralProject.Forms
             this.panelMapsControls.ResumeLayout(false);
             this.panelMapSearch.ResumeLayout(false);
             this.panelMapSearch.PerformLayout();
+            this.tabPageManufacturers.ResumeLayout(false);
+            this.panelManufacturerControls.ResumeLayout(false);
+            this.panelManufacturerSearch.ResumeLayout(false);
+            this.panelManufacturerSearch.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -599,5 +812,21 @@ namespace SemestralProject.Forms
         private Button buttonMapSearch;
         private Splitter splitterMapControls3;
         private Panel panelMapContent;
+        private TabPage tabPageManufacturers;
+        private Panel panelManufacturerContent;
+        private FlowLayoutPanel panelManufacturerControls;
+        private Button buttonAddManufacturer;
+        private Button buttonInfoManufacturer;
+        private Button buttonEditManufacturer;
+        private Button buttonRemoveManufacturer;
+        private Button buttonDeleteManufacturer;
+        private Splitter splitterManufacturerControls1;
+        private Panel panelManufacturerSizeControl;
+        private Splitter splitterManufacturerControls2;
+        private Panel panelManufacturerSearch;
+        private TextBox textBoxManufacturerSearch;
+        private Button buttonManufacturerCancelSearch;
+        private Button buttonManufacturerSearch;
+        private Splitter splitterManufacturerControls3;
     }
 }

@@ -181,6 +181,21 @@
   <data name="is_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\is_remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="manufacturers_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\manufacturers_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="manufacturers_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\manufacturers_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="manufacturers_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\manufacturers_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="manufacturers_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\manufacturers_info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="manufacturers_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\manufacturers_remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="map_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\map_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

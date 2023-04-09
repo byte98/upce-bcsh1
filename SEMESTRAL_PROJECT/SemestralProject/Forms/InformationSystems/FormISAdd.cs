@@ -34,9 +34,13 @@ namespace SemestralProject.Forms.InformationSystems
         /// </summary>
         public Visual.Icon? ISIcon => this.content.DataIcon;
 
+        /// <summary>
+        /// Creates new dialog for adding new information system
+        /// </summary>
+        /// <param name="context">Wrapper of all system resources</param>
         public FormISAdd(Context context): base("Přidat nový IS", "Nový informační systém", SemestralProject.Resources.is_add, context)
         {
-            this.content = new ControlDataIcon(context);
+            this.content = new ControlDataIcon(context, Persistence.FileStorage.DefaultIconType.IS);
             this.AddControl(content);
         }
     }

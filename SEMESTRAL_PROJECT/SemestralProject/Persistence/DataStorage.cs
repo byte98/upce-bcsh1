@@ -1,10 +1,12 @@
 ﻿using SemestralProject.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 using System.Xml;
 
 namespace SemestralProject.Persistence
@@ -44,6 +46,11 @@ namespace SemestralProject.Persistence
             /// XML element holding all maps
             /// </summary>
             public const string Maps = "MAPS";
+
+            /// <summary>
+            /// XML element holding all manufacturers
+            /// </summary>
+            public const string Manufacturers = "MANUFACTURERS";
 
             /// <summary>
             /// Class which holds names of XML elements used to store information systems
@@ -126,6 +133,47 @@ namespace SemestralProject.Persistence
                 /// </summary>
                 public const string Updated = "UPDATED";
             }
+
+            /// <summary>
+            /// Class which holds definitions of XML elements for storing manufacturers
+            /// </summary>
+            internal static class Manufacturer
+            {
+                /// <summary>
+                /// Root element holding all information about manufacturer
+                /// </summary>
+                public const string _Root = "MANUFACTURER";
+
+                /// <summary>
+                /// XML element holding identifier of manufacturer
+                /// </summary>
+                public const string Id = "ID";
+
+                /// <summary>
+                /// XML element holding name of manufacturer
+                /// </summary>
+                public const string Name = "NAME";
+
+                /// <summary>
+                /// XML element holding desription of manufacturer
+                /// </summary>
+                public const string Description = "DESCRIPITON";
+
+                /// <summary>
+                /// XML element holding icon of manufacturer
+                /// </summary>
+                public const string Icon = "ICON";
+
+                /// <summary>
+                /// XML element holding date and time of creation of manufacturer
+                /// </summary>
+                public const string Created = "CREATED";
+
+                /// <summary>
+                /// XML element holding date and time of last update of manufacturer
+                /// </summary>
+                public const string Updated = "UPDATED";
+            }
         }
         #endregion
 
@@ -139,6 +187,10 @@ namespace SemestralProject.Persistence
         /// </summary>
         private const string MapFile = "MAPS.XML";
 
+        /// <summary>
+        /// File containing kind of a database with manufacturers
+        /// </summary>
+        private const string ManufacturerFile = "MANUFACTURERS.XML";
 
         /// <summary>
         /// Path to file with data storage
@@ -166,6 +218,11 @@ namespace SemestralProject.Persistence
         public List<Map> Maps { get; set; }
 
         /// <summary>
+        /// List of all available manufacturers
+        /// </summary>
+        public List<Manufacturer> Manufacturers { get; set; }
+
+        /// <summary>
         /// Creates new data storage
         /// </summary>
         /// <param name="path">Path to file with data</param>
@@ -177,6 +234,7 @@ namespace SemestralProject.Persistence
             this.path = path;
             this.InformationSystems = new List<InformationSystem>();
             this.Maps = new List<Map>();
+            this.Manufacturers = new List<Manufacturer>();
             this.fileStorage = fileStorage;
         }
 
@@ -324,6 +382,71 @@ namespace SemestralProject.Persistence
         }
 
         /// <summary>
+        /// Loads manufacturers from storage
+        /// (this needs to be called AFTER <see cref="Load"/>!)
+        /// </summary>
+        public void LoadManufacturers()
+        {
+            this.Manufacturers = new List<Manufacturer>();
+            string file = this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.ManufacturerFile;
+            if (File.Exists(file))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(file);
+                XmlElement? root = doc.DocumentElement;
+                if (root != null)
+                {
+                    foreach (XmlElement manElem in root.ChildNodes)
+                    {
+                        if (manElem.Name == DataStorage.XML.Manufacturer._Root)
+                        {
+                            XmlNodeList? idenList = manElem.GetElementsByTagName(DataStorage.XML.Manufacturer.Id);
+                            XmlNodeList? nameList = manElem.GetElementsByTagName(DataStorage.XML.Manufacturer.Name);
+                            XmlNodeList? iconList = manElem.GetElementsByTagName(DataStorage.XML.Manufacturer.Icon);
+                            XmlNodeList? descList = manElem.GetElementsByTagName(DataStorage.XML.Manufacturer.Description);
+                            XmlNodeList? credList = manElem.GetElementsByTagName(DataStorage.XML.Manufacturer.Created);
+                            XmlNodeList? updtList = manElem.GetElementsByTagName(DataStorage.XML.Manufacturer.Updated);
+                            if (
+                                    idenList != null && idenList.Count >= 1 &&
+                                    nameList != null && nameList.Count >= 1 &&
+                                    iconList != null && iconList.Count >= 1 &&
+                                    descList != null && descList.Count >= 1 &&
+                                    credList != null && credList.Count >= 1 &&
+                                    updtList != null && credList.Count >= 1
+                               )
+                            {
+                                XmlElement? idenElement = (XmlElement?)idenList[0];
+                                XmlElement? nameElement = (XmlElement?)nameList[0];
+                                XmlElement? iconElement = (XmlElement?)iconList[0];
+                                XmlElement? descElement = (XmlElement?)descList[0];
+                                XmlElement? credElement = (XmlElement?)credList[0];
+                                XmlElement? updtElement = (XmlElement?)updtList[0];
+                                if (
+                                        idenElement != null &&
+                                        nameElement != null &&
+                                        iconElement != null &&
+                                        descElement != null &&
+                                        credElement != null &&
+                                        updtElement != null
+                                   )
+                                {
+                                    this.Manufacturers.Add(new Manufacturer(
+                                        idenElement.InnerText,
+                                        nameElement.InnerText,
+                                        descElement.InnerText,
+                                        this.fileStorage.GetIcon(iconElement.InnerText, FileStorage.DefaultIconType.IS),
+                                        DateTime.ParseExact(credElement.InnerText, DataStorage.XML._Date, null),
+                                        DateTime.ParseExact(updtElement.InnerText, DataStorage.XML._Date, null)
+                                    ));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Saves information systems into XML
         /// </summary>
         private void SaveInformationSystems()
@@ -398,6 +521,43 @@ namespace SemestralProject.Persistence
         }
 
         /// <summary>
+        /// Saves manufacturers into XML
+        /// </summary>
+        private void SaveManufacturers()
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlDeclaration declaration = doc.CreateXmlDeclaration(DataStorage.XML._Version, DataStorage.XML._Charset, null);
+            XmlElement? root = doc.DocumentElement;
+            doc.InsertBefore(declaration, root);
+            XmlElement manufacturers = doc.CreateElement(string.Empty, DataStorage.XML.Manufacturers, null);
+            doc.AppendChild(manufacturers);
+            foreach(Manufacturer manufacturer in this.Manufacturers)
+            {
+                XmlElement manElem = doc.CreateElement(string.Empty, DataStorage.XML.Manufacturer._Root, string.Empty);
+                XmlElement id = doc.CreateElement(string.Empty, DataStorage.XML.Manufacturer.Id, string.Empty);
+                id.InnerText = manufacturer.Id;
+                manElem.AppendChild(id);
+                XmlElement created = doc.CreateElement(string.Empty, DataStorage.XML.Manufacturer.Created, string.Empty);
+                created.InnerText = manufacturer.Created.ToString(DataStorage.XML._Date);
+                manElem.AppendChild(created);
+                XmlElement updated = doc.CreateElement(string.Empty, DataStorage.XML.Manufacturer.Updated, string.Empty);
+                updated.InnerText = manufacturer.Updated.ToString(DataStorage.XML._Date);
+                manElem.AppendChild(updated);
+                XmlElement icon = doc.CreateElement(string.Empty, DataStorage.XML.Manufacturer.Icon, string.Empty);
+                icon.InnerText = manufacturer.Icon.Name;
+                manElem.AppendChild(icon);
+                XmlElement name = doc.CreateElement(string.Empty, DataStorage.XML.Manufacturer.Name, string.Empty);
+                name.InnerText = manufacturer.Name;
+                manElem.AppendChild(name);
+                XmlElement desc = doc.CreateElement(string.Empty, DataStorage.XML.Manufacturer.Description, string.Empty);
+                desc.InnerText = manufacturer.Description;
+                manElem.AppendChild(desc);
+                manufacturers.AppendChild(manElem);
+            }
+            doc.Save(this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.ManufacturerFile);
+        }
+
+        /// <summary>
         /// Saves content of storage
         /// </summary>
         public void Save()
@@ -408,6 +568,7 @@ namespace SemestralProject.Persistence
             }
             this.SaveInformationSystems();
             this.SaveMaps();
+            this.SaveManufacturers();
             ZipFile.CreateFromDirectory(this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB", this.path);
         }
     }

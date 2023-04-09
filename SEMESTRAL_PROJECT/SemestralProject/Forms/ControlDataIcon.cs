@@ -1,4 +1,5 @@
 ﻿using SemestralProject.Data;
+using SemestralProject.Persistence;
 using SemestralProject.Utils;
 using SemestralProject.Visual;
 using System;
@@ -66,10 +67,21 @@ namespace SemestralProject.Forms
         /// Creates new control for creating data with icons
         /// </summary>
         /// <param name="context">Wrapper of all program resources</param>
-        public ControlDataIcon(Context context)
+        private ControlDataIcon(Context context)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.Context = context;
+        }
+
+        /// <summary>
+        /// Creates new control for creating data with icons
+        /// </summary>
+        /// <param name="context">Wrapper of all program resources</param>
+        /// <param name="icon">Icon which will be visible</param>
+        public ControlDataIcon(Context context, FileStorage.DefaultIconType icon): this(context)
+        {
+            this.DataIcon = this.Context.FileStorage.GetIcon(icon);
+            this.buttonIcon.Image = this.DataIcon?.GetImage();
         }
 
         /// <summary>

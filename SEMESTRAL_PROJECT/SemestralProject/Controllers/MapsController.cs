@@ -15,48 +15,13 @@ namespace SemestralProject.Controllers
     /// <summary>
     /// Controller of maps
     /// </summary>
-    internal class MapsController
+    internal class MapsController: AbstractController
     {
-        /// <summary>
-        /// Alphabet with valid characters for identifiers
-        /// </summary>
-        private const string IdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTVUWXYZ";
-
-        /// <summary>
-        /// Minimal length of identifiers
-        /// </summary>
-        private const int IdMinLength = 8;
-
-        /// <summary>
-        /// Maximal length of identifiers
-        /// </summary>
-        private const int IdMaxLength = 16;
-
-        /// <summary>
-        /// Reference to storage of files
-        /// </summary>
-        private readonly FileStorage fileStorage;
-
-        /// <summary>
-        /// Reference to storage of data
-        /// </summary>
-        private readonly DataStorage dataStorage;
-
-        /// <summary>
-        /// Wrapper of all programs resources
-        /// </summary>
-        private readonly Context context;
-
         /// <summary>
         /// Creates new controller of maps
         /// </summary>
         /// <param name="context">Wrapper of all programs resources</param>
-        public MapsController(Context context)
-        {
-            this.context = context;
-            this.fileStorage = this.context.FileStorage;
-            this.dataStorage = this.context.DataStorage;
-        }
+        public MapsController(Context context) : base(context) { }
 
         /// <summary>
         /// Performs creation of new map
@@ -70,13 +35,13 @@ namespace SemestralProject.Controllers
                 {
                     if (dialog.MapName != null && dialog.MapDescription != null && dialog.MapPicture != null)
                     {
-                        this.dataStorage.Maps.Add(new Map(
+                        this.context.DataStorage.Maps.Add(new Map(
                                 this.GenerateId(),
                                 dialog.MapName,
                                 dialog.MapDescription,
                                 dialog.MapPicture
                             ));
-                        this.dataStorage.Save();
+                        this.context.DataStorage.Save();
                     }
                 }, this.context);
                 wait.ShowDialog();
@@ -92,11 +57,7 @@ namespace SemestralProject.Controllers
             string reti = string.Empty;
             do
             {
-                reti = StringUtils.Random(
-                        MapsController.IdAlphabet,
-                        MapsController.IdMinLength,
-                        MapsController.IdMaxLength
-                    );
+                reti = this.GenerateIdentifier("MAP_");
             }
             while(this.GetById(reti) != null );
             return reti;
@@ -110,7 +71,7 @@ namespace SemestralProject.Controllers
         public Map? GetById(string id)
         {
             Map? reti = null;
-            foreach(Map map in this.dataStorage.Maps)
+            foreach(Map map in this.context.DataStorage.Maps)
             {
                 if (map.Id == id)
                 {
@@ -136,7 +97,7 @@ namespace SemestralProject.Controllers
                     FormWait wait = new FormWait(() =>
                     {
                         map.Edit(dialog.MapName, dialog.MapDescription, dialog.MapPicture);
-                        this.dataStorage.Save();
+                        this.context.DataStorage.Save();
                     }, this.context);
                 }
             }
@@ -176,12 +137,12 @@ namespace SemestralProject.Controllers
                 {
                     FormWait wait = new FormWait(() =>
                     {
-                        if (this.dataStorage.Maps.Contains(map))
+                        if (this.context.DataStorage.Maps.Contains(map))
                         {
-                            this.dataStorage.Maps.Remove(map);
+                            this.context.DataStorage.Maps.Remove(map);
                         }
-                        this.dataStorage.Save();
-                        map = null;
+                        this.context.DataStorage.Save();
+                        map = null; 
                     }, this.context);
                     wait.ShowDialog();
                 }
@@ -195,7 +156,7 @@ namespace SemestralProject.Controllers
         {
             if (MessageBox.Show(
                         "Opravdu chcete smazat všechny oblasti?" + Environment.NewLine +
-                        "Počet oblastí, které budou smazány: " + this.dataStorage.InformationSystems.Count + Environment.NewLine +
+                        "Počet oblastí, které budou smazány: " + this.context.DataStorage.Maps.Count + Environment.NewLine +
                         "Tato akce je nevratná.",
                         "Smazat oblasti",
                         MessageBoxButtons.YesNo,
@@ -205,8 +166,8 @@ namespace SemestralProject.Controllers
             {
                 FormWait wait = new FormWait(() =>
                 {
-                    this.dataStorage.Maps.Clear();
-                    this.dataStorage.Save();
+                    this.context.DataStorage.Maps.Clear();
+                    this.context.DataStorage.Save();
                 }, this.context);
                 wait.ShowDialog();
             }
@@ -222,7 +183,7 @@ namespace SemestralProject.Controllers
             List<Map> reti = new List<Map>();
             FormWait wait = new FormWait(() =>
             {
-                foreach (Map map in this.dataStorage.Maps)
+                foreach (Map map in this.context.DataStorage.Maps)
                 {
                     if (map.Matches(phrase))
                     {

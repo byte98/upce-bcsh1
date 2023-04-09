@@ -35,7 +35,17 @@ namespace SemestralProject.Forms
         /// <summary>
         /// Viewer of maps
         /// </summary>
-        private ControlDataPictureView mapsView;
+        private readonly ControlDataPictureView mapsView;
+
+        /// <summary>
+        /// Controller of manufacturers data
+        /// </summary>
+        private readonly ManufacturersController manufacturersController;
+
+        /// <summary>
+        /// Viewer of manufacturers
+        /// </summary>
+        private readonly ControlDataIconView manView;
 
         /// <summary>
         /// Creates new main form of application
@@ -51,10 +61,13 @@ namespace SemestralProject.Forms
             this.tabControlContent.SizeMode = TabSizeMode.Fixed;
             this.isView = new ControlDataIconView(this.Context);
             this.mapsView = new ControlDataPictureView(this.Context);
+            this.manView = new ControlDataIconView(this.Context);
             this.InitializeIS();
             this.InitializeMaps();
+            this.InitializeManufacturers();
             this.informationSystemsController = new InformationSystemsController(this.Context);
             this.mapsController = new MapsController(this.Context);
+            this.manufacturersController = new ManufacturersController(this.Context);
         }
 
         /// <summary>
@@ -108,6 +121,25 @@ namespace SemestralProject.Forms
         }
 
         /// <summary>
+        /// Initializes manufacturers page
+        /// </summary>
+        private void InitializeManufacturers()
+        {
+            this.manView.Dock = DockStyle.Fill;
+            this.panelManufacturerContent.Controls.Add(this.manView);
+            ControlViewSizeButton manSizeButton = new ControlViewSizeButton(this.Context);
+            this.panelManufacturerSizeControl.Controls.Add(manSizeButton);
+            manSizeButton.Dock = DockStyle.Fill;
+            this.manView.SelectedDataChanged += new SelectedDataChangedEventHandler(delegate (object sender, SelectedDataChangedEventArgs args)
+            {
+                this.buttonInfoManufacturer.Enabled = (args.SelectedData != null);
+                this.buttonRemoveManufacturer.Enabled = (args.SelectedData != null);
+                this.buttonEditManufacturer.Enabled = (args.SelectedData != null);
+            });
+            manSizeButton.DataView = this.manView;
+        }
+
+        /// <summary>
         /// Sets correct color for selected item in top panel
         /// </summary>
         private void DisplaySelectedItem()
@@ -127,6 +159,7 @@ namespace SemestralProject.Forms
                         {
                             case "INFORMAČNÍ SYSTÉMY": this.tabControlContent.SelectedTab = this.tabPageIS; break;
                             case "OBLASTI": this.tabControlContent.SelectedTab = this.tabPageMaps; break;
+                            case "VÝROBCI": this.tabControlContent.SelectedTab = this.tabPageManufacturers; break;
                         }
                     }
                 }
@@ -166,6 +199,7 @@ namespace SemestralProject.Forms
             form.ShowDialog();
             this.isView.VisibleData = this.Context.DataStorage.InformationSystems.OfType<AbstractIconData>().ToList();
             this.mapsView.VisibleData = this.Context.DataStorage.Maps.OfType<AbstractPictureData>().ToList(); 
+            this.manView.VisibleData = this.Context.DataStorage.Manufacturers.OfType<AbstractIconData>().ToList();
         }
 
         /// <summary>
@@ -279,6 +313,20 @@ namespace SemestralProject.Forms
             this.RefreshMapView();
             this.textBoxMapSearch.Text = string.Empty;
             this.buttonMapCancelSearch.Enabled = false;
+        }
+
+        /// <summary>
+        /// Refreshes viewer of all available manufacturers
+        /// </summary>
+        private void RefreshManView()
+        {
+            this.manView.VisibleData = this.Context.DataStorage.Manufacturers.OfType<AbstractIconData>().ToList();
+        }
+
+        private void buttonAddManufacturer_Click(object sender, EventArgs e)
+        {
+            this.manufacturersController.Create();
+            this.RefreshManView();
         }
     }
 }

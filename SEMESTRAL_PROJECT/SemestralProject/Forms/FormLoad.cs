@@ -62,13 +62,16 @@ namespace SemestralProject.Forms
         /// <summary>
         /// Minimal time in sleep when loading sequence is running
         /// </summary>
-        private const int SleepMin = 200;
+        private const int SleepMin = 0;
 
         /// <summary>
         /// Maximal time in sleep when loading sequence is running
         /// </summary>
         private const int SleepMax = 1000;
 
+        /// <summary>
+        /// Wrapper of all system resources
+        /// </summary>
         public Context Context { get; init; }
 
         /// <summary>
@@ -104,8 +107,8 @@ namespace SemestralProject.Forms
         private void BuildSequence()
         {
             this.loadingSequence.Clear();
-            this.loadingSequence.Add(new LoadSequenceItem(10, "Načítám...", () => { }));
-            this.loadingSequence.Add(new LoadSequenceItem(15, "Načítám soubory...", () =>
+            this.loadingSequence.Add(new LoadSequenceItem(5, "Načítám...", () => { }));
+            this.loadingSequence.Add(new LoadSequenceItem(10, "Načítám soubory...", () =>
             {
                 this.Context.FileStorage.Load();
             }));
@@ -117,7 +120,7 @@ namespace SemestralProject.Forms
             {
                 this.Context.FileStorage.LoadPictures();
             }));
-            this.loadingSequence.Add(new LoadSequenceItem(15, "Načítám data...", () =>
+            this.loadingSequence.Add(new LoadSequenceItem(10, "Načítám data...", () =>
             {
                 this.Context.DataStorage.Load();
             }));
@@ -128,6 +131,10 @@ namespace SemestralProject.Forms
             this.loadingSequence.Add(new LoadSequenceItem(15, "Načítám oblasti...", () =>
             {
                 this.Context.DataStorage.LoadMaps();
+            }));
+            this.loadingSequence.Add(new LoadSequenceItem(15, "Načítám výrobce...", () =>
+            {
+                this.Context.DataStorage.LoadManufacturers();
             }));
         }
 
