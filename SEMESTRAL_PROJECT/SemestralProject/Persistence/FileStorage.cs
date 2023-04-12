@@ -235,7 +235,7 @@ namespace SemestralProject.Persistence
             {
                 case DefaultIconType.IS:           reti = new Icon(FileStorage.DefaultISIcon,  this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultISIcon + FileStorage.DefaultExt);           break;
                 case DefaultIconType.MAP:          reti = new Icon(FileStorage.DefaultMapIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultMapIcon + FileStorage.DefaultExt);          break;
-                case DefaultIconType.MANUFACTURER: reti = new Icon(FileStorage.DefaultMapIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultManufacturerIcon + FileStorage.DefaultExt); break;
+                case DefaultIconType.MANUFACTURER: reti = new Icon(FileStorage.DefaultManufacturerIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultManufacturerIcon + FileStorage.DefaultExt); break;
             }
             return reti;
         }

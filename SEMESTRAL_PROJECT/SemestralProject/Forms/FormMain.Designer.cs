@@ -620,6 +620,7 @@ namespace SemestralProject.Forms
             this.buttonInfoManufacturer.Text = "Informace o výrobci";
             this.buttonInfoManufacturer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonInfoManufacturer.UseVisualStyleBackColor = true;
+            this.buttonInfoManufacturer.Click += new System.EventHandler(this.buttonInfoManufacturer_Click);
             // 
             // buttonEditManufacturer
             // 
@@ -634,6 +635,7 @@ namespace SemestralProject.Forms
             this.buttonEditManufacturer.Text = "Upravit výrobce";
             this.buttonEditManufacturer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonEditManufacturer.UseVisualStyleBackColor = true;
+            this.buttonEditManufacturer.Click += new System.EventHandler(this.buttonEditManufacturer_Click);
             // 
             // buttonRemoveManufacturer
             // 
@@ -648,6 +650,7 @@ namespace SemestralProject.Forms
             this.buttonRemoveManufacturer.Text = "Smazat výrobce";
             this.buttonRemoveManufacturer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonRemoveManufacturer.UseVisualStyleBackColor = true;
+            this.buttonRemoveManufacturer.Click += new System.EventHandler(this.buttonRemoveManufacturer_Click);
             // 
             // buttonDeleteManufacturer
             // 
@@ -661,6 +664,7 @@ namespace SemestralProject.Forms
             this.buttonDeleteManufacturer.Text = "Smazat všechno";
             this.buttonDeleteManufacturer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonDeleteManufacturer.UseVisualStyleBackColor = true;
+            this.buttonDeleteManufacturer.Click += new System.EventHandler(this.buttonDeleteManufacturer_Click);
             // 
             // splitterManufacturerControls1
             // 
@@ -719,6 +723,7 @@ namespace SemestralProject.Forms
             this.buttonManufacturerCancelSearch.Text = "Zrušit hledání";
             this.buttonManufacturerCancelSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonManufacturerCancelSearch.UseVisualStyleBackColor = true;
+            this.buttonManufacturerCancelSearch.Click += new System.EventHandler(this.buttonManufacturerCancelSearch_Click);
             // 
             // buttonManufacturerSearch
             // 
@@ -732,6 +737,7 @@ namespace SemestralProject.Forms
             this.buttonManufacturerSearch.Text = "Hledat";
             this.buttonManufacturerSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonManufacturerSearch.UseVisualStyleBackColor = true;
+            this.buttonManufacturerSearch.Click += new System.EventHandler(this.buttonManufacturerSearch_Click);
             // 
             // splitterManufacturerControls3
             // 

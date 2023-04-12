@@ -1,6 +1,7 @@
 ﻿using SemestralProject.Controllers;
 using SemestralProject.Data;
 using SemestralProject.Forms;
+using SemestralProject.Forms.Manufacturers;
 using SemestralProject.Persistence;
 using SemestralProject.Utils;
 using SemestralProject.Visual;
@@ -326,6 +327,51 @@ namespace SemestralProject.Forms
         private void buttonAddManufacturer_Click(object sender, EventArgs e)
         {
             this.manufacturersController.Create();
+            this.RefreshManView();
+        }
+
+        private void buttonInfoManufacturer_Click(object sender, EventArgs e)
+        {
+            if (this.manView.SelectedData != null)
+            {
+                this.manufacturersController.Info(this.manView.SelectedData);
+            }
+        }
+
+        private void buttonEditManufacturer_Click(object sender, EventArgs e)
+        {
+            if (this.manView.SelectedData != null)
+            {
+                this.manufacturersController.Edit(this.manView.SelectedData);
+                this.RefreshManView();
+            }
+        }
+
+        private void buttonRemoveManufacturer_Click(object sender, EventArgs e)
+        {
+            if (this.manView.SelectedData != null)
+            {
+                this.manufacturersController.Remove(this.manView.SelectedData);
+                this.RefreshManView();
+            }
+        }
+
+        private void buttonDeleteManufacturer_Click(object sender, EventArgs e)
+        {
+            this.manufacturersController.Delete();
+            this.RefreshManView();
+        }
+
+        private void buttonManufacturerSearch_Click(object sender, EventArgs e)
+        {
+            this.manView.VisibleData = this.manufacturersController.Search(this.textBoxManufacturerSearch.Text).OfType<AbstractIconData>().ToList();
+            this.buttonManufacturerCancelSearch.Enabled = true;
+        }
+
+        private void buttonManufacturerCancelSearch_Click(object sender, EventArgs e)
+        {
+            this.textBoxManufacturerSearch.Text = string.Empty;
+            this.buttonManufacturerCancelSearch.Enabled = false;
             this.RefreshManView();
         }
     }

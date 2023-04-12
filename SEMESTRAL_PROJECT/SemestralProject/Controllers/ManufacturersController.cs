@@ -79,5 +79,122 @@ namespace SemestralProject.Controllers
             }
             return reti;
         }
+
+        /// <summary>
+        /// Edits manufacturer
+        /// </summary>
+        /// <param name="id">Identifier of manufacturer which will be edited</param>
+        public void Edit(string id)
+        {
+            Manufacturer? man = this.GetById(id);
+            if (man != null)
+            {
+                FormManufacturerEdit dialog = new FormManufacturerEdit(man, this.context);
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    FormWait wait = new FormWait(() =>
+                    {
+                        if (dialog.ManufacturerName != null && dialog.ManufacturerDescription != null && dialog.ManufacturerIcon != null)
+                        {
+                            man.Edit(dialog.ManufacturerName, dialog.ManufacturerDescription, dialog.ManufacturerIcon);
+                        }
+                        this.context.DataStorage.Save();
+                    }, this.context);
+                    wait.ShowDialog();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Shows information about manufacturer
+        /// </summary>
+        /// <param name="id">Identifier of manufacturer which will be edited</param>
+        public void Info(string id)
+        {
+            Manufacturer? man = this.GetById(id);
+            if (man != null)
+            {
+                FormManufacturerInfo dialog = new FormManufacturerInfo(man, this.context);
+                dialog.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        /// Removes manufacturer from system
+        /// </summary>
+        /// <param name="id">Identifier of manufacturer which will be removed</param>
+        public void Remove(string id)
+        {
+            Manufacturer? man = this.GetById(id);
+            if (man != null)
+            {
+                if (MessageBox.Show(
+                        "Opravdu chcete odstranit výrobce " + man.Name + "?" + Environment.NewLine +
+                        "Tato akce je nevratná.",
+                        "Ostranit výrobce",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question,
+                        MessageBoxDefaultButton.Button2
+                    ) == DialogResult.Yes)
+                {
+                    FormWait wait = new FormWait(() =>
+                    {
+                        if (this.context.DataStorage.Manufacturers.Contains(man))
+                        {
+                            this.context.DataStorage.Manufacturers.Remove(man);
+                        }
+                        this.context.DataStorage.Save();
+                        man = null;
+                    }, this.context);
+                    wait.ShowDialog();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Deletes all manufacturers
+        /// </summary>
+        public void Delete()
+        {
+            if (MessageBox.Show(
+                        "Opravdu chcete smazat všechny výrobce?" + Environment.NewLine +
+                        "Počet výrobců, kteří budou smazáni: " + this.context.DataStorage.Manufacturers.Count + Environment.NewLine +
+                        "Tato akce je nevratná.",
+                        "Smazat výrobce",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question,
+                        MessageBoxDefaultButton.Button2
+                    ) == DialogResult.Yes)
+            {
+                FormWait wait = new FormWait(() =>
+                {
+                    this.context.DataStorage.Manufacturers.Clear();
+                    this.context.DataStorage.Save();
+                }, this.context);
+                wait.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        /// Searches manufacturers
+        /// </summary>
+        /// <param name="phrase">Phrase which will be searched</param>
+        /// <returns>List of manufacturers which matches the phrase</returns>
+        public List<Manufacturer> Search(string phrase)
+        {
+            List<Manufacturer> reti = new List<Manufacturer>();
+            FormWait wait = new FormWait(() =>
+            {
+                foreach(Manufacturer m in this.context.DataStorage.Manufacturers)
+                {
+                    if (m.Matches(phrase))
+                    {
+                        reti.Add(m);
+                    }
+                }
+            }, this.context);
+            wait.ShowDialog();
+            return reti;
+        }
     }
 }
