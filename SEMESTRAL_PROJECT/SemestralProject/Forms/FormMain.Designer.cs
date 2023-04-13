@@ -84,6 +84,8 @@ namespace SemestralProject.Forms
             this.buttonManufacturerCancelSearch = new System.Windows.Forms.Button();
             this.buttonManufacturerSearch = new System.Windows.Forms.Button();
             this.splitterManufacturerControls3 = new System.Windows.Forms.Splitter();
+            this.radioButtonVehicles = new System.Windows.Forms.RadioButton();
+            this.tabPageVehicles = new System.Windows.Forms.TabPage();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
             this.panelISControls.SuspendLayout();
@@ -99,6 +101,7 @@ namespace SemestralProject.Forms
             // 
             // panelItemsControl
             // 
+            this.panelItemsControl.Controls.Add(this.radioButtonVehicles);
             this.panelItemsControl.Controls.Add(this.radioButtonManufacturers);
             this.panelItemsControl.Controls.Add(this.radioButtonMaps);
             this.panelItemsControl.Controls.Add(this.radioButtonIS);
@@ -353,6 +356,7 @@ namespace SemestralProject.Forms
             this.tabControlContent.Controls.Add(this.tabPageIS);
             this.tabControlContent.Controls.Add(this.tabPageMaps);
             this.tabControlContent.Controls.Add(this.tabPageManufacturers);
+            this.tabControlContent.Controls.Add(this.tabPageVehicles);
             this.tabControlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlContent.Location = new System.Drawing.Point(0, 29);
             this.tabControlContent.Name = "tabControlContent";
@@ -748,6 +752,30 @@ namespace SemestralProject.Forms
             this.splitterManufacturerControls3.TabIndex = 9;
             this.splitterManufacturerControls3.TabStop = false;
             // 
+            // radioButtonVehicles
+            // 
+            this.radioButtonVehicles.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonVehicles.AutoSize = true;
+            this.radioButtonVehicles.FlatAppearance.BorderSize = 0;
+            this.radioButtonVehicles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButtonVehicles.Location = new System.Drawing.Point(345, -1);
+            this.radioButtonVehicles.Name = "radioButtonVehicles";
+            this.radioButtonVehicles.Size = new System.Drawing.Size(80, 30);
+            this.radioButtonVehicles.TabIndex = 4;
+            this.radioButtonVehicles.TabStop = true;
+            this.radioButtonVehicles.Text = "VOZIDLA";
+            this.radioButtonVehicles.UseVisualStyleBackColor = true;
+            this.radioButtonVehicles.CheckedChanged += new System.EventHandler(this.PanelItemsControlItemClicked);
+            // 
+            // tabPageVehicles
+            // 
+            this.tabPageVehicles.Location = new System.Drawing.Point(4, 29);
+            this.tabPageVehicles.Name = "tabPageVehicles";
+            this.tabPageVehicles.Size = new System.Drawing.Size(1340, 659);
+            this.tabPageVehicles.TabIndex = 3;
+            this.tabPageVehicles.Text = "VOZIDLA";
+            this.tabPageVehicles.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -834,5 +862,7 @@ namespace SemestralProject.Forms
         private Button buttonManufacturerCancelSearch;
         private Button buttonManufacturerSearch;
         private Splitter splitterManufacturerControls3;
+        private RadioButton radioButtonVehicles;
+        private TabPage tabPageVehicles;
     }
 }
