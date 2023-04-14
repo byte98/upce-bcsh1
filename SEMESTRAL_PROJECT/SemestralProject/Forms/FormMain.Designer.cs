@@ -32,6 +32,7 @@ namespace SemestralProject.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panelItemsControl = new System.Windows.Forms.Panel();
+            this.radioButtonVehicles = new System.Windows.Forms.RadioButton();
             this.radioButtonManufacturers = new System.Windows.Forms.RadioButton();
             this.radioButtonMaps = new System.Windows.Forms.RadioButton();
             this.radioButtonIS = new System.Windows.Forms.RadioButton();
@@ -84,8 +85,22 @@ namespace SemestralProject.Forms
             this.buttonManufacturerCancelSearch = new System.Windows.Forms.Button();
             this.buttonManufacturerSearch = new System.Windows.Forms.Button();
             this.splitterManufacturerControls3 = new System.Windows.Forms.Splitter();
-            this.radioButtonVehicles = new System.Windows.Forms.RadioButton();
             this.tabPageVehicles = new System.Windows.Forms.TabPage();
+            this.panelVehicleControls = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonAddVehicle = new System.Windows.Forms.Button();
+            this.buttonInfoVehicle = new System.Windows.Forms.Button();
+            this.buttonEditVehicle = new System.Windows.Forms.Button();
+            this.buttonRemoveVehicle = new System.Windows.Forms.Button();
+            this.buttonDeleteVehicle = new System.Windows.Forms.Button();
+            this.splitterVehicleControls1 = new System.Windows.Forms.Splitter();
+            this.panelVehicleSizeButton = new System.Windows.Forms.Panel();
+            this.splitterVehicleControls2 = new System.Windows.Forms.Splitter();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.textBoxVehicleSearch = new System.Windows.Forms.TextBox();
+            this.buttonVehicleCancelSearch = new System.Windows.Forms.Button();
+            this.buttonVehicleSearch = new System.Windows.Forms.Button();
+            this.splitterVehicleControls3 = new System.Windows.Forms.Splitter();
+            this.panelVehicleContent = new System.Windows.Forms.Panel();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
             this.panelISControls.SuspendLayout();
@@ -97,6 +112,9 @@ namespace SemestralProject.Forms
             this.tabPageManufacturers.SuspendLayout();
             this.panelManufacturerControls.SuspendLayout();
             this.panelManufacturerSearch.SuspendLayout();
+            this.tabPageVehicles.SuspendLayout();
+            this.panelVehicleControls.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelItemsControl
@@ -110,6 +128,21 @@ namespace SemestralProject.Forms
             this.panelItemsControl.Name = "panelItemsControl";
             this.panelItemsControl.Size = new System.Drawing.Size(1348, 29);
             this.panelItemsControl.TabIndex = 1;
+            // 
+            // radioButtonVehicles
+            // 
+            this.radioButtonVehicles.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonVehicles.AutoSize = true;
+            this.radioButtonVehicles.FlatAppearance.BorderSize = 0;
+            this.radioButtonVehicles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButtonVehicles.Location = new System.Drawing.Point(345, -1);
+            this.radioButtonVehicles.Name = "radioButtonVehicles";
+            this.radioButtonVehicles.Size = new System.Drawing.Size(80, 30);
+            this.radioButtonVehicles.TabIndex = 4;
+            this.radioButtonVehicles.TabStop = true;
+            this.radioButtonVehicles.Text = "VOZIDLA";
+            this.radioButtonVehicles.UseVisualStyleBackColor = true;
+            this.radioButtonVehicles.CheckedChanged += new System.EventHandler(this.PanelItemsControlItemClicked);
             // 
             // radioButtonManufacturers
             // 
@@ -752,29 +785,192 @@ namespace SemestralProject.Forms
             this.splitterManufacturerControls3.TabIndex = 9;
             this.splitterManufacturerControls3.TabStop = false;
             // 
-            // radioButtonVehicles
-            // 
-            this.radioButtonVehicles.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioButtonVehicles.AutoSize = true;
-            this.radioButtonVehicles.FlatAppearance.BorderSize = 0;
-            this.radioButtonVehicles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radioButtonVehicles.Location = new System.Drawing.Point(345, -1);
-            this.radioButtonVehicles.Name = "radioButtonVehicles";
-            this.radioButtonVehicles.Size = new System.Drawing.Size(80, 30);
-            this.radioButtonVehicles.TabIndex = 4;
-            this.radioButtonVehicles.TabStop = true;
-            this.radioButtonVehicles.Text = "VOZIDLA";
-            this.radioButtonVehicles.UseVisualStyleBackColor = true;
-            this.radioButtonVehicles.CheckedChanged += new System.EventHandler(this.PanelItemsControlItemClicked);
-            // 
             // tabPageVehicles
             // 
+            this.tabPageVehicles.Controls.Add(this.panelVehicleContent);
+            this.tabPageVehicles.Controls.Add(this.panelVehicleControls);
             this.tabPageVehicles.Location = new System.Drawing.Point(4, 29);
             this.tabPageVehicles.Name = "tabPageVehicles";
+            this.tabPageVehicles.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageVehicles.Size = new System.Drawing.Size(1340, 659);
             this.tabPageVehicles.TabIndex = 3;
             this.tabPageVehicles.Text = "VOZIDLA";
             this.tabPageVehicles.UseVisualStyleBackColor = true;
+            // 
+            // panelVehicleControls
+            // 
+            this.panelVehicleControls.Controls.Add(this.buttonAddVehicle);
+            this.panelVehicleControls.Controls.Add(this.buttonInfoVehicle);
+            this.panelVehicleControls.Controls.Add(this.buttonEditVehicle);
+            this.panelVehicleControls.Controls.Add(this.buttonRemoveVehicle);
+            this.panelVehicleControls.Controls.Add(this.buttonDeleteVehicle);
+            this.panelVehicleControls.Controls.Add(this.splitterVehicleControls1);
+            this.panelVehicleControls.Controls.Add(this.panelVehicleSizeButton);
+            this.panelVehicleControls.Controls.Add(this.splitterVehicleControls2);
+            this.panelVehicleControls.Controls.Add(this.panel2);
+            this.panelVehicleControls.Controls.Add(this.splitterVehicleControls3);
+            this.panelVehicleControls.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelVehicleControls.Location = new System.Drawing.Point(3, 3);
+            this.panelVehicleControls.Name = "panelVehicleControls";
+            this.panelVehicleControls.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.panelVehicleControls.Size = new System.Drawing.Size(1334, 107);
+            this.panelVehicleControls.TabIndex = 1;
+            // 
+            // buttonAddVehicle
+            // 
+            this.buttonAddVehicle.FlatAppearance.BorderSize = 0;
+            this.buttonAddVehicle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddVehicle.Image = global::SemestralProject.Resources.is_add;
+            this.buttonAddVehicle.Location = new System.Drawing.Point(3, 3);
+            this.buttonAddVehicle.Name = "buttonAddVehicle";
+            this.buttonAddVehicle.Size = new System.Drawing.Size(94, 94);
+            this.buttonAddVehicle.TabIndex = 0;
+            this.buttonAddVehicle.Text = "Přidat nové vozidlo";
+            this.buttonAddVehicle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonAddVehicle.UseVisualStyleBackColor = true;
+            // 
+            // buttonInfoVehicle
+            // 
+            this.buttonInfoVehicle.Enabled = false;
+            this.buttonInfoVehicle.FlatAppearance.BorderSize = 0;
+            this.buttonInfoVehicle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonInfoVehicle.Image = global::SemestralProject.Resources.is_info;
+            this.buttonInfoVehicle.Location = new System.Drawing.Point(103, 3);
+            this.buttonInfoVehicle.Name = "buttonInfoVehicle";
+            this.buttonInfoVehicle.Size = new System.Drawing.Size(94, 94);
+            this.buttonInfoVehicle.TabIndex = 1;
+            this.buttonInfoVehicle.Text = "Informace o vozidlu";
+            this.buttonInfoVehicle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonInfoVehicle.UseVisualStyleBackColor = true;
+            // 
+            // buttonEditVehicle
+            // 
+            this.buttonEditVehicle.Enabled = false;
+            this.buttonEditVehicle.FlatAppearance.BorderSize = 0;
+            this.buttonEditVehicle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEditVehicle.Image = global::SemestralProject.Resources.is_edit;
+            this.buttonEditVehicle.Location = new System.Drawing.Point(203, 3);
+            this.buttonEditVehicle.Name = "buttonEditVehicle";
+            this.buttonEditVehicle.Size = new System.Drawing.Size(94, 94);
+            this.buttonEditVehicle.TabIndex = 5;
+            this.buttonEditVehicle.Text = "Upravit vozidlo";
+            this.buttonEditVehicle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonEditVehicle.UseVisualStyleBackColor = true;
+            // 
+            // buttonRemoveVehicle
+            // 
+            this.buttonRemoveVehicle.Enabled = false;
+            this.buttonRemoveVehicle.FlatAppearance.BorderSize = 0;
+            this.buttonRemoveVehicle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRemoveVehicle.Image = global::SemestralProject.Resources.is_remove;
+            this.buttonRemoveVehicle.Location = new System.Drawing.Point(303, 3);
+            this.buttonRemoveVehicle.Name = "buttonRemoveVehicle";
+            this.buttonRemoveVehicle.Size = new System.Drawing.Size(94, 94);
+            this.buttonRemoveVehicle.TabIndex = 2;
+            this.buttonRemoveVehicle.Text = "Smazat vozidlo";
+            this.buttonRemoveVehicle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonRemoveVehicle.UseVisualStyleBackColor = true;
+            // 
+            // buttonDeleteVehicle
+            // 
+            this.buttonDeleteVehicle.FlatAppearance.BorderSize = 0;
+            this.buttonDeleteVehicle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDeleteVehicle.Image = global::SemestralProject.Resources.is_delete;
+            this.buttonDeleteVehicle.Location = new System.Drawing.Point(403, 3);
+            this.buttonDeleteVehicle.Name = "buttonDeleteVehicle";
+            this.buttonDeleteVehicle.Size = new System.Drawing.Size(94, 94);
+            this.buttonDeleteVehicle.TabIndex = 3;
+            this.buttonDeleteVehicle.Text = "Smazat všechno";
+            this.buttonDeleteVehicle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonDeleteVehicle.UseVisualStyleBackColor = true;
+            // 
+            // splitterVehicleControls1
+            // 
+            this.splitterVehicleControls1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterVehicleControls1.Location = new System.Drawing.Point(503, 3);
+            this.splitterVehicleControls1.Name = "splitterVehicleControls1";
+            this.splitterVehicleControls1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.splitterVehicleControls1.Size = new System.Drawing.Size(1, 104);
+            this.splitterVehicleControls1.TabIndex = 4;
+            this.splitterVehicleControls1.TabStop = false;
+            // 
+            // panelVehicleSizeButton
+            // 
+            this.panelVehicleSizeButton.Location = new System.Drawing.Point(510, 3);
+            this.panelVehicleSizeButton.Name = "panelVehicleSizeButton";
+            this.panelVehicleSizeButton.Size = new System.Drawing.Size(188, 94);
+            this.panelVehicleSizeButton.TabIndex = 10;
+            // 
+            // splitterVehicleControls2
+            // 
+            this.splitterVehicleControls2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterVehicleControls2.Location = new System.Drawing.Point(704, 3);
+            this.splitterVehicleControls2.Name = "splitterVehicleControls2";
+            this.splitterVehicleControls2.Size = new System.Drawing.Size(1, 104);
+            this.splitterVehicleControls2.TabIndex = 8;
+            this.splitterVehicleControls2.TabStop = false;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.textBoxVehicleSearch);
+            this.panel2.Controls.Add(this.buttonVehicleCancelSearch);
+            this.panel2.Controls.Add(this.buttonVehicleSearch);
+            this.panel2.Location = new System.Drawing.Point(711, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(253, 104);
+            this.panel2.TabIndex = 7;
+            // 
+            // textBoxVehicleSearch
+            // 
+            this.textBoxVehicleSearch.Location = new System.Drawing.Point(3, 3);
+            this.textBoxVehicleSearch.Name = "textBoxVehicleSearch";
+            this.textBoxVehicleSearch.PlaceholderText = "Hledat";
+            this.textBoxVehicleSearch.Size = new System.Drawing.Size(247, 27);
+            this.textBoxVehicleSearch.TabIndex = 0;
+            // 
+            // buttonVehicleCancelSearch
+            // 
+            this.buttonVehicleCancelSearch.Enabled = false;
+            this.buttonVehicleCancelSearch.FlatAppearance.BorderSize = 0;
+            this.buttonVehicleCancelSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonVehicleCancelSearch.Image = global::SemestralProject.Resources.search_cancel;
+            this.buttonVehicleCancelSearch.Location = new System.Drawing.Point(129, 36);
+            this.buttonVehicleCancelSearch.Name = "buttonVehicleCancelSearch";
+            this.buttonVehicleCancelSearch.Size = new System.Drawing.Size(120, 58);
+            this.buttonVehicleCancelSearch.TabIndex = 1;
+            this.buttonVehicleCancelSearch.Text = "Zrušit hledání";
+            this.buttonVehicleCancelSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonVehicleCancelSearch.UseVisualStyleBackColor = true;
+            // 
+            // buttonVehicleSearch
+            // 
+            this.buttonVehicleSearch.FlatAppearance.BorderSize = 0;
+            this.buttonVehicleSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonVehicleSearch.Image = global::SemestralProject.Resources.search;
+            this.buttonVehicleSearch.Location = new System.Drawing.Point(3, 36);
+            this.buttonVehicleSearch.Name = "buttonVehicleSearch";
+            this.buttonVehicleSearch.Size = new System.Drawing.Size(120, 58);
+            this.buttonVehicleSearch.TabIndex = 1;
+            this.buttonVehicleSearch.Text = "Hledat";
+            this.buttonVehicleSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonVehicleSearch.UseVisualStyleBackColor = true;
+            // 
+            // splitterVehicleControls3
+            // 
+            this.splitterVehicleControls3.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterVehicleControls3.Location = new System.Drawing.Point(970, 3);
+            this.splitterVehicleControls3.Name = "splitterVehicleControls3";
+            this.splitterVehicleControls3.Size = new System.Drawing.Size(1, 104);
+            this.splitterVehicleControls3.TabIndex = 9;
+            this.splitterVehicleControls3.TabStop = false;
+            // 
+            // panelVehicleContent
+            // 
+            this.panelVehicleContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelVehicleContent.Location = new System.Drawing.Point(3, 110);
+            this.panelVehicleContent.Name = "panelVehicleContent";
+            this.panelVehicleContent.Size = new System.Drawing.Size(1334, 546);
+            this.panelVehicleContent.TabIndex = 4;
             // 
             // FormMain
             // 
@@ -804,6 +1000,10 @@ namespace SemestralProject.Forms
             this.panelManufacturerControls.ResumeLayout(false);
             this.panelManufacturerSearch.ResumeLayout(false);
             this.panelManufacturerSearch.PerformLayout();
+            this.tabPageVehicles.ResumeLayout(false);
+            this.panelVehicleControls.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -864,5 +1064,20 @@ namespace SemestralProject.Forms
         private Splitter splitterManufacturerControls3;
         private RadioButton radioButtonVehicles;
         private TabPage tabPageVehicles;
+        private FlowLayoutPanel panelVehicleControls;
+        private Button buttonAddVehicle;
+        private Button buttonInfoVehicle;
+        private Button buttonEditVehicle;
+        private Button buttonRemoveVehicle;
+        private Button buttonDeleteVehicle;
+        private Splitter splitterVehicleControls1;
+        private Panel panelVehicleSizeButton;
+        private Splitter splitterVehicleControls2;
+        private Panel panel2;
+        private TextBox textBoxVehicleSearch;
+        private Button buttonVehicleCancelSearch;
+        private Button buttonVehicleSearch;
+        private Splitter splitterVehicleControls3;
+        private Panel panelVehicleContent;
     }
 }

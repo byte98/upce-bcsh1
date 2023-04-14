@@ -589,7 +589,7 @@ namespace SemestralProject.Persistence
         /// </summary>
         /// <param name="id">Searched identifier of manufacturer</param>
         /// <returns>Manufactuer with searched identifier or <c>NULL</c>, if there is no such manufacturer</returns>
-        private Manufacturer? GetManufacturerById(string id)
+        public Manufacturer? GetManufacturerById(string id)
         {
             Manufacturer? reti = null;
             foreach(Manufacturer manufacturer in this.Manufacturers)
