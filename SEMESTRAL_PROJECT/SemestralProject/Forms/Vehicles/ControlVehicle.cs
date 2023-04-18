@@ -61,12 +61,33 @@ namespace SemestralProject.Forms.Vehicles
                 return reti;
             }
 
+            public override int GetHashCode()
+            {
+                return this.Manufacturer.Id.GetHashCode();
+            }
         }
 
         /// <summary>
         /// Wrapper of all program resources
         /// </summary>
         public Context Context { get; init; }
+
+        /// <summary>
+        /// Name of vehicle
+        /// </summary>
+        public string VehicleName => this.textBoxName.Text;
+
+        /// <summary>
+        /// Description of vehicle
+        /// </summary>
+        public string VehicleDescription => this.textBoxDescription.Text;
+
+        /// <summary>
+        /// Picture of vehicle
+        /// </summary>
+        public Picture VehiclePicture { get; private set; }
+
+        public Manufacturer? VehicleManufacturer {get; private set; }
 
         /// <summary>
         /// Creates new control for creating vehicles
@@ -77,6 +98,8 @@ namespace SemestralProject.Forms.Vehicles
             this.InitializeComponent();
             this.Context = context;
             this.InitializeManufacturers();
+            this.VehiclePicture = this.Context.FileStorage.GetPictureChecked(null);
+            this.buttonPicture.BackgroundImage = this.VehiclePicture.GetImage();
         }
 
         /// <summary>
@@ -91,8 +114,10 @@ namespace SemestralProject.Forms.Vehicles
             this.InitializeManufacturers();
             this.textBoxName.Text = vehicle.Name;
             this.textBoxDescription.Text = vehicle.Description;
-            this.buttonPicture.Image = vehicle.Picture.GetImage();
-            this.comboBoxManufacturer.SelectedItem = new ManufacturerItem(vehicle.Manufacturer);
+            this.VehicleManufacturer = vehicle.Manufacturer;
+            this.comboBoxManufacturer.SelectedItem = new ManufacturerItem(this.VehicleManufacturer);
+            this.VehiclePicture = vehicle.Picture;
+            this.buttonPicture.BackgroundImage = this.VehiclePicture.GetImage();
         }
 
         /// <summary>
@@ -104,6 +129,35 @@ namespace SemestralProject.Forms.Vehicles
             foreach(Manufacturer manufacturer in this.Context.DataStorage.Manufacturers)
             {
                 this.comboBoxManufacturer.Items.Add(new ManufacturerItem(manufacturer));
+            }
+        }
+
+        private void buttonPicture_Click(object sender, EventArgs e)
+        {
+            FormPictureChooser dialog = new FormPictureChooser(this.Context);
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                if (dialog.SelectedIsPath)
+                {
+                    FormWait wait = new FormWait(() =>
+                    {
+                        this.VehiclePicture = this.Context.FileStorage.AddPicture(dialog.SelectedPicture);
+                    }, this.Context);
+                }
+                else
+                {
+                    this.VehiclePicture = this.Context.FileStorage.GetPictureChecked(dialog.SelectedPicture);
+                }
+                this.buttonPicture.BackgroundImage = this.VehiclePicture.GetImage();
+            }
+        }
+
+        private void comboBoxManufacturer_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxManufacturer.SelectedItem is ManufacturerItem)
+            {
+                ManufacturerItem item = (ManufacturerItem)this.comboBoxManufacturer.SelectedItem;
+                this.VehicleManufacturer = item.Manufacturer;
             }
         }
     }

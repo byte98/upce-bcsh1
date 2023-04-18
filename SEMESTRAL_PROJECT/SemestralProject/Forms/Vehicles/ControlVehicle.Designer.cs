@@ -35,11 +35,11 @@
             this.labelPicture = new System.Windows.Forms.Label();
             this.buttonPicture = new System.Windows.Forms.Button();
             this.labelSpace2 = new System.Windows.Forms.Label();
-            this.labelDescription = new System.Windows.Forms.Label();
-            this.textBoxDescription = new System.Windows.Forms.TextBox();
-            this.labelSpace3 = new System.Windows.Forms.Label();
             this.labelManufacturer = new System.Windows.Forms.Label();
             this.comboBoxManufacturer = new System.Windows.Forms.ComboBox();
+            this.labelSpace3 = new System.Windows.Forms.Label();
+            this.labelDescription = new System.Windows.Forms.Label();
+            this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.flowLayoutPanelContent.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,6 +108,7 @@
             this.buttonPicture.Size = new System.Drawing.Size(388, 139);
             this.buttonPicture.TabIndex = 4;
             this.buttonPicture.UseVisualStyleBackColor = true;
+            this.buttonPicture.Click += new System.EventHandler(this.buttonPicture_Click);
             // 
             // labelSpace2
             // 
@@ -116,32 +117,6 @@
             this.labelSpace2.Name = "labelSpace2";
             this.labelSpace2.Size = new System.Drawing.Size(0, 20);
             this.labelSpace2.TabIndex = 5;
-            // 
-            // labelDescription
-            // 
-            this.labelDescription.AutoSize = true;
-            this.labelDescription.Location = new System.Drawing.Point(3, 341);
-            this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(44, 20);
-            this.labelDescription.TabIndex = 6;
-            this.labelDescription.Text = "Popis";
-            // 
-            // textBoxDescription
-            // 
-            this.textBoxDescription.Location = new System.Drawing.Point(3, 364);
-            this.textBoxDescription.Multiline = true;
-            this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(388, 159);
-            this.textBoxDescription.TabIndex = 7;
-            // 
-            // labelSpace3
-            // 
-            this.labelSpace3.AutoSize = true;
-            this.labelSpace3.Location = new System.Drawing.Point(3, 321);
-            this.labelSpace3.Name = "labelSpace3";
-            this.labelSpace3.Size = new System.Drawing.Size(13, 20);
-            this.labelSpace3.TabIndex = 8;
-            this.labelSpace3.Text = " ";
             // 
             // labelManufacturer
             // 
@@ -160,6 +135,33 @@
             this.comboBoxManufacturer.Name = "comboBoxManufacturer";
             this.comboBoxManufacturer.Size = new System.Drawing.Size(388, 28);
             this.comboBoxManufacturer.TabIndex = 10;
+            this.comboBoxManufacturer.SelectedValueChanged += new System.EventHandler(this.comboBoxManufacturer_SelectedValueChanged);
+            // 
+            // labelSpace3
+            // 
+            this.labelSpace3.AutoSize = true;
+            this.labelSpace3.Location = new System.Drawing.Point(3, 312);
+            this.labelSpace3.Name = "labelSpace3";
+            this.labelSpace3.Size = new System.Drawing.Size(13, 20);
+            this.labelSpace3.TabIndex = 8;
+            this.labelSpace3.Text = " ";
+            // 
+            // labelDescription
+            // 
+            this.labelDescription.AutoSize = true;
+            this.labelDescription.Location = new System.Drawing.Point(3, 332);
+            this.labelDescription.Name = "labelDescription";
+            this.labelDescription.Size = new System.Drawing.Size(44, 20);
+            this.labelDescription.TabIndex = 6;
+            this.labelDescription.Text = "Popis";
+            // 
+            // textBoxDescription
+            // 
+            this.textBoxDescription.Location = new System.Drawing.Point(3, 355);
+            this.textBoxDescription.Multiline = true;
+            this.textBoxDescription.Name = "textBoxDescription";
+            this.textBoxDescription.Size = new System.Drawing.Size(388, 159);
+            this.textBoxDescription.TabIndex = 7;
             // 
             // ControlVehicle
             // 
