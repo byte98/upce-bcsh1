@@ -87,27 +87,44 @@ namespace SemestralProject.Forms.Vehicles
         /// </summary>
         public Picture VehiclePicture { get; private set; }
 
+        /// <summary>
+        /// Manufacturer of vehicle
+        /// </summary>
         public Manufacturer? VehicleManufacturer {get; private set; }
+
+        /// <summary>
+        /// Path to directory with vehicle
+        /// </summary>
+        public string VehiclePath => this.buttonPath.Text;
+
+        /// <summary>
+        /// Path to root directory with vehicles
+        /// </summary>
+        private readonly string rootPath;
 
         /// <summary>
         /// Creates new control for creating vehicles
         /// </summary>
         /// <param name="context">Wrapper of all program resources</param>
-        public ControlVehicle(Context context)
+        /// <param name="path">Root path for vehicles</param>
+        public ControlVehicle(Context context, string path)
         {
             this.InitializeComponent();
             this.Context = context;
             this.InitializeManufacturers();
             this.VehiclePicture = this.Context.FileStorage.GetPictureChecked(null);
             this.buttonPicture.BackgroundImage = this.VehiclePicture.GetImage();
+            this.rootPath = path;
+            this.buttonPath.Text = this.rootPath;
         }
 
         /// <summary>
         /// Creates new control for editing vehicles
         /// </summary>
         /// <param name="context">Wrapper of all program resources</param>
+        /// <param name="path">Path to root directory with vehicles</param>
         /// <param name="vehicle">Vehicle which will be edited</param>
-        public ControlVehicle(Context context, Vehicle vehicle)
+        public ControlVehicle(Context context, string path, Vehicle vehicle)
         {
             this.InitializeComponent();
             this.Context = context;
@@ -118,6 +135,8 @@ namespace SemestralProject.Forms.Vehicles
             this.comboBoxManufacturer.SelectedItem = new ManufacturerItem(this.VehicleManufacturer);
             this.VehiclePicture = vehicle.Picture;
             this.buttonPicture.BackgroundImage = this.VehiclePicture.GetImage();
+            this.buttonPath.Text = vehicle.Path;
+            this.rootPath = path;
         }
 
         /// <summary>
@@ -158,6 +177,15 @@ namespace SemestralProject.Forms.Vehicles
             {
                 ManufacturerItem item = (ManufacturerItem)this.comboBoxManufacturer.SelectedItem;
                 this.VehicleManufacturer = item.Manufacturer;
+            }
+        }
+
+        private void buttonPath_Click(object sender, EventArgs e)
+        {
+            FormFolder dialog = new FormFolder(this.Context, this.rootPath);
+            if (dialog.ShowDialog() == DialogResult.OK && dialog.SelectedPath != null && dialog.SelectedPath.Length > 0)
+            {
+                this.buttonPath.Text = dialog.SelectedPath;
             }
         }
     }

@@ -14,7 +14,7 @@ namespace SemestralProject.Controllers
     /// <summary>
     /// Controller of information systems
     /// </summary>
-    internal class InformationSystemsController: AbstractController
+    internal class InformationSystemsController: AbstractController<InformationSystem>
     {
         /// <summary>
         /// Creates new controller of information systems
@@ -22,10 +22,7 @@ namespace SemestralProject.Controllers
         /// <param name="context">Wrapper of all programs resources</param>
         public InformationSystemsController(Context context) : base(context) { }
 
-        /// <summary>
-        /// Performs creation of new information system
-        /// </summary>
-        public void Create()
+        public override void Create()
         {
             FormISAdd dialog = new FormISAdd(context);
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -81,11 +78,7 @@ namespace SemestralProject.Controllers
             return reti;
         }
 
-        /// <summary>
-        /// Edits information system
-        /// </summary>
-        /// <param name="id">Identifier of information system which will be edited</param>
-        public void Edit(string id)
+        public override void Edit(string id)
         {
             InformationSystem? system = this.GetById(id);
             if (system != null)
@@ -103,11 +96,7 @@ namespace SemestralProject.Controllers
             }
         }
 
-        /// <summary>
-        /// Shows information about information system
-        /// </summary>
-        /// <param name="id">Identifier of information system</param>
-        public void Info(string id)
+        public override void Info(string id)
         {
             InformationSystem? system = this.GetById(id);
             if (system != null)
@@ -117,11 +106,7 @@ namespace SemestralProject.Controllers
             }
         }
 
-        /// <summary>
-        /// Removes information system
-        /// </summary>
-        /// <param name="id">Identifier of information system</param>
-        public void Remove(string id)
+        public override void Remove(string id)
         {
             InformationSystem? system = this.GetById(id);
             if (system != null)
@@ -149,10 +134,7 @@ namespace SemestralProject.Controllers
             }
         }
 
-        /// <summary>
-        /// Deletes all information systems
-        /// </summary>
-        public void Delete()
+        public override void Delete()
         {
             if (MessageBox.Show(
                         "Opravdu chcete smazat všechny informační systémy?" + Environment.NewLine +
@@ -173,12 +155,7 @@ namespace SemestralProject.Controllers
             }
         }
 
-        /// <summary>
-        /// Searches information systems
-        /// </summary>
-        /// <param name="phrase">Phrase which will be searched</param>
-        /// <returns>List of information systems which matches phrase</returns>
-        public List<InformationSystem> Search(string phrase)
+        public override List<InformationSystem> Search(string phrase)
         {
             List<InformationSystem> reti = new List<InformationSystem>();
             FormWait wait = new FormWait(() =>

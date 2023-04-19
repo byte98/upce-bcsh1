@@ -17,16 +17,6 @@ namespace SemestralProject.Persistence
     internal class Configuration
     {
         /// <summary>
-        /// Name of file where configuration is saved
-        /// </summary>
-        private const string ConfigFile = "CONFIG.INI";
-
-        /// <summary>
-        /// Flag, whether configuration will be saved after any change
-        /// </summary>
-        private const bool AutoSave = true;
-
-        /// <summary>
         /// Actual accent color of system
         /// </summary>
         public Color AccentColor
@@ -68,30 +58,25 @@ namespace SemestralProject.Persistence
         private const string ValueSeparator = "=";
 
         /// <summary>
+        /// Character defining line comment in file
+        /// </summary>
+        private const string Comment = "#";
+
+        /// <summary>
         /// Directory for temporary files
         /// </summary>
         public string TempDir => "./~$TMP";
 
         /// <summary>
-        /// Flag, whether configuration represents actual state of configuration file
-        /// </summary>
-        public bool Loaded { get; private set; } = false;
-
-        /// <summary>
-        /// Delegate of configuration change event
-        /// </summary>
-        public delegate void ConfigurationChangedEventHandler();
-
-        /// <summary>
-        /// Configuration change event
-        /// </summary>
-        public event ConfigurationChangedEventHandler? ConfigurationChanged;
-
-        /// <summary>
         /// Path to file with configuration
         /// </summary>
         private readonly string configFile;
-        
+
+        /// <summary>
+        /// Path to directory with vehicles
+        /// </summary>
+        public string VehiclesRoot { get; set; } = string.Empty;
+
         /// <summary>
         /// Creates new handler of configuration
         /// </summary>
@@ -106,7 +91,13 @@ namespace SemestralProject.Persistence
         /// </summary>
         public void Save()
         {
-            // TODO
+            StringBuilder content = new StringBuilder();
+            content.Append("VEHICLES_ROOT").Append(Configuration.ValueSeparator).Append(this.VehiclesRoot).Append(Configuration.Separator);
+            if (File.Exists(this.configFile))
+            {
+                File.Delete(this.configFile);
+            }
+            File.WriteAllText(this.configFile, content.ToString());
         }
 
         /// <summary>
@@ -114,7 +105,25 @@ namespace SemestralProject.Persistence
         /// </summary>
         public void Load()
         {
-            // TODO
+            if (File.Exists(this.configFile)) 
+            {
+                string content = File.ReadAllText(this.configFile);
+                string[] items = content.Split(Configuration.Separator, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+                foreach (string item in items)
+                {
+                    if (item.StartsWith(Configuration.Comment) == false)
+                    {
+                        string[] values = item.Split(Configuration.ValueSeparator);
+                        if (values.Length >= 2)
+                        {
+                            switch(values[0].ToUpper().Trim())
+                            {
+                                case "VEHICLES_ROOT": this.VehiclesRoot = values[1]; break;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>

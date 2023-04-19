@@ -18,6 +18,11 @@ namespace SemestralProject.Data
         public Manufacturer Manufacturer { get; private set; }
 
         /// <summary>
+        /// Path to directory with vehicle
+        /// </summary>
+        public string Path { get; private set; }
+
+        /// <summary>
         /// Creates new vehicle
         /// </summary>
         /// <param name="id">Identifier of vehicle</param>
@@ -25,10 +30,12 @@ namespace SemestralProject.Data
         /// <param name="description">Description of vehicle</param>
         /// <param name="picture">Picture of vehicle</param>
         /// <param name="manufacturer">Manufacturer of vehicle</param>
-        public Vehicle(string id, string name, string description, Picture picture, Manufacturer manufacturer)
+        /// <param name="path">Path to directory with vehicle</param>
+        public Vehicle(string id, string name, string description, Picture picture, Manufacturer manufacturer, string path)
             : base(id, name, description, picture)
         {
-            this.Manufacturer = manufacturer; 
+            this.Manufacturer = manufacturer;
+            this.Path = path;
         }
 
         /// <summary>
@@ -39,12 +46,29 @@ namespace SemestralProject.Data
         /// <param name="description">Description of vehicle</param>
         /// <param name="picture">Picture of vehicle</param>
         /// <param name="manufacturer">Manufacturer of vehicle</param>
+        /// <param name="path">Path to directory with vehicle</param>
         /// <param name="created">Date and time of creation of vehicle</param>
         /// <param name="updated">Date and time of last update of vehicle</param>
-        public Vehicle(string id, string name, string description, Picture picture, Manufacturer manufacturer, DateTime created, DateTime updated)
+        public Vehicle(string id, string name, string description, Picture picture, Manufacturer manufacturer, string path, DateTime created, DateTime updated)
             : base(id, name, description, picture, created, updated)
         {
             this.Manufacturer = manufacturer;
+            this.Path = path;
+        }
+
+        /// <summary>
+        /// Edits vehicle
+        /// </summary>
+        /// <param name="name">New name of vehicle</param>
+        /// <param name="description">New description of vehicle</param>
+        /// <param name="picture">New picture of vehicle</param>
+        /// <param name="manufacturer">New manufacturer of vehicle</param>
+        /// <param name="path">New path to directory with vehicle</param>
+        public void Edit(string name, string description, Picture picture, Manufacturer manufacturer, string path)
+        {
+            base.Edit(name, description, picture);
+            this.Manufacturer = manufacturer;
+            this.Path = path;
         }
     }
 }

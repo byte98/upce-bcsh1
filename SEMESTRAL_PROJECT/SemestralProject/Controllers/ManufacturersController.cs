@@ -13,7 +13,7 @@ namespace SemestralProject.Controllers
     /// <summary>
     /// Class which controls operations over manufacturers
     /// </summary>
-    internal class ManufacturersController: AbstractController
+    internal class ManufacturersController: AbstractController<Manufacturer>
     {
         /// <summary>
         /// Creates new controller of operations over manufacturers
@@ -21,10 +21,7 @@ namespace SemestralProject.Controllers
         /// <param name="context">Wrapper of all system resources</param>
         public ManufacturersController(Context context) : base(context) { }
 
-        /// <summary>
-        /// Creates new manufacturer
-        /// </summary>
-        public void Create()
+        public override void Create()
         {
             FormManufacturerAdd dialog = new FormManufacturerAdd(this.context);
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -80,11 +77,7 @@ namespace SemestralProject.Controllers
             return reti;
         }
 
-        /// <summary>
-        /// Edits manufacturer
-        /// </summary>
-        /// <param name="id">Identifier of manufacturer which will be edited</param>
-        public void Edit(string id)
+        public override void Edit(string id)
         {
             Manufacturer? man = this.GetById(id);
             if (man != null)
@@ -105,11 +98,7 @@ namespace SemestralProject.Controllers
             }
         }
 
-        /// <summary>
-        /// Shows information about manufacturer
-        /// </summary>
-        /// <param name="id">Identifier of manufacturer which will be edited</param>
-        public void Info(string id)
+        public override void Info(string id)
         {
             Manufacturer? man = this.GetById(id);
             if (man != null)
@@ -119,11 +108,7 @@ namespace SemestralProject.Controllers
             }
         }
 
-        /// <summary>
-        /// Removes manufacturer from system
-        /// </summary>
-        /// <param name="id">Identifier of manufacturer which will be removed</param>
-        public void Remove(string id)
+        public override void Remove(string id)
         {
             Manufacturer? man = this.GetById(id);
             if (man != null)
@@ -151,10 +136,7 @@ namespace SemestralProject.Controllers
             }
         }
 
-        /// <summary>
-        /// Deletes all manufacturers
-        /// </summary>
-        public void Delete()
+        public override void Delete()
         {
             if (MessageBox.Show(
                         "Opravdu chcete smazat všechny výrobce?" + Environment.NewLine +
@@ -175,12 +157,7 @@ namespace SemestralProject.Controllers
             }
         }
 
-        /// <summary>
-        /// Searches manufacturers
-        /// </summary>
-        /// <param name="phrase">Phrase which will be searched</param>
-        /// <returns>List of manufacturers which matches the phrase</returns>
-        public List<Manufacturer> Search(string phrase)
+        public override List<Manufacturer> Search(string phrase)
         {
             List<Manufacturer> reti = new List<Manufacturer>();
             FormWait wait = new FormWait(() =>

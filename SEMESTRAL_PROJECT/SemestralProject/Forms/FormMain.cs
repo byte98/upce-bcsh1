@@ -49,6 +49,16 @@ namespace SemestralProject.Forms
         private readonly ControlDataIconView manView;
 
         /// <summary>
+        /// Controller of vehicles data
+        /// </summary>
+        private readonly VehiclesController vehiclesController;
+
+        /// <summary>
+        /// Viewer of vehicles
+        /// </summary>
+        private readonly ControlDataPictureView vehicleView;
+
+        /// <summary>
         /// Creates new main form of application
         /// </summary>
         /// <param name="context">Wrapper of all application resources</param>
@@ -63,12 +73,15 @@ namespace SemestralProject.Forms
             this.isView = new ControlDataIconView(this.Context);
             this.mapsView = new ControlDataPictureView(this.Context);
             this.manView = new ControlDataIconView(this.Context);
+            this.vehicleView = new ControlDataPictureView(this.Context);
             this.InitializeIS();
             this.InitializeMaps();
             this.InitializeManufacturers();
+            this.InitializeVehicles();
             this.informationSystemsController = new InformationSystemsController(this.Context);
             this.mapsController = new MapsController(this.Context);
             this.manufacturersController = new ManufacturersController(this.Context);
+            this.vehiclesController = new VehiclesController(this.Context);
         }
 
         /// <summary>
@@ -141,6 +154,25 @@ namespace SemestralProject.Forms
         }
 
         /// <summary>
+        /// Initializes vehicles page
+        /// </summary>
+        private void InitializeVehicles()
+        {
+            this.vehicleView.Dock = DockStyle.Fill;
+            this.panelVehicleContent.Controls.Add(this.vehicleView);
+            ControlViewSizeButton vehicleSizeButton = new ControlViewSizeButton(this.Context);
+            this.panelVehicleSizeButton.Controls.Add(vehicleSizeButton);
+            vehicleSizeButton.Dock = DockStyle.Fill;
+            this.vehicleView.SelectedDataChanged += new SelectedDataChangedEventHandler(delegate (object sender, SelectedDataChangedEventArgs args)
+            {
+                this.buttonInfoVehicle.Enabled = (args.SelectedData != null);
+                this.buttonRemoveVehicle.Enabled = (args.SelectedData != null);
+                this.buttonEditVehicle.Enabled = (args.SelectedData!= null);
+            });
+            vehicleSizeButton.DataView = this.vehicleView;
+        }
+
+        /// <summary>
         /// Sets correct color for selected item in top panel
         /// </summary>
         private void DisplaySelectedItem()
@@ -202,6 +234,7 @@ namespace SemestralProject.Forms
             this.isView.VisibleData = this.Context.DataStorage.InformationSystems.OfType<AbstractIconData>().ToList();
             this.mapsView.VisibleData = this.Context.DataStorage.Maps.OfType<AbstractPictureData>().ToList(); 
             this.manView.VisibleData = this.Context.DataStorage.Manufacturers.OfType<AbstractIconData>().ToList();
+            this.vehicleView.VisibleData = this.Context.DataStorage.Vehicles.OfType<AbstractPictureData>().ToList();
         }
 
         /// <summary>
@@ -374,6 +407,64 @@ namespace SemestralProject.Forms
             this.textBoxManufacturerSearch.Text = string.Empty;
             this.buttonManufacturerCancelSearch.Enabled = false;
             this.RefreshManView();
+        }
+
+        /// <summary>
+        /// Refreshes viewer of vehicles
+        /// </summary>
+        private void RefreshVehicleView()
+        {
+            this.vehicleView.VisibleData = this.Context.DataStorage.Vehicles.OfType<AbstractPictureData>().ToList();
+        }
+
+        private void buttonAddVehicle_Click(object sender, EventArgs e)
+        {
+            this.vehiclesController.Create();
+            this.RefreshVehicleView();
+        }
+
+        private void buttonEditVehicle_Click(object sender, EventArgs e)
+        {
+            if (this.vehicleView.SelectedData != null)
+            {
+                this.vehiclesController.Edit(this.vehicleView.SelectedData);
+                this.RefreshVehicleView();
+            }
+        }
+
+        private void buttonInfoVehicle_Click(object sender, EventArgs e)
+        {
+            if (this.vehicleView.SelectedData != null)
+            {
+                this.vehiclesController.Info(this.vehicleView.SelectedData);
+            }
+        }
+
+        private void buttonRemoveVehicle_Click(object sender, EventArgs e)
+        {
+            if (this.vehicleView.SelectedData != null)
+            {
+                this.vehiclesController.Remove(this.vehicleView.SelectedData);
+                this.RefreshVehicleView();
+            }
+        }
+
+        private void buttonDeleteVehicle_Click(object sender, EventArgs e)
+        {
+            this.vehiclesController.Delete();
+        }
+
+        private void buttonVehicleSearch_Click(object sender, EventArgs e)
+        {
+            this.vehicleView.VisibleData = this.vehiclesController.Search(this.textBoxVehicleSearch.Text).OfType<AbstractPictureData>().ToList();
+            this.buttonVehicleCancelSearch.Enabled = true;
+        }
+
+        private void buttonVehicleCancelSearch_Click(object sender, EventArgs e)
+        {
+            this.textBoxVehicleSearch.Text = string.Empty;
+            this.buttonVehicleCancelSearch.Enabled = false;
+            this.RefreshVehicleView();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace SemestralProject.Controllers
     /// <summary>
     /// Controller of maps
     /// </summary>
-    internal class MapsController: AbstractController
+    internal class MapsController: AbstractController<Map>
     {
         /// <summary>
         /// Creates new controller of maps
@@ -23,10 +23,7 @@ namespace SemestralProject.Controllers
         /// <param name="context">Wrapper of all programs resources</param>
         public MapsController(Context context) : base(context) { }
 
-        /// <summary>
-        /// Performs creation of new map
-        /// </summary>
-        public void Create()
+        public override void Create()
         {
             FormMapAdd dialog = new FormMapAdd(this.context);
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -82,11 +79,7 @@ namespace SemestralProject.Controllers
             return reti;
         }
 
-        /// <summary>
-        /// Edits map
-        /// </summary>
-        /// <param name="id">Identifier of map which will be edited</param>
-        public void Edit(string id)
+        public override void Edit(string id)
         {
             Map? map = this.GetById(id);
             if (map != null)
@@ -103,11 +96,7 @@ namespace SemestralProject.Controllers
             }
         }
 
-        /// <summary>
-        /// Shows information about information system
-        /// </summary>
-        /// <param name="id">Identifier of information system</param>
-        public void Info(string id)
+        public override void Info(string id)
         {
             Map? map = this.GetById(id);
             if (map != null )
@@ -117,11 +106,7 @@ namespace SemestralProject.Controllers
             }
         }
 
-        /// <summary>
-        /// Removes map
-        /// </summary>
-        /// <param name="id">Identifier of map</param>
-        public void Remove(string id)
+        public override void Remove(string id)
         {
             Map? map = this.GetById(id);
             if (map != null)
@@ -129,7 +114,7 @@ namespace SemestralProject.Controllers
                 if (MessageBox.Show(
                         "Opravdu chcete odstranit oblast " + map.Name + "?" + Environment.NewLine +
                         "Tato akce je nevratná.",
-                        "Ostranit oblst",
+                        "Ostranit oblast",
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question,
                         MessageBoxDefaultButton.Button2
@@ -149,10 +134,7 @@ namespace SemestralProject.Controllers
             }
         }
 
-        /// <summary>
-        /// Deletes all maps
-        /// </summary>
-        public void Delete()
+        public override void Delete()
         {
             if (MessageBox.Show(
                         "Opravdu chcete smazat všechny oblasti?" + Environment.NewLine +
@@ -173,12 +155,7 @@ namespace SemestralProject.Controllers
             }
         }
 
-        /// <summary>
-        /// Searches maps
-        /// </summary>
-        /// <param name="phrase">Phrase which will be searched</param>
-        /// <returns>List of maps which matches phrase</returns>
-        public List<Map> Search(string phrase)
+        public override List<Map> Search(string phrase)
         {
             List<Map> reti = new List<Map>();
             FormWait wait = new FormWait(() =>

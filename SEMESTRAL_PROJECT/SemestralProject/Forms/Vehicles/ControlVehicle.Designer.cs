@@ -38,6 +38,9 @@
             this.labelManufacturer = new System.Windows.Forms.Label();
             this.comboBoxManufacturer = new System.Windows.Forms.ComboBox();
             this.labelSpace3 = new System.Windows.Forms.Label();
+            this.labelPath = new System.Windows.Forms.Label();
+            this.buttonPath = new System.Windows.Forms.Button();
+            this.labelSpace4 = new System.Windows.Forms.Label();
             this.labelDescription = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.flowLayoutPanelContent.SuspendLayout();
@@ -54,13 +57,16 @@
             this.flowLayoutPanelContent.Controls.Add(this.labelManufacturer);
             this.flowLayoutPanelContent.Controls.Add(this.comboBoxManufacturer);
             this.flowLayoutPanelContent.Controls.Add(this.labelSpace3);
+            this.flowLayoutPanelContent.Controls.Add(this.labelPath);
+            this.flowLayoutPanelContent.Controls.Add(this.buttonPath);
+            this.flowLayoutPanelContent.Controls.Add(this.labelSpace4);
             this.flowLayoutPanelContent.Controls.Add(this.labelDescription);
             this.flowLayoutPanelContent.Controls.Add(this.textBoxDescription);
             this.flowLayoutPanelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelContent.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelContent.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanelContent.Name = "flowLayoutPanelContent";
-            this.flowLayoutPanelContent.Size = new System.Drawing.Size(395, 533);
+            this.flowLayoutPanelContent.Size = new System.Drawing.Size(395, 585);
             this.flowLayoutPanelContent.TabIndex = 3;
             // 
             // labelName
@@ -146,10 +152,42 @@
             this.labelSpace3.TabIndex = 8;
             this.labelSpace3.Text = " ";
             // 
+            // labelPath
+            // 
+            this.labelPath.AutoSize = true;
+            this.labelPath.Location = new System.Drawing.Point(3, 332);
+            this.labelPath.Name = "labelPath";
+            this.labelPath.Size = new System.Drawing.Size(67, 20);
+            this.labelPath.TabIndex = 12;
+            this.labelPath.Text = "Umístění";
+            // 
+            // buttonPath
+            // 
+            this.buttonPath.Image = global::SemestralProject.Resources.folder_open;
+            this.buttonPath.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonPath.Location = new System.Drawing.Point(3, 355);
+            this.buttonPath.Name = "buttonPath";
+            this.buttonPath.Size = new System.Drawing.Size(388, 34);
+            this.buttonPath.TabIndex = 13;
+            this.buttonPath.Text = "button1";
+            this.buttonPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonPath.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonPath.UseVisualStyleBackColor = true;
+            this.buttonPath.Click += new System.EventHandler(this.buttonPath_Click);
+            // 
+            // labelSpace4
+            // 
+            this.labelSpace4.AutoSize = true;
+            this.labelSpace4.Location = new System.Drawing.Point(3, 392);
+            this.labelSpace4.Name = "labelSpace4";
+            this.labelSpace4.Size = new System.Drawing.Size(13, 20);
+            this.labelSpace4.TabIndex = 11;
+            this.labelSpace4.Text = " ";
+            // 
             // labelDescription
             // 
             this.labelDescription.AutoSize = true;
-            this.labelDescription.Location = new System.Drawing.Point(3, 332);
+            this.labelDescription.Location = new System.Drawing.Point(3, 412);
             this.labelDescription.Name = "labelDescription";
             this.labelDescription.Size = new System.Drawing.Size(44, 20);
             this.labelDescription.TabIndex = 6;
@@ -157,10 +195,10 @@
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(3, 355);
+            this.textBoxDescription.Location = new System.Drawing.Point(3, 435);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(388, 159);
+            this.textBoxDescription.Size = new System.Drawing.Size(388, 144);
             this.textBoxDescription.TabIndex = 7;
             // 
             // ControlVehicle
@@ -169,7 +207,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanelContent);
             this.Name = "ControlVehicle";
-            this.Size = new System.Drawing.Size(395, 533);
+            this.Size = new System.Drawing.Size(395, 585);
             this.flowLayoutPanelContent.ResumeLayout(false);
             this.flowLayoutPanelContent.PerformLayout();
             this.ResumeLayout(false);
@@ -190,5 +228,8 @@
         private Label labelSpace3;
         private Label labelManufacturer;
         private ComboBox comboBoxManufacturer;
+        private Label labelPath;
+        private Label labelSpace4;
+        private Button buttonPath;
     }
 }

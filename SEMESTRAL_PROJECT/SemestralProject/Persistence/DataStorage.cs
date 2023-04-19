@@ -183,12 +183,12 @@ namespace SemestralProject.Persistence
                 /// <summary>
                 /// Root element holding all vehicles
                 /// </summary>
-                public const string _Root = "MANUFACTURERS";
+                public const string _Root = "VEHICLES";
 
                 /// <summary>
                 /// Root element holding all information about vehicles
                 /// </summary>
-                public const string _Element = "MANUFACTURER";
+                public const string _Element = "VEHICLE";
 
                 /// <summary>
                 /// XML element holding identifier of vehicle
@@ -214,6 +214,11 @@ namespace SemestralProject.Persistence
                 /// XML element holding identifier of vehicles manufacturer
                 /// </summary>
                 public const string Manufacturer = "MANUFACTURER";
+
+                /// <summary>
+                /// XML element holding path to directory with vehicle
+                /// </summary>
+                public const string Path = "PATH";
 
                 /// <summary>
                 /// XML element holding date and time of creation of vehicle
@@ -536,6 +541,7 @@ namespace SemestralProject.Persistence
                             XmlNodeList? credList = vehicleElem.GetElementsByTagName(DataStorage.XML.Vehicle.Created);
                             XmlNodeList? updtList = vehicleElem.GetElementsByTagName(DataStorage.XML.Vehicle.Updated);
                             XmlNodeList? manuList = vehicleElem.GetElementsByTagName(DataStorage.XML.Vehicle.Manufacturer);
+                            XmlNodeList? pathList = vehicleElem.GetElementsByTagName(DataStorage.XML.Vehicle.Path);
                             if (
                                     idenList != null && idenList.Count >= 1 &&
                                     nameList != null && nameList.Count >= 1 &&
@@ -543,7 +549,8 @@ namespace SemestralProject.Persistence
                                     descList != null && descList.Count >= 1 &&
                                     credList != null && credList.Count >= 1 &&
                                     updtList != null && updtList.Count >= 1 &&
-                                    manuList != null && manuList.Count >= 1
+                                    manuList != null && manuList.Count >= 1 &&
+                                    pathList != null && pathList.Count >= 1
                                )
                             {
                                 XmlElement? idenElement = (XmlElement?)idenList[0];
@@ -553,6 +560,7 @@ namespace SemestralProject.Persistence
                                 XmlElement? credElement = (XmlElement?)credList[0];
                                 XmlElement? updtElement = (XmlElement?)updtList[0];
                                 XmlElement? manuElement = (XmlElement?)manuList[0];
+                                XmlElement? pathElement = (XmlElement?)pathList[0];
                                 if (
                                         idenElement != null &&
                                         nameElement != null &&
@@ -560,7 +568,8 @@ namespace SemestralProject.Persistence
                                         descElement != null &&
                                         credElement != null &&
                                         updtElement != null &&
-                                        manuElement != null
+                                        manuElement != null &&
+                                        pathElement != null
                                    )
                                 {
                                     Manufacturer? manufacturer = this.GetManufacturerById(manuElement.InnerText);
@@ -572,6 +581,7 @@ namespace SemestralProject.Persistence
                                             descElement.InnerText,
                                             this.fileStorage.GetPictureChecked(pictElement.InnerText),
                                             manufacturer,
+                                            pathElement.InnerText,
                                             DateTime.ParseExact(credElement.InnerText, DataStorage.XML._Date, null),
                                             DateTime.ParseExact(updtElement.InnerText, DataStorage.XML._Date, null)
                                         ));
@@ -749,6 +759,9 @@ namespace SemestralProject.Persistence
                 XmlElement man = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Manufacturer, string.Empty);
                 man.InnerText = vehicle.Manufacturer.Id;
                 vehicleElem.AppendChild(man);
+                XmlElement path = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Path, string.Empty);
+                path.InnerText = vehicle.Path;
+                vehicleElem.AppendChild(path);
                 vehicles.AppendChild(vehicleElem);
             }
             doc.Save(this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.VehicleFile);
