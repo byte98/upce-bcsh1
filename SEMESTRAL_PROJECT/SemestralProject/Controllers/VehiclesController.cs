@@ -123,7 +123,7 @@ namespace SemestralProject.Controllers
                 if (MessageBox.Show(
                         "Opravdu chcete odstranit vozidlo " + vehicle.Name + "?" + Environment.NewLine +
                         "Tato akce je nevratná.",
-                        "Ostranit ovozidlo",
+                        "Ostranit vozidlo",
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question,
                         MessageBoxDefaultButton.Button2
