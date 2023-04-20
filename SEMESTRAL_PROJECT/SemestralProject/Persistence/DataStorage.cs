@@ -176,7 +176,7 @@ namespace SemestralProject.Persistence
             }
 
             /// <summary>
-            /// Class which holds definitions of XML elements for storing vehicles
+            /// Class which holds definitions of XML elements for storing dataFiles
             /// </summary>
             internal static class Vehicle
             {
@@ -231,7 +231,61 @@ namespace SemestralProject.Persistence
                 public const string Updated = "UPDATED";
             }
 
+            /// <summary>
+            /// Class holding strucutre of XML elements used to save data files
+            /// </summary>
+            internal static class DataFile
+            {
+                /// <summary>
+                /// Root XML element
+                /// </summary>
+                public const string _Root = "DATA_FILES";
 
+                /// <summary>
+                /// Element which holds information about one data file
+                /// </summary>
+                public const string _Element = "DATA_FILE";
+
+                /// <summary>
+                /// XML element with identifier of data file
+                /// </summary>
+                public const string Id = "ID";
+
+                /// <summary>
+                /// XML element with name of physical file of data file
+                /// </summary>
+                public const string Name = "NAME";
+
+                /// <summary>
+                /// XML element with original name of physical file
+                /// </summary>
+                public const string OriginalName = "ORIGINAL_NAME";
+
+                /// <summary>
+                /// XML element with description of data file
+                /// </summary>
+                public const string Description = "DESCRIPTION";
+
+                /// <summary>
+                /// XML element with identifier of information system which format data file holds
+                /// </summary>
+                public const string InformationSystem = "INFORMATION_SYSTEM";
+
+                /// <summary>
+                /// XML element with identifier of map which data file holds
+                /// </summary>
+                public const string Map = "MAP";
+
+                /// <summary>
+                /// XML element with date and time of creation of data file
+                /// </summary>
+                public const string Created = "CREATED";
+
+                /// <summary>
+                /// XML element with date and time of last modification of data file
+                /// </summary>
+                public const string Updated = "UPDATED";
+            }
         }
         #endregion
 
@@ -246,14 +300,19 @@ namespace SemestralProject.Persistence
         private const string MapFile = "MAPS.XML";
 
         /// <summary>
-        /// File containing kind of a database with vehicles
+        /// File containing kind of a database with manufacturers
         /// </summary>
         private const string ManufacturerFile = "MANUFACTURERS.XML";
 
         /// <summary>
-        /// File with database like structure with vehicles
+        /// File with database like structure with dataFiles
         /// </summary>
         private const string VehicleFile = "VEHICLES.XML";
+
+        /// <summary>
+        /// File with all stored data files
+        /// </summary>
+        private const string DataFileFile = "FILES.XML";
 
         /// <summary>
         /// Path to file with data storage
@@ -281,7 +340,7 @@ namespace SemestralProject.Persistence
         public List<Map> Maps { get; set; }
 
         /// <summary>
-        /// List of all available vehicles
+        /// List of all available manufacturers
         /// </summary>
         public List<Manufacturer> Manufacturers { get; set; }
         
@@ -289,6 +348,11 @@ namespace SemestralProject.Persistence
         /// List of all available vehicles
         /// </summary>
         public List<Vehicle> Vehicles { get; set; }
+
+        /// <summary>
+        /// List of all available data files
+        /// </summary>
+        public List<DataFile> DataFiles { get; set; }
 
         /// <summary>
         /// Creates new data storage
@@ -304,6 +368,7 @@ namespace SemestralProject.Persistence
             this.Maps = new List<Map>();
             this.Manufacturers = new List<Manufacturer>();
             this.Vehicles = new List<Vehicle>();
+            this.DataFiles = new List<DataFile>();
             this.fileStorage = fileStorage;
         }
 
@@ -595,6 +660,86 @@ namespace SemestralProject.Persistence
         }
 
         /// <summary>
+        /// Loads data files from XML file
+        /// (this needs to be called AFTER <see cref="Load"/>!)
+        /// </summary>
+        public void LoadDataFiles()
+        {
+            this.DataFiles = new List<DataFile>();
+            string file = this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.DataFileFile;
+            if (File.Exists(file))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(file);
+                XmlElement? root = doc.DocumentElement;
+                if (root != null)
+                {
+                    foreach (XmlElement dataFileElem in root.ChildNodes)
+                    {
+                        if (dataFileElem.Name == DataStorage.XML.DataFile._Element)
+                        {
+                            XmlNodeList? idenList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.Id);
+                            XmlNodeList? nameList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.Name);
+                            XmlNodeList? descList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.Description);
+                            XmlNodeList? credList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.Created);
+                            XmlNodeList? updtList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.Updated);
+                            XmlNodeList? onamList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.OriginalName);
+                            XmlNodeList? infsList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.InformationSystem);
+                            XmlNodeList? mapsList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.Map);
+                            if (
+                                    idenList != null && idenList.Count >= 1 &&
+                                    nameList != null && nameList.Count >= 1 &&
+                                    descList != null && descList.Count >= 1 &&
+                                    credList != null && credList.Count >= 1 &&
+                                    updtList != null && updtList.Count >= 1 &&
+                                    onamList != null && onamList.Count >= 1 &&
+                                    infsList != null && infsList.Count >= 1 &&
+                                    mapsList != null && mapsList.Count >= 1
+                               )
+                            {
+                                XmlElement? idenElement = (XmlElement?)idenList[0];
+                                XmlElement? nameElement = (XmlElement?)nameList[0];
+                                XmlElement? descElement = (XmlElement?)descList[0];
+                                XmlElement? credElement = (XmlElement?)credList[0];
+                                XmlElement? updtElement = (XmlElement?)updtList[0];
+                                XmlElement? onamElement = (XmlElement?)onamList[0];
+                                XmlElement? infsElement = (XmlElement?)infsList[0];
+                                XmlElement? mapsElement = (XmlElement?)mapsList[0];
+                                if (
+                                        idenElement != null &&
+                                        nameElement != null &&
+                                        descElement != null &&
+                                        credElement != null &&
+                                        updtElement != null &&
+                                        onamElement != null &&
+                                        infsElement != null &&
+                                        mapsElement != null
+                                   )
+                                {
+                                    InformationSystem? informationSystem = this.GetInformationSystemById(infsElement.InnerText);
+                                    Map? map = this.GetMapById(mapsElement.InnerText);
+                                    if (informationSystem != null && map != null)
+                                    {
+                                        this.DataFiles.Add(new DataFile(
+                                                idenElement.InnerText,
+                                                nameElement.InnerText,
+                                                descElement.InnerText,
+                                                onamElement.InnerText,
+                                                informationSystem,
+                                                map,
+                                                DateTime.ParseExact(credElement.InnerText, DataStorage.XML._Date, null),
+                                                DateTime.ParseExact(updtElement.InnerText, DataStorage.XML._Date, null)
+                                            ));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets manufacturer by its identifier
         /// </summary>
         /// <param name="id">Searched identifier of manufacturer</param>
@@ -607,6 +752,44 @@ namespace SemestralProject.Persistence
                 if (manufacturer.Id == id)
                 {
                     reti = manufacturer;
+                    break;
+                }
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets information system by its identifier
+        /// </summary>
+        /// <param name="id">Searched identifier of information system</param>
+        /// <returns>Information system with searched identifier or <c>NULL</c>, if there is no such information system</returns>
+        public InformationSystem? GetInformationSystemById(string id)
+        {
+            InformationSystem? reti = null;
+            foreach(InformationSystem system in this.InformationSystems)
+            {
+                if (system.Id == id)
+                {
+                    reti = system;
+                    break;
+                }
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets map by its identifier
+        /// </summary>
+        /// <param name="id">Searched identifier of map</param>
+        /// <returns>Map with searched identifier or <c>NULL</c>, if tjere is no such map</returns>
+        public Map? GetMapById(string id)
+        {
+            Map? reti = null;
+            foreach(Map map in this.Maps)
+            {
+                if (map.Id == id)
+                {
+                    reti = map;
                     break;
                 }
             }
@@ -688,7 +871,7 @@ namespace SemestralProject.Persistence
         }
 
         /// <summary>
-        /// Saves vehicles into XML
+        /// Saves dataFiles into XML
         /// </summary>
         private void SaveManufacturers()
         {
@@ -725,7 +908,7 @@ namespace SemestralProject.Persistence
         }
 
         /// <summary>
-        /// Saves vehicles into XML
+        /// Saves dataFiles into XML
         /// </summary>
         private void SaveVehicles()
         {
@@ -733,38 +916,81 @@ namespace SemestralProject.Persistence
             XmlDeclaration declaration = doc.CreateXmlDeclaration(DataStorage.XML._Version, DataStorage.XML._Charset, null);
             XmlElement? root = doc.DocumentElement;
             doc.InsertBefore(declaration, root);
-            XmlElement vehicles = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle._Root, null);
-            doc.AppendChild(vehicles);
-            foreach (Vehicle vehicle in this.Vehicles)
+            XmlElement dataFiles = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle._Root, null);
+            doc.AppendChild(dataFiles);
+            foreach (Vehicle dataFile in this.Vehicles)
             {
-                XmlElement vehicleElem = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle._Element, string.Empty);
+                XmlElement dataFileElem = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle._Element, string.Empty);
                 XmlElement id = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Id, string.Empty);
-                id.InnerText = vehicle.Id;
-                vehicleElem.AppendChild(id);
+                id.InnerText = dataFile.Id;
+                dataFileElem.AppendChild(id);
                 XmlElement created = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Created, string.Empty);
-                created.InnerText = vehicle.Created.ToString(DataStorage.XML._Date);
-                vehicleElem.AppendChild(created);
+                created.InnerText = dataFile.Created.ToString(DataStorage.XML._Date);
+                dataFileElem.AppendChild(created);
                 XmlElement updated = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Updated, string.Empty);
-                updated.InnerText = vehicle.Updated.ToString(DataStorage.XML._Date);
-                vehicleElem.AppendChild(updated);
+                updated.InnerText = dataFile.Updated.ToString(DataStorage.XML._Date);
+                dataFileElem.AppendChild(updated);
                 XmlElement picture = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Picture, string.Empty);
-                picture.InnerText = vehicle.Picture.Name;
-                vehicleElem.AppendChild(picture);
+                picture.InnerText = dataFile.Picture.Name;
+                dataFileElem.AppendChild(picture);
                 XmlElement name = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Name, string.Empty);
-                name.InnerText = vehicle.Name;
-                vehicleElem.AppendChild(name);
+                name.InnerText = dataFile.Name;
+                dataFileElem.AppendChild(name);
                 XmlElement desc = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Description, string.Empty);
-                desc.InnerText = vehicle.Description;
-                vehicleElem.AppendChild(desc);
+                desc.InnerText = dataFile.Description;
+                dataFileElem.AppendChild(desc);
                 XmlElement man = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Manufacturer, string.Empty);
-                man.InnerText = vehicle.Manufacturer.Id;
-                vehicleElem.AppendChild(man);
+                man.InnerText = dataFile.Manufacturer.Id;
+                dataFileElem.AppendChild(man);
                 XmlElement path = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Path, string.Empty);
-                path.InnerText = vehicle.Path;
-                vehicleElem.AppendChild(path);
-                vehicles.AppendChild(vehicleElem);
+                path.InnerText = dataFile.Path;
+                dataFileElem.AppendChild(path);
+                dataFiles.AppendChild(dataFileElem);
             }
             doc.Save(this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.VehicleFile);
+        }
+
+        /// <summary>
+        /// Saves all available data files into XML file
+        /// </summary>
+        private void SaveDataFiles()
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlDeclaration declaration = doc.CreateXmlDeclaration(DataStorage.XML._Version, DataStorage.XML._Charset, null);
+            XmlElement? root = doc.DocumentElement;
+            doc.InsertBefore(declaration, root);
+            XmlElement dataFiles = doc.CreateElement(string.Empty, DataStorage.XML.DataFile._Root, null);
+            doc.AppendChild(dataFiles);
+            foreach (DataFile dataFile in this.DataFiles)
+            {
+                XmlElement dataFileElem = doc.CreateElement(string.Empty, DataStorage.XML.DataFile._Element, string.Empty);
+                XmlElement id = doc.CreateElement(string.Empty, DataStorage.XML.DataFile.Id, string.Empty);
+                id.InnerText = dataFile.Id;
+                dataFileElem.AppendChild(id);
+                XmlElement created = doc.CreateElement(string.Empty, DataStorage.XML.DataFile.Created, string.Empty);
+                created.InnerText = dataFile.Created.ToString(DataStorage.XML._Date);
+                dataFileElem.AppendChild(created);
+                XmlElement updated = doc.CreateElement(string.Empty, DataStorage.XML.DataFile.Updated, string.Empty);
+                updated.InnerText = dataFile.Updated.ToString(DataStorage.XML._Date);
+                dataFileElem.AppendChild(updated);
+                XmlElement name = doc.CreateElement(string.Empty, DataStorage.XML.DataFile.Name, string.Empty);
+                name.InnerText = dataFile.Name;
+                dataFileElem.AppendChild(name);
+                XmlElement desc = doc.CreateElement(string.Empty, DataStorage.XML.DataFile.Description, string.Empty);
+                desc.InnerText = dataFile.Description;
+                dataFileElem.AppendChild(desc);
+                XmlElement originalName = doc.CreateElement(string.Empty, DataStorage.XML.DataFile.OriginalName, string.Empty);
+                originalName.InnerText = dataFile.OriginalName;
+                dataFileElem.AppendChild(originalName);
+                XmlElement informationSytem = doc.CreateElement(string.Empty, DataStorage.XML.DataFile.InformationSystem, string.Empty);
+                informationSytem.InnerText = dataFile.InformationSystem.Id;
+                dataFileElem.AppendChild(informationSytem);
+                XmlElement map = doc.CreateElement(string.Empty, DataStorage.XML.DataFile.Map, string.Empty);
+                map.InnerText = dataFile.Map.Id;
+                dataFileElem.AppendChild(map);
+                dataFiles.AppendChild(dataFileElem);
+            }
+            doc.Save(this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.DataFileFile);
         }
 
         /// <summary>
@@ -780,6 +1006,7 @@ namespace SemestralProject.Persistence
             this.SaveMaps();
             this.SaveManufacturers();
             this.SaveVehicles();
+            this.SaveDataFiles();
             ZipFile.CreateFromDirectory(this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB", this.path);
         }
     }

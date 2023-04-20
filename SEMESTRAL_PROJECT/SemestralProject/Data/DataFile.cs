@@ -9,12 +9,12 @@ namespace SemestralProject.Data
     /// <summary>
     /// Class representing one data file
     /// </summary>
-    internal class DataFile: AbstractData
+    internal class DataFile : AbstractData
     {
         /// <summary>
-        /// Path to physical location of file
+        /// Original name of file
         /// </summary>
-        public string Path { get; private set; }
+        public string OriginalName { get; private set; }
 
         /// <summary>
         /// Information system which format of data file holds
@@ -30,21 +30,48 @@ namespace SemestralProject.Data
         /// Creates new data file
         /// </summary>
         /// <param name="id">Identifier of file</param>
-        /// <param name="name">Name of file</param>
+        /// <param name="name">Name of physical file</param>
         /// <param name="description">Description of file</param>
-        /// <param name="path">Path to physical file</param>
+        /// <param name="originalName">Original name of file</param>
         /// <param name="informationSystem">Information system which format of data file holds</param>
         /// <param name="map">Map which data file holds</param>
         public DataFile(
             string id,
             string name,
             string description,
-            string path,
+            string originalName,
             InformationSystem informationSystem,
             Map map
         ) : base(id, name, description)
         {
-            this.Path = path;
+            this.OriginalName = originalName;
+            this.InformationSystem = informationSystem;
+            this.Map = map;
+        }
+
+        /// <summary>
+        /// Creates new data file
+        /// </summary>
+        /// <param name="id">Identifier of file</param>
+        /// <param name="name">Name of physical file</param>
+        /// <param name="description">Description of file</param>
+        /// <param name="originalName">Original name of file</param>
+        /// <param name="informationSystem">Information system which format of data file holds</param>
+        /// <param name="map">Map which data file holds</param>
+        /// <param name="created">Date and time of data file creation</param>
+        /// <param name="updated">Date and time of last data file update</param>
+        public DataFile(
+            string id,
+            string name,
+            string description,
+            string originalName,
+            InformationSystem informationSystem,
+            Map map,
+            DateTime created,
+            DateTime updated
+        ): base(id, name, description, created, updated)
+        {
+            this.OriginalName = originalName;
             this.InformationSystem = informationSystem;
             this.Map = map;
         }
