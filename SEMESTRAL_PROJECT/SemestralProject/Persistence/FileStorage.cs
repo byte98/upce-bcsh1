@@ -92,6 +92,11 @@ namespace SemestralProject.Persistence
         private readonly List<Picture> pictures;
 
         /// <summary>
+        /// List with all available data files
+        /// </summary>
+        private readonly List<string> dataFiles;
+
+        /// <summary>
         /// Path to file storage
         /// </summary>
         private readonly string path;
@@ -111,6 +116,7 @@ namespace SemestralProject.Persistence
             this.configuration = configuration;
             this.icons = new List<Icon>();
             this.pictures = new List<Picture>();
+            this.dataFiles = new List<string>();
             this.path = path;
         }
 
@@ -137,6 +143,8 @@ namespace SemestralProject.Persistence
                 Directory.CreateDirectory(iconsFolder);
                 string picturesFolder = output + Path.DirectorySeparatorChar + "[PICTURES]";
                 Directory.CreateDirectory(picturesFolder);
+                string dataFilesFolder = output + Path.DirectorySeparatorChar + "[DATAFILES]";
+                Directory.CreateDirectory(dataFilesFolder);
             }
         }
 
@@ -163,8 +171,21 @@ namespace SemestralProject.Persistence
             this.pictures.Clear();
             foreach(string file in Directory.GetFiles(output))
             {
-                FileInfo fi = new FileInfo(file);
                 this.pictures.Add(new Picture(file));
+            }
+        }
+
+        /// <summary>
+        /// Loads data files (this needs to be called after <see cref="Load"/> is called!)
+        /// </summary>
+        public void LoadDataFiles()
+        {
+            string output = this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[DATAFILES]";
+            this.dataFiles.Clear();
+            foreach (string file in Directory.GetFiles(output))
+            {
+                FileInfo fi = new FileInfo(file);
+                this.dataFiles.Add(fi.Name);
             }
         }
 

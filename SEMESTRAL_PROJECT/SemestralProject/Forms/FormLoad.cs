@@ -116,33 +116,41 @@ namespace SemestralProject.Forms
             {
                 this.Context.FileStorage.Load();
             }));
-            this.loadingSequence.Add(new LoadSequenceItem(20/2, "Načítám ikony...", () =>
+            this.loadingSequence.Add(new LoadSequenceItem(20 / 3, "Načítám ikony...", () =>
             {
                 this.Context.FileStorage.LoadIcons();
             }));
-            this.loadingSequence.Add(new LoadSequenceItem(20/2, "Načítám obrázky...", () =>
+            this.loadingSequence.Add(new LoadSequenceItem(20 / 3, "Načítám obrázky...", () =>
             {
                 this.Context.FileStorage.LoadPictures();
+            }));
+            this.loadingSequence.Add(new LoadSequenceItem(20 / 3, "Načítám obsah datových souborů...", () =>
+            {
+                this.Context.FileStorage.LoadDataFiles();
             }));
             this.loadingSequence.Add(new LoadSequenceItem(5, "Načítám data...", () =>
             {
                 this.Context.DataStorage.Load();
             }));
-            this.loadingSequence.Add(new LoadSequenceItem(60 / 4, "Načítám informační systémy...", () =>
+            this.loadingSequence.Add(new LoadSequenceItem(60 / 5, "Načítám informační systémy...", () =>
             {
                 this.Context.DataStorage.LoadInformationSystems();
             }));
-            this.loadingSequence.Add(new LoadSequenceItem(60 / 4, "Načítám oblasti...", () =>
+            this.loadingSequence.Add(new LoadSequenceItem(60 / 5, "Načítám oblasti...", () =>
             {
                 this.Context.DataStorage.LoadMaps();
             }));
-            this.loadingSequence.Add(new LoadSequenceItem(60 / 4, "Načítám výrobce...", () =>
+            this.loadingSequence.Add(new LoadSequenceItem(60 / 5, "Načítám výrobce...", () =>
             {
                 this.Context.DataStorage.LoadManufacturers();
             }));
-            this.loadingSequence.Add(new LoadSequenceItem(60 / 4, "Načítám vozidla...", () =>
+            this.loadingSequence.Add(new LoadSequenceItem(60 / 5, "Načítám vozidla...", () =>
             {
                 this.Context.DataStorage.LoadVehicles();
+            }));
+            this.loadingSequence.Add(new LoadSequenceItem(60 / 5, "Načítám datové soubory...", () =>
+            {
+                this.Context.DataStorage.LoadDataFiles();
             }));
         }
 
