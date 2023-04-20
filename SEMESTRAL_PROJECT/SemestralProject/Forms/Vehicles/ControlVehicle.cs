@@ -68,6 +68,60 @@ namespace SemestralProject.Forms.Vehicles
         }
 
         /// <summary>
+        /// Structure holding all necessary information for showing all information systems in combo box
+        /// </summary>
+        private struct InformationSystemItem
+        {
+            /// <summary>
+            /// Displayed name in combo box
+            /// </summary>
+            public string DisplayName { get; set; }
+
+            /// <summary>
+            /// Information system which combo box item represents
+            /// </summary>
+            public InformationSystem System { get; set; }
+
+            /// <summary>
+            /// Creates new combo box item with information system
+            /// </summary>
+            /// <param name="system">Information system represented by combo box item</param>
+            public InformationSystemItem(InformationSystem system) : this(system.Name, system) { }
+
+            /// <summary>
+            /// Creates new combo box item with information system
+            /// </summary>
+            /// <param name="name">Name displayed in combo box</param>
+            /// <param name="system">Information system represented by combo box item</param>
+            public InformationSystemItem(string name, InformationSystem system)
+            {
+                this.DisplayName = name;
+                this.System = system;
+            }
+
+            public override bool Equals([NotNullWhen(true)] object? obj)
+            {
+                bool reti = base.Equals(obj);
+                if (obj != null && obj is InformationSystemItem)
+                {
+                    InformationSystemItem other = (InformationSystemItem)obj;
+                    reti = (this.System.Id == other.System.Id);
+                }
+                return reti;
+            }
+
+            public override int GetHashCode()
+            {
+                return this.System.Id.GetHashCode();
+            }
+
+            public override string ToString()
+            {
+                return this.DisplayName;
+            }
+        }
+
+        /// <summary>
         /// Wrapper of all program resources
         /// </summary>
         public Context Context { get; init; }
@@ -91,6 +145,11 @@ namespace SemestralProject.Forms.Vehicles
         /// Manufacturer of vehicle
         /// </summary>
         public Manufacturer? VehicleManufacturer {get; private set; }
+        
+        /// <summary>
+        /// Information system installed on vehicle
+        /// </summary>
+        public InformationSystem? VehicleInformationSystem { get; private set; }
 
         /// <summary>
         /// Path to directory with vehicle
@@ -112,6 +171,7 @@ namespace SemestralProject.Forms.Vehicles
             this.InitializeComponent();
             this.Context = context;
             this.InitializeManufacturers();
+            this.InitializeInformationSystems();
             this.VehiclePicture = this.Context.FileStorage.GetPictureChecked(null);
             this.buttonPicture.BackgroundImage = this.VehiclePicture.GetImage();
             this.rootPath = path;
@@ -129,10 +189,13 @@ namespace SemestralProject.Forms.Vehicles
             this.InitializeComponent();
             this.Context = context;
             this.InitializeManufacturers();
+            this.InitializeInformationSystems();
             this.textBoxName.Text = vehicle.Name;
             this.textBoxDescription.Text = vehicle.Description;
             this.VehicleManufacturer = vehicle.Manufacturer;
             this.comboBoxManufacturer.SelectedItem = new ManufacturerItem(this.VehicleManufacturer);
+            this.VehicleInformationSystem = vehicle.InformationSystem;
+            this.comboBoxInformationSystem.SelectedItem = new InformationSystemItem(this.VehicleInformationSystem);
             this.VehiclePicture = vehicle.Picture;
             this.buttonPicture.BackgroundImage = this.VehiclePicture.GetImage();
             this.buttonPath.Text = vehicle.Path;
@@ -151,6 +214,18 @@ namespace SemestralProject.Forms.Vehicles
             }
         }
 
+        /// <summary>
+        /// Initializes combo box with all available information systems
+        /// </summary>
+        private void InitializeInformationSystems()
+        {
+            this.comboBoxInformationSystem.Items.Clear();
+            foreach(InformationSystem system in this.Context.DataStorage.InformationSystems)
+            {
+                this.comboBoxInformationSystem.Items.Add(new InformationSystemItem(system));
+            }
+        }
+        
         private void buttonPicture_Click(object sender, EventArgs e)
         {
             FormPictureChooser dialog = new FormPictureChooser(this.Context);

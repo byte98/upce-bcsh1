@@ -38,6 +38,9 @@
             this.labelManufacturer = new System.Windows.Forms.Label();
             this.comboBoxManufacturer = new System.Windows.Forms.ComboBox();
             this.labelSpace3 = new System.Windows.Forms.Label();
+            this.labelInformationSystem = new System.Windows.Forms.Label();
+            this.comboBoxInformationSystem = new System.Windows.Forms.ComboBox();
+            this.labelSpace5 = new System.Windows.Forms.Label();
             this.labelPath = new System.Windows.Forms.Label();
             this.buttonPath = new System.Windows.Forms.Button();
             this.labelSpace4 = new System.Windows.Forms.Label();
@@ -57,6 +60,9 @@
             this.flowLayoutPanelContent.Controls.Add(this.labelManufacturer);
             this.flowLayoutPanelContent.Controls.Add(this.comboBoxManufacturer);
             this.flowLayoutPanelContent.Controls.Add(this.labelSpace3);
+            this.flowLayoutPanelContent.Controls.Add(this.labelInformationSystem);
+            this.flowLayoutPanelContent.Controls.Add(this.comboBoxInformationSystem);
+            this.flowLayoutPanelContent.Controls.Add(this.labelSpace5);
             this.flowLayoutPanelContent.Controls.Add(this.labelPath);
             this.flowLayoutPanelContent.Controls.Add(this.buttonPath);
             this.flowLayoutPanelContent.Controls.Add(this.labelSpace4);
@@ -66,7 +72,7 @@
             this.flowLayoutPanelContent.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelContent.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanelContent.Name = "flowLayoutPanelContent";
-            this.flowLayoutPanelContent.Size = new System.Drawing.Size(395, 585);
+            this.flowLayoutPanelContent.Size = new System.Drawing.Size(395, 661);
             this.flowLayoutPanelContent.TabIndex = 3;
             // 
             // labelName
@@ -152,10 +158,37 @@
             this.labelSpace3.TabIndex = 8;
             this.labelSpace3.Text = " ";
             // 
+            // labelInformationSystem
+            // 
+            this.labelInformationSystem.AutoSize = true;
+            this.labelInformationSystem.Location = new System.Drawing.Point(3, 332);
+            this.labelInformationSystem.Name = "labelInformationSystem";
+            this.labelInformationSystem.Size = new System.Drawing.Size(129, 20);
+            this.labelInformationSystem.TabIndex = 15;
+            this.labelInformationSystem.Text = "Informační systém";
+            // 
+            // comboBoxInformationSystem
+            // 
+            this.comboBoxInformationSystem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxInformationSystem.FormattingEnabled = true;
+            this.comboBoxInformationSystem.Location = new System.Drawing.Point(3, 355);
+            this.comboBoxInformationSystem.Name = "comboBoxInformationSystem";
+            this.comboBoxInformationSystem.Size = new System.Drawing.Size(388, 28);
+            this.comboBoxInformationSystem.TabIndex = 16;
+            // 
+            // labelSpace5
+            // 
+            this.labelSpace5.AutoSize = true;
+            this.labelSpace5.Location = new System.Drawing.Point(3, 386);
+            this.labelSpace5.Name = "labelSpace5";
+            this.labelSpace5.Size = new System.Drawing.Size(13, 20);
+            this.labelSpace5.TabIndex = 14;
+            this.labelSpace5.Text = " ";
+            // 
             // labelPath
             // 
             this.labelPath.AutoSize = true;
-            this.labelPath.Location = new System.Drawing.Point(3, 332);
+            this.labelPath.Location = new System.Drawing.Point(3, 406);
             this.labelPath.Name = "labelPath";
             this.labelPath.Size = new System.Drawing.Size(67, 20);
             this.labelPath.TabIndex = 12;
@@ -165,7 +198,7 @@
             // 
             this.buttonPath.Image = global::SemestralProject.Resources.folder_open;
             this.buttonPath.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonPath.Location = new System.Drawing.Point(3, 355);
+            this.buttonPath.Location = new System.Drawing.Point(3, 429);
             this.buttonPath.Name = "buttonPath";
             this.buttonPath.Size = new System.Drawing.Size(388, 34);
             this.buttonPath.TabIndex = 13;
@@ -178,7 +211,7 @@
             // labelSpace4
             // 
             this.labelSpace4.AutoSize = true;
-            this.labelSpace4.Location = new System.Drawing.Point(3, 392);
+            this.labelSpace4.Location = new System.Drawing.Point(3, 466);
             this.labelSpace4.Name = "labelSpace4";
             this.labelSpace4.Size = new System.Drawing.Size(13, 20);
             this.labelSpace4.TabIndex = 11;
@@ -187,7 +220,7 @@
             // labelDescription
             // 
             this.labelDescription.AutoSize = true;
-            this.labelDescription.Location = new System.Drawing.Point(3, 412);
+            this.labelDescription.Location = new System.Drawing.Point(3, 486);
             this.labelDescription.Name = "labelDescription";
             this.labelDescription.Size = new System.Drawing.Size(44, 20);
             this.labelDescription.TabIndex = 6;
@@ -195,7 +228,7 @@
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(3, 435);
+            this.textBoxDescription.Location = new System.Drawing.Point(3, 509);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.Size = new System.Drawing.Size(388, 144);
@@ -207,7 +240,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanelContent);
             this.Name = "ControlVehicle";
-            this.Size = new System.Drawing.Size(395, 585);
+            this.Size = new System.Drawing.Size(395, 661);
             this.flowLayoutPanelContent.ResumeLayout(false);
             this.flowLayoutPanelContent.PerformLayout();
             this.ResumeLayout(false);
@@ -231,5 +264,8 @@
         private Label labelPath;
         private Label labelSpace4;
         private Button buttonPath;
+        private Label labelInformationSystem;
+        private Label labelSpace5;
+        private ComboBox comboBoxInformationSystem;
     }
 }

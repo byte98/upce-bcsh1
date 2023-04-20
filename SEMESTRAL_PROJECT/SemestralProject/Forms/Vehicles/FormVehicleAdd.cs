@@ -45,6 +45,11 @@ namespace SemestralProject.Forms.Vehicles
         public string VehiclePath => this.content.VehiclePath;
 
         /// <summary>
+        /// Information system installed on vehicle
+        /// </summary>
+        public InformationSystem? VehicleInformationSystem => this.content.VehicleInformationSystem;
+
+        /// <summary>
         /// Creates new dialog for creating new vehicle
         /// </summary>
         /// <param name="context">Wrapper of all system resources</param>

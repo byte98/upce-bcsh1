@@ -541,7 +541,6 @@ namespace SemestralProject.Forms
                 this.RefreshFileView();
             }
         }
-        #endregion
 
         private void buttonRemoveFile_Click(object sender, EventArgs e)
         {
@@ -570,5 +569,6 @@ namespace SemestralProject.Forms
             this.textBoxFileSearch.Text = string.Empty;
             this.RefreshFileView();
         }
+        #endregion
     }
 }

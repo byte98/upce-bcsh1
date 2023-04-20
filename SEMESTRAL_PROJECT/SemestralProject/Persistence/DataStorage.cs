@@ -221,6 +221,11 @@ namespace SemestralProject.Persistence
                 public const string Path = "PATH";
 
                 /// <summary>
+                /// XML element holding identifier of information system installed on vehicle
+                /// </summary>
+                public const string InformationSystem = "INFORMATION_SYSTEM";
+
+                /// <summary>
                 /// XML element holding date and time of creation of vehicle
                 /// </summary>
                 public const string Created = "CREATED";
@@ -607,6 +612,7 @@ namespace SemestralProject.Persistence
                             XmlNodeList? updtList = vehicleElem.GetElementsByTagName(DataStorage.XML.Vehicle.Updated);
                             XmlNodeList? manuList = vehicleElem.GetElementsByTagName(DataStorage.XML.Vehicle.Manufacturer);
                             XmlNodeList? pathList = vehicleElem.GetElementsByTagName(DataStorage.XML.Vehicle.Path);
+                            XmlNodeList? infsList = vehicleElem.GetElementsByTagName(DataStorage.XML.Vehicle.InformationSystem);
                             if (
                                     idenList != null && idenList.Count >= 1 &&
                                     nameList != null && nameList.Count >= 1 &&
@@ -615,7 +621,8 @@ namespace SemestralProject.Persistence
                                     credList != null && credList.Count >= 1 &&
                                     updtList != null && updtList.Count >= 1 &&
                                     manuList != null && manuList.Count >= 1 &&
-                                    pathList != null && pathList.Count >= 1
+                                    pathList != null && pathList.Count >= 1 &&
+                                    infsList != null && infsList.Count >= 1
                                )
                             {
                                 XmlElement? idenElement = (XmlElement?)idenList[0];
@@ -626,6 +633,7 @@ namespace SemestralProject.Persistence
                                 XmlElement? updtElement = (XmlElement?)updtList[0];
                                 XmlElement? manuElement = (XmlElement?)manuList[0];
                                 XmlElement? pathElement = (XmlElement?)pathList[0];
+                                XmlElement? infsElement = (XmlElement?)infsList[0];
                                 if (
                                         idenElement != null &&
                                         nameElement != null &&
@@ -634,11 +642,13 @@ namespace SemestralProject.Persistence
                                         credElement != null &&
                                         updtElement != null &&
                                         manuElement != null &&
-                                        pathElement != null
+                                        pathElement != null &&
+                                        infsElement != null
                                    )
                                 {
                                     Manufacturer? manufacturer = this.GetManufacturerById(manuElement.InnerText);
-                                    if (manufacturer != null )
+                                    InformationSystem? informationSystem = this.GetInformationSystemById(infsElement.InnerText);
+                                    if (manufacturer != null && informationSystem != null)
                                     {
                                         this.Vehicles.Add(new Vehicle(
                                             idenElement.InnerText,
@@ -647,6 +657,7 @@ namespace SemestralProject.Persistence
                                             this.fileStorage.GetPictureChecked(pictElement.InnerText),
                                             manufacturer,
                                             pathElement.InnerText,
+                                            informationSystem,
                                             DateTime.ParseExact(credElement.InnerText, DataStorage.XML._Date, null),
                                             DateTime.ParseExact(updtElement.InnerText, DataStorage.XML._Date, null)
                                         ));
@@ -916,36 +927,39 @@ namespace SemestralProject.Persistence
             XmlDeclaration declaration = doc.CreateXmlDeclaration(DataStorage.XML._Version, DataStorage.XML._Charset, null);
             XmlElement? root = doc.DocumentElement;
             doc.InsertBefore(declaration, root);
-            XmlElement dataFiles = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle._Root, null);
-            doc.AppendChild(dataFiles);
-            foreach (Vehicle dataFile in this.Vehicles)
+            XmlElement vehicles = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle._Root, null);
+            doc.AppendChild(vehicles);
+            foreach (Vehicle vehicle in this.Vehicles)
             {
-                XmlElement dataFileElem = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle._Element, string.Empty);
+                XmlElement vehicleElem = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle._Element, string.Empty);
                 XmlElement id = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Id, string.Empty);
-                id.InnerText = dataFile.Id;
-                dataFileElem.AppendChild(id);
+                id.InnerText = vehicle.Id;
+                vehicleElem.AppendChild(id);
                 XmlElement created = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Created, string.Empty);
-                created.InnerText = dataFile.Created.ToString(DataStorage.XML._Date);
-                dataFileElem.AppendChild(created);
+                created.InnerText = vehicle.Created.ToString(DataStorage.XML._Date);
+                vehicleElem.AppendChild(created);
                 XmlElement updated = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Updated, string.Empty);
-                updated.InnerText = dataFile.Updated.ToString(DataStorage.XML._Date);
-                dataFileElem.AppendChild(updated);
+                updated.InnerText = vehicle.Updated.ToString(DataStorage.XML._Date);
+                vehicleElem.AppendChild(updated);
                 XmlElement picture = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Picture, string.Empty);
-                picture.InnerText = dataFile.Picture.Name;
-                dataFileElem.AppendChild(picture);
+                picture.InnerText = vehicle.Picture.Name;
+                vehicleElem.AppendChild(picture);
                 XmlElement name = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Name, string.Empty);
-                name.InnerText = dataFile.Name;
-                dataFileElem.AppendChild(name);
+                name.InnerText = vehicle.Name;
+                vehicleElem.AppendChild(name);
                 XmlElement desc = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Description, string.Empty);
-                desc.InnerText = dataFile.Description;
-                dataFileElem.AppendChild(desc);
+                desc.InnerText = vehicle.Description;
+                vehicleElem.AppendChild(desc);
                 XmlElement man = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Manufacturer, string.Empty);
-                man.InnerText = dataFile.Manufacturer.Id;
-                dataFileElem.AppendChild(man);
+                man.InnerText = vehicle.Manufacturer.Id;
+                vehicleElem.AppendChild(man);
                 XmlElement path = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.Path, string.Empty);
-                path.InnerText = dataFile.Path;
-                dataFileElem.AppendChild(path);
-                dataFiles.AppendChild(dataFileElem);
+                path.InnerText = vehicle.Path;
+                vehicleElem.AppendChild(path);
+                XmlElement informationSystem = doc.CreateElement(string.Empty, DataStorage.XML.Vehicle.InformationSystem, string.Empty);
+                informationSystem.InnerText = vehicle.InformationSystem.Id;
+                vehicleElem.AppendChild(informationSystem);
+                vehicles.AppendChild(vehicleElem);
             }
             doc.Save(this.configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.VehicleFile);
         }

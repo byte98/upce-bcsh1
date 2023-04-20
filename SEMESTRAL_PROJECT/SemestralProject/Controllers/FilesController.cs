@@ -132,8 +132,9 @@ namespace SemestralProject.Controllers
             DataFile? file = this.GetById(id);
             if (file != null)
             {
+                FileInfo fi = new FileInfo(file.OriginalPath);
                 if (MessageBox.Show(
-                        "Opravdu chcete odstranit soubor " + file.Name + "?" + Environment.NewLine +
+                        "Opravdu chcete odstranit soubor " + fi.Name + "?" + Environment.NewLine +
                         "Tato akce je nevratná.",
                         "Ostranit soubor",
                         MessageBoxButtons.YesNo,

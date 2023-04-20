@@ -48,7 +48,7 @@ namespace SemestralProject.Controllers
             FormVehicleAdd dialog = new FormVehicleAdd(this.context);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                if (dialog.VehicleManufacturer != null)
+                if (dialog.VehicleManufacturer != null && dialog.VehicleInformationSystem != null)
                 {
                     FormWait wait = new FormWait(() =>
                     {
@@ -58,7 +58,8 @@ namespace SemestralProject.Controllers
                             dialog.VehicleDescription,
                             dialog.VehiclePicture,
                             dialog.VehicleManufacturer,
-                            dialog.VehiclePath));
+                            dialog.VehiclePath,
+                            dialog.VehicleInformationSystem));
                         this.context.DataStorage.Save();
                     }, this.context);
                     wait.ShowDialog();
@@ -97,7 +98,7 @@ namespace SemestralProject.Controllers
             if (vehicle != null)
             {
                 FormVehicleEdit dialog = new FormVehicleEdit(this.context, vehicle);
-                if (dialog.ShowDialog() == DialogResult.OK && dialog.VehicleManufacturer != null)
+                if (dialog.ShowDialog() == DialogResult.OK && dialog.VehicleManufacturer != null && dialog.VehicleInformationSystem != null)
                 {
                     FormWait wait = new FormWait(() =>
                     {
@@ -106,7 +107,8 @@ namespace SemestralProject.Controllers
                             dialog.VehicleDescription,
                             dialog.VehiclePicture,
                             dialog.VehicleManufacturer,
-                            dialog.VehiclePath
+                            dialog.VehiclePath,
+                            dialog.VehicleInformationSystem
                         );
                         this.context.DataStorage.Save();
                     }, this.context);

@@ -35,6 +35,11 @@ namespace SemestralProject.Forms.Vehicles
         public Manufacturer? VehicleManufacturer => this.content.VehicleManufacturer;
 
         /// <summary>
+        /// Information system installed on vehcile
+        /// </summary>
+        public InformationSystem? VehicleInformationSystem => this.content.VehicleInformationSystem;
+
+        /// <summary>
         /// Path to directory with vehicle
         /// </summary>
         public string VehiclePath => this.content.VehiclePath;
