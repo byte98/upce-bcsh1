@@ -397,5 +397,38 @@ namespace SemestralProject.Persistence
         }
         #endregion
 
+        #region Data files
+        /// <summary>
+        /// Adds data file to file storage
+        /// </summary>
+        /// <param name="path">Path to file</param>
+        /// <returns>Name of added file in file storage</returns>
+        public string AddDataFile(string path)
+        {
+            string reti = string.Empty;
+            if (File.Exists(path))
+            {
+                reti = this.GenerateUniqueDataFile();
+                string destination = this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[DATAFILES]" + Path.DirectorySeparatorChar + reti;
+                File.Copy(path, destination, false);
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Generates unique name for data file
+        /// </summary>
+        /// <returns>Pseudo-random unique name for data file</returns>
+        private string GenerateUniqueDataFile()
+        {
+            string reti = string.Empty;
+            do
+            {
+                reti = StringUtils.Random(FileStorage.NameAlphabet, FileStorage.NameMin, FileStorage.NameMax);
+            }
+            while (this.dataFiles.Contains(reti));
+            return reti;
+        }
+        #endregion
     }
 }
