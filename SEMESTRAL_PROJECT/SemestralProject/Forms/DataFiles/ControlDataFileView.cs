@@ -123,5 +123,4 @@ namespace SemestralProject.Forms.DataFiles
             this.SelectedDataChanged?.Invoke(this, new SelectedDataChangedEventArgs() { SelectedData = this.SelectedData });
         }
     }
-    }
 }
