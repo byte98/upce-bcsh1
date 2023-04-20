@@ -257,9 +257,9 @@ namespace SemestralProject.Persistence
                 public const string Name = "NAME";
 
                 /// <summary>
-                /// XML element with original name of physical file
+                /// XML element with original path of physical file
                 /// </summary>
-                public const string OriginalName = "ORIGINAL_NAME";
+                public const string OriginalPath = "ORIGINAL_PATH";
 
                 /// <summary>
                 /// XML element with description of data file
@@ -683,7 +683,7 @@ namespace SemestralProject.Persistence
                             XmlNodeList? descList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.Description);
                             XmlNodeList? credList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.Created);
                             XmlNodeList? updtList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.Updated);
-                            XmlNodeList? onamList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.OriginalName);
+                            XmlNodeList? origList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.OriginalPath);
                             XmlNodeList? infsList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.InformationSystem);
                             XmlNodeList? mapsList = dataFileElem.GetElementsByTagName(DataStorage.XML.DataFile.Map);
                             if (
@@ -692,7 +692,7 @@ namespace SemestralProject.Persistence
                                     descList != null && descList.Count >= 1 &&
                                     credList != null && credList.Count >= 1 &&
                                     updtList != null && updtList.Count >= 1 &&
-                                    onamList != null && onamList.Count >= 1 &&
+                                    origList != null && origList.Count >= 1 &&
                                     infsList != null && infsList.Count >= 1 &&
                                     mapsList != null && mapsList.Count >= 1
                                )
@@ -702,7 +702,7 @@ namespace SemestralProject.Persistence
                                 XmlElement? descElement = (XmlElement?)descList[0];
                                 XmlElement? credElement = (XmlElement?)credList[0];
                                 XmlElement? updtElement = (XmlElement?)updtList[0];
-                                XmlElement? onamElement = (XmlElement?)onamList[0];
+                                XmlElement? origElement = (XmlElement?)origList[0];
                                 XmlElement? infsElement = (XmlElement?)infsList[0];
                                 XmlElement? mapsElement = (XmlElement?)mapsList[0];
                                 if (
@@ -711,7 +711,7 @@ namespace SemestralProject.Persistence
                                         descElement != null &&
                                         credElement != null &&
                                         updtElement != null &&
-                                        onamElement != null &&
+                                        origElement != null &&
                                         infsElement != null &&
                                         mapsElement != null
                                    )
@@ -724,7 +724,7 @@ namespace SemestralProject.Persistence
                                                 idenElement.InnerText,
                                                 nameElement.InnerText,
                                                 descElement.InnerText,
-                                                onamElement.InnerText,
+                                                origElement.InnerText,
                                                 informationSystem,
                                                 map,
                                                 DateTime.ParseExact(credElement.InnerText, DataStorage.XML._Date, null),
@@ -979,9 +979,9 @@ namespace SemestralProject.Persistence
                 XmlElement desc = doc.CreateElement(string.Empty, DataStorage.XML.DataFile.Description, string.Empty);
                 desc.InnerText = dataFile.Description;
                 dataFileElem.AppendChild(desc);
-                XmlElement originalName = doc.CreateElement(string.Empty, DataStorage.XML.DataFile.OriginalName, string.Empty);
-                originalName.InnerText = dataFile.OriginalName;
-                dataFileElem.AppendChild(originalName);
+                XmlElement originalPath = doc.CreateElement(string.Empty, DataStorage.XML.DataFile.OriginalPath, string.Empty);
+                originalPath.InnerText = dataFile.OriginalPath;
+                dataFileElem.AppendChild(originalPath);
                 XmlElement informationSytem = doc.CreateElement(string.Empty, DataStorage.XML.DataFile.InformationSystem, string.Empty);
                 informationSytem.InnerText = dataFile.InformationSystem.Id;
                 dataFileElem.AppendChild(informationSytem);

@@ -194,6 +194,7 @@ namespace SemestralProject.Forms
                             case "OBLASTI": this.tabControlContent.SelectedTab = this.tabPageMaps; break;
                             case "VÝROBCI": this.tabControlContent.SelectedTab = this.tabPageManufacturers; break;
                             case "VOZIDLA": this.tabControlContent.SelectedTab = this.tabPageVehicles; break;
+                            case "SOUBORY": this.tabControlContent.SelectedTab = this.tabPageFiles; break;
                         }
                     }
                 }

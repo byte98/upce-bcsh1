@@ -12,9 +12,9 @@ namespace SemestralProject.Data
     internal class DataFile : AbstractData
     {
         /// <summary>
-        /// Original name of file
+        /// Original path to file
         /// </summary>
-        public string OriginalName { get; private set; }
+        public string OriginalPath { get; private set; }
 
         /// <summary>
         /// Information system which format of data file holds
@@ -32,19 +32,19 @@ namespace SemestralProject.Data
         /// <param name="id">Identifier of file</param>
         /// <param name="name">Name of physical file</param>
         /// <param name="description">Description of file</param>
-        /// <param name="originalName">Original name of file</param>
+        /// <param name="originalPath">Original path to file</param>
         /// <param name="informationSystem">Information system which format of data file holds</param>
         /// <param name="map">Map which data file holds</param>
         public DataFile(
             string id,
             string name,
             string description,
-            string originalName,
+            string originalPath,
             InformationSystem informationSystem,
             Map map
         ) : base(id, name, description)
         {
-            this.OriginalName = originalName;
+            this.OriginalPath = originalPath;
             this.InformationSystem = informationSystem;
             this.Map = map;
         }
@@ -55,7 +55,7 @@ namespace SemestralProject.Data
         /// <param name="id">Identifier of file</param>
         /// <param name="name">Name of physical file</param>
         /// <param name="description">Description of file</param>
-        /// <param name="originalName">Original name of file</param>
+        /// <param name="originalPath">Original path to file</param>
         /// <param name="informationSystem">Information system which format of data file holds</param>
         /// <param name="map">Map which data file holds</param>
         /// <param name="created">Date and time of data file creation</param>
@@ -64,14 +64,14 @@ namespace SemestralProject.Data
             string id,
             string name,
             string description,
-            string originalName,
+            string originalPath,
             InformationSystem informationSystem,
             Map map,
             DateTime created,
             DateTime updated
         ): base(id, name, description, created, updated)
         {
-            this.OriginalName = originalName;
+            this.OriginalPath = originalPath;
             this.InformationSystem = informationSystem;
             this.Map = map;
         }

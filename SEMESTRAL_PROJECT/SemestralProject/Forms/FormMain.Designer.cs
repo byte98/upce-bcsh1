@@ -32,6 +32,7 @@ namespace SemestralProject.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panelItemsControl = new System.Windows.Forms.Panel();
+            this.radioButtonFiles = new System.Windows.Forms.RadioButton();
             this.radioButtonVehicles = new System.Windows.Forms.RadioButton();
             this.radioButtonManufacturers = new System.Windows.Forms.RadioButton();
             this.radioButtonMaps = new System.Windows.Forms.RadioButton();
@@ -101,6 +102,21 @@ namespace SemestralProject.Forms
             this.buttonVehicleCancelSearch = new System.Windows.Forms.Button();
             this.buttonVehicleSearch = new System.Windows.Forms.Button();
             this.splitterVehicleControls3 = new System.Windows.Forms.Splitter();
+            this.tabPageFiles = new System.Windows.Forms.TabPage();
+            this.panelFileControls = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonAddFile = new System.Windows.Forms.Button();
+            this.buttonInfoFile = new System.Windows.Forms.Button();
+            this.buttonEditFile = new System.Windows.Forms.Button();
+            this.buttonRemoveFile = new System.Windows.Forms.Button();
+            this.buttonDeleteFile = new System.Windows.Forms.Button();
+            this.splitterFileControls1 = new System.Windows.Forms.Splitter();
+            this.panelFileSizeControl = new System.Windows.Forms.Panel();
+            this.splitterFileControls2 = new System.Windows.Forms.Splitter();
+            this.panelFileSearch = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttonFileCancelSearch = new System.Windows.Forms.Button();
+            this.buttonFileSearch = new System.Windows.Forms.Button();
+            this.splitterFileControls3 = new System.Windows.Forms.Splitter();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
             this.panelISControls.SuspendLayout();
@@ -115,10 +131,14 @@ namespace SemestralProject.Forms
             this.tabPageVehicles.SuspendLayout();
             this.panelVehicleControls.SuspendLayout();
             this.panelVehicleSearch.SuspendLayout();
+            this.tabPageFiles.SuspendLayout();
+            this.panelFileControls.SuspendLayout();
+            this.panelFileSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelItemsControl
             // 
+            this.panelItemsControl.Controls.Add(this.radioButtonFiles);
             this.panelItemsControl.Controls.Add(this.radioButtonVehicles);
             this.panelItemsControl.Controls.Add(this.radioButtonManufacturers);
             this.panelItemsControl.Controls.Add(this.radioButtonMaps);
@@ -128,6 +148,20 @@ namespace SemestralProject.Forms
             this.panelItemsControl.Name = "panelItemsControl";
             this.panelItemsControl.Size = new System.Drawing.Size(1348, 29);
             this.panelItemsControl.TabIndex = 1;
+            // 
+            // radioButtonFiles
+            // 
+            this.radioButtonFiles.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonFiles.AutoSize = true;
+            this.radioButtonFiles.FlatAppearance.BorderSize = 0;
+            this.radioButtonFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButtonFiles.Location = new System.Drawing.Point(431, -1);
+            this.radioButtonFiles.Name = "radioButtonFiles";
+            this.radioButtonFiles.Size = new System.Drawing.Size(85, 30);
+            this.radioButtonFiles.TabIndex = 5;
+            this.radioButtonFiles.TabStop = true;
+            this.radioButtonFiles.Text = "SOUBORY";
+            this.radioButtonFiles.UseVisualStyleBackColor = true;
             // 
             // radioButtonVehicles
             // 
@@ -390,6 +424,7 @@ namespace SemestralProject.Forms
             this.tabControlContent.Controls.Add(this.tabPageMaps);
             this.tabControlContent.Controls.Add(this.tabPageManufacturers);
             this.tabControlContent.Controls.Add(this.tabPageVehicles);
+            this.tabControlContent.Controls.Add(this.tabPageFiles);
             this.tabControlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlContent.Location = new System.Drawing.Point(0, 29);
             this.tabControlContent.Name = "tabControlContent";
@@ -979,6 +1014,184 @@ namespace SemestralProject.Forms
             this.splitterVehicleControls3.TabIndex = 9;
             this.splitterVehicleControls3.TabStop = false;
             // 
+            // tabPageFiles
+            // 
+            this.tabPageFiles.Controls.Add(this.panelFileControls);
+            this.tabPageFiles.Location = new System.Drawing.Point(4, 29);
+            this.tabPageFiles.Name = "tabPageFiles";
+            this.tabPageFiles.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageFiles.Size = new System.Drawing.Size(1340, 659);
+            this.tabPageFiles.TabIndex = 4;
+            this.tabPageFiles.Text = "SOUBORY";
+            this.tabPageFiles.UseVisualStyleBackColor = true;
+            // 
+            // panelFileControls
+            // 
+            this.panelFileControls.Controls.Add(this.buttonAddFile);
+            this.panelFileControls.Controls.Add(this.buttonInfoFile);
+            this.panelFileControls.Controls.Add(this.buttonEditFile);
+            this.panelFileControls.Controls.Add(this.buttonRemoveFile);
+            this.panelFileControls.Controls.Add(this.buttonDeleteFile);
+            this.panelFileControls.Controls.Add(this.splitterFileControls1);
+            this.panelFileControls.Controls.Add(this.panelFileSizeControl);
+            this.panelFileControls.Controls.Add(this.splitterFileControls2);
+            this.panelFileControls.Controls.Add(this.panelFileSearch);
+            this.panelFileControls.Controls.Add(this.splitterFileControls3);
+            this.panelFileControls.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelFileControls.Location = new System.Drawing.Point(3, 3);
+            this.panelFileControls.Name = "panelFileControls";
+            this.panelFileControls.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.panelFileControls.Size = new System.Drawing.Size(1334, 107);
+            this.panelFileControls.TabIndex = 2;
+            // 
+            // buttonAddFile
+            // 
+            this.buttonAddFile.FlatAppearance.BorderSize = 0;
+            this.buttonAddFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddFile.Image = global::SemestralProject.Resources.file_add;
+            this.buttonAddFile.Location = new System.Drawing.Point(3, 3);
+            this.buttonAddFile.Name = "buttonAddFile";
+            this.buttonAddFile.Size = new System.Drawing.Size(94, 94);
+            this.buttonAddFile.TabIndex = 0;
+            this.buttonAddFile.Text = "Přidat nový soubor";
+            this.buttonAddFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonAddFile.UseVisualStyleBackColor = true;
+            // 
+            // buttonInfoFile
+            // 
+            this.buttonInfoFile.Enabled = false;
+            this.buttonInfoFile.FlatAppearance.BorderSize = 0;
+            this.buttonInfoFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonInfoFile.Image = global::SemestralProject.Resources.file_info;
+            this.buttonInfoFile.Location = new System.Drawing.Point(103, 3);
+            this.buttonInfoFile.Name = "buttonInfoFile";
+            this.buttonInfoFile.Size = new System.Drawing.Size(94, 94);
+            this.buttonInfoFile.TabIndex = 1;
+            this.buttonInfoFile.Text = "Informace o souboru";
+            this.buttonInfoFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonInfoFile.UseVisualStyleBackColor = true;
+            // 
+            // buttonEditFile
+            // 
+            this.buttonEditFile.Enabled = false;
+            this.buttonEditFile.FlatAppearance.BorderSize = 0;
+            this.buttonEditFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEditFile.Image = global::SemestralProject.Resources.file_edit;
+            this.buttonEditFile.Location = new System.Drawing.Point(203, 3);
+            this.buttonEditFile.Name = "buttonEditFile";
+            this.buttonEditFile.Size = new System.Drawing.Size(94, 94);
+            this.buttonEditFile.TabIndex = 5;
+            this.buttonEditFile.Text = "Upravit soubor";
+            this.buttonEditFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonEditFile.UseVisualStyleBackColor = true;
+            // 
+            // buttonRemoveFile
+            // 
+            this.buttonRemoveFile.Enabled = false;
+            this.buttonRemoveFile.FlatAppearance.BorderSize = 0;
+            this.buttonRemoveFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRemoveFile.Image = global::SemestralProject.Resources.file_remove;
+            this.buttonRemoveFile.Location = new System.Drawing.Point(303, 3);
+            this.buttonRemoveFile.Name = "buttonRemoveFile";
+            this.buttonRemoveFile.Size = new System.Drawing.Size(94, 94);
+            this.buttonRemoveFile.TabIndex = 2;
+            this.buttonRemoveFile.Text = "Smazat soubor";
+            this.buttonRemoveFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonRemoveFile.UseVisualStyleBackColor = true;
+            // 
+            // buttonDeleteFile
+            // 
+            this.buttonDeleteFile.FlatAppearance.BorderSize = 0;
+            this.buttonDeleteFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDeleteFile.Image = global::SemestralProject.Resources.file_delete;
+            this.buttonDeleteFile.Location = new System.Drawing.Point(403, 3);
+            this.buttonDeleteFile.Name = "buttonDeleteFile";
+            this.buttonDeleteFile.Size = new System.Drawing.Size(94, 94);
+            this.buttonDeleteFile.TabIndex = 3;
+            this.buttonDeleteFile.Text = "Smazat všechno";
+            this.buttonDeleteFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonDeleteFile.UseVisualStyleBackColor = true;
+            // 
+            // splitterFileControls1
+            // 
+            this.splitterFileControls1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterFileControls1.Location = new System.Drawing.Point(503, 3);
+            this.splitterFileControls1.Name = "splitterFileControls1";
+            this.splitterFileControls1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.splitterFileControls1.Size = new System.Drawing.Size(1, 104);
+            this.splitterFileControls1.TabIndex = 4;
+            this.splitterFileControls1.TabStop = false;
+            // 
+            // panelFileSizeControl
+            // 
+            this.panelFileSizeControl.Location = new System.Drawing.Point(510, 3);
+            this.panelFileSizeControl.Name = "panelFileSizeControl";
+            this.panelFileSizeControl.Size = new System.Drawing.Size(188, 94);
+            this.panelFileSizeControl.TabIndex = 10;
+            // 
+            // splitterFileControls2
+            // 
+            this.splitterFileControls2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterFileControls2.Location = new System.Drawing.Point(704, 3);
+            this.splitterFileControls2.Name = "splitterFileControls2";
+            this.splitterFileControls2.Size = new System.Drawing.Size(1, 104);
+            this.splitterFileControls2.TabIndex = 8;
+            this.splitterFileControls2.TabStop = false;
+            // 
+            // panelFileSearch
+            // 
+            this.panelFileSearch.Controls.Add(this.textBox1);
+            this.panelFileSearch.Controls.Add(this.buttonFileCancelSearch);
+            this.panelFileSearch.Controls.Add(this.buttonFileSearch);
+            this.panelFileSearch.Location = new System.Drawing.Point(711, 3);
+            this.panelFileSearch.Name = "panelFileSearch";
+            this.panelFileSearch.Size = new System.Drawing.Size(253, 104);
+            this.panelFileSearch.TabIndex = 7;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(3, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.PlaceholderText = "Hledat";
+            this.textBox1.Size = new System.Drawing.Size(247, 27);
+            this.textBox1.TabIndex = 0;
+            // 
+            // buttonFileCancelSearch
+            // 
+            this.buttonFileCancelSearch.Enabled = false;
+            this.buttonFileCancelSearch.FlatAppearance.BorderSize = 0;
+            this.buttonFileCancelSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFileCancelSearch.Image = global::SemestralProject.Resources.search_cancel;
+            this.buttonFileCancelSearch.Location = new System.Drawing.Point(129, 36);
+            this.buttonFileCancelSearch.Name = "buttonFileCancelSearch";
+            this.buttonFileCancelSearch.Size = new System.Drawing.Size(120, 58);
+            this.buttonFileCancelSearch.TabIndex = 1;
+            this.buttonFileCancelSearch.Text = "Zrušit hledání";
+            this.buttonFileCancelSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonFileCancelSearch.UseVisualStyleBackColor = true;
+            // 
+            // buttonFileSearch
+            // 
+            this.buttonFileSearch.FlatAppearance.BorderSize = 0;
+            this.buttonFileSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFileSearch.Image = global::SemestralProject.Resources.search;
+            this.buttonFileSearch.Location = new System.Drawing.Point(3, 36);
+            this.buttonFileSearch.Name = "buttonFileSearch";
+            this.buttonFileSearch.Size = new System.Drawing.Size(120, 58);
+            this.buttonFileSearch.TabIndex = 1;
+            this.buttonFileSearch.Text = "Hledat";
+            this.buttonFileSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonFileSearch.UseVisualStyleBackColor = true;
+            // 
+            // splitterFileControls3
+            // 
+            this.splitterFileControls3.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterFileControls3.Location = new System.Drawing.Point(970, 3);
+            this.splitterFileControls3.Name = "splitterFileControls3";
+            this.splitterFileControls3.Size = new System.Drawing.Size(1, 104);
+            this.splitterFileControls3.TabIndex = 9;
+            this.splitterFileControls3.TabStop = false;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -1011,6 +1224,10 @@ namespace SemestralProject.Forms
             this.panelVehicleControls.ResumeLayout(false);
             this.panelVehicleSearch.ResumeLayout(false);
             this.panelVehicleSearch.PerformLayout();
+            this.tabPageFiles.ResumeLayout(false);
+            this.panelFileControls.ResumeLayout(false);
+            this.panelFileSearch.ResumeLayout(false);
+            this.panelFileSearch.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1086,5 +1303,21 @@ namespace SemestralProject.Forms
         private Button buttonVehicleSearch;
         private Splitter splitterVehicleControls3;
         private Panel panelVehicleContent;
+        private RadioButton radioButtonFiles;
+        private TabPage tabPageFiles;
+        private FlowLayoutPanel panelFileControls;
+        private Button buttonAddFile;
+        private Button buttonInfoFile;
+        private Button buttonEditFile;
+        private Button buttonRemoveFile;
+        private Button buttonDeleteFile;
+        private Splitter splitterFileControls1;
+        private Panel panelFileSizeControl;
+        private Splitter splitterFileControls2;
+        private Panel panelFileSearch;
+        private TextBox textBox1;
+        private Button buttonFileCancelSearch;
+        private Button buttonFileSearch;
+        private Splitter splitterFileControls3;
     }
 }
