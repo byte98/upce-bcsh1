@@ -31,8 +31,8 @@
             this.flowLayoutPanelContent = new System.Windows.Forms.FlowLayoutPanel();
             this.labelPath = new System.Windows.Forms.Label();
             this.tableLayoutPanelPath = new System.Windows.Forms.TableLayoutPanel();
-            this.textBoxPath = new System.Windows.Forms.TextBox();
             this.panelPathBrowse = new System.Windows.Forms.Panel();
+            this.textBoxPath = new System.Windows.Forms.TextBox();
             this.labelSpace1 = new System.Windows.Forms.Label();
             this.labelInformationSystem = new System.Windows.Forms.Label();
             this.comboBoxInformationSystem = new System.Windows.Forms.ComboBox();
@@ -40,6 +40,8 @@
             this.comboBoxMap = new System.Windows.Forms.ComboBox();
             this.labelDescription = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
+            this.labelSpace2 = new System.Windows.Forms.Label();
+            this.labelSpace3 = new System.Windows.Forms.Label();
             this.flowLayoutPanelContent.SuspendLayout();
             this.tableLayoutPanelPath.SuspendLayout();
             this.SuspendLayout();
@@ -51,8 +53,10 @@
             this.flowLayoutPanelContent.Controls.Add(this.labelSpace1);
             this.flowLayoutPanelContent.Controls.Add(this.labelInformationSystem);
             this.flowLayoutPanelContent.Controls.Add(this.comboBoxInformationSystem);
+            this.flowLayoutPanelContent.Controls.Add(this.labelSpace2);
             this.flowLayoutPanelContent.Controls.Add(this.labelMap);
             this.flowLayoutPanelContent.Controls.Add(this.comboBoxMap);
+            this.flowLayoutPanelContent.Controls.Add(this.labelSpace3);
             this.flowLayoutPanelContent.Controls.Add(this.labelDescription);
             this.flowLayoutPanelContent.Controls.Add(this.textBoxDescription);
             this.flowLayoutPanelContent.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -85,20 +89,20 @@
             this.tableLayoutPanelPath.Size = new System.Drawing.Size(546, 44);
             this.tableLayoutPanelPath.TabIndex = 1;
             // 
+            // panelPathBrowse
+            // 
+            this.panelPathBrowse.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelPathBrowse.Location = new System.Drawing.Point(400, 3);
+            this.panelPathBrowse.Name = "panelPathBrowse";
+            this.panelPathBrowse.Size = new System.Drawing.Size(143, 38);
+            this.panelPathBrowse.TabIndex = 1;
+            // 
             // textBoxPath
             // 
             this.textBoxPath.Location = new System.Drawing.Point(3, 3);
             this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.Size = new System.Drawing.Size(392, 27);
+            this.textBoxPath.Size = new System.Drawing.Size(391, 27);
             this.textBoxPath.TabIndex = 0;
-            // 
-            // panelPathBrowse
-            // 
-            this.panelPathBrowse.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelPathBrowse.Location = new System.Drawing.Point(401, 3);
-            this.panelPathBrowse.Name = "panelPathBrowse";
-            this.panelPathBrowse.Size = new System.Drawing.Size(142, 38);
-            this.panelPathBrowse.TabIndex = 1;
             // 
             // labelSpace1
             // 
@@ -130,7 +134,7 @@
             // labelMap
             // 
             this.labelMap.AutoSize = true;
-            this.labelMap.Location = new System.Drawing.Point(3, 167);
+            this.labelMap.Location = new System.Drawing.Point(3, 164);
             this.labelMap.Name = "labelMap";
             this.labelMap.Size = new System.Drawing.Size(52, 20);
             this.labelMap.TabIndex = 5;
@@ -140,7 +144,7 @@
             // 
             this.comboBoxMap.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMap.FormattingEnabled = true;
-            this.comboBoxMap.Location = new System.Drawing.Point(3, 190);
+            this.comboBoxMap.Location = new System.Drawing.Point(3, 187);
             this.comboBoxMap.Name = "comboBoxMap";
             this.comboBoxMap.Size = new System.Drawing.Size(543, 28);
             this.comboBoxMap.TabIndex = 6;
@@ -148,7 +152,7 @@
             // labelDescription
             // 
             this.labelDescription.AutoSize = true;
-            this.labelDescription.Location = new System.Drawing.Point(3, 241);
+            this.labelDescription.Location = new System.Drawing.Point(3, 238);
             this.labelDescription.Name = "labelDescription";
             this.labelDescription.Size = new System.Drawing.Size(44, 20);
             this.labelDescription.TabIndex = 7;
@@ -156,11 +160,29 @@
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(3, 264);
+            this.textBoxDescription.Location = new System.Drawing.Point(3, 261);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.Size = new System.Drawing.Size(543, 144);
             this.textBoxDescription.TabIndex = 8;
+            // 
+            // labelSpace2
+            // 
+            this.labelSpace2.AutoSize = true;
+            this.labelSpace2.Location = new System.Drawing.Point(3, 144);
+            this.labelSpace2.Name = "labelSpace2";
+            this.labelSpace2.Size = new System.Drawing.Size(13, 20);
+            this.labelSpace2.TabIndex = 9;
+            this.labelSpace2.Text = " ";
+            // 
+            // labelSpace3
+            // 
+            this.labelSpace3.AutoSize = true;
+            this.labelSpace3.Location = new System.Drawing.Point(3, 218);
+            this.labelSpace3.Name = "labelSpace3";
+            this.labelSpace3.Size = new System.Drawing.Size(13, 20);
+            this.labelSpace3.TabIndex = 10;
+            this.labelSpace3.Text = " ";
             // 
             // ControlDataFile
             // 
@@ -191,5 +213,7 @@
         private ComboBox comboBoxMap;
         private Label labelDescription;
         private TextBox textBoxDescription;
+        private Label labelSpace2;
+        private Label labelSpace3;
     }
 }

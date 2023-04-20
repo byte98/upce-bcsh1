@@ -208,7 +208,7 @@ namespace SemestralProject.Forms.DataFiles
         {
             // Browse button
             ControlBrowseButton browseButton = new ControlBrowseButton(this.Context);
-            browseButton.FileFilter = "*.* | Všechny soubory";
+            browseButton.FileFilter = "Všechny soubory (*.*)|*.*";
             browseButton.Dock = DockStyle.Fill;
             this.panelPathBrowse.Controls.Add(browseButton);
 
@@ -225,7 +225,14 @@ namespace SemestralProject.Forms.DataFiles
             {
                 this.comboBoxMap.Items.Add(new MapItem(map));
             }
-
+            
+            browseButton.FileSelectedEvent += new ControlBrowseButton.FileSelectedHandler(delegate (object sender, ControlBrowseButton.FileSelectedArgs args)
+            {
+                if (args.SelectedFile.Length > 0)
+                {
+                    this.textBoxPath.Text = args.SelectedFile;
+                }
+            });
         }
     }
 }

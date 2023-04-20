@@ -1,6 +1,7 @@
 ﻿using SemestralProject.Controllers;
 using SemestralProject.Data;
 using SemestralProject.Forms;
+using SemestralProject.Forms.DataFiles;
 using SemestralProject.Forms.Manufacturers;
 using SemestralProject.Persistence;
 using SemestralProject.Utils;
@@ -59,6 +60,16 @@ namespace SemestralProject.Forms
         private readonly ControlDataPictureView vehicleView;
 
         /// <summary>
+        /// Controller of data files
+        /// </summary>
+        private readonly FilesController filesController;
+
+        /// <summary>
+        /// Viewer of data files
+        /// </summary>
+        private readonly ControlDataFileView fileView;
+
+        /// <summary>
         /// Creates new main form of application
         /// </summary>
         /// <param name="context">Wrapper of all application resources</param>
@@ -74,14 +85,17 @@ namespace SemestralProject.Forms
             this.mapsView = new ControlDataPictureView(this.Context);
             this.manView = new ControlDataIconView(this.Context);
             this.vehicleView = new ControlDataPictureView(this.Context);
+            this.fileView = new ControlDataFileView(this.Context);
             this.InitializeIS();
             this.InitializeMaps();
             this.InitializeManufacturers();
             this.InitializeVehicles();
+            this.InitializeDataFiles();
             this.informationSystemsController = new InformationSystemsController(this.Context);
             this.mapsController = new MapsController(this.Context);
             this.manufacturersController = new ManufacturersController(this.Context);
             this.vehiclesController = new VehiclesController(this.Context);
+            this.filesController = new FilesController(this.Context);
         }
 
         /// <summary>
@@ -173,6 +187,25 @@ namespace SemestralProject.Forms
         }
 
         /// <summary>
+        /// Initializes data files page
+        /// </summary>
+        private void InitializeDataFiles()
+        {
+            this.fileView.Dock = DockStyle.Fill;
+            this.panelFileContent.Controls.Add(this.fileView);
+            ControlViewSizeButton fileSizeButton = new ControlViewSizeButton(this.Context);
+            this.panelFileSizeControl.Controls.Add(fileSizeButton);
+            fileSizeButton.Dock = DockStyle.Fill;
+            this.fileView.SelectedDataChanged += new SelectedDataChangedEventHandler(delegate (object sender, SelectedDataChangedEventArgs args)
+            {
+                this.buttonInfoFile.Enabled = (args.SelectedData != null);
+                this.buttonRemoveFile.Enabled = (args.SelectedData != null);
+                this.buttonEditFile.Enabled = (args.SelectedData != null);
+            });
+            fileSizeButton.DataView = this.fileView;
+        }
+
+        /// <summary>
         /// Sets correct color for selected item in top panel
         /// </summary>
         private void DisplaySelectedItem()
@@ -236,8 +269,10 @@ namespace SemestralProject.Forms
             this.mapsView.VisibleData = this.Context.DataStorage.Maps.OfType<AbstractPictureData>().ToList(); 
             this.manView.VisibleData = this.Context.DataStorage.Manufacturers.OfType<AbstractIconData>().ToList();
             this.vehicleView.VisibleData = this.Context.DataStorage.Vehicles.OfType<AbstractPictureData>().ToList();
+            this.fileView.VisibleData = this.Context.DataStorage.DataFiles;
         }
 
+        #region Information Systems
         /// <summary>
         /// Refreshes viewer of information systems
         /// </summary>
@@ -291,7 +326,9 @@ namespace SemestralProject.Forms
             this.buttonISCancelSearch.Enabled = false;
             this.textBoxISSearch.Text = string.Empty;
         }
+        #endregion
 
+        #region Maps
         /// <summary>
         /// Refresehes viewer of maps
         /// </summary>
@@ -350,7 +387,9 @@ namespace SemestralProject.Forms
             this.textBoxMapSearch.Text = string.Empty;
             this.buttonMapCancelSearch.Enabled = false;
         }
+        #endregion
 
+        #region Manufacturers
         /// <summary>
         /// Refreshes viewer of all available manufacturers
         /// </summary>
@@ -409,7 +448,9 @@ namespace SemestralProject.Forms
             this.buttonManufacturerCancelSearch.Enabled = false;
             this.RefreshManView();
         }
+        #endregion
 
+        #region Vehicles
         /// <summary>
         /// Refreshes viewer of vehicles
         /// </summary>
@@ -466,6 +507,68 @@ namespace SemestralProject.Forms
             this.textBoxVehicleSearch.Text = string.Empty;
             this.buttonVehicleCancelSearch.Enabled = false;
             this.RefreshVehicleView();
+        }
+        #endregion
+
+        #region Files
+        /// <summary>
+        /// Refreshes data files viewer to show all available data files
+        /// </summary>
+        private void RefreshFileView()
+        {
+            this.fileView.VisibleData = this.Context.DataStorage.DataFiles;
+        }
+
+        private void buttonAddFile_Click(object sender, EventArgs e)
+        {
+            this.filesController.Create();
+            this.RefreshFileView();
+        }
+
+        private void buttonInfoFile_Click(object sender, EventArgs e)
+        {
+            if (this.fileView.SelectedData != null)
+            {
+                this.filesController.Info(this.fileView.SelectedData);
+            }
+        }
+        
+        private void buttonEditFile_Click(object sender, EventArgs e)
+        {
+            if (this.fileView.SelectedData != null)
+            {
+                this.filesController.Edit(this.fileView.SelectedData);
+                this.RefreshFileView();
+            }
+        }
+        #endregion
+
+        private void buttonRemoveFile_Click(object sender, EventArgs e)
+        {
+            if (this.fileView.SelectedData != null)
+            {
+                this.filesController.Remove(this.fileView.SelectedData);
+                this.RefreshFileView();
+            }
+        }
+
+        private void buttonDeleteFile_Click(object sender, EventArgs e)
+        {
+            this.filesController.Delete();
+            this.RefreshFileView();
+        }
+
+        private void buttonFileSearch_Click(object sender, EventArgs e)
+        {
+            this.fileView.VisibleData = this.filesController.Search(this.textBoxFileSearch.Text);
+            this.buttonFileCancelSearch.Enabled = true;
+        }
+
+        private void buttonFileCancelSearch_Click(object sender, EventArgs e)
+        {
+            this.buttonFileCancelSearch.Enabled = false;
+            this.textBoxFileSearch.Text = string.Empty;
+            this.RefreshFileView();
         }
     }
 }

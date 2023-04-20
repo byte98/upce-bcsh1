@@ -41,7 +41,9 @@
             this.columnHeaderInformationSystem,
             this.columnHeaderMap});
             this.listViewContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewContent.FullRowSelect = true;
             this.listViewContent.Location = new System.Drawing.Point(0, 0);
+            this.listViewContent.MultiSelect = false;
             this.listViewContent.Name = "listViewContent";
             this.listViewContent.Size = new System.Drawing.Size(405, 315);
             this.listViewContent.TabIndex = 0;

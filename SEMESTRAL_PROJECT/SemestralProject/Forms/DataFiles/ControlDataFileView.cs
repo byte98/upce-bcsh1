@@ -79,19 +79,23 @@ namespace SemestralProject.Forms.DataFiles
         /// </summary>
         private void RefreshView()
         {
+            this.listViewContent.Items.Clear();
+
             // Prepare image lists
             ImageList smallList = new ImageList();
             ImageList largeList = new ImageList();
             smallList.ImageSize = new Size(ControlDataFileView.SmallSize, ControlDataFileView.SmallSize);
             largeList.ImageSize = new Size(ControlDataFileView.LargeSize, ControlDataFileView.LargeSize);
-            smallList.Images.Add(this.Context.FileStorage.GetIcon(Persistence.FileStorage.DefaultIconType.FILE).GetImage());
-            largeList.Images.Add(this.Context.FileStorage.GetIcon(Persistence.FileStorage.DefaultIconType.FILE).GetImage());
+            smallList.Images.Add("file", this.Context.FileStorage.GetIcon(Persistence.FileStorage.DefaultIconType.FILE).GetImage());
+            largeList.Images.Add("file", this.Context.FileStorage.GetIcon(Persistence.FileStorage.DefaultIconType.FILE).GetImage());
+            this.listViewContent.SmallImageList = smallList;
+            this.listViewContent.LargeImageList = largeList;
 
             // Show items
             foreach(DataFile file in this.visibleData)
             {
                 FileInfo fi = new FileInfo(file.OriginalPath);
-                ListViewItem item = new ListViewItem(fi.FullName, 0);
+                ListViewItem item = new ListViewItem(fi.Name, "file");
                 item.Tag = file.Id;
                 item.SubItems.Add(file.InformationSystem.Name);
                 item.SubItems.Add(file.Map.Name);

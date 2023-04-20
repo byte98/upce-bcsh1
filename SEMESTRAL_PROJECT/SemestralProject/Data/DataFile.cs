@@ -75,5 +75,21 @@ namespace SemestralProject.Data
             this.InformationSystem = informationSystem;
             this.Map = map;
         }
+
+        /// <summary>
+        /// Edits data file
+        /// </summary>
+        /// <param name="name">New name of physical file of data file</param>
+        /// <param name="description">New description of data file</param>
+        /// <param name="path">New original path to data file</param>
+        /// <param name="informationSystem">New information system of data file</param>
+        /// <param name="map">New map of data file</param>
+        public void Edit(string name, string description, string path, InformationSystem informationSystem, Map map)
+        {
+            base.Edit(name, description);
+            this.OriginalPath = path;
+            this.InformationSystem = informationSystem;
+            this.Map = map;
+        }
     }
 }

@@ -92,16 +92,24 @@ namespace SemestralProject.Forms
         /// </summary>
         /// <param name="directory">Directory which will be traversed</param>
         /// <returns>Structure of directory as tree node</returns>
-        private TreeNode TraverseDirectory(string directory)
+        private TreeNode? TraverseDirectory(string directory)
         {
-            string name = directory.Split(Path.DirectorySeparatorChar)[directory.Split(Path.DirectorySeparatorChar).Length - 1];
-            TreeNode reti = new TreeNode(name);
-            foreach(string dir in Directory.EnumerateDirectories(directory))
+            TreeNode? reti = null;
+            if (Directory.Exists(directory))
             {
-                reti.Nodes.Add(this.TraverseDirectory(dir));
+                string name = directory.Split(Path.DirectorySeparatorChar)[directory.Split(Path.DirectorySeparatorChar).Length - 1];
+                reti = new TreeNode(name);
+                foreach (string dir in Directory.EnumerateDirectories(directory))
+                {
+                    TreeNode? subdir = this.TraverseDirectory(dir);
+                    if (subdir != null)
+                    {
+                        reti.Nodes.Add(subdir);
+                    }
+                }
+                reti.ImageIndex = FormFolder.NodeDefault;
+                reti.SelectedImageIndex = FormFolder.NodeSelected;
             }
-            reti.ImageIndex = FormFolder.NodeDefault;
-            reti.SelectedImageIndex = FormFolder.NodeSelected;
             return reti;
         }
 
