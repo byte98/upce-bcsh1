@@ -34,8 +34,10 @@ namespace SemestralProject.Forms.Vehicles
             InitializeComponent();
             this.Context = context;
             this.pictureBoxImage.Image = vehicle.Picture.GetImage();
-            this.pictureBoxManufacturerIcon.Image = vehicle.Manufacturer.Icon.GetImage();
+            this.pictureBoxManufacturer.Image = vehicle.Manufacturer.Icon.GetImage();
             this.textBoxManufacturer.Text = vehicle.Manufacturer.Name;
+            this.pictureBoxInformationSystem.Image = vehicle.InformationSystem.Icon.GetImage();
+            this.textBoxInformationSystem.Text = vehicle.InformationSystem.Name;
             this.textBoxPath.Text = vehicle.Path;
             this.labelName.Text = vehicle.Name;
             this.textBoxDescription.Text = vehicle.Description;
@@ -43,9 +45,9 @@ namespace SemestralProject.Forms.Vehicles
             this.textBoxUpdated.Text = vehicle.Updated.ToString();
         }
 
-        private void textBoxPath_Click(object sender, EventArgs e)
+        private void buttonExplorer_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", Path.GetFullPath(this.textBoxPath.Text));
+            Process.Start("explorer.exe", this.textBoxPath.Text);
         }
     }
 }

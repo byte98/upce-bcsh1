@@ -248,7 +248,7 @@ namespace SemestralProject.Forms.Vehicles
 
         private void comboBoxManufacturer_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (this.comboBoxManufacturer.SelectedItem is ManufacturerItem)
+            if (this.comboBoxManufacturer.SelectedItem != null && this.comboBoxManufacturer.SelectedItem is ManufacturerItem)
             {
                 ManufacturerItem item = (ManufacturerItem)this.comboBoxManufacturer.SelectedItem;
                 this.VehicleManufacturer = item.Manufacturer;
@@ -261,6 +261,15 @@ namespace SemestralProject.Forms.Vehicles
             if (dialog.ShowDialog() == DialogResult.OK && dialog.SelectedPath != null && dialog.SelectedPath.Length > 0)
             {
                 this.buttonPath.Text = dialog.SelectedPath;
+            }
+        }
+
+        private void comboBoxInformationSystem_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxInformationSystem.SelectedItem != null && this.comboBoxInformationSystem.SelectedItem is InformationSystemItem)
+            {
+                InformationSystemItem item = (InformationSystemItem)this.comboBoxInformationSystem.SelectedItem;
+                this.VehicleInformationSystem = item.System;
             }
         }
     }

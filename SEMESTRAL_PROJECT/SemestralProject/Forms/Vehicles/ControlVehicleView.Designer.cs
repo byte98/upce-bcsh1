@@ -32,12 +32,15 @@
             this.flowLayoutPanelImageName = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureBoxImage = new System.Windows.Forms.PictureBox();
             this.labelName = new System.Windows.Forms.Label();
-            this.tableLayoutPanelManufacturerandPath = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanelInforamtion = new System.Windows.Forms.TableLayoutPanel();
             this.labelManufacturer = new System.Windows.Forms.Label();
-            this.flowLayoutPanelManufacturer = new System.Windows.Forms.FlowLayoutPanel();
-            this.pictureBoxManufacturerIcon = new System.Windows.Forms.PictureBox();
-            this.textBoxManufacturer = new System.Windows.Forms.TextBox();
+            this.labelInformationSystem = new System.Windows.Forms.Label();
             this.labelPath = new System.Windows.Forms.Label();
+            this.pictureBoxManufacturer = new System.Windows.Forms.PictureBox();
+            this.pictureBoxInformationSystem = new System.Windows.Forms.PictureBox();
+            this.buttonExplorer = new System.Windows.Forms.Button();
+            this.textBoxManufacturer = new System.Windows.Forms.TextBox();
+            this.textBoxInformationSystem = new System.Windows.Forms.TextBox();
             this.textBoxPath = new System.Windows.Forms.TextBox();
             this.flowLayoutPanelDetails = new System.Windows.Forms.FlowLayoutPanel();
             this.labelDescription = new System.Windows.Forms.Label();
@@ -50,9 +53,9 @@
             this.tableLayoutPanelContent.SuspendLayout();
             this.flowLayoutPanelImageName.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).BeginInit();
-            this.tableLayoutPanelManufacturerandPath.SuspendLayout();
-            this.flowLayoutPanelManufacturer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxManufacturerIcon)).BeginInit();
+            this.tableLayoutPanelInforamtion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxManufacturer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInformationSystem)).BeginInit();
             this.flowLayoutPanelDetails.SuspendLayout();
             this.tableLayoutPanelDates.SuspendLayout();
             this.SuspendLayout();
@@ -67,28 +70,28 @@
             this.tableLayoutPanelContent.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelContent.Name = "tableLayoutPanelContent";
             this.tableLayoutPanelContent.RowCount = 2;
-            this.tableLayoutPanelContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.45412F));
-            this.tableLayoutPanelContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.54588F));
-            this.tableLayoutPanelContent.Size = new System.Drawing.Size(422, 643);
+            this.tableLayoutPanelContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.99095F));
+            this.tableLayoutPanelContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.00905F));
+            this.tableLayoutPanelContent.Size = new System.Drawing.Size(471, 641);
             this.tableLayoutPanelContent.TabIndex = 1;
             // 
             // flowLayoutPanelImageName
             // 
             this.flowLayoutPanelImageName.Controls.Add(this.pictureBoxImage);
             this.flowLayoutPanelImageName.Controls.Add(this.labelName);
-            this.flowLayoutPanelImageName.Controls.Add(this.tableLayoutPanelManufacturerandPath);
+            this.flowLayoutPanelImageName.Controls.Add(this.tableLayoutPanelInforamtion);
             this.flowLayoutPanelImageName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelImageName.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelImageName.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanelImageName.Name = "flowLayoutPanelImageName";
-            this.flowLayoutPanelImageName.Size = new System.Drawing.Size(416, 357);
+            this.flowLayoutPanelImageName.Size = new System.Drawing.Size(465, 391);
             this.flowLayoutPanelImageName.TabIndex = 0;
             // 
             // pictureBoxImage
             // 
             this.pictureBoxImage.Location = new System.Drawing.Point(3, 3);
             this.pictureBoxImage.Name = "pictureBoxImage";
-            this.pictureBoxImage.Size = new System.Drawing.Size(402, 231);
+            this.pictureBoxImage.Size = new System.Drawing.Size(462, 231);
             this.pictureBoxImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBoxImage.TabIndex = 0;
             this.pictureBoxImage.TabStop = false;
@@ -100,28 +103,34 @@
             this.labelName.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelName.Location = new System.Drawing.Point(3, 237);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(402, 38);
+            this.labelName.Size = new System.Drawing.Size(462, 38);
             this.labelName.TabIndex = 1;
             this.labelName.Text = "label1";
             this.labelName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tableLayoutPanelManufacturerandPath
+            // tableLayoutPanelInforamtion
             // 
-            this.tableLayoutPanelManufacturerandPath.ColumnCount = 2;
-            this.tableLayoutPanelManufacturerandPath.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 176F));
-            this.tableLayoutPanelManufacturerandPath.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanelManufacturerandPath.Controls.Add(this.labelManufacturer, 0, 0);
-            this.tableLayoutPanelManufacturerandPath.Controls.Add(this.flowLayoutPanelManufacturer, 1, 0);
-            this.tableLayoutPanelManufacturerandPath.Controls.Add(this.labelPath, 0, 1);
-            this.tableLayoutPanelManufacturerandPath.Controls.Add(this.textBoxPath, 1, 1);
-            this.tableLayoutPanelManufacturerandPath.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanelManufacturerandPath.Location = new System.Drawing.Point(3, 278);
-            this.tableLayoutPanelManufacturerandPath.Name = "tableLayoutPanelManufacturerandPath";
-            this.tableLayoutPanelManufacturerandPath.RowCount = 2;
-            this.tableLayoutPanelManufacturerandPath.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelManufacturerandPath.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelManufacturerandPath.Size = new System.Drawing.Size(402, 71);
-            this.tableLayoutPanelManufacturerandPath.TabIndex = 2;
+            this.tableLayoutPanelInforamtion.ColumnCount = 3;
+            this.tableLayoutPanelInforamtion.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.10925F));
+            this.tableLayoutPanelInforamtion.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.89076F));
+            this.tableLayoutPanelInforamtion.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
+            this.tableLayoutPanelInforamtion.Controls.Add(this.labelManufacturer, 0, 0);
+            this.tableLayoutPanelInforamtion.Controls.Add(this.labelInformationSystem, 0, 1);
+            this.tableLayoutPanelInforamtion.Controls.Add(this.labelPath, 0, 2);
+            this.tableLayoutPanelInforamtion.Controls.Add(this.pictureBoxManufacturer, 1, 0);
+            this.tableLayoutPanelInforamtion.Controls.Add(this.pictureBoxInformationSystem, 1, 1);
+            this.tableLayoutPanelInforamtion.Controls.Add(this.buttonExplorer, 1, 2);
+            this.tableLayoutPanelInforamtion.Controls.Add(this.textBoxManufacturer, 2, 0);
+            this.tableLayoutPanelInforamtion.Controls.Add(this.textBoxInformationSystem, 2, 1);
+            this.tableLayoutPanelInforamtion.Controls.Add(this.textBoxPath, 2, 2);
+            this.tableLayoutPanelInforamtion.Location = new System.Drawing.Point(3, 278);
+            this.tableLayoutPanelInforamtion.Name = "tableLayoutPanelInforamtion";
+            this.tableLayoutPanelInforamtion.RowCount = 3;
+            this.tableLayoutPanelInforamtion.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanelInforamtion.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanelInforamtion.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanelInforamtion.Size = new System.Drawing.Size(462, 110);
+            this.tableLayoutPanelInforamtion.TabIndex = 2;
             // 
             // labelManufacturer
             // 
@@ -129,61 +138,90 @@
             this.labelManufacturer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelManufacturer.Location = new System.Drawing.Point(3, 0);
             this.labelManufacturer.Name = "labelManufacturer";
-            this.labelManufacturer.Size = new System.Drawing.Size(170, 35);
+            this.labelManufacturer.Size = new System.Drawing.Size(189, 36);
             this.labelManufacturer.TabIndex = 0;
             this.labelManufacturer.Text = "Výrobce";
             this.labelManufacturer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // flowLayoutPanelManufacturer
+            // labelInformationSystem
             // 
-            this.flowLayoutPanelManufacturer.Controls.Add(this.pictureBoxManufacturerIcon);
-            this.flowLayoutPanelManufacturer.Controls.Add(this.textBoxManufacturer);
-            this.flowLayoutPanelManufacturer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelManufacturer.Location = new System.Drawing.Point(176, 0);
-            this.flowLayoutPanelManufacturer.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanelManufacturer.Name = "flowLayoutPanelManufacturer";
-            this.flowLayoutPanelManufacturer.Size = new System.Drawing.Size(226, 35);
-            this.flowLayoutPanelManufacturer.TabIndex = 1;
-            // 
-            // pictureBoxManufacturerIcon
-            // 
-            this.pictureBoxManufacturerIcon.Location = new System.Drawing.Point(3, 3);
-            this.pictureBoxManufacturerIcon.Name = "pictureBoxManufacturerIcon";
-            this.pictureBoxManufacturerIcon.Size = new System.Drawing.Size(30, 30);
-            this.pictureBoxManufacturerIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxManufacturerIcon.TabIndex = 0;
-            this.pictureBoxManufacturerIcon.TabStop = false;
-            // 
-            // textBoxManufacturer
-            // 
-            this.textBoxManufacturer.Location = new System.Drawing.Point(39, 3);
-            this.textBoxManufacturer.Name = "textBoxManufacturer";
-            this.textBoxManufacturer.ReadOnly = true;
-            this.textBoxManufacturer.Size = new System.Drawing.Size(184, 27);
-            this.textBoxManufacturer.TabIndex = 1;
+            this.labelInformationSystem.AutoSize = true;
+            this.labelInformationSystem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelInformationSystem.Location = new System.Drawing.Point(3, 36);
+            this.labelInformationSystem.Name = "labelInformationSystem";
+            this.labelInformationSystem.Size = new System.Drawing.Size(189, 36);
+            this.labelInformationSystem.TabIndex = 1;
+            this.labelInformationSystem.Text = "Informační systém";
+            this.labelInformationSystem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelPath
             // 
             this.labelPath.AutoSize = true;
             this.labelPath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelPath.Location = new System.Drawing.Point(3, 35);
+            this.labelPath.Location = new System.Drawing.Point(3, 72);
             this.labelPath.Name = "labelPath";
-            this.labelPath.Size = new System.Drawing.Size(170, 36);
+            this.labelPath.Size = new System.Drawing.Size(189, 38);
             this.labelPath.TabIndex = 2;
             this.labelPath.Text = "Umístění";
             this.labelPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // pictureBoxManufacturer
+            // 
+            this.pictureBoxManufacturer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxManufacturer.Location = new System.Drawing.Point(198, 3);
+            this.pictureBoxManufacturer.Name = "pictureBoxManufacturer";
+            this.pictureBoxManufacturer.Size = new System.Drawing.Size(65, 30);
+            this.pictureBoxManufacturer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxManufacturer.TabIndex = 3;
+            this.pictureBoxManufacturer.TabStop = false;
+            // 
+            // pictureBoxInformationSystem
+            // 
+            this.pictureBoxInformationSystem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxInformationSystem.Location = new System.Drawing.Point(198, 39);
+            this.pictureBoxInformationSystem.Name = "pictureBoxInformationSystem";
+            this.pictureBoxInformationSystem.Size = new System.Drawing.Size(65, 30);
+            this.pictureBoxInformationSystem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxInformationSystem.TabIndex = 4;
+            this.pictureBoxInformationSystem.TabStop = false;
+            // 
+            // buttonExplorer
+            // 
+            this.buttonExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonExplorer.Image = global::SemestralProject.Resources.explorer;
+            this.buttonExplorer.Location = new System.Drawing.Point(198, 75);
+            this.buttonExplorer.Name = "buttonExplorer";
+            this.buttonExplorer.Size = new System.Drawing.Size(65, 32);
+            this.buttonExplorer.TabIndex = 5;
+            this.buttonExplorer.UseVisualStyleBackColor = true;
+            this.buttonExplorer.Click += new System.EventHandler(this.buttonExplorer_Click);
+            // 
+            // textBoxManufacturer
+            // 
+            this.textBoxManufacturer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxManufacturer.Location = new System.Drawing.Point(269, 3);
+            this.textBoxManufacturer.Name = "textBoxManufacturer";
+            this.textBoxManufacturer.ReadOnly = true;
+            this.textBoxManufacturer.Size = new System.Drawing.Size(190, 27);
+            this.textBoxManufacturer.TabIndex = 6;
+            // 
+            // textBoxInformationSystem
+            // 
+            this.textBoxInformationSystem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxInformationSystem.Location = new System.Drawing.Point(269, 39);
+            this.textBoxInformationSystem.Name = "textBoxInformationSystem";
+            this.textBoxInformationSystem.ReadOnly = true;
+            this.textBoxInformationSystem.Size = new System.Drawing.Size(190, 27);
+            this.textBoxInformationSystem.TabIndex = 7;
+            // 
             // textBoxPath
             // 
             this.textBoxPath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxPath.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
-            this.textBoxPath.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.textBoxPath.Location = new System.Drawing.Point(179, 38);
+            this.textBoxPath.Location = new System.Drawing.Point(269, 75);
             this.textBoxPath.Name = "textBoxPath";
             this.textBoxPath.ReadOnly = true;
-            this.textBoxPath.Size = new System.Drawing.Size(220, 27);
-            this.textBoxPath.TabIndex = 3;
-            this.textBoxPath.Click += new System.EventHandler(this.textBoxPath_Click);
+            this.textBoxPath.Size = new System.Drawing.Size(190, 27);
+            this.textBoxPath.TabIndex = 8;
             // 
             // flowLayoutPanelDetails
             // 
@@ -192,9 +230,9 @@
             this.flowLayoutPanelDetails.Controls.Add(this.tableLayoutPanelDates);
             this.flowLayoutPanelDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelDetails.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelDetails.Location = new System.Drawing.Point(3, 366);
+            this.flowLayoutPanelDetails.Location = new System.Drawing.Point(3, 400);
             this.flowLayoutPanelDetails.Name = "flowLayoutPanelDetails";
-            this.flowLayoutPanelDetails.Size = new System.Drawing.Size(416, 274);
+            this.flowLayoutPanelDetails.Size = new System.Drawing.Size(465, 238);
             this.flowLayoutPanelDetails.TabIndex = 1;
             // 
             // labelDescription
@@ -212,7 +250,7 @@
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.ReadOnly = true;
-            this.textBoxDescription.Size = new System.Drawing.Size(402, 165);
+            this.textBoxDescription.Size = new System.Drawing.Size(459, 119);
             this.textBoxDescription.TabIndex = 1;
             // 
             // tableLayoutPanelDates
@@ -225,12 +263,12 @@
             this.tableLayoutPanelDates.Controls.Add(this.textBoxCreated, 1, 0);
             this.tableLayoutPanelDates.Controls.Add(this.textBoxUpdated, 1, 1);
             this.tableLayoutPanelDates.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelDates.Location = new System.Drawing.Point(3, 194);
+            this.tableLayoutPanelDates.Location = new System.Drawing.Point(3, 148);
             this.tableLayoutPanelDates.Name = "tableLayoutPanelDates";
             this.tableLayoutPanelDates.RowCount = 2;
             this.tableLayoutPanelDates.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelDates.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelDates.Size = new System.Drawing.Size(402, 73);
+            this.tableLayoutPanelDates.Size = new System.Drawing.Size(459, 73);
             this.tableLayoutPanelDates.TabIndex = 2;
             // 
             // labelCreated
@@ -239,7 +277,7 @@
             this.labelCreated.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelCreated.Location = new System.Drawing.Point(3, 0);
             this.labelCreated.Name = "labelCreated";
-            this.labelCreated.Size = new System.Drawing.Size(169, 36);
+            this.labelCreated.Size = new System.Drawing.Size(193, 36);
             this.labelCreated.TabIndex = 0;
             this.labelCreated.Text = "Vytvořeno";
             this.labelCreated.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -250,7 +288,7 @@
             this.labelUpdated.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelUpdated.Location = new System.Drawing.Point(3, 36);
             this.labelUpdated.Name = "labelUpdated";
-            this.labelUpdated.Size = new System.Drawing.Size(169, 37);
+            this.labelUpdated.Size = new System.Drawing.Size(193, 37);
             this.labelUpdated.TabIndex = 1;
             this.labelUpdated.Text = "Naposledy změneno";
             this.labelUpdated.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -258,19 +296,19 @@
             // textBoxCreated
             // 
             this.textBoxCreated.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxCreated.Location = new System.Drawing.Point(178, 3);
+            this.textBoxCreated.Location = new System.Drawing.Point(202, 3);
             this.textBoxCreated.Name = "textBoxCreated";
             this.textBoxCreated.ReadOnly = true;
-            this.textBoxCreated.Size = new System.Drawing.Size(221, 27);
+            this.textBoxCreated.Size = new System.Drawing.Size(254, 27);
             this.textBoxCreated.TabIndex = 2;
             // 
             // textBoxUpdated
             // 
             this.textBoxUpdated.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxUpdated.Location = new System.Drawing.Point(178, 39);
+            this.textBoxUpdated.Location = new System.Drawing.Point(202, 39);
             this.textBoxUpdated.Name = "textBoxUpdated";
             this.textBoxUpdated.ReadOnly = true;
-            this.textBoxUpdated.Size = new System.Drawing.Size(221, 27);
+            this.textBoxUpdated.Size = new System.Drawing.Size(254, 27);
             this.textBoxUpdated.TabIndex = 3;
             // 
             // ControlVehicleView
@@ -279,16 +317,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanelContent);
             this.Name = "ControlVehicleView";
-            this.Size = new System.Drawing.Size(422, 643);
+            this.Size = new System.Drawing.Size(471, 641);
             this.tableLayoutPanelContent.ResumeLayout(false);
             this.flowLayoutPanelImageName.ResumeLayout(false);
             this.flowLayoutPanelImageName.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImage)).EndInit();
-            this.tableLayoutPanelManufacturerandPath.ResumeLayout(false);
-            this.tableLayoutPanelManufacturerandPath.PerformLayout();
-            this.flowLayoutPanelManufacturer.ResumeLayout(false);
-            this.flowLayoutPanelManufacturer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxManufacturerIcon)).EndInit();
+            this.tableLayoutPanelInforamtion.ResumeLayout(false);
+            this.tableLayoutPanelInforamtion.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxManufacturer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxInformationSystem)).EndInit();
             this.flowLayoutPanelDetails.ResumeLayout(false);
             this.flowLayoutPanelDetails.PerformLayout();
             this.tableLayoutPanelDates.ResumeLayout(false);
@@ -311,12 +348,15 @@
         private Label labelUpdated;
         private TextBox textBoxCreated;
         private TextBox textBoxUpdated;
-        private TableLayoutPanel tableLayoutPanelManufacturerandPath;
+        private TableLayoutPanel tableLayoutPanelInforamtion;
         private Label labelManufacturer;
-        private FlowLayoutPanel flowLayoutPanelManufacturer;
-        private PictureBox pictureBoxManufacturerIcon;
-        private TextBox textBoxManufacturer;
+        private Label labelInformationSystem;
         private Label labelPath;
+        private PictureBox pictureBoxManufacturer;
+        private PictureBox pictureBoxInformationSystem;
+        private Button buttonExplorer;
+        private TextBox textBoxManufacturer;
+        private TextBox textBoxInformationSystem;
         private TextBox textBoxPath;
     }
 }

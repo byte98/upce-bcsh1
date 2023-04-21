@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,11 @@ namespace SemestralProject.Forms.DataFiles
             this.textBoxDescription.Text = dataFile.Description;
             this.textBoxCreated.Text = dataFile.Created.ToString();
             this.textBoxUpdated.Text = dataFile.Updated.ToString();
+        }
+
+        private void buttonExplorer_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", Path.GetDirectoryName(this.textBoxPath.Text) ?? string.Empty);
         }
     }
 }

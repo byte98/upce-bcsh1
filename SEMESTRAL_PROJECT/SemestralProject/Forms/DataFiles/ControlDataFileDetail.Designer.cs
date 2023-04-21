@@ -30,8 +30,8 @@
         {
             this.tableLayoutPanelContent = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanelHeader = new System.Windows.Forms.FlowLayoutPanel();
-            this.labelName = new System.Windows.Forms.Label();
             this.panelSpace = new System.Windows.Forms.Panel();
+            this.labelName = new System.Windows.Forms.Label();
             this.labelPath = new System.Windows.Forms.Label();
             this.labelInformationSystem = new System.Windows.Forms.Label();
             this.labelMap = new System.Windows.Forms.Label();
@@ -102,6 +102,13 @@
             this.flowLayoutPanelHeader.Size = new System.Drawing.Size(541, 59);
             this.flowLayoutPanelHeader.TabIndex = 0;
             // 
+            // panelSpace
+            // 
+            this.panelSpace.Location = new System.Drawing.Point(3, 3);
+            this.panelSpace.Name = "panelSpace";
+            this.panelSpace.Size = new System.Drawing.Size(502, 1);
+            this.panelSpace.TabIndex = 1;
+            // 
             // labelName
             // 
             this.labelName.AutoSize = true;
@@ -113,13 +120,6 @@
             this.labelName.TabIndex = 0;
             this.labelName.Text = "label1";
             this.labelName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panelSpace
-            // 
-            this.panelSpace.Location = new System.Drawing.Point(3, 3);
-            this.panelSpace.Name = "panelSpace";
-            this.panelSpace.Size = new System.Drawing.Size(502, 1);
-            this.panelSpace.TabIndex = 1;
             // 
             // labelPath
             // 
@@ -183,7 +183,7 @@
             this.pictureBoxInformationSystem.Location = new System.Drawing.Point(176, 102);
             this.pictureBoxInformationSystem.Name = "pictureBoxInformationSystem";
             this.pictureBoxInformationSystem.Size = new System.Drawing.Size(111, 33);
-            this.pictureBoxInformationSystem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBoxInformationSystem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxInformationSystem.TabIndex = 6;
             this.pictureBoxInformationSystem.TabStop = false;
             // 
@@ -193,14 +193,13 @@
             this.pictureBoxMap.Location = new System.Drawing.Point(176, 141);
             this.pictureBoxMap.Name = "pictureBoxMap";
             this.pictureBoxMap.Size = new System.Drawing.Size(111, 26);
-            this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxMap.TabIndex = 7;
             this.pictureBoxMap.TabStop = false;
             // 
             // textBoxPath
             // 
             this.textBoxPath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxPath.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
             this.textBoxPath.Location = new System.Drawing.Point(293, 68);
             this.textBoxPath.Name = "textBoxPath";
             this.textBoxPath.ReadOnly = true;
@@ -234,6 +233,7 @@
             this.buttonExplorer.Size = new System.Drawing.Size(111, 28);
             this.buttonExplorer.TabIndex = 11;
             this.buttonExplorer.UseVisualStyleBackColor = true;
+            this.buttonExplorer.Click += new System.EventHandler(this.buttonExplorer_Click);
             // 
             // labelCreated
             // 

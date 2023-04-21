@@ -175,6 +175,7 @@
             this.comboBoxInformationSystem.Name = "comboBoxInformationSystem";
             this.comboBoxInformationSystem.Size = new System.Drawing.Size(388, 28);
             this.comboBoxInformationSystem.TabIndex = 16;
+            this.comboBoxInformationSystem.SelectedValueChanged += new System.EventHandler(this.comboBoxInformationSystem_SelectedValueChanged);
             // 
             // labelSpace5
             // 

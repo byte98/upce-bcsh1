@@ -36,12 +36,12 @@
             this.labelSpace1 = new System.Windows.Forms.Label();
             this.labelInformationSystem = new System.Windows.Forms.Label();
             this.comboBoxInformationSystem = new System.Windows.Forms.ComboBox();
+            this.labelSpace2 = new System.Windows.Forms.Label();
             this.labelMap = new System.Windows.Forms.Label();
             this.comboBoxMap = new System.Windows.Forms.ComboBox();
+            this.labelSpace3 = new System.Windows.Forms.Label();
             this.labelDescription = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
-            this.labelSpace2 = new System.Windows.Forms.Label();
-            this.labelSpace3 = new System.Windows.Forms.Label();
             this.flowLayoutPanelContent.SuspendLayout();
             this.tableLayoutPanelPath.SuspendLayout();
             this.SuspendLayout();
@@ -86,15 +86,14 @@
             this.tableLayoutPanelPath.Name = "tableLayoutPanelPath";
             this.tableLayoutPanelPath.RowCount = 1;
             this.tableLayoutPanelPath.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelPath.Size = new System.Drawing.Size(546, 44);
+            this.tableLayoutPanelPath.Size = new System.Drawing.Size(546, 35);
             this.tableLayoutPanelPath.TabIndex = 1;
             // 
             // panelPathBrowse
             // 
-            this.panelPathBrowse.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPathBrowse.Location = new System.Drawing.Point(400, 3);
             this.panelPathBrowse.Name = "panelPathBrowse";
-            this.panelPathBrowse.Size = new System.Drawing.Size(143, 38);
+            this.panelPathBrowse.Size = new System.Drawing.Size(143, 27);
             this.panelPathBrowse.TabIndex = 1;
             // 
             // textBoxPath
@@ -107,7 +106,7 @@
             // labelSpace1
             // 
             this.labelSpace1.AutoSize = true;
-            this.labelSpace1.Location = new System.Drawing.Point(3, 70);
+            this.labelSpace1.Location = new System.Drawing.Point(3, 61);
             this.labelSpace1.Name = "labelSpace1";
             this.labelSpace1.Size = new System.Drawing.Size(13, 20);
             this.labelSpace1.TabIndex = 2;
@@ -116,7 +115,7 @@
             // labelInformationSystem
             // 
             this.labelInformationSystem.AutoSize = true;
-            this.labelInformationSystem.Location = new System.Drawing.Point(3, 90);
+            this.labelInformationSystem.Location = new System.Drawing.Point(3, 81);
             this.labelInformationSystem.Name = "labelInformationSystem";
             this.labelInformationSystem.Size = new System.Drawing.Size(129, 20);
             this.labelInformationSystem.TabIndex = 3;
@@ -126,15 +125,24 @@
             // 
             this.comboBoxInformationSystem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxInformationSystem.FormattingEnabled = true;
-            this.comboBoxInformationSystem.Location = new System.Drawing.Point(3, 113);
+            this.comboBoxInformationSystem.Location = new System.Drawing.Point(3, 104);
             this.comboBoxInformationSystem.Name = "comboBoxInformationSystem";
             this.comboBoxInformationSystem.Size = new System.Drawing.Size(543, 28);
             this.comboBoxInformationSystem.TabIndex = 4;
             // 
+            // labelSpace2
+            // 
+            this.labelSpace2.AutoSize = true;
+            this.labelSpace2.Location = new System.Drawing.Point(3, 135);
+            this.labelSpace2.Name = "labelSpace2";
+            this.labelSpace2.Size = new System.Drawing.Size(13, 20);
+            this.labelSpace2.TabIndex = 9;
+            this.labelSpace2.Text = " ";
+            // 
             // labelMap
             // 
             this.labelMap.AutoSize = true;
-            this.labelMap.Location = new System.Drawing.Point(3, 164);
+            this.labelMap.Location = new System.Drawing.Point(3, 155);
             this.labelMap.Name = "labelMap";
             this.labelMap.Size = new System.Drawing.Size(52, 20);
             this.labelMap.TabIndex = 5;
@@ -144,15 +152,24 @@
             // 
             this.comboBoxMap.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMap.FormattingEnabled = true;
-            this.comboBoxMap.Location = new System.Drawing.Point(3, 187);
+            this.comboBoxMap.Location = new System.Drawing.Point(3, 178);
             this.comboBoxMap.Name = "comboBoxMap";
             this.comboBoxMap.Size = new System.Drawing.Size(543, 28);
             this.comboBoxMap.TabIndex = 6;
             // 
+            // labelSpace3
+            // 
+            this.labelSpace3.AutoSize = true;
+            this.labelSpace3.Location = new System.Drawing.Point(3, 209);
+            this.labelSpace3.Name = "labelSpace3";
+            this.labelSpace3.Size = new System.Drawing.Size(13, 20);
+            this.labelSpace3.TabIndex = 10;
+            this.labelSpace3.Text = " ";
+            // 
             // labelDescription
             // 
             this.labelDescription.AutoSize = true;
-            this.labelDescription.Location = new System.Drawing.Point(3, 238);
+            this.labelDescription.Location = new System.Drawing.Point(3, 229);
             this.labelDescription.Name = "labelDescription";
             this.labelDescription.Size = new System.Drawing.Size(44, 20);
             this.labelDescription.TabIndex = 7;
@@ -160,29 +177,11 @@
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(3, 261);
+            this.textBoxDescription.Location = new System.Drawing.Point(3, 252);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.Size = new System.Drawing.Size(543, 144);
             this.textBoxDescription.TabIndex = 8;
-            // 
-            // labelSpace2
-            // 
-            this.labelSpace2.AutoSize = true;
-            this.labelSpace2.Location = new System.Drawing.Point(3, 144);
-            this.labelSpace2.Name = "labelSpace2";
-            this.labelSpace2.Size = new System.Drawing.Size(13, 20);
-            this.labelSpace2.TabIndex = 9;
-            this.labelSpace2.Text = " ";
-            // 
-            // labelSpace3
-            // 
-            this.labelSpace3.AutoSize = true;
-            this.labelSpace3.Location = new System.Drawing.Point(3, 218);
-            this.labelSpace3.Name = "labelSpace3";
-            this.labelSpace3.Size = new System.Drawing.Size(13, 20);
-            this.labelSpace3.TabIndex = 10;
-            this.labelSpace3.Text = " ";
             // 
             // ControlDataFile
             // 

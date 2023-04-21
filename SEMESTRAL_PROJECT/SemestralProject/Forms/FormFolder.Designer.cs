@@ -51,8 +51,8 @@
             // flowLayoutPanelButtons
             // 
             this.flowLayoutPanelButtons.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanelButtons.Controls.Add(this.buttonCancel);
             this.flowLayoutPanelButtons.Controls.Add(this.buttonOK);
+            this.flowLayoutPanelButtons.Controls.Add(this.buttonCancel);
             this.flowLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanelButtons.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanelButtons.Location = new System.Drawing.Point(0, 379);
@@ -64,7 +64,7 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(302, 13);
+            this.buttonCancel.Location = new System.Drawing.Point(148, 13);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(148, 43);
             this.buttonCancel.TabIndex = 0;
@@ -74,7 +74,7 @@
             // buttonOK
             // 
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(148, 13);
+            this.buttonOK.Location = new System.Drawing.Point(302, 13);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(148, 43);
             this.buttonOK.TabIndex = 0;
@@ -131,7 +131,7 @@
             this.toolStripMenuItemExpand,
             this.toolStripMenuItemCollapse});
             this.contextMenuStripNodeMenu.Name = "contextMenuStripNodeMenu";
-            this.contextMenuStripNodeMenu.Size = new System.Drawing.Size(284, 162);
+            this.contextMenuStripNodeMenu.Size = new System.Drawing.Size(284, 134);
             // 
             // toolStripMenuItemRefresh
             // 
