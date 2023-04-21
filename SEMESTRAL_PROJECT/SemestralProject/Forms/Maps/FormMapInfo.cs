@@ -30,6 +30,7 @@ namespace SemestralProject.Forms.Maps
                 context
             );
             this.AddControl(this.content);
+            this.HideCancelButton();
         }
     }
 }

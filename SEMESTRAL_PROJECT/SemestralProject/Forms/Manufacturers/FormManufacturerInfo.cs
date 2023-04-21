@@ -34,6 +34,7 @@ namespace SemestralProject.Forms.Manufacturers
                 this.Context
             );
             this.AddControl(this.content);
+            this.HideCancelButton();
         }
     }
 }

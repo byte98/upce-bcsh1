@@ -265,11 +265,11 @@ namespace SemestralProject.Forms
             FormLoad form = new FormLoad(this, this.Context);
             this.Hide();
             form.ShowDialog();
-            this.isView.VisibleData = this.Context.DataStorage.InformationSystems.OfType<AbstractIconData>().ToList();
-            this.mapsView.VisibleData = this.Context.DataStorage.Maps.OfType<AbstractPictureData>().ToList(); 
-            this.manView.VisibleData = this.Context.DataStorage.Manufacturers.OfType<AbstractIconData>().ToList();
-            this.vehicleView.VisibleData = this.Context.DataStorage.Vehicles.OfType<AbstractPictureData>().ToList();
-            this.fileView.VisibleData = this.Context.DataStorage.DataFiles;
+            this.RefreshIsView();
+            this.RefreshMapView();
+            this.RefreshManView();
+            this.RefreshVehicleView();
+            this.RefreshFileView();
         }
 
         #region Information Systems
@@ -279,6 +279,7 @@ namespace SemestralProject.Forms
         private void RefreshIsView()
         {
             this.isView.VisibleData = this.Context.DataStorage.InformationSystems.OfType<AbstractIconData>().ToList();
+            this.isView.Unselect();
         }
         
 
@@ -339,6 +340,7 @@ namespace SemestralProject.Forms
         private void RefreshMapView()
         {
             this.mapsView.VisibleData = this.Context.DataStorage.Maps.OfType<AbstractPictureData>().ToList();
+            this.mapsView.Unselect();
         }
 
         private void buttonAddMap_Click(object sender, EventArgs e)
@@ -370,6 +372,7 @@ namespace SemestralProject.Forms
             {
                 this.mapsController.Remove(this.mapsView.SelectedData);
                 this.RefreshMapView();
+                this.RefreshFileView();
             }
         }
 
@@ -377,6 +380,7 @@ namespace SemestralProject.Forms
         {
             this.mapsController.Delete();
             this.RefreshMapView();
+            this.RefreshFileView();
         }
 
         private void buttonMapSearch_Click(object sender, EventArgs e)
@@ -400,6 +404,7 @@ namespace SemestralProject.Forms
         private void RefreshManView()
         {
             this.manView.VisibleData = this.Context.DataStorage.Manufacturers.OfType<AbstractIconData>().ToList();
+            this.manView.Unselect();
         }
 
         private void buttonAddManufacturer_Click(object sender, EventArgs e)
@@ -461,6 +466,7 @@ namespace SemestralProject.Forms
         private void RefreshVehicleView()
         {
             this.vehicleView.VisibleData = this.Context.DataStorage.Vehicles.OfType<AbstractPictureData>().ToList();
+            this.vehicleView.Unselect();
         }
 
         private void buttonAddVehicle_Click(object sender, EventArgs e)
@@ -521,6 +527,7 @@ namespace SemestralProject.Forms
         private void RefreshFileView()
         {
             this.fileView.VisibleData = this.Context.DataStorage.DataFiles;
+            this.fileView.Unselect();
         }
 
         private void buttonAddFile_Click(object sender, EventArgs e)

@@ -29,7 +29,14 @@ namespace SemestralProject.Forms.InformationSystems
         {
             this.content = new ControlISConflicts(vehicles, files, this.Context);
             this.AddControl(this.content);
-            this.TopMost= true;
+            this.TopMost = true;
+            this.Load+= new EventHandler(this.FormISConflicts_Load);
+        }
+
+        private void FormISConflicts_Load(object? sender, EventArgs e)
+        {
+            this.TopMost = true;
+            this.BringToFront();
         }
     }
 }

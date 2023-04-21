@@ -115,6 +115,11 @@ namespace SemestralProject.Forms.DataFiles
             this.listViewContent.View = itemsSize;
         }
 
+        public void Unselect()
+        {
+            this.listViewContent.SelectedIndices.Clear();
+        }
+
         private void listViewContent_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if (this.listViewContent.SelectedItems.Count > 0)

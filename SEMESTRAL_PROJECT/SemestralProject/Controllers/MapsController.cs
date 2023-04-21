@@ -120,16 +120,7 @@ namespace SemestralProject.Controllers
                         MessageBoxDefaultButton.Button2
                     ) == DialogResult.Yes)
                 {
-                    FormWait wait = new FormWait(() =>
-                    {
-                        if (this.context.DataStorage.Maps.Contains(map))
-                        {
-                            this.context.DataStorage.Maps.Remove(map);
-                        }
-                        this.context.DataStorage.Save();
-                        map = null; 
-                    }, this.context);
-                    wait.ShowDialog();
+                    this.RemoveMap(map);
                 }
             }
         }
@@ -146,13 +137,60 @@ namespace SemestralProject.Controllers
                         MessageBoxDefaultButton.Button2
                     ) == DialogResult.Yes)
             {
-                FormWait wait = new FormWait(() =>
+                foreach(Map map in this.context.DataStorage.Maps)
                 {
-                    this.context.DataStorage.Maps.Clear();
-                    this.context.DataStorage.Save();
-                }, this.context);
-                wait.ShowDialog();
+                    this.RemoveMap(map);
+                }
             }
+        }
+        
+        /// <summary>
+        /// Removes map with checking for conflicts
+        /// </summary>
+        /// <param name="map">Map which will be removed</param>
+        private void RemoveMap(Map map)
+        {
+            FormWait wait = new FormWait(() =>
+            {
+                List<DataFile> conflicts = this.GetDataFiles(map);
+                if (conflicts.Count > 0)
+                {
+                    FormMapConflict dialog = new FormMapConflict(conflicts, context);
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        foreach(DataFile file in conflicts)
+                        {
+                            this.context.FileStorage.RemoveDataFile(file.Name);
+                            this.context.DataStorage.DataFiles.Remove(file);
+                        }
+                        this.context.DataStorage.Maps.Remove(map);
+                    }
+                }
+                else
+                {
+                    this.context.DataStorage.Maps.Remove(map);
+                }
+                this.context.DataStorage.Save();
+            }, this.context);
+            wait.ShowDialog();
+        }
+
+        /// <summary>
+        /// Gets data files which holds data of map
+        /// </summary>
+        /// <param name="map">Map which data will be searched across files</param>
+        /// <returns>List of files which holds data of map</returns>
+        private List<DataFile> GetDataFiles(Map map)
+        {
+            List<DataFile> reti = new List<DataFile>();
+            foreach(DataFile file in this.context.DataStorage.DataFiles)
+            {
+                if (file.Map.Id == map.Id)
+                {
+                    reti.Add(file);
+                }
+            }
+            return reti;
         }
 
         public override List<Map> Search(string phrase)

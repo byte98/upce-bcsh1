@@ -16,5 +16,10 @@ namespace SemestralProject.Visual
         /// </summary>
         /// <param name="itemsSize">New size of items in view</param>
         public abstract void SetItemsSize(View itemsSize);
+
+        /// <summary>
+        /// Unselects any selected data
+        /// </summary>
+        public abstract void Unselect();
     }
 }

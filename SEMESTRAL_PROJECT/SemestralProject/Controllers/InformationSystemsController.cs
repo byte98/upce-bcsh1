@@ -154,7 +154,7 @@ namespace SemestralProject.Controllers
             {
                 List<Vehicle> conflictVehicles = this.GetVehicles(system);
                 List<DataFile> conflictFiles = this.GetFiles(system);
-                if (conflictVehicles.Count > 0 && conflictFiles.Count > 0)
+                if (conflictVehicles.Count > 0 || conflictFiles.Count > 0)
                 {
                     FormISConflicts dialog = new FormISConflicts(conflictVehicles, conflictFiles, this.context);
                     dialog.BringToFront();

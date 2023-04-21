@@ -158,23 +158,26 @@ namespace SemestralProject.Forms
         /// <returns>Name for new node</returns>
         private string CreateNewNodeName(TreeNode node)
         {
-            int counter = 0;
+            int counter = 1;
             bool contains = true;
-            do
+            if (node != null)
             {
-                contains = false;
-                counter++;
-                string name = "Nová složka (" + counter + ")";
-                foreach (TreeNode childNode in node.Nodes)
+                do
                 {
-                    if (childNode.Text == name)
+                    contains = false;
+                    string name = "Nová složka (" + counter + ")";
+                    counter++;
+                    foreach (TreeNode childNode in node.Nodes)
                     {
-                        contains = true;
-                        break;
+                        if (childNode.Text == name)
+                        {
+                            contains = true;
+                            break;
+                        }
                     }
                 }
+                while (contains);
             }
-            while (contains);
             return "Nová složka (" + counter + ")";
         }
 
