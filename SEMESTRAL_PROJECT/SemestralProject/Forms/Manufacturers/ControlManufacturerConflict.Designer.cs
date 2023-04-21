@@ -1,6 +1,6 @@
-﻿namespace SemestralProject.Forms.Maps
+﻿namespace SemestralProject.Forms.Manufacturers
 {
-    partial class ControlMapConflict
+    partial class ControlManufacturerConflict
     {
         /// <summary> 
         /// Required designer variable.
@@ -32,12 +32,12 @@
             this.labelHeaderInfo = new System.Windows.Forms.Label();
             this.panelFiles = new System.Windows.Forms.Panel();
             this.listViewFiles = new System.Windows.Forms.ListView();
-            this.columnHeaderFileName = new System.Windows.Forms.ColumnHeader();
-            this.columnHeaderFileMap = new System.Windows.Forms.ColumnHeader();
-            this.columnHeaderFileDesc = new System.Windows.Forms.ColumnHeader();
+            this.columnHeaderName = new System.Windows.Forms.ColumnHeader();
+            this.columnHeaderManufacturer = new System.Windows.Forms.ColumnHeader();
+            this.columnHeaderDescription = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderPath = new System.Windows.Forms.ColumnHeader();
-            this.columnHeaderFileCreated = new System.Windows.Forms.ColumnHeader();
-            this.columnHeaderFileUpdated = new System.Windows.Forms.ColumnHeader();
+            this.columnHeaderCreated = new System.Windows.Forms.ColumnHeader();
+            this.columnHeaderUpdated = new System.Windows.Forms.ColumnHeader();
             this.labelFiles = new System.Windows.Forms.Label();
             this.tableLayoutPanelFooter = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBoxImportant = new System.Windows.Forms.PictureBox();
@@ -67,7 +67,7 @@
             this.tableLayoutPanelContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanelContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelContent.Size = new System.Drawing.Size(806, 524);
-            this.tableLayoutPanelContent.TabIndex = 1;
+            this.tableLayoutPanelContent.TabIndex = 2;
             // 
             // labelHeaderInfo
             // 
@@ -77,7 +77,7 @@
             this.labelHeaderInfo.Name = "labelHeaderInfo";
             this.labelHeaderInfo.Size = new System.Drawing.Size(800, 20);
             this.labelHeaderInfo.TabIndex = 1;
-            this.labelHeaderInfo.Text = "Při pokusu o smazání oblasti byly nalezeny konflikty.";
+            this.labelHeaderInfo.Text = "Při pokusu o smazání výrobce byly nalezeny konflikty.";
             // 
             // panelFiles
             // 
@@ -92,12 +92,12 @@
             // listViewFiles
             // 
             this.listViewFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderFileName,
-            this.columnHeaderFileMap,
-            this.columnHeaderFileDesc,
+            this.columnHeaderName,
+            this.columnHeaderManufacturer,
+            this.columnHeaderDescription,
             this.columnHeaderPath,
-            this.columnHeaderFileCreated,
-            this.columnHeaderFileUpdated});
+            this.columnHeaderCreated,
+            this.columnHeaderUpdated});
             this.listViewFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewFiles.FullRowSelect = true;
             this.listViewFiles.Location = new System.Drawing.Point(0, 20);
@@ -107,29 +107,29 @@
             this.listViewFiles.UseCompatibleStateImageBehavior = false;
             this.listViewFiles.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeaderFileName
+            // columnHeaderName
             // 
-            this.columnHeaderFileName.Text = "Název";
+            this.columnHeaderName.Text = "Název";
             // 
-            // columnHeaderFileMap
+            // columnHeaderManufacturer
             // 
-            this.columnHeaderFileMap.Text = "Oblast";
+            this.columnHeaderManufacturer.Text = "Výrobce";
             // 
-            // columnHeaderFileDesc
+            // columnHeaderDescription
             // 
-            this.columnHeaderFileDesc.Text = "Popis";
+            this.columnHeaderDescription.Text = "Popis";
             // 
             // columnHeaderPath
             // 
             this.columnHeaderPath.Text = "Umístění";
             // 
-            // columnHeaderFileCreated
+            // columnHeaderCreated
             // 
-            this.columnHeaderFileCreated.Text = "Vytvořeno";
+            this.columnHeaderCreated.Text = "Vytvořeno";
             // 
-            // columnHeaderFileUpdated
+            // columnHeaderUpdated
             // 
-            this.columnHeaderFileUpdated.Text = "Naposledy upraveno";
+            this.columnHeaderUpdated.Text = "Naposledy upraveno";
             // 
             // labelFiles
             // 
@@ -137,9 +137,9 @@
             this.labelFiles.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelFiles.Location = new System.Drawing.Point(0, 0);
             this.labelFiles.Name = "labelFiles";
-            this.labelFiles.Size = new System.Drawing.Size(318, 20);
+            this.labelFiles.Size = new System.Drawing.Size(264, 20);
             this.labelFiles.TabIndex = 0;
-            this.labelFiles.Text = "Soubory, ve kterých jsou uložena data k oblasti";
+            this.labelFiles.Text = "Vozidla, která byla vyrobena výrobcem";
             // 
             // tableLayoutPanelFooter
             // 
@@ -184,9 +184,9 @@
             this.labelFooter1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelFooter1.Location = new System.Drawing.Point(3, 0);
             this.labelFooter1.Name = "labelFooter1";
-            this.labelFooter1.Size = new System.Drawing.Size(574, 20);
+            this.labelFooter1.Size = new System.Drawing.Size(568, 20);
             this.labelFooter1.TabIndex = 0;
-            this.labelFooter1.Text = "Pokračováním dojde ke smazání všech výše uvedených souborů. Tato akce je nevratná" +
+            this.labelFooter1.Text = "Pokračováním dojde ke smazání všech výše uvedených vozidel. Tato akce je nevratná" +
     ".";
             // 
             // labelFooter2
@@ -195,16 +195,16 @@
             this.labelFooter2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelFooter2.Location = new System.Drawing.Point(3, 20);
             this.labelFooter2.Name = "labelFooter2";
-            this.labelFooter2.Size = new System.Drawing.Size(574, 20);
+            this.labelFooter2.Size = new System.Drawing.Size(568, 20);
             this.labelFooter2.TabIndex = 1;
             this.labelFooter2.Text = "Opravdu chcete pokračovat?";
             // 
-            // ControlMapConflict
+            // ControlManufacturerConflict
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanelContent);
-            this.Name = "ControlMapConflict";
+            this.Name = "ControlManufacturerConflict";
             this.Size = new System.Drawing.Size(806, 524);
             this.tableLayoutPanelContent.ResumeLayout(false);
             this.tableLayoutPanelContent.PerformLayout();
@@ -224,12 +224,12 @@
         private Label labelHeaderInfo;
         private Panel panelFiles;
         private ListView listViewFiles;
-        private ColumnHeader columnHeaderFileName;
-        private ColumnHeader columnHeaderFileMap;
-        private ColumnHeader columnHeaderFileDesc;
+        private ColumnHeader columnHeaderName;
+        private ColumnHeader columnHeaderManufacturer;
+        private ColumnHeader columnHeaderDescription;
         private ColumnHeader columnHeaderPath;
-        private ColumnHeader columnHeaderFileCreated;
-        private ColumnHeader columnHeaderFileUpdated;
+        private ColumnHeader columnHeaderCreated;
+        private ColumnHeader columnHeaderUpdated;
         private Label labelFiles;
         private TableLayoutPanel tableLayoutPanelFooter;
         private PictureBox pictureBoxImportant;

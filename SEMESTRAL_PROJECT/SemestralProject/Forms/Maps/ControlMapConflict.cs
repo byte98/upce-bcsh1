@@ -65,7 +65,7 @@ namespace SemestralProject.Forms.Maps
             {
                 FileInfo fi = new FileInfo(file.OriginalPath);
                 ListViewItem item = new ListViewItem(fi.Name, "file");
-                item.SubItems.Add(file.InformationSystem.Name);
+                item.SubItems.Add(file.Map.Name);
                 item.SubItems.Add(file.Description);
                 item.SubItems.Add(Path.GetDirectoryName(file.OriginalPath));
                 item.SubItems.Add(file.Created.ToString());
