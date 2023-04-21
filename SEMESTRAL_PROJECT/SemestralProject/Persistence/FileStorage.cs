@@ -441,6 +441,24 @@ namespace SemestralProject.Persistence
             while (this.dataFiles.Contains(reti));
             return reti;
         }
+
+        /// <summary>
+        /// Removes data file
+        /// </summary>
+        /// <param name="name">Name of data file which will be removed</param>
+        public void RemoveDataFile(string name)
+        {
+            if (this.dataFiles.Contains(name))
+            {
+                string path = this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[DATAFILES]" + Path.DirectorySeparatorChar + name;
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+                this.dataFiles.Remove(name);
+                this.Save();
+            }
+        }
         #endregion
     }
 }

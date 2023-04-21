@@ -296,6 +296,8 @@ namespace SemestralProject.Forms
             {
                 this.informationSystemsController.Remove(this.isView.SelectedData);
                 this.RefreshIsView();
+                this.RefreshFileView();
+                this.RefreshVehicleView();
             }
         }
 
@@ -303,6 +305,8 @@ namespace SemestralProject.Forms
         {
             this.informationSystemsController.Delete();
             this.RefreshIsView();
+            this.RefreshFileView();
+            this.RefreshVehicleView();
         }
 
         private void buttonEditIS_Click(object sender, EventArgs e)

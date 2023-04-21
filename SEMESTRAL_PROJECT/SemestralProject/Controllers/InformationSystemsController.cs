@@ -120,16 +120,7 @@ namespace SemestralProject.Controllers
                         MessageBoxDefaultButton.Button2
                     ) == DialogResult.Yes)
                 {
-                    FormWait wait = new FormWait(() =>
-                    {
-                        if (this.context.DataStorage.InformationSystems.Contains(system))
-                        {
-                            this.context.DataStorage.InformationSystems.Remove(system);
-                        }
-                        this.context.DataStorage.Save();
-                        system = null;
-                    }, this.context);
-                    wait.ShowDialog();
+                    this.RemoveSystem(system);
                 }
             }
         }
@@ -146,13 +137,86 @@ namespace SemestralProject.Controllers
                         MessageBoxDefaultButton.Button2
                     ) == DialogResult.Yes)
             {
-                FormWait wait = new FormWait(() =>
+                foreach(InformationSystem system in this.context.DataStorage.InformationSystems)
                 {
-                    this.context.DataStorage.InformationSystems.Clear();
-                    this.context.DataStorage.Save();
-                }, this.context);
-                wait.ShowDialog();
+                    this.RemoveSystem(system);
+                }
             }
+        }
+
+        /// <summary>
+        /// Removes information system with check for conflicts
+        /// </summary>
+        /// <param name="system">System which will be removed</param>
+        private void RemoveSystem(InformationSystem system)
+        {
+            FormWait wait = new FormWait(() =>
+            {
+                List<Vehicle> conflictVehicles = this.GetVehicles(system);
+                List<DataFile> conflictFiles = this.GetFiles(system);
+                if (conflictVehicles.Count > 0 && conflictFiles.Count > 0)
+                {
+                    FormISConflicts dialog = new FormISConflicts(conflictVehicles, conflictFiles, this.context);
+                    dialog.BringToFront();
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        foreach(Vehicle vehicle in conflictVehicles)
+                        {
+                            this.context.DataStorage.Vehicles.Remove(vehicle);
+                        }
+                        foreach(DataFile dataFile in conflictFiles)
+                        {
+                            this.context.FileStorage.RemoveDataFile(dataFile.Name);
+                            this.context.DataStorage.DataFiles.Remove(dataFile);
+                        }
+                        this.context.DataStorage.InformationSystems.Remove(system);
+                        this.context.DataStorage.Save();
+                    }
+                }
+                else
+                {
+                    this.context.DataStorage.InformationSystems.Remove(system);
+                    this.context.DataStorage.Save();
+                }
+
+            }, this.context);
+            wait.ShowDialog();
+        }
+
+        /// <summary>
+        /// Searches for vehicles with installed information system
+        /// </summary>
+        /// <param name="system">Searched information system</param>
+        /// <returns>List of vehicles with installed searched information system</returns>
+        private List<Vehicle> GetVehicles(InformationSystem system)
+        {
+            List<Vehicle> reti = new List<Vehicle>();
+            foreach(Vehicle vehicle in this.context.DataStorage.Vehicles)
+            {
+                if (vehicle.InformationSystem.Id == system.Id)
+                {
+                    reti.Add(vehicle);
+                }
+            }   
+            return reti;
+        }
+
+        /// <summary>
+        /// Searches for data files which has data stored in information system format
+        /// </summary>
+        /// <param name="system">Searched information system</param>
+        /// <returns>List of data files which holds data in searched information system format</returns>
+        private List<DataFile> GetFiles(InformationSystem system)
+        {
+            List<DataFile> reti = new List<DataFile>();
+            foreach(DataFile file in this.context.DataStorage.DataFiles)
+            {
+                if (file.InformationSystem.Id == system.Id)
+                {
+                    reti.Add(file);
+                }
+            }
+            return reti;
         }
 
         public override List<InformationSystem> Search(string phrase)
