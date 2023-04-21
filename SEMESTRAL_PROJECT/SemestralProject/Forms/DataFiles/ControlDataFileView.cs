@@ -97,6 +97,7 @@ namespace SemestralProject.Forms.DataFiles
                 FileInfo fi = new FileInfo(file.OriginalPath);
                 ListViewItem item = new ListViewItem(fi.Name, "file");
                 item.Tag = file.Id;
+                item.SubItems.Add(file.Description);
                 item.SubItems.Add(file.InformationSystem.Name);
                 item.SubItems.Add(file.Map.Name);
                 this.listViewContent.Items.Add(item);

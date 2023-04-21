@@ -32,12 +32,14 @@
             this.columnHeaderName = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderInformationSystem = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderMap = new System.Windows.Forms.ColumnHeader();
+            this.columnHeaderDescripiton = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
             // listViewContent
             // 
             this.listViewContent.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderName,
+            this.columnHeaderDescripiton,
             this.columnHeaderInformationSystem,
             this.columnHeaderMap});
             this.listViewContent.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -63,6 +65,10 @@
             // 
             this.columnHeaderMap.Text = "Oblast";
             // 
+            // columnHeaderDescripiton
+            // 
+            this.columnHeaderDescripiton.Text = "Popis";
+            // 
             // ControlDataFileView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -80,5 +86,6 @@
         private ColumnHeader columnHeaderName;
         private ColumnHeader columnHeaderInformationSystem;
         private ColumnHeader columnHeaderMap;
+        private ColumnHeader columnHeaderDescripiton;
     }
 }
