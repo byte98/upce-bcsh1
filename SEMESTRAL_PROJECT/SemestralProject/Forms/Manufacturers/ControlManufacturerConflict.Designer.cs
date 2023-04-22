@@ -101,6 +101,7 @@
             this.listViewFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewFiles.FullRowSelect = true;
             this.listViewFiles.Location = new System.Drawing.Point(0, 20);
+            this.listViewFiles.MultiSelect = false;
             this.listViewFiles.Name = "listViewFiles";
             this.listViewFiles.Size = new System.Drawing.Size(800, 418);
             this.listViewFiles.TabIndex = 1;

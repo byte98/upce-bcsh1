@@ -120,7 +120,12 @@ namespace SemestralProject.Controllers
                         MessageBoxDefaultButton.Button2
                     ) == DialogResult.Yes)
                 {
-                    this.RemoveMap(map);
+                    FormWait wait = new FormWait(() =>
+                    {
+                        this.RemoveMap(map);
+                        this.context.DataStorage.Save();
+                    }, this.context);
+                    wait.ShowDialog();
                 }
             }
         }
@@ -137,10 +142,15 @@ namespace SemestralProject.Controllers
                         MessageBoxDefaultButton.Button2
                     ) == DialogResult.Yes)
             {
-                foreach(Map map in this.context.DataStorage.Maps)
+                FormWait wait = new FormWait(() =>
                 {
-                    this.RemoveMap(map);
-                }
+                    foreach (Map map in this.context.DataStorage.Maps)
+                    {
+                        this.RemoveMap(map);
+                    }
+                    this.context.DataStorage.Save();
+                }, this.context);
+                wait.ShowDialog();
             }
         }
         
@@ -150,29 +160,24 @@ namespace SemestralProject.Controllers
         /// <param name="map">Map which will be removed</param>
         private void RemoveMap(Map map)
         {
-            FormWait wait = new FormWait(() =>
+            List<DataFile> conflicts = this.GetDataFiles(map);
+            if (conflicts.Count > 0)
             {
-                List<DataFile> conflicts = this.GetDataFiles(map);
-                if (conflicts.Count > 0)
+                FormMapConflict dialog = new FormMapConflict(conflicts, context);
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    FormMapConflict dialog = new FormMapConflict(conflicts, context);
-                    if (dialog.ShowDialog() == DialogResult.OK)
+                    foreach (DataFile file in conflicts)
                     {
-                        foreach(DataFile file in conflicts)
-                        {
-                            this.context.FileStorage.RemoveDataFile(file.Name);
-                            this.context.DataStorage.DataFiles.Remove(file);
-                        }
-                        this.context.DataStorage.Maps.Remove(map);
+                        this.context.FileStorage.RemoveDataFile(file.Name);
+                        this.context.DataStorage.DataFiles.Remove(file);
                     }
-                }
-                else
-                {
                     this.context.DataStorage.Maps.Remove(map);
                 }
-                this.context.DataStorage.Save();
-            }, this.context);
-            wait.ShowDialog();
+            }
+            else
+            {
+                this.context.DataStorage.Maps.Remove(map);
+            }
         }
 
         /// <summary>

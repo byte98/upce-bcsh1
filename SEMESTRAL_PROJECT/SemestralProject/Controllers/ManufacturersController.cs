@@ -13,7 +13,7 @@ namespace SemestralProject.Controllers
     /// <summary>
     /// Class which controls operations over manufacturers
     /// </summary>
-    internal class ManufacturersController: AbstractController<Manufacturer>
+    internal class ManufacturersController : AbstractController<Manufacturer>
     {
         /// <summary>
         /// Creates new controller of operations over manufacturers
@@ -124,16 +124,55 @@ namespace SemestralProject.Controllers
                 {
                     FormWait wait = new FormWait(() =>
                     {
-                        if (this.context.DataStorage.Manufacturers.Contains(man))
-                        {
-                            this.context.DataStorage.Manufacturers.Remove(man);
-                        }
+                        this.RemoveManufacturer(man);
                         this.context.DataStorage.Save();
-                        man = null;
                     }, this.context);
                     wait.ShowDialog();
                 }
             }
+        }
+
+        /// <summary>
+        /// Removes manufacturer with conflict check
+        /// </summary>
+        /// <param name="manufacturer">Manufacturer which will be removed</param>
+        private void RemoveManufacturer(Manufacturer manufacturer)
+        {
+            List<Vehicle> conflicts = this.GetVehicles(manufacturer);
+            if (conflicts.Count > 0)
+            {
+                FormManufacturersConflicts dialog = new FormManufacturersConflicts(conflicts, this.context);
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    foreach(Vehicle vehicle in conflicts)
+                    {
+                        this.context.DataStorage.Vehicles.Remove(vehicle);
+                    }
+                    this.context.DataStorage.Manufacturers.Remove(manufacturer);
+                }
+            }
+            else
+            {
+                this.context.DataStorage.Manufacturers.Remove(manufacturer);
+            }
+        }
+
+        /// <summary>
+        /// Gets vehicles made by defined manufacturer
+        /// </summary>
+        /// <param name="manufacturer">Manufacturer which vehicles will be searched</param>
+        /// <returns>List of vehicles made by searched manufacturer</returns>
+        private List<Vehicle> GetVehicles(Manufacturer manufacturer)
+        {
+            List<Vehicle> reti = new List<Vehicle>();
+            foreach (Vehicle vehicle in this.context.DataStorage.Vehicles)
+            {
+                if (vehicle.Manufacturer.Id == manufacturer.Id)
+                {
+                    reti.Add(vehicle);
+                }
+            }
+            return reti;
         }
 
         public override void Delete()
@@ -150,7 +189,10 @@ namespace SemestralProject.Controllers
             {
                 FormWait wait = new FormWait(() =>
                 {
-                    this.context.DataStorage.Manufacturers.Clear();
+                    foreach(Manufacturer manufacturer in this.context.DataStorage.Manufacturers)
+                    {
+                        this.RemoveManufacturer(manufacturer);
+                    }
                     this.context.DataStorage.Save();
                 }, this.context);
                 wait.ShowDialog();
@@ -162,7 +204,7 @@ namespace SemestralProject.Controllers
             List<Manufacturer> reti = new List<Manufacturer>();
             FormWait wait = new FormWait(() =>
             {
-                foreach(Manufacturer m in this.context.DataStorage.Manufacturers)
+                foreach (Manufacturer m in this.context.DataStorage.Manufacturers)
                 {
                     if (m.Matches(phrase))
                     {

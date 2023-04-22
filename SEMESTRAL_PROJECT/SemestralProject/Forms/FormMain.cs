@@ -436,6 +436,7 @@ namespace SemestralProject.Forms
             {
                 this.manufacturersController.Remove(this.manView.SelectedData);
                 this.RefreshManView();
+                this.RefreshVehicleView();
             }
         }
 
@@ -443,6 +444,7 @@ namespace SemestralProject.Forms
         {
             this.manufacturersController.Delete();
             this.RefreshManView();
+            this.RefreshVehicleView();
         }
 
         private void buttonManufacturerSearch_Click(object sender, EventArgs e)

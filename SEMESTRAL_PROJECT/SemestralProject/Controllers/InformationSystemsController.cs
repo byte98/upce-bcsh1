@@ -120,7 +120,13 @@ namespace SemestralProject.Controllers
                         MessageBoxDefaultButton.Button2
                     ) == DialogResult.Yes)
                 {
-                    this.RemoveSystem(system);
+                    
+                    FormWait wait = new FormWait(() =>
+                    {
+                        this.RemoveSystem(system);
+                        this.context.DataStorage.Save();
+                    }, this.context);
+                    wait.ShowDialog();
                 }
             }
         }
@@ -137,10 +143,15 @@ namespace SemestralProject.Controllers
                         MessageBoxDefaultButton.Button2
                     ) == DialogResult.Yes)
             {
-                foreach(InformationSystem system in this.context.DataStorage.InformationSystems)
+                FormWait wait = new FormWait(() =>
                 {
-                    this.RemoveSystem(system);
-                }
+                    foreach (InformationSystem system in this.context.DataStorage.InformationSystems)
+                    {
+                        this.RemoveSystem(system);
+                    }
+                    this.context.DataStorage.Save();
+                }, this.context);
+                wait.ShowDialog();
             }
         }
 
@@ -150,37 +161,32 @@ namespace SemestralProject.Controllers
         /// <param name="system">System which will be removed</param>
         private void RemoveSystem(InformationSystem system)
         {
-            FormWait wait = new FormWait(() =>
+            List<Vehicle> conflictVehicles = this.GetVehicles(system);
+            List<DataFile> conflictFiles = this.GetFiles(system);
+            if (conflictVehicles.Count > 0 || conflictFiles.Count > 0)
             {
-                List<Vehicle> conflictVehicles = this.GetVehicles(system);
-                List<DataFile> conflictFiles = this.GetFiles(system);
-                if (conflictVehicles.Count > 0 || conflictFiles.Count > 0)
+                FormISConflicts dialog = new FormISConflicts(conflictVehicles, conflictFiles, this.context);
+                dialog.BringToFront();
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    FormISConflicts dialog = new FormISConflicts(conflictVehicles, conflictFiles, this.context);
-                    dialog.BringToFront();
-                    if (dialog.ShowDialog() == DialogResult.OK)
+                    foreach (Vehicle vehicle in conflictVehicles)
                     {
-                        foreach(Vehicle vehicle in conflictVehicles)
-                        {
-                            this.context.DataStorage.Vehicles.Remove(vehicle);
-                        }
-                        foreach(DataFile dataFile in conflictFiles)
-                        {
-                            this.context.FileStorage.RemoveDataFile(dataFile.Name);
-                            this.context.DataStorage.DataFiles.Remove(dataFile);
-                        }
-                        this.context.DataStorage.InformationSystems.Remove(system);
-                        this.context.DataStorage.Save();
+                        this.context.DataStorage.Vehicles.Remove(vehicle);
                     }
-                }
-                else
-                {
+                    foreach (DataFile dataFile in conflictFiles)
+                    {
+                        this.context.FileStorage.RemoveDataFile(dataFile.Name);
+                        this.context.DataStorage.DataFiles.Remove(dataFile);
+                    }
                     this.context.DataStorage.InformationSystems.Remove(system);
                     this.context.DataStorage.Save();
                 }
-
-            }, this.context);
-            wait.ShowDialog();
+            }
+            else
+            {
+                this.context.DataStorage.InformationSystems.Remove(system);
+                this.context.DataStorage.Save();
+            }
         }
 
         /// <summary>
