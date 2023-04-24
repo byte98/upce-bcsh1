@@ -1444,7 +1444,7 @@ namespace SemestralProject.Forms
             this.labelActionsImport2.Name = "labelActionsImport2";
             this.labelActionsImport2.Size = new System.Drawing.Size(225, 20);
             this.labelActionsImport2.TabIndex = 1;
-            this.labelActionsImport2.Text = " • umožňí načíst data ze souboru";
+            this.labelActionsImport2.Text = " • umožní načíst data ze souboru";
             // 
             // labelActionsImport3
             // 

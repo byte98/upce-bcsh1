@@ -33,7 +33,7 @@ namespace SemestralProject.Controllers
         /// <summary>
         /// Minimal thread sleep (in miliseconds) during export/import
         /// </summary>
-        private const int EISleepMin = 0;
+        private const int EISleepMin = 100;
 
         /// <summary>
         /// Maximal thread sleep (in miliseconds) during export/import
