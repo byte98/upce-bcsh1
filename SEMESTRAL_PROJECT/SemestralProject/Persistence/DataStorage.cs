@@ -20,7 +20,7 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Class which holds names of XML elements used in XML files
         /// </summary>
-        private static class XML
+        public static class XML
         {
             /// <summary>
             /// Format of date and time used to store data in XML files
@@ -297,27 +297,27 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// File containing something like a database of information systems
         /// </summary>
-        private const string ISFile = "INFORMATION_SYSTEMS.XML";
+        public const string ISFile = "INFORMATION_SYSTEMS.XML";
 
         /// <summary>
         /// File containing something like a database of maps
         /// </summary>
-        private const string MapFile = "MAPS.XML";
+        public const string MapFile = "MAPS.XML";
 
         /// <summary>
         /// File containing kind of a database with manufacturers
         /// </summary>
-        private const string ManufacturerFile = "MANUFACTURERS.XML";
+        public const string ManufacturerFile = "MANUFACTURERS.XML";
 
         /// <summary>
         /// File with database like structure with dataFiles
         /// </summary>
-        private const string VehicleFile = "VEHICLES.XML";
+        public const string VehicleFile = "VEHICLES.XML";
 
         /// <summary>
         /// File with all stored data files
         /// </summary>
-        private const string DataFileFile = "FILES.XML";
+        public const string DataFileFile = "FILES.XML";
 
         /// <summary>
         /// Path to file with data storage

@@ -202,12 +202,15 @@ namespace SemestralProject.Forms
         private void toolStripMenuItemRefresh_Click(object sender, EventArgs e)
         {
             TreeNode selected = this.treeViewContent.SelectedNode;
-            TreeNode newNode = this.TraverseDirectory(selected.FullPath);
-            int idx = this.treeViewContent.Nodes.IndexOf(selected);
-            if (idx >= 0 && idx < this.treeViewContent.Nodes.Count)
+            if (selected != null)
             {
-                this.treeViewContent.Nodes.RemoveAt(idx);
-                this.treeViewContent.Nodes.Insert(idx, newNode);
+                TreeNode? newNode = this.TraverseDirectory(selected.FullPath);
+                int idx = this.treeViewContent.Nodes.IndexOf(selected);
+                if (idx >= 0 && idx < this.treeViewContent.Nodes.Count)
+                {
+                    this.treeViewContent.Nodes.RemoveAt(idx);
+                    this.treeViewContent.Nodes.Insert(idx, newNode);
+                }
             }
         }
 

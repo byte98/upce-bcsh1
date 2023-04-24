@@ -41,6 +41,90 @@ namespace SemestralProject.Persistence
             FILE
         }
 
+        #region Utility structures
+
+        /// <summary>
+        /// Structure which wraps information about icon
+        /// </summary>
+        private struct IconWrapper
+        {
+            /// <summary>
+            /// Icon itself
+            /// </summary>
+            public Icon Icon { get; init; }
+
+            /// <summary>
+            /// Path to file containing icon
+            /// </summary>
+            public string Path { get; init; }
+
+            /// <summary>
+            /// Creates new information wrapper of icon
+            /// </summary>
+            /// <param name="icon">Icon itself</param>
+            /// <param name="path">Path to file containing icon</param>
+            public IconWrapper(Icon icon, string path)
+            {
+                this.Icon = icon;
+                this.Path = path;
+            }
+        }
+
+        /// <summary>
+        /// Structure which wraps information about picture
+        /// </summary>
+        private struct PictureWrapper
+        {
+            /// <summary>
+            /// Picture itself
+            /// </summary>
+            public Picture Picture { get; init; }
+
+            /// <summary>
+            /// Path to file containing picture
+            /// </summary>
+            public string Path { get; init; }
+
+            /// <summary>
+            /// Creates new wrapper of information about picture
+            /// </summary>
+            /// <param name="picture">Picture itself</param>
+            /// <param name="path">Path to file with picture</param>
+            public PictureWrapper(Picture picture, string path)
+            {
+                this.Picture = picture;
+                this.Path = path;
+            }
+        }
+
+        /// <summary>
+        /// Structure holding information about data file
+        /// </summary>
+        private struct DataFileWrapper
+        {
+            /// <summary>
+            /// Name of data file
+            /// </summary>
+            public string DataFile { get; init; }
+
+            /// <summary>
+            /// Path to data file
+            /// </summary>
+            public string Path { get; init; }
+
+            /// <summary>
+            /// Creates new wrapper of information about data file
+            /// </summary>
+            /// <param name="dataFile">Name of data file</param>
+            /// <param name="path">Path to data file</param>
+            public DataFileWrapper(string dataFile, string path)
+            {
+                this.DataFile = dataFile;
+                this.Path = path;
+            }
+        }
+        #endregion
+
         /// <summary>
         /// Extension of default files
         /// </summary>
@@ -94,17 +178,17 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// List with all stored icons
         /// </summary>
-        private readonly List<Icon> icons;
+        private readonly List<IconWrapper> icons;
 
         /// <summary>
         /// List with all stored pictures
         /// </summary>
-        private readonly List<Picture> pictures;
+        private readonly List<PictureWrapper> pictures;
 
         /// <summary>
         /// List with all available data files
         /// </summary>
-        private readonly List<string> dataFiles;
+        private readonly List<DataFileWrapper> dataFiles;
 
         /// <summary>
         /// Path to file storage
@@ -124,9 +208,9 @@ namespace SemestralProject.Persistence
         public FileStorage(string path, Configuration configuration)
         {
             this.configuration = configuration;
-            this.icons = new List<Icon>();
-            this.pictures = new List<Picture>();
-            this.dataFiles = new List<string>();
+            this.icons = new List<IconWrapper>();
+            this.pictures = new List<PictureWrapper>();
+            this.dataFiles = new List<DataFileWrapper>();
             this.path = path;
         }
 
@@ -168,7 +252,8 @@ namespace SemestralProject.Persistence
             foreach (string file in Directory.GetFiles(output + Path.DirectorySeparatorChar + "[ICONS]"))
             {
                 FileInfo fi = new FileInfo(file);
-                this.icons.Add(new Icon(Path.GetFileNameWithoutExtension(fi.FullName), file));
+                Icon icon = new Icon(Path.GetFileNameWithoutExtension(fi.FullName), file);
+                this.icons.Add(new IconWrapper(icon, file));
             }
         }
 
@@ -181,7 +266,7 @@ namespace SemestralProject.Persistence
             this.pictures.Clear();
             foreach(string file in Directory.GetFiles(output))
             {
-                this.pictures.Add(new Picture(file));
+                this.pictures.Add(new PictureWrapper(new Picture(file), file));
             }
         }
 
@@ -195,7 +280,7 @@ namespace SemestralProject.Persistence
             foreach (string file in Directory.GetFiles(output))
             {
                 FileInfo fi = new FileInfo(file);
-                this.dataFiles.Add(fi.Name);
+                this.dataFiles.Add(new DataFileWrapper(fi.Name, file));
             }
         }
 
@@ -230,7 +315,7 @@ namespace SemestralProject.Persistence
                 File.Copy(path, destination, true);
                 this.Save();
                 reti = new Icon(name, destination);
-                this.icons.Add(reti);
+                this.icons.Add(new IconWrapper(reti, destination));
             }
             return reti;
         }
@@ -243,11 +328,11 @@ namespace SemestralProject.Persistence
         public Icon? GetIcon(string name)
         {
             Icon? reti = null;
-            foreach(Icon icon in this.icons)
+            foreach(IconWrapper icon in this.icons)
             {
-                if (icon.Name == name)
+                if (icon.Icon.Name == name)
                 {
-                    reti = icon;
+                    reti = icon.Icon;
                     break;
                 }
             }
@@ -294,7 +379,14 @@ namespace SemestralProject.Persistence
         /// <returns>All icons stored in file storage</returns>
         public Icon[] GetAllIcons()
         {
-            return this.icons.ToArray();
+            Icon[] reti = new Icon[this.icons.Count];
+            int idx = 0;
+            foreach(IconWrapper iw in this.icons)
+            {
+                reti[idx] = iw.Icon;
+                idx++;
+            }
+            return reti;
         }
 
         /// <summary>
@@ -313,6 +405,26 @@ namespace SemestralProject.Persistence
             while(this.GetIcon(reti) != null);
             return reti;
         }
+
+        /// <summary>
+        /// Gets path to file containing icon
+        /// </summary>
+        /// <param name="icon">Icon which path to file will be searched</param>
+        /// <returns>Path to file containing searched icon or <c>NULL</c> if there is no such icon</returns>
+        public string? GetIconPath(Icon icon)
+        {
+            string? reti = null;
+            foreach(IconWrapper iw in this.icons)
+            {
+                if (iw.Icon.Name == icon.Name)
+                {
+                    reti = iw.Path;
+                    break;
+                }
+            }
+            return reti;
+        }
+
         #endregion
 
         #region Pictures
@@ -322,7 +434,14 @@ namespace SemestralProject.Persistence
         /// <returns>Array with all available pictures</returns>
         public Picture[] GetPictures()
         {
-            return this.pictures.ToArray();
+            Picture[] reti = new Picture[this.pictures.Count];
+            int idx = 0;
+            foreach(PictureWrapper pw in this.pictures)
+            {
+                reti[idx] = pw.Picture;
+                idx++;
+            }
+            return reti;
         }
 
         /// <summary>
@@ -333,11 +452,11 @@ namespace SemestralProject.Persistence
         public Picture? GetPicture(string name)
         {
             Picture? reti = null;
-            foreach(Picture picture in this.pictures)
+            foreach(PictureWrapper picture in this.pictures)
             {
-                if (picture.Name == name)
+                if (picture.Picture.Name == name)
                 {
-                    reti = picture;
+                    reti = picture.Picture;
                     break;
                 }
             }
@@ -354,11 +473,11 @@ namespace SemestralProject.Persistence
             Picture reti = new Picture(this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[PICTURES]" + Path.DirectorySeparatorChar + FileStorage.DefaultPicture + FileStorage.DefaultExt);
             if (name != null)
             {
-                foreach (Picture picture in this.pictures)
+                foreach (PictureWrapper picture in this.pictures)
                 {
-                    if (picture.Name == name)
+                    if (picture.Picture.Name == name)
                     {
-                        reti = picture;
+                        reti = picture.Picture;
                         break;
                     }
                 }
@@ -384,7 +503,7 @@ namespace SemestralProject.Persistence
             }
             this.Save();
             Picture reti = new Picture(destination, name);
-            this.pictures.Add(reti);
+            this.pictures.Add(new PictureWrapper(reti, destination));
             return reti;
         }
 
@@ -406,6 +525,26 @@ namespace SemestralProject.Persistence
             while(this.GetPicture(reti) != null);
             return reti;
         }
+
+        /// <summary>
+        /// Gets path to file containing picture
+        /// </summary>
+        /// <param name="picture">Picture which path will be searched</param>
+        /// <returns>Path to file containing searched picture or <c>NULL</c> if there is no such picture</returns>
+        public string? GetPicturePath(Picture picture)
+        {
+            string? reti = null;
+            foreach(PictureWrapper pw in this.pictures)
+            {
+                if (pw.Picture.Name == picture.Name)
+                {
+                    reti = pw.Path;
+                    break;
+                }
+            }
+            return reti;
+        }
+
         #endregion
 
         #region Data files
@@ -438,7 +577,26 @@ namespace SemestralProject.Persistence
             {
                 reti = StringUtils.Random(FileStorage.NameAlphabet, FileStorage.NameMin, FileStorage.NameMax);
             }
-            while (this.dataFiles.Contains(reti));
+            while (this.DataFilesContains(reti));
+            return reti;
+        }
+
+        /// <summary>
+        /// Checks, whether storage contains data file with defined name
+        /// </summary>
+        /// <param name="name">Name which will be searched</param>
+        /// <returns><c>TRUE</c> if storage contains data file with defined name or <c>FALSE</c> if not</returns>
+        private bool DataFilesContains(string name)
+        {
+            bool reti = false;
+            foreach (DataFileWrapper dw in this.dataFiles)
+            {
+                if (dw.DataFile == name)
+                {
+                    reti = true;
+                    break;
+                }
+            }
             return reti;
         }
 
@@ -448,16 +606,63 @@ namespace SemestralProject.Persistence
         /// <param name="name">Name of data file which will be removed</param>
         public void RemoveDataFile(string name)
         {
-            if (this.dataFiles.Contains(name))
+            if (this.DataFilesContains(name))
             {
                 string path = this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[DATAFILES]" + Path.DirectorySeparatorChar + name;
                 if (File.Exists(path))
                 {
                     File.Delete(path);
                 }
-                this.dataFiles.Remove(name);
+                DataFileWrapper? toRemove = null;
+                foreach(DataFileWrapper dw in this.dataFiles)
+                {
+                    if (dw.DataFile == name)
+                    {
+                        toRemove = dw;
+                        break;
+                    }
+                }
+                if (toRemove != null)
+                {
+                    this.dataFiles.Remove((DataFileWrapper)toRemove);
+                }
                 this.Save();
             }
+        }
+
+        /// <summary>
+        /// Gets all available data files
+        /// </summary>
+        /// <returns>Array with names of all available data files</returns>
+        public string[] GetDataFiles()
+        {
+            string[] reti = new string[this.dataFiles.Count];
+            int idx = 0;
+            foreach(DataFileWrapper dw in this.dataFiles)
+            {
+                reti[idx] = dw.DataFile;
+                idx++;
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets path to data file
+        /// </summary>
+        /// <param name="dataFile">Name of searched data file</param>
+        /// <returns>Path to searched data file or <c>NULL</c> if there is no such data file</returns>
+        public string? GetDataFilePath(string dataFile)
+        {
+            string? reti = null;
+            foreach(DataFileWrapper dw in this.dataFiles)
+            {
+                if (dw.DataFile == dataFile)
+                {
+                    reti = dw.Path;
+                    return reti;
+                }
+            }
+            return reti;
         }
         #endregion
     }

@@ -70,6 +70,11 @@ namespace SemestralProject.Forms
         private readonly ControlDataFileView fileView;
 
         /// <summary>
+        /// Controller of actions page
+        /// </summary>
+        private readonly ActionsController actionsController;
+
+        /// <summary>
         /// Creates new main form of application
         /// </summary>
         /// <param name="context">Wrapper of all application resources</param>
@@ -96,6 +101,7 @@ namespace SemestralProject.Forms
             this.manufacturersController = new ManufacturersController(this.Context);
             this.vehiclesController = new VehiclesController(this.Context);
             this.filesController = new FilesController(this.Context);
+            this.actionsController = new ActionsController(this.Context);
         }
 
         /// <summary>
@@ -228,6 +234,7 @@ namespace SemestralProject.Forms
                             case "VÝROBCI": this.tabControlContent.SelectedTab = this.tabPageManufacturers; break;
                             case "VOZIDLA": this.tabControlContent.SelectedTab = this.tabPageVehicles; break;
                             case "SOUBORY": this.tabControlContent.SelectedTab = this.tabPageFiles; break;
+                            case "AKCE":    this.tabControlContent.SelectedTab = this.tabPageActions; break;
                         }
                     }
                 }
@@ -583,5 +590,14 @@ namespace SemestralProject.Forms
             this.RefreshFileView();
         }
         #endregion
+
+        private void buttonActionsExport_Click(object sender, EventArgs e)
+        {
+            this.saveFileDialogExport.InitialDirectory = Directory.GetCurrentDirectory();
+            if (this.saveFileDialogExport.ShowDialog() == DialogResult.OK)
+            {
+                this.actionsController.Export(this.saveFileDialogExport.FileName);
+            }
+        }
     }
 }

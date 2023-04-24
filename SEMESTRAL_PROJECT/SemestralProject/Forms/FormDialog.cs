@@ -74,17 +74,18 @@ namespace SemestralProject.Forms
         /// <param name="title">Title of dialog</param>
         /// <param name="header">Header of dialog</param>
         /// <param name="icon">Icon of dialog</param>
+        /// <param name="context">Wrapper of all program resources</param>
         public FormDialog(string title, string header, Bitmap icon, Context context)
         {
             this.Context = context;
             InitializeComponent();
-            if (this.Context!= null)
+            if (this.Context != null)
             {
                 this.panelHeader.BackColor = this.Context.Configuration.AccentColor;
                 this.panelHeader.ForeColor = this.Context.Configuration.TextColor;
             }
             this.Text = title;
-            this.HeaderText = header; 
+            this.HeaderText = header;
             this.HeaderIcon = icon;
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -98,6 +99,24 @@ namespace SemestralProject.Forms
             this.buttonCancel.Visible = false;
         }
 
+        /// <summary>
+        /// Disables dialog buttons
+        /// </summary>
+        protected void DisableButtons()
+        {
+            this.buttonOK.Enabled = false;
+            this.buttonCancel.Enabled = false;
+        }
+
+        /// <summary>
+        /// Enables dialog buttons
+        /// </summary>
+        protected void EnableButtons()
+        {
+            this.buttonOK.Enabled = true;
+            this.buttonCancel.Enabled = true;
+        }
+
         private void FormAddIS_Deactivate(object sender, EventArgs e)
         {
             this.panelHeader.BackColor = Color.White;
@@ -105,10 +124,20 @@ namespace SemestralProject.Forms
 
         private void FormAddIS_Activated(object sender, EventArgs e)
         {
-            if (this.Context!= null)
+            if (this.Context != null)
             {
                 this.panelHeader.BackColor = this.Context.Configuration.AccentColor;
             }
         }
+
+        /// <summary>
+        /// Adds handler on event 'click on OK button'
+        /// </summary>
+        /// <param name="eventHandler">Event handler which will be invoked</param>
+        protected void OnOKClicked(EventHandler eventHandler)
+        {
+            this.buttonOK.Click += eventHandler;
+        }
+
     }
 }

@@ -32,6 +32,7 @@ namespace SemestralProject.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panelItemsControl = new System.Windows.Forms.Panel();
+            this.radioButtonActions = new System.Windows.Forms.RadioButton();
             this.radioButtonFiles = new System.Windows.Forms.RadioButton();
             this.radioButtonVehicles = new System.Windows.Forms.RadioButton();
             this.radioButtonManufacturers = new System.Windows.Forms.RadioButton();
@@ -118,6 +119,25 @@ namespace SemestralProject.Forms
             this.buttonFileCancelSearch = new System.Windows.Forms.Button();
             this.buttonFileSearch = new System.Windows.Forms.Button();
             this.splitterFileControls3 = new System.Windows.Forms.Splitter();
+            this.tabPageActions = new System.Windows.Forms.TabPage();
+            this.panelActionsContent = new System.Windows.Forms.TableLayoutPanel();
+            this.panelActionsHeader = new System.Windows.Forms.Panel();
+            this.labelActionsHeader = new System.Windows.Forms.Label();
+            this.pictureBoxActionsHeader = new System.Windows.Forms.PictureBox();
+            this.splitterActionsHeader = new System.Windows.Forms.Splitter();
+            this.groupBoxActionsDataTransfer = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanelActionsDataTransfer = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonActionsExport = new System.Windows.Forms.Button();
+            this.buttonActionsImport = new System.Windows.Forms.Button();
+            this.flowLayoutPanelActionsExport = new System.Windows.Forms.FlowLayoutPanel();
+            this.labelActionsExport1 = new System.Windows.Forms.Label();
+            this.labelActionsExport2 = new System.Windows.Forms.Label();
+            this.labelActionsExport3 = new System.Windows.Forms.Label();
+            this.flowLayoutPanelActionsImport = new System.Windows.Forms.FlowLayoutPanel();
+            this.labelActionsImport1 = new System.Windows.Forms.Label();
+            this.labelActionsImport2 = new System.Windows.Forms.Label();
+            this.labelActionsImport3 = new System.Windows.Forms.Label();
+            this.saveFileDialogExport = new System.Windows.Forms.SaveFileDialog();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
             this.panelISControls.SuspendLayout();
@@ -135,10 +155,19 @@ namespace SemestralProject.Forms
             this.tabPageFiles.SuspendLayout();
             this.panelFileControls.SuspendLayout();
             this.panelFileSearch.SuspendLayout();
+            this.tabPageActions.SuspendLayout();
+            this.panelActionsContent.SuspendLayout();
+            this.panelActionsHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxActionsHeader)).BeginInit();
+            this.groupBoxActionsDataTransfer.SuspendLayout();
+            this.tableLayoutPanelActionsDataTransfer.SuspendLayout();
+            this.flowLayoutPanelActionsExport.SuspendLayout();
+            this.flowLayoutPanelActionsImport.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelItemsControl
             // 
+            this.panelItemsControl.Controls.Add(this.radioButtonActions);
             this.panelItemsControl.Controls.Add(this.radioButtonFiles);
             this.panelItemsControl.Controls.Add(this.radioButtonVehicles);
             this.panelItemsControl.Controls.Add(this.radioButtonManufacturers);
@@ -149,6 +178,21 @@ namespace SemestralProject.Forms
             this.panelItemsControl.Name = "panelItemsControl";
             this.panelItemsControl.Size = new System.Drawing.Size(1348, 29);
             this.panelItemsControl.TabIndex = 1;
+            // 
+            // radioButtonActions
+            // 
+            this.radioButtonActions.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonActions.AutoSize = true;
+            this.radioButtonActions.FlatAppearance.BorderSize = 0;
+            this.radioButtonActions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radioButtonActions.Location = new System.Drawing.Point(522, 0);
+            this.radioButtonActions.Name = "radioButtonActions";
+            this.radioButtonActions.Size = new System.Drawing.Size(54, 30);
+            this.radioButtonActions.TabIndex = 6;
+            this.radioButtonActions.TabStop = true;
+            this.radioButtonActions.Text = "AKCE";
+            this.radioButtonActions.UseVisualStyleBackColor = true;
+            this.radioButtonActions.CheckedChanged += new System.EventHandler(this.PanelItemsControlItemClicked);
             // 
             // radioButtonFiles
             // 
@@ -163,6 +207,7 @@ namespace SemestralProject.Forms
             this.radioButtonFiles.TabStop = true;
             this.radioButtonFiles.Text = "SOUBORY";
             this.radioButtonFiles.UseVisualStyleBackColor = true;
+            this.radioButtonFiles.CheckedChanged += new System.EventHandler(this.PanelItemsControlItemClicked);
             // 
             // radioButtonVehicles
             // 
@@ -426,6 +471,7 @@ namespace SemestralProject.Forms
             this.tabControlContent.Controls.Add(this.tabPageManufacturers);
             this.tabControlContent.Controls.Add(this.tabPageVehicles);
             this.tabControlContent.Controls.Add(this.tabPageFiles);
+            this.tabControlContent.Controls.Add(this.tabPageActions);
             this.tabControlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlContent.Location = new System.Drawing.Point(0, 29);
             this.tabControlContent.Name = "tabControlContent";
@@ -1209,6 +1255,211 @@ namespace SemestralProject.Forms
             this.splitterFileControls3.TabIndex = 9;
             this.splitterFileControls3.TabStop = false;
             // 
+            // tabPageActions
+            // 
+            this.tabPageActions.Controls.Add(this.panelActionsContent);
+            this.tabPageActions.Location = new System.Drawing.Point(4, 29);
+            this.tabPageActions.Name = "tabPageActions";
+            this.tabPageActions.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageActions.Size = new System.Drawing.Size(1340, 659);
+            this.tabPageActions.TabIndex = 5;
+            this.tabPageActions.Text = "AKCE";
+            this.tabPageActions.UseVisualStyleBackColor = true;
+            // 
+            // panelActionsContent
+            // 
+            this.panelActionsContent.AutoScroll = true;
+            this.panelActionsContent.ColumnCount = 1;
+            this.panelActionsContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.panelActionsContent.Controls.Add(this.panelActionsHeader, 0, 0);
+            this.panelActionsContent.Controls.Add(this.splitterActionsHeader, 0, 1);
+            this.panelActionsContent.Controls.Add(this.groupBoxActionsDataTransfer, 0, 2);
+            this.panelActionsContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelActionsContent.Location = new System.Drawing.Point(3, 3);
+            this.panelActionsContent.Name = "panelActionsContent";
+            this.panelActionsContent.RowCount = 4;
+            this.panelActionsContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
+            this.panelActionsContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 9F));
+            this.panelActionsContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 184F));
+            this.panelActionsContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 228F));
+            this.panelActionsContent.Size = new System.Drawing.Size(1334, 653);
+            this.panelActionsContent.TabIndex = 0;
+            // 
+            // panelActionsHeader
+            // 
+            this.panelActionsHeader.Controls.Add(this.labelActionsHeader);
+            this.panelActionsHeader.Controls.Add(this.pictureBoxActionsHeader);
+            this.panelActionsHeader.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelActionsHeader.Location = new System.Drawing.Point(3, 3);
+            this.panelActionsHeader.Name = "panelActionsHeader";
+            this.panelActionsHeader.Size = new System.Drawing.Size(1328, 69);
+            this.panelActionsHeader.TabIndex = 0;
+            // 
+            // labelActionsHeader
+            // 
+            this.labelActionsHeader.AutoSize = true;
+            this.labelActionsHeader.Font = new System.Drawing.Font("Segoe UI Semilight", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelActionsHeader.Location = new System.Drawing.Point(73, 29);
+            this.labelActionsHeader.Name = "labelActionsHeader";
+            this.labelActionsHeader.Size = new System.Drawing.Size(74, 38);
+            this.labelActionsHeader.TabIndex = 1;
+            this.labelActionsHeader.Text = "Akce";
+            // 
+            // pictureBoxActionsHeader
+            // 
+            this.pictureBoxActionsHeader.Image = global::SemestralProject.Resources.actions;
+            this.pictureBoxActionsHeader.Location = new System.Drawing.Point(3, 3);
+            this.pictureBoxActionsHeader.Name = "pictureBoxActionsHeader";
+            this.pictureBoxActionsHeader.Size = new System.Drawing.Size(64, 64);
+            this.pictureBoxActionsHeader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBoxActionsHeader.TabIndex = 0;
+            this.pictureBoxActionsHeader.TabStop = false;
+            // 
+            // splitterActionsHeader
+            // 
+            this.splitterActionsHeader.BackColor = System.Drawing.Color.Black;
+            this.splitterActionsHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitterActionsHeader.Location = new System.Drawing.Point(3, 78);
+            this.splitterActionsHeader.Name = "splitterActionsHeader";
+            this.splitterActionsHeader.Size = new System.Drawing.Size(1328, 1);
+            this.splitterActionsHeader.TabIndex = 1;
+            this.splitterActionsHeader.TabStop = false;
+            // 
+            // groupBoxActionsDataTransfer
+            // 
+            this.groupBoxActionsDataTransfer.Controls.Add(this.tableLayoutPanelActionsDataTransfer);
+            this.groupBoxActionsDataTransfer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxActionsDataTransfer.Location = new System.Drawing.Point(3, 87);
+            this.groupBoxActionsDataTransfer.Name = "groupBoxActionsDataTransfer";
+            this.groupBoxActionsDataTransfer.Size = new System.Drawing.Size(1328, 178);
+            this.groupBoxActionsDataTransfer.TabIndex = 2;
+            this.groupBoxActionsDataTransfer.TabStop = false;
+            this.groupBoxActionsDataTransfer.Text = "Přesun dat";
+            // 
+            // tableLayoutPanelActionsDataTransfer
+            // 
+            this.tableLayoutPanelActionsDataTransfer.ColumnCount = 2;
+            this.tableLayoutPanelActionsDataTransfer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.606657F));
+            this.tableLayoutPanelActionsDataTransfer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.39334F));
+            this.tableLayoutPanelActionsDataTransfer.Controls.Add(this.buttonActionsExport, 0, 0);
+            this.tableLayoutPanelActionsDataTransfer.Controls.Add(this.buttonActionsImport, 0, 1);
+            this.tableLayoutPanelActionsDataTransfer.Controls.Add(this.flowLayoutPanelActionsExport, 1, 0);
+            this.tableLayoutPanelActionsDataTransfer.Controls.Add(this.flowLayoutPanelActionsImport, 1, 1);
+            this.tableLayoutPanelActionsDataTransfer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelActionsDataTransfer.Location = new System.Drawing.Point(3, 23);
+            this.tableLayoutPanelActionsDataTransfer.Name = "tableLayoutPanelActionsDataTransfer";
+            this.tableLayoutPanelActionsDataTransfer.RowCount = 2;
+            this.tableLayoutPanelActionsDataTransfer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelActionsDataTransfer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelActionsDataTransfer.Size = new System.Drawing.Size(1322, 152);
+            this.tableLayoutPanelActionsDataTransfer.TabIndex = 0;
+            // 
+            // buttonActionsExport
+            // 
+            this.buttonActionsExport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonActionsExport.Image = global::SemestralProject.Resources.export;
+            this.buttonActionsExport.Location = new System.Drawing.Point(3, 3);
+            this.buttonActionsExport.Name = "buttonActionsExport";
+            this.buttonActionsExport.Size = new System.Drawing.Size(121, 70);
+            this.buttonActionsExport.TabIndex = 0;
+            this.buttonActionsExport.UseVisualStyleBackColor = true;
+            this.buttonActionsExport.Click += new System.EventHandler(this.buttonActionsExport_Click);
+            // 
+            // buttonActionsImport
+            // 
+            this.buttonActionsImport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonActionsImport.Image = global::SemestralProject.Resources.import;
+            this.buttonActionsImport.Location = new System.Drawing.Point(3, 79);
+            this.buttonActionsImport.Name = "buttonActionsImport";
+            this.buttonActionsImport.Size = new System.Drawing.Size(121, 70);
+            this.buttonActionsImport.TabIndex = 1;
+            this.buttonActionsImport.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanelActionsExport
+            // 
+            this.flowLayoutPanelActionsExport.Controls.Add(this.labelActionsExport1);
+            this.flowLayoutPanelActionsExport.Controls.Add(this.labelActionsExport2);
+            this.flowLayoutPanelActionsExport.Controls.Add(this.labelActionsExport3);
+            this.flowLayoutPanelActionsExport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelActionsExport.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelActionsExport.Location = new System.Drawing.Point(130, 3);
+            this.flowLayoutPanelActionsExport.Name = "flowLayoutPanelActionsExport";
+            this.flowLayoutPanelActionsExport.Size = new System.Drawing.Size(1189, 70);
+            this.flowLayoutPanelActionsExport.TabIndex = 2;
+            // 
+            // labelActionsExport1
+            // 
+            this.labelActionsExport1.AutoSize = true;
+            this.labelActionsExport1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelActionsExport1.Location = new System.Drawing.Point(3, 0);
+            this.labelActionsExport1.Name = "labelActionsExport1";
+            this.labelActionsExport1.Size = new System.Drawing.Size(82, 20);
+            this.labelActionsExport1.TabIndex = 0;
+            this.labelActionsExport1.Text = "Export dat";
+            // 
+            // labelActionsExport2
+            // 
+            this.labelActionsExport2.AutoSize = true;
+            this.labelActionsExport2.Location = new System.Drawing.Point(3, 20);
+            this.labelActionsExport2.Name = "labelActionsExport2";
+            this.labelActionsExport2.Size = new System.Drawing.Size(362, 20);
+            this.labelActionsExport2.TabIndex = 1;
+            this.labelActionsExport2.Text = " • umožní exportovat všechna uložená data v systému";
+            // 
+            // labelActionsExport3
+            // 
+            this.labelActionsExport3.AutoSize = true;
+            this.labelActionsExport3.Location = new System.Drawing.Point(3, 40);
+            this.labelActionsExport3.Name = "labelActionsExport3";
+            this.labelActionsExport3.Size = new System.Drawing.Size(397, 20);
+            this.labelActionsExport3.TabIndex = 2;
+            this.labelActionsExport3.Text = " • používá se hlavně při nutnosti přesunu dat na jiný systém";
+            // 
+            // flowLayoutPanelActionsImport
+            // 
+            this.flowLayoutPanelActionsImport.Controls.Add(this.labelActionsImport1);
+            this.flowLayoutPanelActionsImport.Controls.Add(this.labelActionsImport2);
+            this.flowLayoutPanelActionsImport.Controls.Add(this.labelActionsImport3);
+            this.flowLayoutPanelActionsImport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelActionsImport.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelActionsImport.Location = new System.Drawing.Point(130, 79);
+            this.flowLayoutPanelActionsImport.Name = "flowLayoutPanelActionsImport";
+            this.flowLayoutPanelActionsImport.Size = new System.Drawing.Size(1189, 70);
+            this.flowLayoutPanelActionsImport.TabIndex = 3;
+            // 
+            // labelActionsImport1
+            // 
+            this.labelActionsImport1.AutoSize = true;
+            this.labelActionsImport1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelActionsImport1.Location = new System.Drawing.Point(3, 0);
+            this.labelActionsImport1.Name = "labelActionsImport1";
+            this.labelActionsImport1.Size = new System.Drawing.Size(85, 20);
+            this.labelActionsImport1.TabIndex = 0;
+            this.labelActionsImport1.Text = "Import dat";
+            // 
+            // labelActionsImport2
+            // 
+            this.labelActionsImport2.AutoSize = true;
+            this.labelActionsImport2.Location = new System.Drawing.Point(3, 20);
+            this.labelActionsImport2.Name = "labelActionsImport2";
+            this.labelActionsImport2.Size = new System.Drawing.Size(225, 20);
+            this.labelActionsImport2.TabIndex = 1;
+            this.labelActionsImport2.Text = " • umožňí načíst data ze souboru";
+            // 
+            // labelActionsImport3
+            // 
+            this.labelActionsImport3.AutoSize = true;
+            this.labelActionsImport3.Location = new System.Drawing.Point(3, 40);
+            this.labelActionsImport3.Name = "labelActionsImport3";
+            this.labelActionsImport3.Size = new System.Drawing.Size(428, 20);
+            this.labelActionsImport3.TabIndex = 2;
+            this.labelActionsImport3.Text = " • tato akce nebude mít vliv na data aktuálně uložená v systému";
+            // 
+            // saveFileDialogExport
+            // 
+            this.saveFileDialogExport.FileName = "EXPORT.EXDAT";
+            this.saveFileDialogExport.Filter = "Exportovaný soubor dat|*.EXDAT";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -1245,6 +1496,17 @@ namespace SemestralProject.Forms
             this.panelFileControls.ResumeLayout(false);
             this.panelFileSearch.ResumeLayout(false);
             this.panelFileSearch.PerformLayout();
+            this.tabPageActions.ResumeLayout(false);
+            this.panelActionsContent.ResumeLayout(false);
+            this.panelActionsHeader.ResumeLayout(false);
+            this.panelActionsHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxActionsHeader)).EndInit();
+            this.groupBoxActionsDataTransfer.ResumeLayout(false);
+            this.tableLayoutPanelActionsDataTransfer.ResumeLayout(false);
+            this.flowLayoutPanelActionsExport.ResumeLayout(false);
+            this.flowLayoutPanelActionsExport.PerformLayout();
+            this.flowLayoutPanelActionsImport.ResumeLayout(false);
+            this.flowLayoutPanelActionsImport.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1337,5 +1599,25 @@ namespace SemestralProject.Forms
         private Button buttonFileSearch;
         private Splitter splitterFileControls3;
         private Panel panelFileContent;
+        private TabPage tabPageActions;
+        private RadioButton radioButtonActions;
+        private TableLayoutPanel panelActionsContent;
+        private Panel panelActionsHeader;
+        private PictureBox pictureBoxActionsHeader;
+        private Label labelActionsHeader;
+        private Splitter splitterActionsHeader;
+        private GroupBox groupBoxActionsDataTransfer;
+        private TableLayoutPanel tableLayoutPanelActionsDataTransfer;
+        private Button buttonActionsExport;
+        private Button buttonActionsImport;
+        private FlowLayoutPanel flowLayoutPanelActionsExport;
+        private Label labelActionsExport1;
+        private Label labelActionsExport2;
+        private Label labelActionsExport3;
+        private FlowLayoutPanel flowLayoutPanelActionsImport;
+        private Label labelActionsImport1;
+        private Label labelActionsImport2;
+        private Label labelActionsImport3;
+        private SaveFileDialog saveFileDialogExport;
     }
 }

@@ -21,6 +21,7 @@ namespace SemestralProject.Visual
         /// </summary>
         private Bitmap image;
 
+
         /// <summary>
         /// Creates new icon
         /// </summary>
