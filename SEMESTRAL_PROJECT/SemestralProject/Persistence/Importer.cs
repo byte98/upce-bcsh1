@@ -124,6 +124,61 @@ namespace SemestralProject.Persistence
             }
         }
 
+        /// <summary>
+        /// Structure holding raw data about manufacturer from file
+        /// </summary>
+        private struct Manufacturer
+        {
+            /// <summary>
+            /// Identifier of manufacturer
+            /// </summary>
+            public string Id { get; init; }
+
+            /// <summary>
+            /// Name of manufacturer
+            /// </summary>
+            public string Name { get; init; }
+
+            /// <summary>
+            /// Description of manufacturer
+            /// </summary>
+            public string Description { get; init; }
+
+            /// <summary>
+            /// Identifier of icon of manufacturer
+            /// </summary>
+            public string Icon { get; init; }
+
+            /// <summary>
+            /// Date and time of creation of manufacturer
+            /// </summary>
+            public DateTime Created { get; init; }
+
+            /// <summary>
+            /// Date and time of last update of manufacturer
+            /// </summary>
+            public DateTime Updated { get; init; }
+
+            /// <summary>
+            /// Creates new structure holding information about manufacturer
+            /// </summary>
+            /// <param name="id">Identifier of manufacturer</param>
+            /// <param name="name">Name of manufacturer</param>
+            /// <param name="description">Description of manufacturer</param>
+            /// <param name="icon">Name of icon of manufacturer</param>
+            /// <param name="created">Date and time of creation of manufacturer</param>
+            /// <param name="updated">Date and time of last update of manufacturer</param>
+            public Manufacturer(string id, string name, string description, string icon, DateTime created, DateTime updated)
+            {
+                this.Id = id;
+                this.Name = name;
+                this.Description = description;
+                this.Icon = icon;
+                this.Created = created;
+                this.Updated = updated;
+            }
+        }
+
         #endregion
 
         /// <summary>
