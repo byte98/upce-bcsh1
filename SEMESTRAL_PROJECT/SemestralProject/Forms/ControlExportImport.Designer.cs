@@ -46,7 +46,7 @@
             this.flowLayoutPanelContent.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelContent.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanelContent.Name = "flowLayoutPanelContent";
-            this.flowLayoutPanelContent.Size = new System.Drawing.Size(800, 115);
+            this.flowLayoutPanelContent.Size = new System.Drawing.Size(960, 115);
             this.flowLayoutPanelContent.TabIndex = 0;
             // 
             // labelState
@@ -62,7 +62,7 @@
             // 
             this.progressBar.Location = new System.Drawing.Point(3, 23);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(794, 34);
+            this.progressBar.Size = new System.Drawing.Size(954, 34);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.TabIndex = 1;
             // 
@@ -78,12 +78,12 @@
             // 
             // textBoxDetails
             // 
-            this.textBoxDetails.Location = new System.Drawing.Point(803, 3);
+            this.textBoxDetails.Location = new System.Drawing.Point(963, 3);
             this.textBoxDetails.Multiline = true;
             this.textBoxDetails.Name = "textBoxDetails";
             this.textBoxDetails.ReadOnly = true;
             this.textBoxDetails.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDetails.Size = new System.Drawing.Size(787, 256);
+            this.textBoxDetails.Size = new System.Drawing.Size(954, 256);
             this.textBoxDetails.TabIndex = 3;
             this.textBoxDetails.Visible = false;
             // 
@@ -93,7 +93,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanelContent);
             this.Name = "ControlExportImport";
-            this.Size = new System.Drawing.Size(800, 115);
+            this.Size = new System.Drawing.Size(960, 115);
             this.flowLayoutPanelContent.ResumeLayout(false);
             this.flowLayoutPanelContent.PerformLayout();
             this.ResumeLayout(false);

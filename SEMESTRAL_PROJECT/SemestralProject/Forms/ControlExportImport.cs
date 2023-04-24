@@ -54,13 +54,13 @@ namespace SemestralProject.Forms
             if (this.textBoxDetails.Visible)
             {
                 this.textBoxDetails.Visible = false;
-                this.Size = new Size(800, 115);
+                this.Size = new Size(960, 115);
                 this.buttonShowDetails.Text = "Zobrazit podrobnosti";
             }
             else
             {
                 this.textBoxDetails.Visible = true;
-                this.Size = new Size(800, 380);
+                this.Size = new Size(960, 380);
                 this.buttonShowDetails.Text = "Skrýt podrobnosti";
             }
         }

@@ -322,6 +322,7 @@ namespace SemestralProject.Persistence
             this.OnExportImportLog(new ExportImportLogEventArgs("Smazán adresář " + this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT"));
             this.progress = 100;
             this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Hotovo"));
+            this.OnExportImportLog(new ExportImportLogEventArgs("Hotovo"));
             this.OnExportImportDone();
         }
     }
