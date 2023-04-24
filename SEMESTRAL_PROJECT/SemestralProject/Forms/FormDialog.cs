@@ -139,5 +139,13 @@ namespace SemestralProject.Forms
             this.buttonOK.Click += eventHandler;
         }
 
+        /// <summary>
+        /// Hides close button
+        /// </summary>
+        protected void HideCloseButton()
+        {
+            this.ControlBox = false;
+        }
+
     }
 }

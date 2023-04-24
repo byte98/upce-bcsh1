@@ -56,6 +56,7 @@ namespace SemestralProject.Forms
         {
             this.HideCancelButton();
             this.DisableButtons();
+            this.HideCloseButton();
             this.Content = new ControlExportImport(this.Context);
             this.AddControl(this.Content);
             this.OnOKClicked(delegate (object? sender, EventArgs e)
