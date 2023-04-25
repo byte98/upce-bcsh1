@@ -17,6 +17,11 @@ namespace SemestralProject.Controllers
     internal class InformationSystemsController: AbstractController<InformationSystem>
     {
         /// <summary>
+        /// Prefix of identifier
+        /// </summary>
+        public const string IdPrefix = "IS_";
+
+        /// <summary>
         /// Creates new controller of information systems
         /// </summary>
         /// <param name="context">Wrapper of all programs resources</param>
@@ -53,7 +58,7 @@ namespace SemestralProject.Controllers
             string reti = string.Empty;
             do
             {
-                reti = this.GenerateIdentifier("IS_");
+                reti = this.GenerateIdentifier(InformationSystemsController.IdPrefix);
             }
             while(this.GetById(reti) != null );
             return reti;

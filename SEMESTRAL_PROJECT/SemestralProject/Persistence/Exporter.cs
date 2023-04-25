@@ -48,7 +48,7 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Exports state of program into file
         /// </summary>
-        public void Export()
+        private void Export()
         {
             this.progress = 0;
             this.OnExportImportUpdate(new ExportImportEventArgs(ushort.MaxValue, "Připravuji export dat..."));
@@ -93,7 +93,7 @@ namespace SemestralProject.Persistence
         /// Exports information systems
         /// (this can be called AFTER <see cref="Export(string)" !)/>
         /// </summary>
-        public void ExportInformationSystems()
+        private void ExportInformationSystems()
         {
             string input = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.ISFile;
             string output = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + "DB" + Path.DirectorySeparatorChar + DataStorage.ISFile;
@@ -107,7 +107,7 @@ namespace SemestralProject.Persistence
         /// Exports maps
         /// (this can be called AFTER <see cref="Export(string)" !)/>
         /// </summary>
-        public void ExportMaps()
+        private void ExportMaps()
         {
             string input = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.MapFile;
             string output = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + "DB" + Path.DirectorySeparatorChar + DataStorage.MapFile;
@@ -121,7 +121,7 @@ namespace SemestralProject.Persistence
         /// Exports manufacturers
         /// (this can be called AFTER <see cref="Export(string)" !)/>
         /// </summary>
-        public void ExportManufacturers()
+        private void ExportManufacturers()
         {
             string input = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.ManufacturerFile;
             string output = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + "DB" + Path.DirectorySeparatorChar + DataStorage.ManufacturerFile;
@@ -135,7 +135,7 @@ namespace SemestralProject.Persistence
         /// Exports vehicles
         /// (this can be called AFTER <see cref="Export(string)" !)/>
         /// </summary>
-        public void ExportVehicles()
+        private void ExportVehicles()
         {
             string input = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.VehicleFile;
             string output = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + "DB" + Path.DirectorySeparatorChar + DataStorage.VehicleFile;
@@ -149,7 +149,7 @@ namespace SemestralProject.Persistence
         /// Exports data files
         /// (this can be called AFTER <see cref="Export(string)" !)/>
         /// </summary>
-        public void ExportDataFiles()
+        private void ExportDataFiles()
         {
             string input = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.DataFileFile;
             string output = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + "DB" + Path.DirectorySeparatorChar + DataStorage.DataFileFile;
@@ -163,7 +163,7 @@ namespace SemestralProject.Persistence
         /// Exports icons
         /// (this can be called AFTER <see cref="Export(string)"/>!)
         /// </summary>
-        public void ExportIcons()
+        private void ExportIcons()
         {
             double step = 15f / (2f * this.context.FileStorage.GetAllIcons().Count());
             this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Exportuji ikony..."));
@@ -210,7 +210,7 @@ namespace SemestralProject.Persistence
         /// Exports pictures
         /// (this can be called AFTER <see cref="Export(string)"/>!)
         /// </summary>
-        public void ExportPictures()
+        private void ExportPictures()
         {
             double step = 15f / (2f * this.context.FileStorage.GetPictures().Count());
             this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Exportuji obrázky..."));
@@ -258,7 +258,7 @@ namespace SemestralProject.Persistence
         /// Exports data files content
         /// (this can be called AFTER <see cref="Export(string)"/>!)
         /// </summary>
-        public void ExportDataFilesContent()
+        private void ExportDataFilesContent()
         {
             double step = 15f / (2f * this.context.FileStorage.GetDataFiles().Count());
             this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Exportuji obsah datových souborů..."));
@@ -305,7 +305,7 @@ namespace SemestralProject.Persistence
         /// Finishes export of data
         /// (this can be as LAST call of any export function)
         /// </summary>
-        public void FinishExport()
+        private void FinishExport()
         {
             this.progress = 90;
             this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Dokončuji export dat..."));
@@ -324,6 +324,26 @@ namespace SemestralProject.Persistence
             this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Hotovo"));
             this.OnExportImportLog(new ExportImportLogEventArgs("Hotovo"));
             this.OnExportImportDone();
+        }
+
+        /// <summary>
+        /// Gets list of actions needed to successfull export
+        /// </summary>
+        /// <returns>List with all necessary actions needed to successfull export</returns>
+        public List<Action> GetExportSequence()
+        {
+            List<Action> reti = new List<Action>();
+            reti.Add(new Action(() => { this.Export(); }));
+            reti.Add(new Action(() => { this.ExportInformationSystems(); }));
+            reti.Add(new Action(() => { this.ExportMaps(); }));
+            reti.Add(new Action(() => { this.ExportManufacturers(); }));
+            reti.Add(new Action(() => { this.ExportVehicles(); }));
+            reti.Add(new Action(() => { this.ExportDataFiles(); }));
+            reti.Add(new Action(() => { this.ExportIcons(); }));
+            reti.Add(new Action(() => { this.ExportPictures(); }));
+            reti.Add(new Action(() => { this.ExportDataFilesContent(); }));
+            reti.Add(new Action(() => { this.FinishExport(); }));
+            return reti;
         }
     }
 }

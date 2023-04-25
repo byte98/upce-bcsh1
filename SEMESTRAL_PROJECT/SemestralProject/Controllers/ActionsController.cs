@@ -21,6 +21,11 @@ namespace SemestralProject.Controllers
         private readonly Exporter exporter;
 
         /// <summary>
+        /// Object which has ability to import state of program from file
+        /// </summary>
+        private readonly Importer importer;
+
+        /// <summary>
         /// Wrapper of all program resources
         /// </summary>
         private readonly Context context;
@@ -41,11 +46,6 @@ namespace SemestralProject.Controllers
         private const int EISleepMax = 1000;
 
         /// <summary>
-        /// Pipeline of commands needed to execute to sucessfull export of data
-        /// </summary>
-        private readonly List<Action> exportPipeline;
-
-        /// <summary>
         /// Creates new controller of actions page
         /// </summary>
         /// <param name="context"></param>
@@ -53,28 +53,13 @@ namespace SemestralProject.Controllers
         {
             this.context = context;
             this.exporter = new Exporter(this.context);
-            this.exportPipeline = new List<Action>();
-            this.BuildExportPipeline();
-            this.exporter.ExportImport += Exporter_ExportImport;
-            this.exporter.ExportImportLog += Exporter_ExportImportLog;
-            this.exporter.ExportImportDone += Exporter_ExportImportDone;
-        }
-
-        /// <summary>
-        /// Builds pipeline of commands needed to be executed to successfull export of data
-        /// </summary>
-        private void BuildExportPipeline()
-        {
-            this.exportPipeline.Add(new Action(() => { this.exporter.Export(); }));
-            this.exportPipeline.Add(new Action(() => { this.exporter.ExportInformationSystems(); }));
-            this.exportPipeline.Add(new Action(() => { this.exporter.ExportMaps(); }));
-            this.exportPipeline.Add(new Action(() => { this.exporter.ExportManufacturers(); }));
-            this.exportPipeline.Add(new Action(() => { this.exporter.ExportVehicles(); }));
-            this.exportPipeline.Add(new Action(() => { this.exporter.ExportDataFiles(); }));
-            this.exportPipeline.Add(new Action(() => { this.exporter.ExportIcons(); }));
-            this.exportPipeline.Add(new Action(() => { this.exporter.ExportPictures(); }));
-            this.exportPipeline.Add(new Action(() => { this.exporter.ExportDataFilesContent(); }));
-            this.exportPipeline.Add(new Action(() => { this.exporter.FinishExport(); }));
+            this.importer = new Importer(this.context);
+            this.exporter.ExportImport += ExportImportHandler;
+            this.exporter.ExportImportLog += ExportImportLogHandler;
+            this.exporter.ExportImportDone += ExportImportDoneHandler;
+            this.importer.ExportImport += ExportImportHandler;
+            this.importer.ExportImportLog += ExportImportLogHandler;
+            this.importer.ExportImportDone += ExportImportDoneHandler;
         }
 
         /// <summary>
@@ -84,12 +69,12 @@ namespace SemestralProject.Controllers
         public void Export(string path)
         {
             this.exporter.OutputPath = path;
-            this.formImportExport = new FormImportExport(this.context);
+            this.formImportExport = FormImportExport.CreateExportForm(this.context);
             this.formImportExport.Show();
             Random random = new Random();
             Task.Run(new Action(() =>
             {
-                foreach(Action action in this.exportPipeline)
+                foreach(Action action in this.exporter.GetExportSequence())
                 {
                     action();
                     Thread.Sleep(random.Next(ActionsController.EISleepMin, ActionsController.EISleepMax));
@@ -99,7 +84,35 @@ namespace SemestralProject.Controllers
             this.formImportExport.TopMost = true;
         }
 
-        private void Exporter_ExportImport(object sender, AbstractExporterImporter.ExportImportEventArgs e)
+        /// <summary>
+        /// Imports state of program from file
+        /// </summary>
+        /// <param name="path">Path to file from which state of program will be imported from</param>
+        public void Import(string path)
+        {
+            this.importer.InputPath = path;
+            this.formImportExport = FormImportExport.CreateImportForm(this.context);
+            this.formImportExport.Show();
+            Random random = new Random();
+            Task.Run(new Action(() =>
+            {
+                foreach(Action action in this.importer.GetImportSequence())
+                {
+                    action();
+                    Thread.Sleep(random.Next(ActionsController.EISleepMin, ActionsController.EISleepMax));
+                }
+            }));
+            this.formImportExport.BringToFront();
+            this.formImportExport.TopMost = true;
+        }
+
+
+        /// <summary>
+        /// Handles export/import event
+        /// </summary>
+        /// <param name="sender">Sender of event</param>
+        /// <param name="e">Arguments of event</param>
+        private void ExportImportHandler(object sender, AbstractExporterImporter.ExportImportEventArgs e)
         {
             if (this.formImportExport!= null)
             {
@@ -119,7 +132,12 @@ namespace SemestralProject.Controllers
             }
         }
 
-        private void Exporter_ExportImportLog(object sender, AbstractExporterImporter.ExportImportLogEventArgs e)
+        /// <summary>
+        /// Handles export/import log event
+        /// </summary>
+        /// <param name="sender">Sender of event</param>
+        /// <param name="e">Arguments of event</param>
+        private void ExportImportLogHandler(object sender, AbstractExporterImporter.ExportImportLogEventArgs e)
         {
             if (this.formImportExport != null)
             {
@@ -130,7 +148,11 @@ namespace SemestralProject.Controllers
             }
         }
 
-        private void Exporter_ExportImportDone(object sender)
+        /// <summary>
+        /// Handles export/import done event
+        /// </summary>
+        /// <param name="sender">Sender of event</param>
+        private void ExportImportDoneHandler(object sender)
         {
             if (this.formImportExport != null)
             {

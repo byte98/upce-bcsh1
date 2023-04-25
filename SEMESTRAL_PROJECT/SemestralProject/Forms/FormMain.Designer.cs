@@ -138,6 +138,7 @@ namespace SemestralProject.Forms
             this.labelActionsImport2 = new System.Windows.Forms.Label();
             this.labelActionsImport3 = new System.Windows.Forms.Label();
             this.saveFileDialogExport = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialogImport = new System.Windows.Forms.OpenFileDialog();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
             this.panelISControls.SuspendLayout();
@@ -1374,6 +1375,7 @@ namespace SemestralProject.Forms
             this.buttonActionsImport.Size = new System.Drawing.Size(121, 70);
             this.buttonActionsImport.TabIndex = 1;
             this.buttonActionsImport.UseVisualStyleBackColor = true;
+            this.buttonActionsImport.Click += new System.EventHandler(this.buttonActionsImport_Click);
             // 
             // flowLayoutPanelActionsExport
             // 
@@ -1459,6 +1461,11 @@ namespace SemestralProject.Forms
             // 
             this.saveFileDialogExport.FileName = "EXPORT.EXDAT";
             this.saveFileDialogExport.Filter = "Exportovaný soubor dat|*.EXDAT";
+            // 
+            // openFileDialogImport
+            // 
+            this.openFileDialogImport.FileName = "EXPORT.EXDAT";
+            this.openFileDialogImport.Filter = "Exportovaný soubor dat|*.EXDAT";
             // 
             // FormMain
             // 
@@ -1619,5 +1626,6 @@ namespace SemestralProject.Forms
         private Label labelActionsImport2;
         private Label labelActionsImport3;
         private SaveFileDialog saveFileDialogExport;
+        private OpenFileDialog openFileDialogImport;
     }
 }

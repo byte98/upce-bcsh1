@@ -599,5 +599,14 @@ namespace SemestralProject.Forms
                 this.actionsController.Export(this.saveFileDialogExport.FileName);
             }
         }
+
+        private void buttonActionsImport_Click(object sender, EventArgs e)
+        {
+            this.openFileDialogImport.InitialDirectory = Directory.GetCurrentDirectory();
+            if (this.openFileDialogImport.ShowDialog() == DialogResult.OK)
+            {
+                this.actionsController.Import(this.openFileDialogImport.FileName);
+            }
+        }
     }
 }

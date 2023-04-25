@@ -48,11 +48,34 @@ namespace SemestralProject.Forms
         }
 
         /// <summary>
-        /// Creates new dialog for informing about export process
+        /// Creates new form which informs about export process
         /// </summary>
         /// <param name="context">Wrapper of all program resources</param>
-        public FormImportExport(Context context)
-            : base("Export dat", "Exportování dat", SemestralProject.Resources.export32, context)
+        /// <returns>Form which has ability to inform about export process</returns>
+        public static FormImportExport CreateExportForm(Context context)
+        {
+            return new FormImportExport(context, SemestralProject.Resources.export32, "Export dat", "Exportování dat");
+        }
+
+        /// <summary>
+        /// Creates new form which informs about import process
+        /// </summary>
+        /// <param name="context">Wrapper of all program resources</param>
+        /// <returns>Form which has ability to inform about import process</returns>
+        public static FormImportExport CreateImportForm(Context context)
+        {
+            return new FormImportExport(context, SemestralProject.Resources.import32, "Import dat", "Importování dat");
+        }
+
+        /// <summary>
+        /// Creates new dialog for informing about import/export process
+        /// </summary>
+        /// <param name="context">Wrapper of all program resources</param>
+        /// <param name="icon">Icon displayed in header</param>
+        /// <param name="title">Title of dialog</param>
+        /// <param name="header">Text displayed in </param>
+        private FormImportExport(Context context, Bitmap icon, string title, string header)
+            : base(title, header, icon, context)
         {
             this.HideCancelButton();
             this.DisableButtons();

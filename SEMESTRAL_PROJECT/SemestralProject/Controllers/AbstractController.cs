@@ -15,17 +15,17 @@ namespace SemestralProject.Controllers
         /// <summary>
         /// Minimal length of all identifiers in system
         /// </summary>
-        protected const uint IdMinLength = 8;
+        public const uint IdMinLength = 8;
 
         /// <summary>
         /// Maximal length of all identifiers in system
         /// </summary>
-        protected const uint IdMaxLength = 16;
+        public const uint IdMaxLength = 16;
 
         /// <summary>
         /// String containing allowed characters for generating identifiers
         /// </summary>
-        protected const string IdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ*";
+        public const string IdAlphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ*";
 
         /// <summary>
         /// Wrapper of all system resources
