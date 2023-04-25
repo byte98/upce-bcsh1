@@ -137,8 +137,20 @@ namespace SemestralProject.Forms
             this.labelActionsImport1 = new System.Windows.Forms.Label();
             this.labelActionsImport2 = new System.Windows.Forms.Label();
             this.labelActionsImport3 = new System.Windows.Forms.Label();
+            this.groupBoxActionCopy = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanelActionCopyContent = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonActionCopy = new System.Windows.Forms.Button();
             this.saveFileDialogExport = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialogImport = new System.Windows.Forms.OpenFileDialog();
+            this.buttonActionCopyReplace = new System.Windows.Forms.Button();
+            this.flowLayoutPanelActionCopy = new System.Windows.Forms.FlowLayoutPanel();
+            this.labelActionCopy1 = new System.Windows.Forms.Label();
+            this.labelActionCopy2 = new System.Windows.Forms.Label();
+            this.labelActionCopy3 = new System.Windows.Forms.Label();
+            this.flowLayoutPanelActionCopyReplace = new System.Windows.Forms.FlowLayoutPanel();
+            this.labelActionCopyReplace1 = new System.Windows.Forms.Label();
+            this.labelActionCopyReplace2 = new System.Windows.Forms.Label();
+            this.labelActionCopyReplace3 = new System.Windows.Forms.Label();
             this.panelItemsControl.SuspendLayout();
             this.tabPageIS.SuspendLayout();
             this.panelISControls.SuspendLayout();
@@ -164,6 +176,10 @@ namespace SemestralProject.Forms
             this.tableLayoutPanelActionsDataTransfer.SuspendLayout();
             this.flowLayoutPanelActionsExport.SuspendLayout();
             this.flowLayoutPanelActionsImport.SuspendLayout();
+            this.groupBoxActionCopy.SuspendLayout();
+            this.tableLayoutPanelActionCopyContent.SuspendLayout();
+            this.flowLayoutPanelActionCopy.SuspendLayout();
+            this.flowLayoutPanelActionCopyReplace.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelItemsControl
@@ -1274,15 +1290,17 @@ namespace SemestralProject.Forms
             this.panelActionsContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.panelActionsContent.Controls.Add(this.panelActionsHeader, 0, 0);
             this.panelActionsContent.Controls.Add(this.splitterActionsHeader, 0, 1);
-            this.panelActionsContent.Controls.Add(this.groupBoxActionsDataTransfer, 0, 2);
+            this.panelActionsContent.Controls.Add(this.groupBoxActionsDataTransfer, 0, 3);
+            this.panelActionsContent.Controls.Add(this.groupBoxActionCopy, 0, 2);
             this.panelActionsContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelActionsContent.Location = new System.Drawing.Point(3, 3);
             this.panelActionsContent.Name = "panelActionsContent";
-            this.panelActionsContent.RowCount = 4;
+            this.panelActionsContent.RowCount = 5;
             this.panelActionsContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.panelActionsContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 9F));
             this.panelActionsContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 184F));
-            this.panelActionsContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 228F));
+            this.panelActionsContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 182F));
+            this.panelActionsContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66F));
             this.panelActionsContent.Size = new System.Drawing.Size(1334, 653);
             this.panelActionsContent.TabIndex = 0;
             // 
@@ -1330,9 +1348,9 @@ namespace SemestralProject.Forms
             // 
             this.groupBoxActionsDataTransfer.Controls.Add(this.tableLayoutPanelActionsDataTransfer);
             this.groupBoxActionsDataTransfer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxActionsDataTransfer.Location = new System.Drawing.Point(3, 87);
+            this.groupBoxActionsDataTransfer.Location = new System.Drawing.Point(3, 271);
             this.groupBoxActionsDataTransfer.Name = "groupBoxActionsDataTransfer";
-            this.groupBoxActionsDataTransfer.Size = new System.Drawing.Size(1328, 178);
+            this.groupBoxActionsDataTransfer.Size = new System.Drawing.Size(1328, 176);
             this.groupBoxActionsDataTransfer.TabIndex = 2;
             this.groupBoxActionsDataTransfer.TabStop = false;
             this.groupBoxActionsDataTransfer.Text = "Přesun dat";
@@ -1352,7 +1370,7 @@ namespace SemestralProject.Forms
             this.tableLayoutPanelActionsDataTransfer.RowCount = 2;
             this.tableLayoutPanelActionsDataTransfer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelActionsDataTransfer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelActionsDataTransfer.Size = new System.Drawing.Size(1322, 152);
+            this.tableLayoutPanelActionsDataTransfer.Size = new System.Drawing.Size(1322, 150);
             this.tableLayoutPanelActionsDataTransfer.TabIndex = 0;
             // 
             // buttonActionsExport
@@ -1361,7 +1379,7 @@ namespace SemestralProject.Forms
             this.buttonActionsExport.Image = global::SemestralProject.Resources.export;
             this.buttonActionsExport.Location = new System.Drawing.Point(3, 3);
             this.buttonActionsExport.Name = "buttonActionsExport";
-            this.buttonActionsExport.Size = new System.Drawing.Size(121, 70);
+            this.buttonActionsExport.Size = new System.Drawing.Size(121, 69);
             this.buttonActionsExport.TabIndex = 0;
             this.buttonActionsExport.UseVisualStyleBackColor = true;
             this.buttonActionsExport.Click += new System.EventHandler(this.buttonActionsExport_Click);
@@ -1370,9 +1388,9 @@ namespace SemestralProject.Forms
             // 
             this.buttonActionsImport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonActionsImport.Image = global::SemestralProject.Resources.import;
-            this.buttonActionsImport.Location = new System.Drawing.Point(3, 79);
+            this.buttonActionsImport.Location = new System.Drawing.Point(3, 78);
             this.buttonActionsImport.Name = "buttonActionsImport";
-            this.buttonActionsImport.Size = new System.Drawing.Size(121, 70);
+            this.buttonActionsImport.Size = new System.Drawing.Size(121, 69);
             this.buttonActionsImport.TabIndex = 1;
             this.buttonActionsImport.UseVisualStyleBackColor = true;
             this.buttonActionsImport.Click += new System.EventHandler(this.buttonActionsImport_Click);
@@ -1386,7 +1404,7 @@ namespace SemestralProject.Forms
             this.flowLayoutPanelActionsExport.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelActionsExport.Location = new System.Drawing.Point(130, 3);
             this.flowLayoutPanelActionsExport.Name = "flowLayoutPanelActionsExport";
-            this.flowLayoutPanelActionsExport.Size = new System.Drawing.Size(1189, 70);
+            this.flowLayoutPanelActionsExport.Size = new System.Drawing.Size(1189, 69);
             this.flowLayoutPanelActionsExport.TabIndex = 2;
             // 
             // labelActionsExport1
@@ -1424,9 +1442,9 @@ namespace SemestralProject.Forms
             this.flowLayoutPanelActionsImport.Controls.Add(this.labelActionsImport3);
             this.flowLayoutPanelActionsImport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelActionsImport.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelActionsImport.Location = new System.Drawing.Point(130, 79);
+            this.flowLayoutPanelActionsImport.Location = new System.Drawing.Point(130, 78);
             this.flowLayoutPanelActionsImport.Name = "flowLayoutPanelActionsImport";
-            this.flowLayoutPanelActionsImport.Size = new System.Drawing.Size(1189, 70);
+            this.flowLayoutPanelActionsImport.Size = new System.Drawing.Size(1189, 69);
             this.flowLayoutPanelActionsImport.TabIndex = 3;
             // 
             // labelActionsImport1
@@ -1457,6 +1475,45 @@ namespace SemestralProject.Forms
             this.labelActionsImport3.TabIndex = 2;
             this.labelActionsImport3.Text = " • tato akce nebude mít vliv na data aktuálně uložená v systému";
             // 
+            // groupBoxActionCopy
+            // 
+            this.groupBoxActionCopy.Controls.Add(this.tableLayoutPanelActionCopyContent);
+            this.groupBoxActionCopy.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxActionCopy.Location = new System.Drawing.Point(3, 87);
+            this.groupBoxActionCopy.Name = "groupBoxActionCopy";
+            this.groupBoxActionCopy.Size = new System.Drawing.Size(1328, 178);
+            this.groupBoxActionCopy.TabIndex = 3;
+            this.groupBoxActionCopy.TabStop = false;
+            this.groupBoxActionCopy.Text = "Kopírování souborů";
+            // 
+            // tableLayoutPanelActionCopyContent
+            // 
+            this.tableLayoutPanelActionCopyContent.ColumnCount = 2;
+            this.tableLayoutPanelActionCopyContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.61F));
+            this.tableLayoutPanelActionCopyContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.39F));
+            this.tableLayoutPanelActionCopyContent.Controls.Add(this.flowLayoutPanelActionCopyReplace, 1, 1);
+            this.tableLayoutPanelActionCopyContent.Controls.Add(this.flowLayoutPanelActionCopy, 1, 0);
+            this.tableLayoutPanelActionCopyContent.Controls.Add(this.buttonActionCopy, 0, 0);
+            this.tableLayoutPanelActionCopyContent.Controls.Add(this.buttonActionCopyReplace, 0, 1);
+            this.tableLayoutPanelActionCopyContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelActionCopyContent.Location = new System.Drawing.Point(3, 23);
+            this.tableLayoutPanelActionCopyContent.Name = "tableLayoutPanelActionCopyContent";
+            this.tableLayoutPanelActionCopyContent.RowCount = 2;
+            this.tableLayoutPanelActionCopyContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelActionCopyContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelActionCopyContent.Size = new System.Drawing.Size(1322, 152);
+            this.tableLayoutPanelActionCopyContent.TabIndex = 0;
+            // 
+            // buttonActionCopy
+            // 
+            this.buttonActionCopy.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonActionCopy.Image = global::SemestralProject.Resources.copy;
+            this.buttonActionCopy.Location = new System.Drawing.Point(3, 3);
+            this.buttonActionCopy.Name = "buttonActionCopy";
+            this.buttonActionCopy.Size = new System.Drawing.Size(121, 70);
+            this.buttonActionCopy.TabIndex = 0;
+            this.buttonActionCopy.UseVisualStyleBackColor = true;
+            // 
             // saveFileDialogExport
             // 
             this.saveFileDialogExport.FileName = "EXPORT.EXDAT";
@@ -1466,6 +1523,96 @@ namespace SemestralProject.Forms
             // 
             this.openFileDialogImport.FileName = "EXPORT.EXDAT";
             this.openFileDialogImport.Filter = "Exportovaný soubor dat|*.EXDAT";
+            // 
+            // buttonActionCopyReplace
+            // 
+            this.buttonActionCopyReplace.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonActionCopyReplace.Image = global::SemestralProject.Resources.copyr;
+            this.buttonActionCopyReplace.Location = new System.Drawing.Point(3, 79);
+            this.buttonActionCopyReplace.Name = "buttonActionCopyReplace";
+            this.buttonActionCopyReplace.Size = new System.Drawing.Size(121, 70);
+            this.buttonActionCopyReplace.TabIndex = 1;
+            this.buttonActionCopyReplace.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanelActionCopy
+            // 
+            this.flowLayoutPanelActionCopy.Controls.Add(this.labelActionCopy1);
+            this.flowLayoutPanelActionCopy.Controls.Add(this.labelActionCopy2);
+            this.flowLayoutPanelActionCopy.Controls.Add(this.labelActionCopy3);
+            this.flowLayoutPanelActionCopy.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelActionCopy.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelActionCopy.Location = new System.Drawing.Point(130, 3);
+            this.flowLayoutPanelActionCopy.Name = "flowLayoutPanelActionCopy";
+            this.flowLayoutPanelActionCopy.Size = new System.Drawing.Size(1189, 70);
+            this.flowLayoutPanelActionCopy.TabIndex = 3;
+            // 
+            // labelActionCopy1
+            // 
+            this.labelActionCopy1.AutoSize = true;
+            this.labelActionCopy1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelActionCopy1.Location = new System.Drawing.Point(3, 0);
+            this.labelActionCopy1.Name = "labelActionCopy1";
+            this.labelActionCopy1.Size = new System.Drawing.Size(140, 20);
+            this.labelActionCopy1.TabIndex = 0;
+            this.labelActionCopy1.Text = "Kopírovat soubory";
+            // 
+            // labelActionCopy2
+            // 
+            this.labelActionCopy2.AutoSize = true;
+            this.labelActionCopy2.Location = new System.Drawing.Point(3, 20);
+            this.labelActionCopy2.Name = "labelActionCopy2";
+            this.labelActionCopy2.Size = new System.Drawing.Size(449, 20);
+            this.labelActionCopy2.TabIndex = 1;
+            this.labelActionCopy2.Text = " • provede kopírování všech datových souborů do adresářů vozidel";
+            // 
+            // labelActionCopy3
+            // 
+            this.labelActionCopy3.AutoSize = true;
+            this.labelActionCopy3.Location = new System.Drawing.Point(3, 40);
+            this.labelActionCopy3.Name = "labelActionCopy3";
+            this.labelActionCopy3.Size = new System.Drawing.Size(469, 20);
+            this.labelActionCopy3.TabIndex = 2;
+            this.labelActionCopy3.Text = " • pokud v adresáři vozidla již datovy soubor existuje, bude přeskočen";
+            // 
+            // flowLayoutPanelActionCopyReplace
+            // 
+            this.flowLayoutPanelActionCopyReplace.Controls.Add(this.labelActionCopyReplace1);
+            this.flowLayoutPanelActionCopyReplace.Controls.Add(this.labelActionCopyReplace2);
+            this.flowLayoutPanelActionCopyReplace.Controls.Add(this.labelActionCopyReplace3);
+            this.flowLayoutPanelActionCopyReplace.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelActionCopyReplace.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelActionCopyReplace.Location = new System.Drawing.Point(130, 79);
+            this.flowLayoutPanelActionCopyReplace.Name = "flowLayoutPanelActionCopyReplace";
+            this.flowLayoutPanelActionCopyReplace.Size = new System.Drawing.Size(1189, 70);
+            this.flowLayoutPanelActionCopyReplace.TabIndex = 4;
+            // 
+            // labelActionCopyReplace1
+            // 
+            this.labelActionCopyReplace1.AutoSize = true;
+            this.labelActionCopyReplace1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelActionCopyReplace1.Location = new System.Drawing.Point(3, 0);
+            this.labelActionCopyReplace1.Name = "labelActionCopyReplace1";
+            this.labelActionCopyReplace1.Size = new System.Drawing.Size(215, 20);
+            this.labelActionCopyReplace1.TabIndex = 0;
+            this.labelActionCopyReplace1.Text = "Kopírovat a nahradit soubory";
+            // 
+            // labelActionCopyReplace2
+            // 
+            this.labelActionCopyReplace2.AutoSize = true;
+            this.labelActionCopyReplace2.Location = new System.Drawing.Point(3, 20);
+            this.labelActionCopyReplace2.Name = "labelActionCopyReplace2";
+            this.labelActionCopyReplace2.Size = new System.Drawing.Size(449, 20);
+            this.labelActionCopyReplace2.TabIndex = 1;
+            this.labelActionCopyReplace2.Text = " • provede kopírování všech datových souborů do adresářů vozidel";
+            // 
+            // labelActionCopyReplace3
+            // 
+            this.labelActionCopyReplace3.AutoSize = true;
+            this.labelActionCopyReplace3.Location = new System.Drawing.Point(3, 40);
+            this.labelActionCopyReplace3.Name = "labelActionCopyReplace3";
+            this.labelActionCopyReplace3.Size = new System.Drawing.Size(462, 20);
+            this.labelActionCopyReplace3.TabIndex = 2;
+            this.labelActionCopyReplace3.Text = " • pokud v adresáři vozidla již datový soubor existuje, bude nahrazen";
             // 
             // FormMain
             // 
@@ -1514,6 +1661,12 @@ namespace SemestralProject.Forms
             this.flowLayoutPanelActionsExport.PerformLayout();
             this.flowLayoutPanelActionsImport.ResumeLayout(false);
             this.flowLayoutPanelActionsImport.PerformLayout();
+            this.groupBoxActionCopy.ResumeLayout(false);
+            this.tableLayoutPanelActionCopyContent.ResumeLayout(false);
+            this.flowLayoutPanelActionCopy.ResumeLayout(false);
+            this.flowLayoutPanelActionCopy.PerformLayout();
+            this.flowLayoutPanelActionCopyReplace.ResumeLayout(false);
+            this.flowLayoutPanelActionCopyReplace.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1627,5 +1780,17 @@ namespace SemestralProject.Forms
         private Label labelActionsImport3;
         private SaveFileDialog saveFileDialogExport;
         private OpenFileDialog openFileDialogImport;
+        private GroupBox groupBoxActionCopy;
+        private TableLayoutPanel tableLayoutPanelActionCopyContent;
+        private Button buttonActionCopy;
+        private Button buttonActionCopyReplace;
+        private FlowLayoutPanel flowLayoutPanelActionCopyReplace;
+        private Label labelActionCopyReplace1;
+        private Label labelActionCopyReplace2;
+        private Label labelActionCopyReplace3;
+        private FlowLayoutPanel flowLayoutPanelActionCopy;
+        private Label labelActionCopy1;
+        private Label labelActionCopy2;
+        private Label labelActionCopy3;
     }
 }
