@@ -31,9 +31,9 @@ namespace SemestralProject.Controllers
         private readonly Context context;
 
         /// <summary>
-        /// Form which informs about import/export process
+        /// Form which informs about progress of process
         /// </summary>
-        private FormProgress? formImportExport;
+        private FormProgress? formProgress;
 
         /// <summary>
         /// Minimal thread sleep (in miliseconds) during export/import
@@ -51,6 +51,21 @@ namespace SemestralProject.Controllers
         private readonly FormMain mainForm;
 
         /// <summary>
+        /// Minimal thread sleep (in miliseconds) during file copiing
+        /// </summary>
+        private const int CopySleepMin = 10;
+
+        /// <summary>
+        /// Maximal thread sleep (in miliseconds) during file copiing
+        /// </summary>
+        private const int CopySleepMax = 100;
+
+        /// <summary>
+        /// Object which can copy files into right directories
+        /// </summary>
+        private readonly Copier copier;
+
+        /// <summary>
         /// Creates new controller of actions page
         /// </summary>
         /// <param name="context">Wrapper of all program resources</param>
@@ -61,13 +76,17 @@ namespace SemestralProject.Controllers
             this.mainForm = formMain;
             this.exporter = new Exporter(this.context);
             this.importer = new Importer(this.context);
-            this.exporter.Progress += ExportImportHandler;
-            this.exporter.ProgressLog += ExportImportLogHandler;
-            this.exporter.ProcessDone += ExportImportDoneHandler;
-            this.importer.Progress += ExportImportHandler;
-            this.importer.ProgressLog += ExportImportLogHandler;
-            this.importer.ProcessDone += ExportImportDoneHandler;
+            this.copier = new Copier(this.context);
+            this.exporter.Progress += ProgressEventHandler;
+            this.exporter.ProgressLog += ProgressLogEventhandler;
+            this.exporter.ProcessDone += ProgressDoneEventHandler;
+            this.importer.Progress += ProgressEventHandler;
+            this.importer.ProgressLog += ProgressLogEventhandler;
+            this.importer.ProcessDone += ProgressDoneEventHandler;
             this.importer.ProcessDone += ImportDoneHandler;
+            this.copier.Progress += ProgressEventHandler;
+            this.copier.ProgressLog += ProgressLogEventhandler;
+            this.copier.ProcessDone += ProgressDoneEventHandler;
         }
 
         /// <summary>
@@ -77,8 +96,8 @@ namespace SemestralProject.Controllers
         public void Export(string path)
         {
             this.exporter.OutputPath = path;
-            this.formImportExport = FormProgress.CreateExportForm(this.context);
-            this.formImportExport.Show();
+            this.formProgress = FormProgress.CreateExportForm(this.context);
+            this.formProgress.Show();
             Random random = new Random();
             Task.Run(new Action(() =>
             {
@@ -88,8 +107,8 @@ namespace SemestralProject.Controllers
                     Thread.Sleep(random.Next(ActionsController.EISleepMin, ActionsController.EISleepMax));
                 }
             }));
-            this.formImportExport.BringToFront();
-            this.formImportExport.TopMost = true;
+            this.formProgress.BringToFront();
+            this.formProgress.TopMost = true;
         }
 
         /// <summary>
@@ -99,8 +118,8 @@ namespace SemestralProject.Controllers
         public void Import(string path)
         {
             this.importer.InputPath = path;
-            this.formImportExport = FormProgress.CreateImportForm(this.context);
-            this.formImportExport.Show();
+            this.formProgress = FormProgress.CreateImportForm(this.context);
+            this.formProgress.Show();
             Random random = new Random();
             Task.Run(new Action(() =>
             {
@@ -110,8 +129,36 @@ namespace SemestralProject.Controllers
                     Thread.Sleep(random.Next(ActionsController.EISleepMin, ActionsController.EISleepMax));
                 }
             }));
-            this.formImportExport.BringToFront();
-            this.formImportExport.TopMost = true;
+            this.formProgress.BringToFront();
+            this.formProgress.TopMost = true;
+        }
+
+        /// <summary>
+        /// Performs copiing of data files into directories of vehicles
+        /// </summary>
+        /// <param name="replace">Flag, whether files should be replaced or not</param>
+        public void Copy(bool replace = false)
+        {
+            if (replace == true)
+            {
+                this.formProgress = FormProgress.CreateCopyReplaceForm(this.context);
+            }
+            else
+            {
+                this.formProgress = FormProgress.CreateCopyForm(this.context);
+            }
+            this.formProgress.Show();
+            Random random = new Random();
+            Task.Run(new Action(() =>
+            {
+                foreach(Action action in this.copier.GetCopySequence(replace))
+                {
+                    action();
+                    Thread.Sleep(random.Next(ActionsController.CopySleepMin, ActionsController.CopySleepMax));
+                }
+            }));
+            this.formProgress.BringToFront();
+            this.formProgress.TopMost = true;
         }
 
         /// <summary>
@@ -128,57 +175,57 @@ namespace SemestralProject.Controllers
 
 
         /// <summary>
-        /// Handles export/import event
+        /// Handles progress event
         /// </summary>
         /// <param name="sender">Sender of event</param>
         /// <param name="e">Arguments of event</param>
-        private void ExportImportHandler(object sender, AbstracProgress.ProgressEventArgs e)
+        private void ProgressEventHandler(object sender, AbstracProgress.ProgressEventArgs e)
         {
-            if (this.formImportExport!= null)
+            if (this.formProgress!= null)
             {
-                this.formImportExport.Invoke(new MethodInvoker(delegate ()
+                this.formProgress.Invoke(new MethodInvoker(delegate ()
                 {
                     if (e.Percentage < 0 || e.Percentage > 100)
                     {
-                        this.formImportExport.Content.ContentProgress.Style = ProgressBarStyle.Marquee;
+                        this.formProgress.Content.ContentProgress.Style = ProgressBarStyle.Marquee;
                     }
                     else
                     {
-                        this.formImportExport.Content.ContentProgress.Style = ProgressBarStyle.Continuous;
-                        this.formImportExport.Content.ContentProgress.Value = e.Percentage;
+                        this.formProgress.Content.ContentProgress.Style = ProgressBarStyle.Continuous;
+                        this.formProgress.Content.ContentProgress.Value = e.Percentage;
                     }
-                    this.formImportExport.Content.ContentState.Text = e.State;
+                    this.formProgress.Content.ContentState.Text = e.State;
                 }));
             }
         }
 
         /// <summary>
-        /// Handles export/import log event
+        /// Handles progress log event
         /// </summary>
         /// <param name="sender">Sender of event</param>
         /// <param name="e">Arguments of event</param>
-        private void ExportImportLogHandler(object sender, AbstracProgress.ProgressLogEventArgs e)
+        private void ProgressLogEventhandler(object sender, AbstracProgress.ProgressLogEventArgs e)
         {
-            if (this.formImportExport != null)
+            if (this.formProgress != null)
             {
-                this.formImportExport.Invoke(new MethodInvoker(delegate ()
+                this.formProgress.Invoke(new MethodInvoker(delegate ()
                 {
-                    this.formImportExport.Content.ContentLog.AppendText(e.DateTime.ToString() + " | " + e.Message + Environment.NewLine);
+                    this.formProgress.Content.ContentLog.AppendText(e.DateTime.ToString() + " | " + e.Message + Environment.NewLine);
                 }));
             }
         }
 
         /// <summary>
-        /// Handles export/import done event
+        /// Handles process done event
         /// </summary>
         /// <param name="sender">Sender of event</param>
-        private void ExportImportDoneHandler(object sender)
+        private void ProgressDoneEventHandler(object sender)
         {
-            if (this.formImportExport != null)
+            if (this.formProgress != null)
             {
-                this.formImportExport.Invoke(new MethodInvoker(delegate ()
+                this.formProgress.Invoke(new MethodInvoker(delegate ()
                 {
-                    this.formImportExport.ButtonsEnabled = true;
+                    this.formProgress.ButtonsEnabled = true;
                 }));
             }
         }

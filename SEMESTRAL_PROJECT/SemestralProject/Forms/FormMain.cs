@@ -620,5 +620,15 @@ namespace SemestralProject.Forms
                 this.actionsController.Import(this.openFileDialogImport.FileName);
             }
         }
+
+        private void buttonActionCopy_Click(object sender, EventArgs e)
+        {
+            this.actionsController.Copy();
+        }
+
+        private void buttonActionCopyReplace_Click(object sender, EventArgs e)
+        {
+            this.actionsController.Copy(true);
+        }
     }
 }

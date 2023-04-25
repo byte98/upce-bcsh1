@@ -68,6 +68,26 @@ namespace SemestralProject.Forms
         }
 
         /// <summary>
+        /// Creates new form which informs about process of copiing files
+        /// </summary>
+        /// <param name="context">Wrapper of all program resources</param>
+        /// <returns>Form which has ability to inform about process of copiing files</returns>
+        public static FormProgress CreateCopyForm(Context context)
+        {
+            return new FormProgress(context, SemestralProject.Resources.copy32, "Kopírování souborů", "Kopírování souborů");
+        }
+
+        /// <summary>
+        /// Creates new form which informs about process of copiing and replacing files
+        /// </summary>
+        /// <param name="context">Wrapper of all program resources</param>
+        /// <returns>Form which has ability to inform about process of copiing and replacing files</returns>
+        public static FormProgress CreateCopyReplaceForm(Context context)
+        {
+            return new FormProgress(context, SemestralProject.Resources.copyr32, "Kopírování a nahrazování souborů", "Kopírování a nahrazování souborů");
+        }
+
+        /// <summary>
         /// Creates new dialog for informing about import/export process
         /// </summary>
         /// <param name="context">Wrapper of all program resources</param>

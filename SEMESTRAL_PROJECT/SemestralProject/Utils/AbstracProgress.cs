@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SemestralProject.Persistence
+namespace SemestralProject.Utils
 {
     /// <summary>
     /// Class abstracting commmon attributes for any process which reports progress
@@ -14,7 +14,7 @@ namespace SemestralProject.Persistence
         /// <summary>
         /// Arguments for progress event
         /// </summary>
-        public class ProgressEventArgs: EventArgs
+        public class ProgressEventArgs : EventArgs
         {
             /// <summary>
             /// Actual progress percentage of progress of process
@@ -34,8 +34,8 @@ namespace SemestralProject.Persistence
             /// <param name="state">Actual state of progress of process</param>
             public ProgressEventArgs(ushort percentage, string state)
             {
-                this.Percentage = percentage;
-                this.State = state;
+                Percentage = percentage;
+                State = state;
             }
         }
 
@@ -57,13 +57,13 @@ namespace SemestralProject.Persistence
         /// <param name="args">Arguments of event</param>
         protected virtual void OnProgress(ProgressEventArgs args)
         {
-            this.Progress?.Invoke(this, args);
+            Progress?.Invoke(this, args);
         }
 
         /// <summary>
         /// Arguments of progress log event
         /// </summary>
-        public class ProgressLogEventArgs: EventArgs
+        public class ProgressLogEventArgs : EventArgs
         {
             /// <summary>
             /// Message of log
@@ -81,8 +81,8 @@ namespace SemestralProject.Persistence
             /// <param name="message">Message of log</param>
             public ProgressLogEventArgs(string message)
             {
-                this.Message = message;
-                this.DateTime = DateTime.Now;
+                Message = message;
+                DateTime = DateTime.Now;
             }
         }
 
@@ -104,7 +104,7 @@ namespace SemestralProject.Persistence
         /// <param name="args">Arguments of event</param>
         protected virtual void OnProgressLog(ProgressLogEventArgs args)
         {
-            this.ProgressLog?.Invoke(this, args);
+            ProgressLog?.Invoke(this, args);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace SemestralProject.Persistence
         /// </summary>
         protected virtual void OnProcessDone()
         {
-            this.ProcessDone?.Invoke(this);
+            ProcessDone?.Invoke(this);
         }
     }
 }
