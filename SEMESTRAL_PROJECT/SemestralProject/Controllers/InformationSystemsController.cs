@@ -152,7 +152,10 @@ namespace SemestralProject.Controllers
                 {
                     while(this.context.DataStorage.InformationSystems.Count > 0)
                     {
-                        this.RemoveSystem(this.context.DataStorage.InformationSystems.First());
+                        if (this.RemoveSystem(this.context.DataStorage.InformationSystems.First()) == false)
+                        {
+                            break;
+                        }
                     }
                     this.context.DataStorage.Save();
                 }, this.context);
@@ -164,8 +167,10 @@ namespace SemestralProject.Controllers
         /// Removes information system with check for conflicts
         /// </summary>
         /// <param name="system">System which will be removed</param>
-        private void RemoveSystem(InformationSystem system)
+        /// <returns><c>TRUE</c> if user accepted system removal, <c>FALSE</c> otherwise</returns>
+        private bool RemoveSystem(InformationSystem system)
         {
+            bool reti = true;
             List<Vehicle> conflictVehicles = this.GetVehicles(system);
             List<DataFile> conflictFiles = this.GetFiles(system);
             if (conflictVehicles.Count > 0 || conflictFiles.Count > 0)
@@ -186,12 +191,17 @@ namespace SemestralProject.Controllers
                     this.context.DataStorage.InformationSystems.Remove(system);
                     this.context.DataStorage.Save();
                 }
+                else
+                {
+                    reti = false;
+                }
             }
             else
             {
                 this.context.DataStorage.InformationSystems.Remove(system);
                 this.context.DataStorage.Save();
             }
+            return reti;
         }
 
         /// <summary>

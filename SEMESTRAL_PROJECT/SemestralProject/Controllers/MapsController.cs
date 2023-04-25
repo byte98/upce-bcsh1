@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.UserDataTasks;
 
 namespace SemestralProject.Controllers
 {
@@ -151,7 +152,10 @@ namespace SemestralProject.Controllers
                 {
                     while (this.context.DataStorage.Maps.Count > 0)
                     {
-                        this.RemoveMap(this.context.DataStorage.Maps.First());
+                        if (this.RemoveMap(this.context.DataStorage.Maps.First()) == false)
+                        {
+                            break;
+                        }
                     }
                     this.context.DataStorage.Save();
                 }, this.context);
@@ -163,8 +167,10 @@ namespace SemestralProject.Controllers
         /// Removes map with checking for conflicts
         /// </summary>
         /// <param name="map">Map which will be removed</param>
-        private void RemoveMap(Map map)
+        /// <returns><c>TRUE</c> if user accepted map removal, <c>FALSE</c> otherwise</returns>
+        private bool RemoveMap(Map map)
         {
+            bool reti = true;
             List<DataFile> conflicts = this.GetDataFiles(map);
             if (conflicts.Count > 0)
             {
@@ -178,11 +184,16 @@ namespace SemestralProject.Controllers
                     }
                     this.context.DataStorage.Maps.Remove(map);
                 }
+                else
+                {
+                    reti = false;
+                }
             }
             else
             {
                 this.context.DataStorage.Maps.Remove(map);
             }
+            return reti;
         }
 
         /// <summary>

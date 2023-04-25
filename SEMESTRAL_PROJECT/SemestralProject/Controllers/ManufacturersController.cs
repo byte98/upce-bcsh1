@@ -141,8 +141,10 @@ namespace SemestralProject.Controllers
         /// Removes manufacturer with conflict check
         /// </summary>
         /// <param name="manufacturer">Manufacturer which will be removed</param>
-        private void RemoveManufacturer(Manufacturer manufacturer)
+        /// <returns><c>TRUE</c> if user accepted deletion of manufacturer, <c>FALSE</c> otherwise</returns>
+        private bool RemoveManufacturer(Manufacturer manufacturer)
         {
+            bool reti = true;
             List<Vehicle> conflicts = this.GetVehicles(manufacturer);
             if (conflicts.Count > 0)
             {
@@ -155,11 +157,16 @@ namespace SemestralProject.Controllers
                     }
                     this.context.DataStorage.Manufacturers.Remove(manufacturer);
                 }
+                else
+                {
+                    reti = false;
+                }
             }
             else
             {
                 this.context.DataStorage.Manufacturers.Remove(manufacturer);
             }
+            return reti;
         }
 
         /// <summary>
@@ -196,7 +203,10 @@ namespace SemestralProject.Controllers
                 {
                     while(this.context.DataStorage.Manufacturers.Count > 0)
                     {
-                        this.RemoveManufacturer(this.context.DataStorage.Manufacturers.First());
+                        if (this.RemoveManufacturer(this.context.DataStorage.Manufacturers.First()) == false)
+                        {
+                            break;
+                        }
                     }
                     this.context.DataStorage.Save();
                 }, this.context);
