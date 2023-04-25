@@ -16,6 +16,11 @@ namespace SemestralProject.Controllers
     internal class VehiclesController: AbstractController<Vehicle>
     {
         /// <summary>
+        /// Prefix used in identifiers
+        /// </summary>
+        public const string IdPrefix = "V_";
+
+        /// <summary>
         /// Creates new controller of vehicles
         /// </summary>
         /// <param name="context">Wrapper of all program resources</param>
@@ -76,7 +81,7 @@ namespace SemestralProject.Controllers
             string reti = string.Empty;
             do
             {
-                reti = this.GenerateIdentifier("V_");
+                reti = this.GenerateIdentifier(VehiclesController.IdPrefix);
             }
             while(this.GetById(reti) != null);
             return reti;

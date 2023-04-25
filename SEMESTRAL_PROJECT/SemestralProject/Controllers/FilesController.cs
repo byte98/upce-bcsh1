@@ -16,6 +16,11 @@ namespace SemestralProject.Controllers
     internal class FilesController : AbstractController<DataFile>
     {
         /// <summary>
+        /// Prefix used in identifiers
+        /// </summary>
+        public const string IdPrefix = "FILE_";
+
+        /// <summary>
         /// Creates new controller of data files
         /// </summary>
         /// <param name="context">Wrapper of all program resources</param>
@@ -52,7 +57,7 @@ namespace SemestralProject.Controllers
             string reti = string.Empty;
             do
             {
-                reti = this.GenerateIdentifier("FILE_");
+                reti = this.GenerateIdentifier(FilesController.IdPrefix);
             }
             while (this.GetById(reti) != null);
             return reti;

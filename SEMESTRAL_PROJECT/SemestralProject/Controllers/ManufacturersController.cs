@@ -16,6 +16,11 @@ namespace SemestralProject.Controllers
     internal class ManufacturersController : AbstractController<Manufacturer>
     {
         /// <summary>
+        /// Prefix used in identifier
+        /// </summary>
+        public const string IdPrefix = "MAN_";
+
+        /// <summary>
         /// Creates new controller of operations over manufacturers
         /// </summary>
         /// <param name="context">Wrapper of all system resources</param>
@@ -52,7 +57,7 @@ namespace SemestralProject.Controllers
             string reti = string.Empty;
             do
             {
-                reti = this.GenerateIdentifier("MAN_");
+                reti = this.GenerateIdentifier(ManufacturersController.IdPrefix);
             }
             while (this.GetById(reti) != null);
             return reti;

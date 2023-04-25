@@ -1,5 +1,7 @@
 ﻿using SemestralProject.Controllers;
+using SemestralProject.Data;
 using SemestralProject.Utils;
+using SemestralProject.Visual;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -82,10 +84,20 @@ namespace SemestralProject.Persistence
             /// Checks, whether stored raw data equals to information system
             /// </summary>
             /// <param name="informationSystem">Information to which raw data will be compared</param>
+            /// <param name="context">Wrapper of all program resources</param>
             /// <returns><c>TRUE</c> if raw data equals to information system, <c>FALSE</c> otherwise</returns>
-            public bool EqualsTo(Data.InformationSystem informationSystem)
+            public bool EqualsTo(Data.InformationSystem informationSystem, Context context)
             {
-                return false;
+                bool reti = false;
+                if (this.Name == informationSystem.Name)
+                {
+                    string? path = context.FileStorage.GetIconPath(informationSystem.Icon);
+                    if (path != null)
+                    {
+                        reti = this.IconChecksum == FileUtils.GenerateChecksum(path);
+                    }
+                }
+                return reti;
             }
         }
 
@@ -147,6 +159,26 @@ namespace SemestralProject.Persistence
                 this.Created = created;
                 this.Updated = updated;
             }
+
+            /// <summary>
+            /// Checks, whether raw data equals to map object
+            /// </summary>
+            /// <param name="map">Map object which will be checked</param>
+            /// <param name="context">Wrapper of all program resources</param>
+            /// <returns><c>TRUE</c> if raw data equals to map object, <c>FALSE</c> otherwise</returns>
+            public bool EqualsTo(Data.Map map, Context context)
+            {
+                bool reti = false;
+                if (this.Name == map.Name)
+                {
+                    string? path = context.FileStorage.GetPicturePath(map.Picture);
+                    if (path != null)
+                    {
+                        reti = this.PictureChecksum == FileUtils.GenerateChecksum(path);
+                    }
+                }
+                return reti;
+            }
         }
 
         /// <summary>
@@ -207,6 +239,26 @@ namespace SemestralProject.Persistence
                 this.Created = created;
                 this.Updated = updated;
             }
+
+            /// <summary>
+            /// Checks, whether raw data of manufacturer equals to manufacturer object
+            /// </summary>
+            /// <param name="manufacturer">Manufacturer which will be checked if equals to raw data</param>
+            /// <param name="context">Wrapper of all program resources</param>
+            /// <returns><c>TRUE</c> if raw data equals to manufacturer, <c>FALSE</c> otherwise</returns>
+            public bool EqualsTo(Data.Manufacturer manufacturer, Context context)
+            {
+                bool reti = false;
+                if (manufacturer.Name == this.Name)
+                {
+                    string? path = context.FileStorage.GetIconPath(manufacturer.Icon);
+                    if (path != null)
+                    {
+                        reti = this.IconChecksum == FileUtils.GenerateChecksum(path);
+                    }
+                }
+                return reti;
+            }
         }
 
         /// <summary>
@@ -245,6 +297,16 @@ namespace SemestralProject.Persistence
             public Manufacturer Manufacturer { get; init; }
 
             /// <summary>
+            /// Checksum of picture file
+            /// </summary>
+            public string PictureChecksum { get; set; } = string.Empty;
+
+            /// <summary>
+            /// Path to vehicle
+            /// </summary>
+            public string Path { get; init; }
+
+            /// <summary>
             /// Date and time of creation of vehicle
             /// </summary>
             public DateTime Created { get; init; }
@@ -263,18 +325,40 @@ namespace SemestralProject.Persistence
             /// <param name="picture">Picture of vehicle</param>
             /// <param name="informationSystem">Information system of vehicle</param>
             /// <param name="manufacturer">Manufacturer of vehicle</param>
+            /// <param name="path">Path to vehicle</param>
             /// <param name="created">Date and time of creation of vehicle</param>
             /// <param name="updated">Date and time of last update of vehicle</param>
-            public Vehicle(string id, string name, string description, string picture, InformationSystem informationSystem, Manufacturer manufacturer, DateTime created, DateTime updated)
+            public Vehicle(string id, string name, string description, string picture, InformationSystem informationSystem, Manufacturer manufacturer, string path, DateTime created, DateTime updated)
             {
                 this.Id = id;
                 this.Name = name;
                 this.Description = description;
                 this.Picture = picture;
+                this.Path = path;
                 this.Manufacturer = manufacturer;
                 this.InformationSystem = informationSystem;
                 this.Created = created;
                 this.Updated = updated;
+            }
+
+            /// <summary>
+            /// Checks, whether raw data of vehicle equals to vehicle object
+            /// </summary>
+            /// <param name="vehicle">Vehicle which will be checked</param>
+            /// <param name="context">Wrapper of all program resources</param>
+            /// <returns><c>TRUE</c>, if raw data equals to vehicle object, <c>FALSE</c> otherwise</returns>
+            public bool EqualsTo(Data.Vehicle vehicle, Context context)
+            {
+                bool reti = false;
+                if (vehicle.Name == this.Name && this.InformationSystem.EqualsTo(vehicle.InformationSystem, context) && this.Manufacturer.EqualsTo(vehicle.Manufacturer, context))
+                {
+                    string? path = context.FileStorage.GetPicturePath(vehicle.Picture);
+                    if (path != null)
+                    {
+                        reti = this.PictureChecksum == FileUtils.GenerateChecksum(path);
+                    }
+                }
+                return reti;
             }
         }
 
@@ -344,6 +428,21 @@ namespace SemestralProject.Persistence
                 this.Map = map;
                 this.Created = created;
                 this.Updated = updated;
+            }
+
+            /// <summary>
+            /// Checks, whether raw data of data file equals to data file object
+            /// </summary>
+            /// <param name="dataFile">Data file which will be checked</param>
+            /// <param name="context">Wrapper of all program resources</param>
+            /// <returns><c>TRUE</c> if raw data of data file equals to data file object, <c>FALSE</c> otherwise</returns>
+            public bool EqualsTo(Data.DataFile dataFile, Context context)
+            {
+                return (
+                    this.Name == dataFile.Name &&
+                    this.InformationSystem.EqualsTo(dataFile.InformationSystem, context) &&
+                    this.Map.EqualsTo(dataFile.Map, context)
+                 );
             }
         }
 
@@ -430,6 +529,16 @@ namespace SemestralProject.Persistence
         private readonly Dictionary<InformationSystem, Data.InformationSystem> informationSystemsDictionary;
 
         /// <summary>
+        /// Dictionary which stores map object relevant to its raw data
+        /// </summary>
+        private readonly Dictionary<Map, Data.Map> mapsDictionary;
+
+        /// <summary>
+        /// Dictionary which stores manufacturer object relevant to its raw data
+        /// </summary>
+        private readonly Dictionary<Manufacturer, Data.Manufacturer> manufacturersDictionary;
+
+        /// <summary>
         /// Creates new importer of data
         /// </summary>
         /// <param name="context">Wrapper of all program resources</param>
@@ -448,6 +557,8 @@ namespace SemestralProject.Persistence
             this.picturesDictionary = new Dictionary<string, string>();
             this.dataFilesDictionary = new Dictionary<string, string>();
             this.informationSystemsDictionary = new Dictionary<InformationSystem, Data.InformationSystem>();
+            this.mapsDictionary = new Dictionary<Map, Data.Map>();
+            this.manufacturersDictionary = new Dictionary<Manufacturer, Data.Manufacturer>();
         }
 
         /// <summary>
@@ -773,6 +884,7 @@ namespace SemestralProject.Persistence
                                                 pictElement.InnerText,
                                                 (InformationSystem)informationSystem,
                                                 (Manufacturer)manufacturer,
+                                                pathElement.InnerText,
                                                 DateTime.ParseExact(credElement.InnerText, DataStorage.XML._Date, null),
                                                 DateTime.ParseExact(updtElement.InnerText, DataStorage.XML._Date, null)
                                             ));
@@ -1194,7 +1306,7 @@ namespace SemestralProject.Persistence
         /// </summary>
         /// <param name="checksum">Searched checksum</param>
         /// <returns>Name of data file with searched checksum or <c>NULL</c>, if there is no such data file</returns>
-        private string? GetDataFile(string checksum)
+        private string? GetDataFileContent(string checksum)
         {
             string? reti = null;
             foreach(string dataFile in this.context.FileStorage.GetDataFiles())
@@ -1214,9 +1326,9 @@ namespace SemestralProject.Persistence
         }
 
         /// <summary>
-        /// Imports data files to system
+        /// Imports content of data files to system
         /// </summary>
-        private void ImportDataFiles()
+        private void ImportDataFilesContent()
         {
             this.progress = 60;
             this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji obsah datových souborů..."));
@@ -1225,7 +1337,7 @@ namespace SemestralProject.Persistence
             int counter = 0;
             foreach (FileWrapper dataFile in this.loadedDataFilesContent)
             {
-                string? inSystem = this.GetDataFile(dataFile.Checksum);
+                string? inSystem = this.GetDataFileContent(dataFile.Checksum);
                 if (inSystem == null)
                 {
                     this.dataFilesDictionary.Add(dataFile.Name, dataFile.Name);
@@ -1255,18 +1367,10 @@ namespace SemestralProject.Persistence
             Data.InformationSystem? reti = null;
             foreach(Data.InformationSystem system in this.context.DataStorage.InformationSystems)
             {
-                if (system.Name == informationSystem.Name)
+                if (informationSystem.EqualsTo(system, this.context))
                 {
-                    string? path = this.context.FileStorage.GetIconPath(system.Icon);
-                    if (path != null)
-                    {
-                        string checksum = FileUtils.GenerateChecksum(path);
-                        if (checksum == informationSystem.IconChecksum)
-                        {
-                            reti = system;
-                            break;
-                        }
-                    }
+                    reti = system;
+                    break;
                 }
             }
             return reti;
@@ -1285,6 +1389,158 @@ namespace SemestralProject.Persistence
                 if (system.Id == id)
                 {
                     reti = system;
+                    break;
+                }
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets map by its raw data
+        /// </summary>
+        /// <param name="rawMap">Raw data of map</param>
+        /// <returns>Map with searched raw data or <c>NULL</c> if there is no such map</returns>
+        private Data.Map? GetMap(Map rawMap)
+        {
+            Data.Map? reti = null;
+            foreach(Data.Map map in this.context.DataStorage.Maps)
+            {
+                if (rawMap.EqualsTo(map, this.context))
+                {
+                    reti = map;
+                    break;
+                }
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets map by its identifier
+        /// </summary>
+        /// <param name="id">Searched identifier of map</param>
+        /// <returns>Map with searched identifier or <c>NULL</c>, if there is no such map</returns>
+        private Data.Map? GetMap(string id)
+        {
+            Data.Map? reti = null;
+            foreach(Data.Map map in this.context.DataStorage.Maps)
+            {
+                if (map.Id == id)
+                {
+                    reti = map;
+                    break;
+                }
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets manufacturer by its raw data
+        /// </summary>
+        /// <param name="rawManufacturer">Raw data of manufacturer</param>
+        /// <returns>Manufacturer object which has searched raw data or <c>NULL</c>, if there is no such manufacturer</returns>
+        private Data.Manufacturer? GetManufacturer(Manufacturer rawManufacturer)
+        {
+            Data.Manufacturer? reti = null;
+            foreach(Data.Manufacturer manufacturer in this.context.DataStorage.Manufacturers)
+            {
+                if (rawManufacturer.EqualsTo(manufacturer, this.context))
+                {
+                    reti = manufacturer;
+                    break;
+                }
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets manufacturer by its identifier
+        /// </summary>
+        /// <param name="id">Searched identifier of manufacturer</param>
+        /// <returns>Manufacturer with searched identifier or <c>NULL</c>, if there is no such manufacturer</returns>
+        private Data.Manufacturer? GetManufacturer(string id)
+        {
+            Data.Manufacturer? reti = null;
+            foreach(Data.Manufacturer manufacturer in this.context.DataStorage.Manufacturers)
+            {
+                if (manufacturer.Id == id)
+                {
+                    reti = manufacturer;
+                    break;
+                }
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets vehicle by its raw data
+        /// </summary>
+        /// <param name="rawVehicle">Raw data of vehicle</param>
+        /// <returns>Vehicle with searched raw data or <c>NULL</c>, if there is no such vehicle</returns>
+        private Data.Vehicle? GetVehicle(Vehicle rawVehicle)
+        {
+            Data.Vehicle? reti = null;
+            foreach(Data.Vehicle vehicle in this.context.DataStorage.Vehicles)
+            {
+                if(rawVehicle.EqualsTo(vehicle, this.context))
+                {
+                    reti = vehicle;
+                    break;
+                }
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets vehicle by its identifier
+        /// </summary>
+        /// <param name="id">Searched identifier of vehicle</param>
+        /// <returns>Vehicle with searched identifier or <c>NULL</c>, if there is no such vehicle</returns>
+        private Data.Vehicle? GetVehicle(string id)
+        {
+            Data.Vehicle? reti = null;
+            foreach(Data.Vehicle vehicle in this.context.DataStorage.Vehicles)
+            {
+                if(vehicle.Id == id)
+                {
+                    reti = vehicle;
+                    break;
+                }
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets data file by its raw data
+        /// </summary>
+        /// <param name="rawDataFile">Raw data of data file</param>
+        /// <returns>Data file object with searched raw data or <c>NULL</c>, if there is no such data file</returns>
+        private Data.DataFile? GetDataFile(DataFile rawDataFile)
+        {
+            Data.DataFile? reti = null;
+            foreach(Data.DataFile dataFile in this.context.DataStorage.DataFiles)
+            {
+                if (rawDataFile.EqualsTo(dataFile, this.context))
+                {
+                    reti = dataFile;
+                    break;
+                }
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Gets data file by its identifier
+        /// </summary>
+        /// <param name="id">Searched identifier of data file</param>
+        /// <returns>Data file with searched identifier or <c>NULL</c>, if there is no such data file</returns>
+        private Data.DataFile? GetDataFile(string id)
+        {
+            Data.DataFile? reti = null;
+            foreach(Data.DataFile dataFile in this.context.DataStorage.DataFiles)
+            {
+                if (dataFile.Id == id)
+                {
+                    reti = dataFile;
                     break;
                 }
             }
@@ -1312,17 +1568,52 @@ namespace SemestralProject.Persistence
         }
 
         /// <summary>
-        /// Generates identifier for information system
+        /// Gets checksum of picture file
         /// </summary>
-        /// <returns>Pseudo-random unique identifier of information system</returns>
-        private string GenerateInformationSystemId()
+        /// <param name="name">Name of picture</param>
+        /// <returns>Checksum of picture file</returns>
+        private string GetPictureChecksum(string name)
         {
+            string reti = string.Empty;
+            Picture? picture = this.context.FileStorage.GetPicture(name);
+            if (picture != null)
+            {
+                string? path = this.context.FileStorage.GetPicturePath(picture);
+                if (path != null)
+                {
+                    reti = FileUtils.GenerateChecksum(path);
+                }
+            }
+            return reti;
+        }
+
+        /// <summary>
+        /// Generates identifier for defined set of data
+        /// </summary>
+        /// <param name="prefix">Prefix of identifier</param>
+        /// <param name="data">Data in which identifier should be unique</param>
+        /// <returns>Pseudo-random unique identifier for defined set of data</returns>
+        private string GenerateIdentifier(string prefix, List<AbstractData> data)
+        {
+            Func<string, bool> isUnique = (string id) =>
+            {
+                bool reti = true;
+                foreach(AbstractData item in data)
+                {
+                    if (item.Id == id)
+                    {
+                        reti = false;
+                        break;
+                    }
+                }
+                return reti;
+            };
             string reti = string.Empty;
             do
             {
-                reti = InformationSystemsController.IdPrefix + StringUtils.Random(AbstractController<Data.InformationSystem>.IdAlphabet, AbstractController<Data.InformationSystem>.IdMinLength, AbstractController<Data.InformationSystem>.IdMaxLength);
+                reti = prefix + StringUtils.Random(AbstractController<Data.InformationSystem>.IdAlphabet, AbstractController<Data.InformationSystem>.IdMinLength, AbstractController<Data.InformationSystem>.IdMaxLength);
             }
-            while (this.GetInformationSystem(reti) != null);
+            while (isUnique(reti) == false);
             return reti;
         }
 
@@ -1333,7 +1624,7 @@ namespace SemestralProject.Persistence
         {
             this.progress = 65;
             this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji informační systémy..."));
-            this.dataFilesDictionary.Clear();
+            this.informationSystemsDictionary.Clear();
             double step = 5f / (double)this.loadedInformationSystems.Count;
             int idx = 0;
             for(; idx < this.loadedInformationSystems.Count;idx++)
@@ -1344,7 +1635,7 @@ namespace SemestralProject.Persistence
                 if (informationSystem == null)
                 {
                     Data.InformationSystem newSystem = new Data.InformationSystem(
-                        this.GenerateInformationSystemId(),
+                        this.GenerateIdentifier(InformationSystemsController.IdPrefix, this.context.DataStorage.InformationSystems.OfType<AbstractData>().ToList()),
                         system.Name,
                         system.Description,
                         this.context.FileStorage.GetIcon(this.iconsDictionary[system.Icon], FileStorage.DefaultIconType.IS),
@@ -1369,6 +1660,192 @@ namespace SemestralProject.Persistence
         }
 
         /// <summary>
+        /// Import maps into system
+        /// </summary>
+        private void ImportMaps()
+        {
+            this.progress = 70;
+            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji oblasti..."));
+            this.mapsDictionary.Clear();
+            double step = 5f / (double)this.loadedMaps.Count;
+            int idx = 0;
+            for (; idx < this.loadedMaps.Count; idx++)
+            {
+                Map rawMap = this.loadedMaps[idx];
+                rawMap.PictureChecksum = this.GetPictureChecksum(this.picturesDictionary[rawMap.Picture]);
+                Data.Map? map = this.GetMap(rawMap);
+                if (map == null)
+                {
+                    Data.Map newMap = new Data.Map(
+                        this.GenerateIdentifier(MapsController.IdPrefix, this.context.DataStorage.Maps.OfType<AbstractData>().ToList()),
+                        rawMap.Created,
+                        rawMap.Updated,
+                        rawMap.Name,
+                        rawMap.Description,
+                        this.context.FileStorage.GetPictureChecked(this.picturesDictionary[rawMap.Picture])
+                    ) ;
+                    this.context.DataStorage.Maps.Add(newMap);
+                    this.mapsDictionary.Add(rawMap, newMap);
+                    this.OnExportImportLog(new ExportImportLogEventArgs("Importována oblast " + rawMap.Name));
+
+                }
+                else
+                {
+                    this.mapsDictionary.Add(rawMap, map);
+                    this.OnExportImportLog(new ExportImportLogEventArgs("Oblast " + rawMap.Name + " je již v systému"));
+                }
+                this.progress = (ushort)(70 + (ushort)Math.Round((double)idx * step));
+                this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji oblasti..."));
+            }
+            this.progress = 75;
+            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji oblasti..."));
+        }
+
+        /// <summary>
+        /// Import manufacturers into system
+        /// </summary>
+        private void ImportManufacturers()
+        {
+            this.progress = 75;
+            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji výrobce..."));
+            this.manufacturersDictionary.Clear();
+            double step = 5f / (double)this.loadedManufacturers.Count;
+            int idx = 0;
+            for (; idx < this.loadedManufacturers.Count; idx++)
+            {
+                Manufacturer rawManufacturer = this.loadedManufacturers[idx];
+                rawManufacturer.IconChecksum = this.GetIconChecksum(this.iconsDictionary[rawManufacturer.Icon]);
+                Data.Manufacturer? manufacturer = this.GetManufacturer(rawManufacturer);
+                if (manufacturer == null)
+                {
+                    Data.Manufacturer newManufacturer = new Data.Manufacturer(
+                        this.GenerateIdentifier(ManufacturersController.IdPrefix, this.context.DataStorage.Manufacturers.OfType<AbstractData>().ToList()),
+                        rawManufacturer.Name,
+                        rawManufacturer.Description,
+                        this.context.FileStorage.GetIcon(this.iconsDictionary[rawManufacturer.Icon], FileStorage.DefaultIconType.MANUFACTURER),
+                        rawManufacturer.Created,
+                        rawManufacturer.Updated
+                    );
+                    this.context.DataStorage.Manufacturers.Add(newManufacturer);
+                    this.manufacturersDictionary.Add(rawManufacturer, newManufacturer);
+                    this.OnExportImportLog(new ExportImportLogEventArgs("Importován výrobce " + rawManufacturer.Name));
+
+                }
+                else
+                {
+                    this.manufacturersDictionary.Add(rawManufacturer, manufacturer);
+                    this.OnExportImportLog(new ExportImportLogEventArgs("Výrobce " + rawManufacturer.Name + " je již v systému"));
+                }
+                this.progress = (ushort)(75 + (ushort)Math.Round((double)idx * step));
+                this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji výrobce..."));
+            }
+            this.progress = 80;
+            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji výrobce..."));
+        }
+
+        /// <summary>
+        /// Import vehicles into system
+        /// </summary>
+        private void ImportVehicles()
+        {
+            this.progress = 80;
+            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji vozidla..."));
+            double step = 5f / (double)this.loadedVehicles.Count;
+            int idx = 0;
+            for (; idx < this.loadedVehicles.Count; idx++)
+            {
+                Vehicle rawVehicle = this.loadedVehicles[idx];
+                rawVehicle.PictureChecksum = this.GetPictureChecksum(this.picturesDictionary[rawVehicle.Picture]);
+                Data.Vehicle? vehicle = this.GetVehicle(rawVehicle);
+                if (vehicle == null)
+                {
+                    Data.Vehicle newVehicle = new Data.Vehicle(
+                        this.GenerateIdentifier(VehiclesController.IdPrefix, this.context.DataStorage.Vehicles.OfType<AbstractData>().ToList()),
+                        rawVehicle.Name,
+                        rawVehicle.Description,
+                        this.context.FileStorage.GetPictureChecked(this.picturesDictionary[rawVehicle.Picture]),
+                        this.manufacturersDictionary[rawVehicle.Manufacturer],
+                        rawVehicle.Path,
+                        this.informationSystemsDictionary[rawVehicle.InformationSystem],
+                        rawVehicle.Created,
+                        rawVehicle.Updated
+                    );
+                    this.context.DataStorage.Vehicles.Add(newVehicle);
+                    this.OnExportImportLog(new ExportImportLogEventArgs("Importováno vozidlo " + rawVehicle.Name));
+
+                }
+                else
+                {
+                    this.OnExportImportLog(new ExportImportLogEventArgs("Vozidlo " + rawVehicle.Name + " je již v systému"));
+                }
+                this.progress = (ushort)(80 + (ushort)Math.Round((double)idx * step));
+                this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji vozidla..."));
+            }
+            this.progress = 85;
+            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji vozidla..."));
+        }
+
+        /// <summary>
+        /// Import data files into system
+        /// </summary>
+        private void ImportDataFiles()
+        {
+            this.progress = 85;
+            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji datové soubory..."));
+            double step = 5f / (double)this.loadedDataFiles.Count;
+            int idx = 0;
+            for (; idx < this.loadedDataFiles.Count; idx++)
+            {
+                DataFile rawDataFile = this.loadedDataFiles[idx];
+                Data.DataFile? dataFile = this.GetDataFile(rawDataFile);
+                FileInfo fi = new FileInfo(rawDataFile.OriginalPath);
+                if (dataFile == null)
+                {
+                    Data.DataFile newDataFile = new Data.DataFile(
+                        this.GenerateIdentifier(FilesController.IdPrefix, this.context.DataStorage.DataFiles.OfType<AbstractData>().ToList()),
+                        rawDataFile.Name,
+                        rawDataFile.Description,
+                        this.InputPath + Path.DirectorySeparatorChar + "DATAFILES" + Path.DirectorySeparatorChar + fi.Name,
+                        this.informationSystemsDictionary[rawDataFile.InformationSystem],
+                        this.mapsDictionary[rawDataFile.Map],
+                        rawDataFile.Created,
+                        rawDataFile.Updated
+                    );
+                    this.context.DataStorage.DataFiles.Add(newDataFile);
+                    this.OnExportImportLog(new ExportImportLogEventArgs("Importován datový soubor " + fi.Name));
+
+                }
+                else
+                {
+                    this.OnExportImportLog(new ExportImportLogEventArgs("Datový soubor " + fi.Name + " je již v systému"));
+                }
+                this.progress = (ushort)(85 + (ushort)Math.Round((double)idx * step));
+                this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji datové soubory..."));
+            }
+            this.progress = 90;
+            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji datové soubory..."));
+        }
+
+        /// <summary>
+        /// Finishes import
+        /// </summary>
+        private void FinishImport()
+        {
+            this.progress = 90;
+            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Dokončuji import..."));
+            this.context.DataStorage.Save();
+            this.OnExportImportLog(new ExportImportLogEventArgs("Úložiště dat uloženo"));
+            this.progress = 95;
+            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Dokončuji import..."));
+            Directory.Delete(this.tempDir, true);
+            this.OnExportImportLog(new ExportImportLogEventArgs("Smazán adresář " + this.tempDir));
+            this.progress = 100;
+            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Hotovo"));
+            this.OnExportImportLog(new ExportImportLogEventArgs("Hotovo " + this.tempDir));
+            this.OnExportImportDone();
+        }
+
+        /// <summary>
         /// Gets all necessary actions to successfull import of data
         /// </summary>
         /// <returns>List with all necessary actions to successfull import of data</returns>
@@ -1388,6 +1865,11 @@ namespace SemestralProject.Persistence
             reti.Add(new Action(() => { this.ImportPictures(); }));
             reti.Add(new Action(() => { this.ImportDataFiles(); }));
             reti.Add(new Action(() => { this.ImportInformationSystems(); }));
+            reti.Add(new Action(() => { this.ImportMaps(); }));
+            reti.Add(new Action(() => { this.ImportManufacturers(); }));
+            reti.Add(new Action(() => { this.ImportVehicles(); }));
+            reti.Add(new Action(() => { this.ImportDataFiles(); }));
+            reti.Add(new Action(() => { this.FinishImport(); }));
             return reti;
         }
     }

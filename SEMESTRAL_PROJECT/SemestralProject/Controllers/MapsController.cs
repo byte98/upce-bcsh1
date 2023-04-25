@@ -23,6 +23,11 @@ namespace SemestralProject.Controllers
         /// <param name="context">Wrapper of all programs resources</param>
         public MapsController(Context context) : base(context) { }
 
+        /// <summary>
+        /// Prefix used in identifier
+        /// </summary>
+        public const string IdPrefix = "MAP_";
+
         public override void Create()
         {
             FormMapAdd dialog = new FormMapAdd(this.context);
@@ -54,7 +59,7 @@ namespace SemestralProject.Controllers
             string reti = string.Empty;
             do
             {
-                reti = this.GenerateIdentifier("MAP_");
+                reti = this.GenerateIdentifier(MapsController.IdPrefix);
             }
             while(this.GetById(reti) != null );
             return reti;
