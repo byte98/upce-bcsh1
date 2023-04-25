@@ -14,9 +14,9 @@ using System.Windows.Forms;
 namespace SemestralProject.Forms
 {
     /// <summary>
-    /// Class representing control which informs about import/export process
+    /// Class representing control which informs about progress of process
     /// </summary>
-    internal partial class ControlExportImport : UserControl, IControl
+    internal partial class ControlProgress : UserControl, IControl
     {
 
         /// <summary>
@@ -40,10 +40,10 @@ namespace SemestralProject.Forms
         public TextBox ContentLog => this.textBoxDetails;
 
         /// <summary>
-        /// Creates new control for informaing about import/export process
+        /// Creates new control for informaing about progress of process
         /// </summary>
         /// <param name="context">Wrapper of all program resources</param>
-        public ControlExportImport(Context context)
+        public ControlProgress(Context context)
         {
             this.Context = context;
             InitializeComponent();

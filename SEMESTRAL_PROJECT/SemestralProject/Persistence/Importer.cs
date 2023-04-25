@@ -20,7 +20,7 @@ namespace SemestralProject.Persistence
     /// <summary>
     /// Class which has ability to import data from file
     /// </summary>
-    internal class Importer : AbstractExporterImporter
+    internal class Importer : AbstracProgress
     {
         #region Utility structures
         /// <summary>
@@ -645,7 +645,7 @@ namespace SemestralProject.Persistence
         {
             // Initial event invoke
             this.progress = 0;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Připravuji import dat..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Připravuji import dat..."));
 
             // Make temporary directory
             if (Directory.Exists(this.tempDir))
@@ -654,14 +654,14 @@ namespace SemestralProject.Persistence
             }
             Directory.CreateDirectory(this.tempDir);
             this.progress += 2;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Připravuji import dat..."));
-            this.OnExportImportLog(new ExportImportLogEventArgs("Vytvořen adresář " + this.tempDir));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Připravuji import dat..."));
+            this.OnProgressLog(new ProgressLogEventArgs("Vytvořen adresář " + this.tempDir));
 
             // Unzip file
             ZipFile.ExtractToDirectory(this.InputPath, tempDir, true);
             this.progress = 10;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Připravuji import dat..."));
-            this.OnExportImportLog(new ExportImportLogEventArgs("Rozbalen soubor " + this.InputPath));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Připravuji import dat..."));
+            this.OnProgressLog(new ProgressLogEventArgs("Rozbalen soubor " + this.InputPath));
         }
 
         /// <summary>
@@ -670,10 +670,10 @@ namespace SemestralProject.Persistence
         private void LoadInformationIS()
         {
             this.progress = 10;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o informačních systémech..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o informačních systémech..."));
             this.loadedInformationSystems.Clear();
             string file = this.tempDir + "DB" + Path.DirectorySeparatorChar + DataStorage.ISFile;
-            this.OnExportImportLog(new ExportImportLogEventArgs("Čtení ze souboru " + file));
+            this.OnProgressLog(new ProgressLogEventArgs("Čtení ze souboru " + file));
             if (File.Exists(file))
             {
                 XmlDocument doc = new XmlDocument();
@@ -725,7 +725,7 @@ namespace SemestralProject.Persistence
                                             DateTime.ParseExact(updtElement.InnerText, DataStorage.XML._Date, null)
                                         )
                                     );
-                                    this.OnExportImportLog(new ExportImportLogEventArgs("Načteny informace o systému " + nameElement.InnerText));
+                                    this.OnProgressLog(new ProgressLogEventArgs("Načteny informace o systému " + nameElement.InnerText));
                                 }
                             }
                         }
@@ -734,10 +734,10 @@ namespace SemestralProject.Persistence
             }
             else
             {
-                this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Soubor neexistuje!"));
+                this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Soubor neexistuje!"));
             }
             this.progress = 15;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o informačních systémech..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o informačních systémech..."));
         }
 
         /// <summary>
@@ -747,9 +747,9 @@ namespace SemestralProject.Persistence
         {
             this.progress = 15;
             this.loadedMaps.Clear();
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o oblastech..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o oblastech..."));
             string file = this.tempDir + "DB" + Path.DirectorySeparatorChar + DataStorage.MapFile;
-            this.OnExportImportLog(new ExportImportLogEventArgs("Čtení ze souboru " + file));
+            this.OnProgressLog(new ProgressLogEventArgs("Čtení ze souboru " + file));
             if (File.Exists(file))
             {
                 XmlDocument doc = new XmlDocument();
@@ -795,7 +795,7 @@ namespace SemestralProject.Persistence
                                         DateTime.ParseExact(credElem.InnerText, DataStorage.XML._Date, null),
                                         DateTime.ParseExact(updtElem.InnerText, DataStorage.XML._Date, null)
                                     ));
-                                    this.OnExportImportLog(new ExportImportLogEventArgs("Načteny informace o oblasti " + nameElem.InnerText));
+                                    this.OnProgressLog(new ProgressLogEventArgs("Načteny informace o oblasti " + nameElem.InnerText));
                                 }
                             }
                         }
@@ -804,10 +804,10 @@ namespace SemestralProject.Persistence
             }
             else
             {
-                this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Soubor neexistuje!"));
+                this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Soubor neexistuje!"));
             }
             this.progress = 20;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o oblastech..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o oblastech..."));
         }
 
         /// <summary>
@@ -818,8 +818,8 @@ namespace SemestralProject.Persistence
             this.progress = 20;
             this.loadedManufacturers.Clear();
             string file = this.tempDir + "DB" + Path.DirectorySeparatorChar + DataStorage.ManufacturerFile;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o výrobcích..."));
-            this.OnExportImportLog(new ExportImportLogEventArgs("Čtení ze souboru " + file));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o výrobcích..."));
+            this.OnProgressLog(new ProgressLogEventArgs("Čtení ze souboru " + file));
             if (File.Exists(file))
             {
                 XmlDocument doc = new XmlDocument();
@@ -869,7 +869,7 @@ namespace SemestralProject.Persistence
                                         DateTime.ParseExact(credElement.InnerText, DataStorage.XML._Date, null),
                                         DateTime.ParseExact(updtElement.InnerText, DataStorage.XML._Date, null)
                                     ));
-                                    this.OnExportImportLog(new ExportImportLogEventArgs("Načteny informace o výrobci " + nameElement.InnerText));
+                                    this.OnProgressLog(new ProgressLogEventArgs("Načteny informace o výrobci " + nameElement.InnerText));
                                 }
                             }
                         }
@@ -878,10 +878,10 @@ namespace SemestralProject.Persistence
             }
             else
             {
-                this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Soubor neexistuje!"));
+                this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Soubor neexistuje!"));
             }
             this.progress = 25;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o výrobcích..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o výrobcích..."));
         }
 
         /// <summary>
@@ -890,9 +890,9 @@ namespace SemestralProject.Persistence
         private void LoadInformationVehicles()
         {
             this.progress = 25;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o vozidlech..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o vozidlech..."));
             string file = this.tempDir + "DB" + Path.DirectorySeparatorChar + DataStorage.VehicleFile;
-            this.OnExportImportLog(new ExportImportLogEventArgs("Čtení ze souboru " + file));
+            this.OnProgressLog(new ProgressLogEventArgs("Čtení ze souboru " + file));
             if (File.Exists(file))
             {
                 XmlDocument doc = new XmlDocument();
@@ -963,16 +963,16 @@ namespace SemestralProject.Persistence
                                                 DateTime.ParseExact(credElement.InnerText, DataStorage.XML._Date, null),
                                                 DateTime.ParseExact(updtElement.InnerText, DataStorage.XML._Date, null)
                                             ));
-                                            this.OnExportImportLog(new ExportImportLogEventArgs("Načteny informace o vozidle " + nameElement.InnerText));
+                                            this.OnProgressLog(new ProgressLogEventArgs("Načteny informace o vozidle " + nameElement.InnerText));
                                         }
                                         else
                                         {
-                                            this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Nelze načíst informace o vozidle " + nameElement.InnerText + " (neznámý výrobce " + manuElement.InnerText + ")!"));
+                                            this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Nelze načíst informace o vozidle " + nameElement.InnerText + " (neznámý výrobce " + manuElement.InnerText + ")!"));
                                         }
                                     }
                                     else
                                     {
-                                        this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Nelze načíst informace o vozidle " + nameElement.InnerText + " (neznámý informační systém " + infsElement.InnerText + ")!"));
+                                        this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Nelze načíst informace o vozidle " + nameElement.InnerText + " (neznámý informační systém " + infsElement.InnerText + ")!"));
                                     }
                                 }
                             }
@@ -982,10 +982,10 @@ namespace SemestralProject.Persistence
             }
             else
             {
-                this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Soubor neexistuje!"));
+                this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Soubor neexistuje!"));
             }
             this.progress = 30;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o vozidlech..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o vozidlech..."));
         }
 
         /// <summary>
@@ -994,9 +994,9 @@ namespace SemestralProject.Persistence
         private void LoadInformationDataFiles()
         {
             this.progress = 30;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o datových souborech..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o datových souborech..."));
             string file = this.tempDir + "DB" + Path.DirectorySeparatorChar + DataStorage.DataFileFile;
-            this.OnExportImportLog(new ExportImportLogEventArgs("Čtení ze souboru " + file));
+            this.OnProgressLog(new ProgressLogEventArgs("Čtení ze souboru " + file));
             if (File.Exists(file))
             {
                 XmlDocument doc = new XmlDocument();
@@ -1062,16 +1062,16 @@ namespace SemestralProject.Persistence
                                                 DateTime.ParseExact(credElement.InnerText, DataStorage.XML._Date, null),
                                                 DateTime.ParseExact(updtElement.InnerText, DataStorage.XML._Date, null)
                                             ));
-                                            this.OnExportImportLog(new ExportImportLogEventArgs("Načteny informace o datovém souboru " + nameElement.InnerText));
+                                            this.OnProgressLog(new ProgressLogEventArgs("Načteny informace o datovém souboru " + nameElement.InnerText));
                                         }
                                         else
                                         {
-                                            this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Nelze načíst informace o datovém souboru " + nameElement.InnerText + " (neznámá oblast " + mapsElement.InnerText + ")!"));
+                                            this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Nelze načíst informace o datovém souboru " + nameElement.InnerText + " (neznámá oblast " + mapsElement.InnerText + ")!"));
                                         }
                                     }
                                     else
                                     {
-                                        this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Nelze načíst informace o datovém souboru " + nameElement.InnerText + " (neznámý informační systém " + infsElement.InnerText + ")!"));
+                                        this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Nelze načíst informace o datovém souboru " + nameElement.InnerText + " (neznámý informační systém " + infsElement.InnerText + ")!"));
                                     }
                                 }
                             }
@@ -1081,10 +1081,10 @@ namespace SemestralProject.Persistence
             }
             else
             {
-                this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Soubor neexistuje!"));
+                this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Soubor neexistuje!"));
             }
             this.progress = 35;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o datových souborech..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o datových souborech..."));
         }
 
         /// <summary>
@@ -1150,9 +1150,9 @@ namespace SemestralProject.Persistence
         private void LoadInformationIcons()
         {
             this.progress = 35;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o ikonách..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o ikonách..."));
             string file = this.tempDir + Path.DirectorySeparatorChar + "ICONS" + Path.DirectorySeparatorChar + "ICONS.XML";
-            this.OnExportImportLog(new ExportImportLogEventArgs("Čtení ze souboru " + file));
+            this.OnProgressLog(new ProgressLogEventArgs("Čtení ze souboru " + file));
             this.loadedIcons.Clear();
             if (File.Exists(file))
             {
@@ -1169,7 +1169,7 @@ namespace SemestralProject.Persistence
                             if (icon != null)
                             {
                                 FileWrapper iconChecked = (FileWrapper)icon;
-                                this.OnExportImportLog(new ExportImportLogEventArgs("Načteny informace o ikoně " + iconChecked.Name));
+                                this.OnProgressLog(new ProgressLogEventArgs("Načteny informace o ikoně " + iconChecked.Name));
                                 this.loadedIcons.Add(iconChecked);
                             }
                         }
@@ -1178,10 +1178,10 @@ namespace SemestralProject.Persistence
             }
             else
             {
-                this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Soubor neexistuje!"));
+                this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Soubor neexistuje!"));
             }
             this.progress = 40;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o ikonách..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o ikonách..."));
         }
 
         /// <summary>
@@ -1190,9 +1190,9 @@ namespace SemestralProject.Persistence
         private void LoadInformationPictures()
         {
             this.progress = 40;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o obrázcích..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o obrázcích..."));
             string file = this.tempDir + Path.DirectorySeparatorChar + "PICTURES" + Path.DirectorySeparatorChar + "PICTURES.XML";
-            this.OnExportImportLog(new ExportImportLogEventArgs("Čtení ze souboru " + file));
+            this.OnProgressLog(new ProgressLogEventArgs("Čtení ze souboru " + file));
             this.loadedPictures.Clear();
             if (File.Exists(file))
             {
@@ -1209,7 +1209,7 @@ namespace SemestralProject.Persistence
                             if (picture != null)
                             {
                                 FileWrapper pictureChecked = (FileWrapper)picture;
-                                this.OnExportImportLog(new ExportImportLogEventArgs("Načteny informace o obrázku " + pictureChecked.Name));
+                                this.OnProgressLog(new ProgressLogEventArgs("Načteny informace o obrázku " + pictureChecked.Name));
                                 this.loadedPictures.Add(pictureChecked);
                             }
                         }
@@ -1218,10 +1218,10 @@ namespace SemestralProject.Persistence
             }
             else
             {
-                this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Soubor neexistuje!"));
+                this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Soubor neexistuje!"));
             }
             this.progress = 45;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o obrázcích..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o obrázcích..."));
         }
 
         /// <summary>
@@ -1230,9 +1230,9 @@ namespace SemestralProject.Persistence
         private void LoadInformationDataFileContents()
         {
             this.progress = 45;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o obsahu datových souborů..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o obsahu datových souborů..."));
             string file = this.tempDir + Path.DirectorySeparatorChar + "DATAFILES" + Path.DirectorySeparatorChar + "DATAFILES.XML";
-            this.OnExportImportLog(new ExportImportLogEventArgs("Čtení ze souboru " + file));
+            this.OnProgressLog(new ProgressLogEventArgs("Čtení ze souboru " + file));
             this.loadedDataFilesContent.Clear();
             if (File.Exists(file))
             {
@@ -1249,7 +1249,7 @@ namespace SemestralProject.Persistence
                             if (dataFile != null)
                             {
                                 FileWrapper dataFileChecked = (FileWrapper)dataFile;
-                                this.OnExportImportLog(new ExportImportLogEventArgs("Načteny informace o obsahu datového souboru " + dataFileChecked.Name));
+                                this.OnProgressLog(new ProgressLogEventArgs("Načteny informace o obsahu datového souboru " + dataFileChecked.Name));
                                 this.loadedDataFilesContent.Add(dataFileChecked);
                             }
                         }
@@ -1258,10 +1258,10 @@ namespace SemestralProject.Persistence
             }
             else
             {
-                this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Soubor neexistuje!"));
+                this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Soubor neexistuje!"));
             }
             this.progress = 50;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o obsahu datových souborů..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Načítám informace o obsahu datových souborů..."));
         }
 
         /// <summary>
@@ -1294,7 +1294,7 @@ namespace SemestralProject.Persistence
         private void ImportIcons()
         {
             this.progress = 50;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji ikony..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji ikony..."));
             this.iconsDictionary.Clear();
             double step = 5f / (double)this.loadedIcons.Count;
             int counter = 0;
@@ -1305,19 +1305,19 @@ namespace SemestralProject.Persistence
                 {
                     this.iconsDictionary.Add(icon.Name, icon.Name);
                     this.context.FileStorage.AddIcon(icon.Path);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Importována ikona " + icon.Name));
+                    this.OnProgressLog(new ProgressLogEventArgs("Importována ikona " + icon.Name));
                 }
                 else
                 {
                     this.iconsDictionary.Add(icon.Name, inSystem.Name);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Ikona " + icon.Name + " je již v systému"));
+                    this.OnProgressLog(new ProgressLogEventArgs("Ikona " + icon.Name + " je již v systému"));
                 }
                 this.progress = (ushort)(50 + (ushort)Math.Round((double)counter * step));
                 counter++;
-                this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji ikony..."));
+                this.OnProgress(new ProgressEventArgs(this.progress, "Importuji ikony..."));
             }
             this.progress = 55;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji ikony..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji ikony..."));
         }
 
         /// <summary>
@@ -1350,7 +1350,7 @@ namespace SemestralProject.Persistence
         private void ImportPictures()
         {
             this.progress = 55;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji obrázky..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji obrázky..."));
             this.picturesDictionary.Clear();
             double step = 5f / (double)this.loadedPictures.Count;
             int counter = 0;
@@ -1361,19 +1361,19 @@ namespace SemestralProject.Persistence
                 {
                     this.picturesDictionary.Add(picture.Name, picture.Name);
                     this.context.FileStorage.AddPicture(picture.Path);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Importován obrázek " + picture.Name));
+                    this.OnProgressLog(new ProgressLogEventArgs("Importován obrázek " + picture.Name));
                 }
                 else
                 {
                     this.picturesDictionary.Add(picture.Name, inSystem.Name);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Obrázek " + picture.Name + " je již v systému"));
+                    this.OnProgressLog(new ProgressLogEventArgs("Obrázek " + picture.Name + " je již v systému"));
                 }
                 this.progress = (ushort)(55 + (ushort)Math.Round((double)counter * step));
                 counter++;
-                this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji obrázky..."));
+                this.OnProgress(new ProgressEventArgs(this.progress, "Importuji obrázky..."));
             }
             this.progress = 60;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji obrázky..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji obrázky..."));
         }
 
         /// <summary>
@@ -1406,7 +1406,7 @@ namespace SemestralProject.Persistence
         private void ImportDataFilesContent()
         {
             this.progress = 60;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji obsah datových souborů..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji obsah datových souborů..."));
             this.dataFilesDictionary.Clear();
             double step = 5f / (double)this.loadedDataFilesContent.Count;
             int counter = 0;
@@ -1417,19 +1417,19 @@ namespace SemestralProject.Persistence
                 {
                     this.dataFilesDictionary.Add(dataFile.Name, dataFile.Name);
                     this.context.FileStorage.AddDataFile(dataFile.Path);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Importován obsah datového souboru " + dataFile.Name));
+                    this.OnProgressLog(new ProgressLogEventArgs("Importován obsah datového souboru " + dataFile.Name));
                 }
                 else
                 {
                     this.dataFilesDictionary.Add(dataFile.Name, inSystem);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Obsah datového souboru " + dataFile.Name + " je již v systému"));
+                    this.OnProgressLog(new ProgressLogEventArgs("Obsah datového souboru " + dataFile.Name + " je již v systému"));
                 }
                 this.progress = (ushort)(60 + (ushort)Math.Round((double)counter * step));
                 counter++;
-                this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji obsah datových souborů..."));
+                this.OnProgress(new ProgressEventArgs(this.progress, "Importuji obsah datových souborů..."));
             }
             this.progress = 65;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji obsah datových souborů..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji obsah datových souborů..."));
         }
 
         /// <summary>
@@ -1712,7 +1712,7 @@ namespace SemestralProject.Persistence
         private void ImportInformationSystems()
         {
             this.progress = 65;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji informační systémy..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji informační systémy..."));
             this.informationSystemsDictionary.Clear();
             double step = 5f / (double)this.loadedInformationSystems.Count;
             int idx = 0;
@@ -1733,19 +1733,19 @@ namespace SemestralProject.Persistence
                     );
                     this.context.DataStorage.InformationSystems.Add(newSystem);
                     this.informationSystemsDictionary.Add(system, newSystem);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Importován informační systém " + system.Name));
+                    this.OnProgressLog(new ProgressLogEventArgs("Importován informační systém " + system.Name));
                     
                 }
                 else
                 {
                     this.informationSystemsDictionary.Add(system, informationSystem);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Informační systém " + system.Name + " je již v systému"));
+                    this.OnProgressLog(new ProgressLogEventArgs("Informační systém " + system.Name + " je již v systému"));
                 }
                 this.progress = (ushort)(65 + (ushort)Math.Round((double)idx * step));
-                this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji informační systémy..."));
+                this.OnProgress(new ProgressEventArgs(this.progress, "Importuji informační systémy..."));
             }
             this.progress = 70;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji informační systémy..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji informační systémy..."));
         }
 
         /// <summary>
@@ -1754,7 +1754,7 @@ namespace SemestralProject.Persistence
         private void ImportMaps()
         {
             this.progress = 70;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji oblasti..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji oblasti..."));
             this.mapsDictionary.Clear();
             double step = 5f / (double)this.loadedMaps.Count;
             int idx = 0;
@@ -1775,19 +1775,19 @@ namespace SemestralProject.Persistence
                     ) ;
                     this.context.DataStorage.Maps.Add(newMap);
                     this.mapsDictionary.Add(rawMap, newMap);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Importována oblast " + rawMap.Name));
+                    this.OnProgressLog(new ProgressLogEventArgs("Importována oblast " + rawMap.Name));
 
                 }
                 else
                 {
                     this.mapsDictionary.Add(rawMap, map);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Oblast " + rawMap.Name + " je již v systému"));
+                    this.OnProgressLog(new ProgressLogEventArgs("Oblast " + rawMap.Name + " je již v systému"));
                 }
                 this.progress = (ushort)(70 + (ushort)Math.Round((double)idx * step));
-                this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji oblasti..."));
+                this.OnProgress(new ProgressEventArgs(this.progress, "Importuji oblasti..."));
             }
             this.progress = 75;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji oblasti..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji oblasti..."));
         }
 
         /// <summary>
@@ -1796,7 +1796,7 @@ namespace SemestralProject.Persistence
         private void ImportManufacturers()
         {
             this.progress = 75;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji výrobce..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji výrobce..."));
             this.manufacturersDictionary.Clear();
             double step = 5f / (double)this.loadedManufacturers.Count;
             int idx = 0;
@@ -1817,19 +1817,19 @@ namespace SemestralProject.Persistence
                     );
                     this.context.DataStorage.Manufacturers.Add(newManufacturer);
                     this.manufacturersDictionary.Add(rawManufacturer, newManufacturer);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Importován výrobce " + rawManufacturer.Name));
+                    this.OnProgressLog(new ProgressLogEventArgs("Importován výrobce " + rawManufacturer.Name));
 
                 }
                 else
                 {
                     this.manufacturersDictionary.Add(rawManufacturer, manufacturer);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Výrobce " + rawManufacturer.Name + " je již v systému"));
+                    this.OnProgressLog(new ProgressLogEventArgs("Výrobce " + rawManufacturer.Name + " je již v systému"));
                 }
                 this.progress = (ushort)(75 + (ushort)Math.Round((double)idx * step));
-                this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji výrobce..."));
+                this.OnProgress(new ProgressEventArgs(this.progress, "Importuji výrobce..."));
             }
             this.progress = 80;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji výrobce..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji výrobce..."));
         }
 
         /// <summary>
@@ -1838,7 +1838,7 @@ namespace SemestralProject.Persistence
         private void ImportVehicles()
         {
             this.progress = 80;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji vozidla..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji vozidla..."));
             double step = 5f / (double)this.loadedVehicles.Count;
             int idx = 0;
             for (; idx < this.loadedVehicles.Count; idx++)
@@ -1860,18 +1860,18 @@ namespace SemestralProject.Persistence
                         rawVehicle.Updated
                     );
                     this.context.DataStorage.Vehicles.Add(newVehicle);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Importováno vozidlo " + rawVehicle.Name));
+                    this.OnProgressLog(new ProgressLogEventArgs("Importováno vozidlo " + rawVehicle.Name));
 
                 }
                 else
                 {
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Vozidlo " + rawVehicle.Name + " je již v systému"));
+                    this.OnProgressLog(new ProgressLogEventArgs("Vozidlo " + rawVehicle.Name + " je již v systému"));
                 }
                 this.progress = (ushort)(80 + (ushort)Math.Round((double)idx * step));
-                this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji vozidla..."));
+                this.OnProgress(new ProgressEventArgs(this.progress, "Importuji vozidla..."));
             }
             this.progress = 85;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji vozidla..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji vozidla..."));
         }
 
         /// <summary>
@@ -1880,7 +1880,7 @@ namespace SemestralProject.Persistence
         private void ImportDataFiles()
         {
             this.progress = 85;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji datové soubory..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji datové soubory..."));
             double step = 5f / (double)this.loadedDataFiles.Count;
             int idx = 0;
             for (; idx < this.loadedDataFiles.Count; idx++)
@@ -1901,18 +1901,18 @@ namespace SemestralProject.Persistence
                         rawDataFile.Updated
                     );
                     this.context.DataStorage.DataFiles.Add(newDataFile);
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Importován datový soubor " + fi.Name));
+                    this.OnProgressLog(new ProgressLogEventArgs("Importován datový soubor " + fi.Name));
 
                 }
                 else
                 {
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Datový soubor " + fi.Name + " je již v systému"));
+                    this.OnProgressLog(new ProgressLogEventArgs("Datový soubor " + fi.Name + " je již v systému"));
                 }
                 this.progress = (ushort)(85 + (ushort)Math.Round((double)idx * step));
-                this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji datové soubory..."));
+                this.OnProgress(new ProgressEventArgs(this.progress, "Importuji datové soubory..."));
             }
             this.progress = 90;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Importuji datové soubory..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Importuji datové soubory..."));
         }
 
         /// <summary>
@@ -1921,17 +1921,17 @@ namespace SemestralProject.Persistence
         private void FinishImport()
         {
             this.progress = 90;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Dokončuji import..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Dokončuji import..."));
             this.context.DataStorage.Save();
-            this.OnExportImportLog(new ExportImportLogEventArgs("Úložiště dat uloženo"));
+            this.OnProgressLog(new ProgressLogEventArgs("Úložiště dat uloženo"));
             this.progress = 95;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Dokončuji import..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Dokončuji import..."));
             Directory.Delete(this.tempDir, true);
-            this.OnExportImportLog(new ExportImportLogEventArgs("Smazán adresář " + this.tempDir));
+            this.OnProgressLog(new ProgressLogEventArgs("Smazán adresář " + this.tempDir));
             this.progress = 100;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Hotovo"));
-            this.OnExportImportLog(new ExportImportLogEventArgs("Hotovo"));
-            this.OnExportImportDone();
+            this.OnProgress(new ProgressEventArgs(this.progress, "Hotovo"));
+            this.OnProgressLog(new ProgressLogEventArgs("Hotovo"));
+            this.OnProcessDone();
         }
 
         /// <summary>

@@ -17,7 +17,7 @@ namespace SemestralProject.Persistence
     /// <summary>
     /// Class representing exporter of current state of program into file
     /// </summary>
-    internal class Exporter: AbstractExporterImporter
+    internal class Exporter: AbstracProgress
     {
         /// <summary>
         /// Wrapper of all program resources
@@ -51,7 +51,7 @@ namespace SemestralProject.Persistence
         private void Export()
         {
             this.progress = 0;
-            this.OnExportImportUpdate(new ExportImportEventArgs(ushort.MaxValue, "Připravuji export dat..."));
+            this.OnProgress(new ProgressEventArgs(ushort.MaxValue, "Připravuji export dat..."));
             this.MakeExportDirectory();
         }
 
@@ -64,29 +64,29 @@ namespace SemestralProject.Persistence
             if (Directory.Exists(path))
             {
                 Directory.Delete(path, true);
-                this.OnExportImportLog(new ExportImportLogEventArgs("Smazán adresář " + path));
+                this.OnProgressLog(new ProgressLogEventArgs("Smazán adresář " + path));
             }
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Připravuji export dat..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Připravuji export dat..."));
             Directory.CreateDirectory(path);
             this.progress++;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Připravuji export dat..."));
-            this.OnExportImportLog(new ExportImportLogEventArgs("Vytvořen adresář " + path));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Připravuji export dat..."));
+            this.OnProgressLog(new ProgressLogEventArgs("Vytvořen adresář " + path));
             Directory.CreateDirectory(path + Path.DirectorySeparatorChar + "DB");
             this.progress++;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Připravuji export dat..."));
-            this.OnExportImportLog(new ExportImportLogEventArgs("Vytvořen adresář " + path + Path.DirectorySeparatorChar + "DB"));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Připravuji export dat..."));
+            this.OnProgressLog(new ProgressLogEventArgs("Vytvořen adresář " + path + Path.DirectorySeparatorChar + "DB"));
             Directory.CreateDirectory(path + Path.DirectorySeparatorChar + "ICONS");
             this.progress++;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Připravuji export dat..."));
-            this.OnExportImportLog(new ExportImportLogEventArgs("Vytvořen adresář " + path + Path.DirectorySeparatorChar + "ICONS"));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Připravuji export dat..."));
+            this.OnProgressLog(new ProgressLogEventArgs("Vytvořen adresář " + path + Path.DirectorySeparatorChar + "ICONS"));
             Directory.CreateDirectory(path + Path.DirectorySeparatorChar + "PICTURES");
             this.progress++;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Připravuji export dat..."));
-            this.OnExportImportLog(new ExportImportLogEventArgs("Vytvořen adresář " + path + Path.DirectorySeparatorChar + "PICTURES"));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Připravuji export dat..."));
+            this.OnProgressLog(new ProgressLogEventArgs("Vytvořen adresář " + path + Path.DirectorySeparatorChar + "PICTURES"));
             Directory.CreateDirectory(path + Path.DirectorySeparatorChar + "DATAFILES");
             this.progress++;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Připravuji export dat..."));
-            this.OnExportImportLog(new ExportImportLogEventArgs("Vytvořen adresář " + path + Path.DirectorySeparatorChar + "DATAFILES"));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Připravuji export dat..."));
+            this.OnProgressLog(new ProgressLogEventArgs("Vytvořen adresář " + path + Path.DirectorySeparatorChar + "DATAFILES"));
         }
 
         /// <summary>
@@ -97,9 +97,9 @@ namespace SemestralProject.Persistence
         {
             string input = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.ISFile;
             string output = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + "DB" + Path.DirectorySeparatorChar + DataStorage.ISFile;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Exportuji informační systémy..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Exportuji informační systémy..."));
             File.Copy(input, output, true);
-            this.OnExportImportLog(new ExportImportLogEventArgs("Zkopírován soubor " + input + " (" + output + ")"));
+            this.OnProgressLog(new ProgressLogEventArgs("Zkopírován soubor " + input + " (" + output + ")"));
             this.progress += (40 / 5);
         }
 
@@ -111,9 +111,9 @@ namespace SemestralProject.Persistence
         {
             string input = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.MapFile;
             string output = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + "DB" + Path.DirectorySeparatorChar + DataStorage.MapFile;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Exportuji oblasti..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Exportuji oblasti..."));
             File.Copy(input, output, true);
-            this.OnExportImportLog(new ExportImportLogEventArgs("Zkopírován soubor " + input + " (" + output + ")"));
+            this.OnProgressLog(new ProgressLogEventArgs("Zkopírován soubor " + input + " (" + output + ")"));
             this.progress += (40 / 5);
         }
 
@@ -125,9 +125,9 @@ namespace SemestralProject.Persistence
         {
             string input = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.ManufacturerFile;
             string output = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + "DB" + Path.DirectorySeparatorChar + DataStorage.ManufacturerFile;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Exportuji výrobce..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Exportuji výrobce..."));
             File.Copy(input, output, true);
-            this.OnExportImportLog(new ExportImportLogEventArgs("Zkopírován soubor " + input + " (" + output + ")"));
+            this.OnProgressLog(new ProgressLogEventArgs("Zkopírován soubor " + input + " (" + output + ")"));
             this.progress += (40 / 5);
         }
 
@@ -139,9 +139,9 @@ namespace SemestralProject.Persistence
         {
             string input = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.VehicleFile;
             string output = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + "DB" + Path.DirectorySeparatorChar + DataStorage.VehicleFile;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Exportuji vozidla..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Exportuji vozidla..."));
             File.Copy(input, output, true);
-            this.OnExportImportLog(new ExportImportLogEventArgs("Zkopírován soubor " + input + " (" + output + ")"));
+            this.OnProgressLog(new ProgressLogEventArgs("Zkopírován soubor " + input + " (" + output + ")"));
             this.progress += (40 / 5);
         }
 
@@ -153,9 +153,9 @@ namespace SemestralProject.Persistence
         {
             string input = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_DB" + Path.DirectorySeparatorChar + DataStorage.DataFileFile;
             string output = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + "DB" + Path.DirectorySeparatorChar + DataStorage.DataFileFile;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Exportuji datové soubory..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Exportuji datové soubory..."));
             File.Copy(input, output, true);
-            this.OnExportImportLog(new ExportImportLogEventArgs("Zkopírován soubor " + input + " (" + output + ")"));
+            this.OnProgressLog(new ProgressLogEventArgs("Zkopírován soubor " + input + " (" + output + ")"));
             this.progress += (40 / 5);
         }
 
@@ -166,7 +166,7 @@ namespace SemestralProject.Persistence
         private void ExportIcons()
         {
             double step = 15f / (2f * this.context.FileStorage.GetAllIcons().Count());
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Exportuji ikony..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Exportuji ikony..."));
             List<FileWrapper> files = new List<FileWrapper>();
             string iconIn = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]";
             string iconOut = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + "ICONS" + Path.DirectorySeparatorChar;
@@ -180,13 +180,13 @@ namespace SemestralProject.Persistence
                     string iconFileOut = iconOut + Path.DirectorySeparatorChar + icon.Name;
                     File.Copy(iconFileIn, iconFileOut, true);
                     files.Add(new FileWrapper(icon.Name, iconFileIn, fi.Name));
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Zkopírován soubor " + iconFileIn + " (" + iconFileOut + ")"));
-                    this.OnExportImportUpdate(new ExportImportEventArgs((ushort)Math.Round((double)this.progress + (counter * step)), "Exportuji ikony..."));
+                    this.OnProgressLog(new ProgressLogEventArgs("Zkopírován soubor " + iconFileIn + " (" + iconFileOut + ")"));
+                    this.OnProgress(new ProgressEventArgs((ushort)Math.Round((double)this.progress + (counter * step)), "Exportuji ikony..."));
                     counter++;
                 }
                 else
                 {
-                    this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Kopírování souboru ikony " + icon.Name + " se nezdařilo!"));
+                    this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Kopírování souboru ikony " + icon.Name + " se nezdařilo!"));
                 }
             }
             XmlDocument doc = new XmlDocument();
@@ -198,8 +198,8 @@ namespace SemestralProject.Persistence
             foreach (FileWrapper file in files)
             {
                 file.ToXml(doc, "ICON", icons);
-                this.OnExportImportLog(new ExportImportLogEventArgs("Zapsány údaje k souboru " + file.Path));
-                this.OnExportImportUpdate(new ExportImportEventArgs((ushort)Math.Round((double)this.progress + (counter * step)), "Exportuji ikony..."));
+                this.OnProgressLog(new ProgressLogEventArgs("Zapsány údaje k souboru " + file.Path));
+                this.OnProgress(new ProgressEventArgs((ushort)Math.Round((double)this.progress + (counter * step)), "Exportuji ikony..."));
                 counter++;
             }
             doc.Save(iconOut + "ICONS.XML");
@@ -213,7 +213,7 @@ namespace SemestralProject.Persistence
         private void ExportPictures()
         {
             double step = 15f / (2f * this.context.FileStorage.GetPictures().Count());
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Exportuji obrázky..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Exportuji obrázky..."));
             List<FileWrapper> files = new List<FileWrapper>();
             string pictureIn = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[PICTURES]";
             string pictureOut = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + "PICTURES" + Path.DirectorySeparatorChar;
@@ -227,13 +227,13 @@ namespace SemestralProject.Persistence
                     string pictureFileOut = pictureOut + Path.DirectorySeparatorChar + picture.Name;
                     File.Copy(pictureFileIn, pictureFileOut, true);
                     files.Add(new FileWrapper(picture.Name, pictureFileIn, fi.Name));
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Zkopírován soubor " + pictureFileIn + " (" + pictureFileOut + ")"));
-                    this.OnExportImportUpdate(new ExportImportEventArgs((ushort)Math.Round((double)this.progress + (counter * step)), "Exportuji obrázky..."));
+                    this.OnProgressLog(new ProgressLogEventArgs("Zkopírován soubor " + pictureFileIn + " (" + pictureFileOut + ")"));
+                    this.OnProgress(new ProgressEventArgs((ushort)Math.Round((double)this.progress + (counter * step)), "Exportuji obrázky..."));
                     counter++;
                 }
                 else
                 {
-                    this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Kopírování souboru obrázku " + picture.Name + " se nezdařilo!"));
+                    this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Kopírování souboru obrázku " + picture.Name + " se nezdařilo!"));
                 }
             }
             XmlDocument doc = new XmlDocument();
@@ -245,8 +245,8 @@ namespace SemestralProject.Persistence
             foreach (FileWrapper file in files)
             {
                 file.ToXml(doc, "PICTURE", pictures);
-                this.OnExportImportLog(new ExportImportLogEventArgs("Zapsány údaje k souboru " + file.Path));
-                this.OnExportImportUpdate(new ExportImportEventArgs((ushort)Math.Round((double)this.progress + (counter * step)), "Exportuji obrázky..."));
+                this.OnProgressLog(new ProgressLogEventArgs("Zapsány údaje k souboru " + file.Path));
+                this.OnProgress(new ProgressEventArgs((ushort)Math.Round((double)this.progress + (counter * step)), "Exportuji obrázky..."));
                 counter++;
             }
             doc.Save(pictureOut + "PICTURES.XML");
@@ -261,7 +261,7 @@ namespace SemestralProject.Persistence
         private void ExportDataFilesContent()
         {
             double step = 15f / (2f * this.context.FileStorage.GetDataFiles().Count());
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Exportuji obsah datových souborů..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Exportuji obsah datových souborů..."));
             List<FileWrapper> files = new List<FileWrapper>();
             string dataFileIn = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[DATAFILES]";
             string dataFileOut = this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + "DATAFILES" + Path.DirectorySeparatorChar;
@@ -275,13 +275,13 @@ namespace SemestralProject.Persistence
                     string dataFileOutFile = dataFileOut + Path.DirectorySeparatorChar + dataFile;
                     File.Copy(dataFileInFile, dataFileOutFile, true);
                     files.Add(new FileWrapper(dataFile, dataFileInFile, fi.Name));
-                    this.OnExportImportLog(new ExportImportLogEventArgs("Zkopírován soubor " + dataFileInFile + " (" + dataFileOutFile + ")"));
-                    this.OnExportImportUpdate(new ExportImportEventArgs((ushort)Math.Round((double)this.progress + (counter * step)), "Exportuji obsah datových souborů..."));
+                    this.OnProgressLog(new ProgressLogEventArgs("Zkopírován soubor " + dataFileInFile + " (" + dataFileOutFile + ")"));
+                    this.OnProgress(new ProgressEventArgs((ushort)Math.Round((double)this.progress + (counter * step)), "Exportuji obsah datových souborů..."));
                     counter++;
                 }
                 else
                 {
-                    this.OnExportImportLog(new ExportImportLogEventArgs("CHYBA: Kopírování obsahu datového souboru " + dataFile + " se nezdařilo!"));
+                    this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Kopírování obsahu datového souboru " + dataFile + " se nezdařilo!"));
                 }
             }
             XmlDocument doc = new XmlDocument();
@@ -293,8 +293,8 @@ namespace SemestralProject.Persistence
             foreach (FileWrapper file in files)
             {
                 file.ToXml(doc, "DATAFILE", datafiles);
-                this.OnExportImportLog(new ExportImportLogEventArgs("Zapsány údaje k souboru " + file.Path));
-                this.OnExportImportUpdate(new ExportImportEventArgs((ushort)Math.Round((double)this.progress + (counter * step)), "Exportuji obsah datových souborů..."));
+                this.OnProgressLog(new ProgressLogEventArgs("Zapsány údaje k souboru " + file.Path));
+                this.OnProgress(new ProgressEventArgs((ushort)Math.Round((double)this.progress + (counter * step)), "Exportuji obsah datových souborů..."));
                 counter++;
             }
             doc.Save(dataFileOut + "DATAFILES.XML");
@@ -308,22 +308,22 @@ namespace SemestralProject.Persistence
         private void FinishExport()
         {
             this.progress = 90;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Dokončuji export dat..."));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Dokončuji export dat..."));
             if (File.Exists(this.OutputPath))
             {
                 File.Delete(this.OutputPath);
-                this.OnExportImportLog(new ExportImportLogEventArgs("Smazán soubor " + this.OutputPath));
+                this.OnProgressLog(new ProgressLogEventArgs("Smazán soubor " + this.OutputPath));
             }
             ZipFile.CreateFromDirectory(this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT", this.OutputPath);
-            this.OnExportImportLog(new ExportImportLogEventArgs("Vytvořen soubor " + this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + this.OutputPath));
+            this.OnProgressLog(new ProgressLogEventArgs("Vytvořen soubor " + this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT" + Path.DirectorySeparatorChar + this.OutputPath));
             this.progress = 95;
             Directory.Delete(this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT", true);
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Dokončuji export dat..."));
-            this.OnExportImportLog(new ExportImportLogEventArgs("Smazán adresář " + this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT"));
+            this.OnProgress(new ProgressEventArgs(this.progress, "Dokončuji export dat..."));
+            this.OnProgressLog(new ProgressLogEventArgs("Smazán adresář " + this.context.Configuration.TempDir + Path.DirectorySeparatorChar + "_EXPORT"));
             this.progress = 100;
-            this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Hotovo"));
-            this.OnExportImportLog(new ExportImportLogEventArgs("Hotovo"));
-            this.OnExportImportDone();
+            this.OnProgress(new ProgressEventArgs(this.progress, "Hotovo"));
+            this.OnProgressLog(new ProgressLogEventArgs("Hotovo"));
+            this.OnProcessDone();
         }
 
         /// <summary>

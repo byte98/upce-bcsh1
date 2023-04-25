@@ -33,7 +33,7 @@ namespace SemestralProject.Controllers
         /// <summary>
         /// Form which informs about import/export process
         /// </summary>
-        private FormImportExport? formImportExport;
+        private FormProgress? formImportExport;
 
         /// <summary>
         /// Minimal thread sleep (in miliseconds) during export/import
@@ -61,13 +61,13 @@ namespace SemestralProject.Controllers
             this.mainForm = formMain;
             this.exporter = new Exporter(this.context);
             this.importer = new Importer(this.context);
-            this.exporter.ExportImport += ExportImportHandler;
-            this.exporter.ExportImportLog += ExportImportLogHandler;
-            this.exporter.ExportImportDone += ExportImportDoneHandler;
-            this.importer.ExportImport += ExportImportHandler;
-            this.importer.ExportImportLog += ExportImportLogHandler;
-            this.importer.ExportImportDone += ExportImportDoneHandler;
-            this.importer.ExportImportDone += ImportDoneHandler;
+            this.exporter.Progress += ExportImportHandler;
+            this.exporter.ProgressLog += ExportImportLogHandler;
+            this.exporter.ProcessDone += ExportImportDoneHandler;
+            this.importer.Progress += ExportImportHandler;
+            this.importer.ProgressLog += ExportImportLogHandler;
+            this.importer.ProcessDone += ExportImportDoneHandler;
+            this.importer.ProcessDone += ImportDoneHandler;
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace SemestralProject.Controllers
         public void Export(string path)
         {
             this.exporter.OutputPath = path;
-            this.formImportExport = FormImportExport.CreateExportForm(this.context);
+            this.formImportExport = FormProgress.CreateExportForm(this.context);
             this.formImportExport.Show();
             Random random = new Random();
             Task.Run(new Action(() =>
@@ -99,7 +99,7 @@ namespace SemestralProject.Controllers
         public void Import(string path)
         {
             this.importer.InputPath = path;
-            this.formImportExport = FormImportExport.CreateImportForm(this.context);
+            this.formImportExport = FormProgress.CreateImportForm(this.context);
             this.formImportExport.Show();
             Random random = new Random();
             Task.Run(new Action(() =>
@@ -132,7 +132,7 @@ namespace SemestralProject.Controllers
         /// </summary>
         /// <param name="sender">Sender of event</param>
         /// <param name="e">Arguments of event</param>
-        private void ExportImportHandler(object sender, AbstractExporterImporter.ExportImportEventArgs e)
+        private void ExportImportHandler(object sender, AbstracProgress.ProgressEventArgs e)
         {
             if (this.formImportExport!= null)
             {
@@ -157,7 +157,7 @@ namespace SemestralProject.Controllers
         /// </summary>
         /// <param name="sender">Sender of event</param>
         /// <param name="e">Arguments of event</param>
-        private void ExportImportLogHandler(object sender, AbstractExporterImporter.ExportImportLogEventArgs e)
+        private void ExportImportLogHandler(object sender, AbstracProgress.ProgressLogEventArgs e)
         {
             if (this.formImportExport != null)
             {

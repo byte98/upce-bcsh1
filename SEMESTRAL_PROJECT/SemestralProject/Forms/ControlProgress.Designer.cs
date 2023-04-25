@@ -1,6 +1,6 @@
 ﻿namespace SemestralProject.Forms
 {
-    partial class ControlExportImport
+    partial class ControlProgress
     {
         /// <summary> 
         /// Required designer variable.
