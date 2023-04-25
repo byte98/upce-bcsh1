@@ -149,9 +149,9 @@ namespace SemestralProject.Controllers
             {
                 FormWait wait = new FormWait(() =>
                 {
-                    foreach (Map map in this.context.DataStorage.Maps)
+                    while (this.context.DataStorage.Maps.Count > 0)
                     {
-                        this.RemoveMap(map);
+                        this.RemoveMap(this.context.DataStorage.Maps.First());
                     }
                     this.context.DataStorage.Save();
                 }, this.context);

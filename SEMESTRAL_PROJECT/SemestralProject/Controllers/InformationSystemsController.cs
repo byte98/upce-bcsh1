@@ -150,9 +150,9 @@ namespace SemestralProject.Controllers
             {
                 FormWait wait = new FormWait(() =>
                 {
-                    foreach (InformationSystem system in this.context.DataStorage.InformationSystems)
+                    while(this.context.DataStorage.InformationSystems.Count > 0)
                     {
-                        this.RemoveSystem(system);
+                        this.RemoveSystem(this.context.DataStorage.InformationSystems.First());
                     }
                     this.context.DataStorage.Save();
                 }, this.context);

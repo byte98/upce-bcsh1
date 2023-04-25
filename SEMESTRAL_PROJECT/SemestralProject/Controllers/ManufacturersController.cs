@@ -194,9 +194,9 @@ namespace SemestralProject.Controllers
             {
                 FormWait wait = new FormWait(() =>
                 {
-                    foreach(Manufacturer manufacturer in this.context.DataStorage.Manufacturers)
+                    while(this.context.DataStorage.Manufacturers.Count > 0)
                     {
-                        this.RemoveManufacturer(manufacturer);
+                        this.RemoveManufacturer(this.context.DataStorage.Manufacturers.First());
                     }
                     this.context.DataStorage.Save();
                 }, this.context);

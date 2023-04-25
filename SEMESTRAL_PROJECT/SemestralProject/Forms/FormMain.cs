@@ -101,7 +101,7 @@ namespace SemestralProject.Forms
             this.manufacturersController = new ManufacturersController(this.Context);
             this.vehiclesController = new VehiclesController(this.Context);
             this.filesController = new FilesController(this.Context);
-            this.actionsController = new ActionsController(this.Context);
+            this.actionsController = new ActionsController(this.Context, this);
         }
 
         /// <summary>
@@ -272,6 +272,18 @@ namespace SemestralProject.Forms
             FormLoad form = new FormLoad(this, this.Context);
             this.Hide();
             form.ShowDialog();
+            this.RefreshIsView();
+            this.RefreshMapView();
+            this.RefreshManView();
+            this.RefreshVehicleView();
+            this.RefreshFileView();
+        }
+
+        /// <summary>
+        /// Refreshes all data views
+        /// </summary>
+        public void RefreshViews()
+        {
             this.RefreshIsView();
             this.RefreshMapView();
             this.RefreshManView();

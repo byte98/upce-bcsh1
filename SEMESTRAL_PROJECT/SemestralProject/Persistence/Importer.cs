@@ -5,6 +5,7 @@ using SemestralProject.Visual;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Metrics;
 using System.IO.Compression;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Windows.Devices.Pwm;
 
 namespace SemestralProject.Persistence
 {
@@ -99,6 +101,21 @@ namespace SemestralProject.Persistence
                 }
                 return reti;
             }
+
+            public override bool Equals([NotNullWhen(true)] object? obj)
+            {
+                bool reti = base.Equals(obj);
+                if (obj != null && obj is InformationSystem informationSystem)
+                {
+                    reti = this.Id == informationSystem.Id;
+                }
+                return reti;
+            }
+
+            public override int GetHashCode()
+            {
+                return this.Id.GetHashCode();
+            }
         }
 
         /// <summary>
@@ -179,6 +196,21 @@ namespace SemestralProject.Persistence
                 }
                 return reti;
             }
+
+            public override bool Equals([NotNullWhen(true)] object? obj)
+            {
+                bool reti = base.Equals(obj);
+                if (obj != null && obj is Map map)
+                {
+                    reti = this.Id == map.Id;
+                }
+                return reti;
+            }
+
+            public override int GetHashCode()
+            {
+                return this.Id.GetHashCode();
+            }
         }
 
         /// <summary>
@@ -258,6 +290,21 @@ namespace SemestralProject.Persistence
                     }
                 }
                 return reti;
+            }
+
+            public override bool Equals([NotNullWhen(true)] object? obj)
+            {
+                bool reti = base.Equals(obj);
+                if (obj != null && obj is Manufacturer manufacturer)
+                {
+                    reti = this.Id == manufacturer.Id;
+                }
+                return reti;
+            }
+
+            public override int GetHashCode()
+            {
+                return this.Id.GetHashCode();
             }
         }
 
@@ -350,7 +397,7 @@ namespace SemestralProject.Persistence
             public bool EqualsTo(Data.Vehicle vehicle, Context context)
             {
                 bool reti = false;
-                if (vehicle.Name == this.Name && this.InformationSystem.EqualsTo(vehicle.InformationSystem, context) && this.Manufacturer.EqualsTo(vehicle.Manufacturer, context))
+                if (vehicle.Name == this.Name)
                 {
                     string? path = context.FileStorage.GetPicturePath(vehicle.Picture);
                     if (path != null)
@@ -359,6 +406,21 @@ namespace SemestralProject.Persistence
                     }
                 }
                 return reti;
+            }
+
+            public override bool Equals([NotNullWhen(true)] object? obj)
+            {
+                bool reti = base.Equals(obj);
+                if (obj != null && obj is Vehicle vehicle)
+                {
+                    reti = this.Id == vehicle.Id;
+                }
+                return reti;
+            }
+
+            public override int GetHashCode()
+            {
+                return this.Id.GetHashCode();
             }
         }
 
@@ -439,10 +501,23 @@ namespace SemestralProject.Persistence
             public bool EqualsTo(Data.DataFile dataFile, Context context)
             {
                 return (
-                    this.Name == dataFile.Name &&
-                    this.InformationSystem.EqualsTo(dataFile.InformationSystem, context) &&
-                    this.Map.EqualsTo(dataFile.Map, context)
+                    this.Name == dataFile.Name
                  );
+            }
+
+            public override bool Equals([NotNullWhen(true)] object? obj)
+            {
+                bool reti = base.Equals(obj);
+                if (obj != null && obj is DataFile dataFile)
+                {
+                    reti = this.Id == dataFile.Id;
+                }
+                return reti;
+            }
+
+            public override int GetHashCode()
+            {
+                return this.Id.GetHashCode();
             }
         }
 
@@ -1158,7 +1233,7 @@ namespace SemestralProject.Persistence
             this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Načítám informace o obsahu datových souborů..."));
             string file = this.tempDir + Path.DirectorySeparatorChar + "DATAFILES" + Path.DirectorySeparatorChar + "DATAFILES.XML";
             this.OnExportImportLog(new ExportImportLogEventArgs("Čtení ze souboru " + file));
-            this.loadedPictures.Clear();
+            this.loadedDataFilesContent.Clear();
             if (File.Exists(file))
             {
                 XmlDocument doc = new XmlDocument();
@@ -1483,8 +1558,15 @@ namespace SemestralProject.Persistence
             {
                 if(rawVehicle.EqualsTo(vehicle, this.context))
                 {
-                    reti = vehicle;
-                    break;
+                    InformationSystem rawInformationSystem = rawVehicle.InformationSystem;
+                    rawInformationSystem.IconChecksum = this.GetIconChecksum(this.iconsDictionary[rawInformationSystem.Icon]);
+                    Manufacturer rawManufacturer = rawVehicle.Manufacturer;
+                    rawManufacturer.IconChecksum = this.GetIconChecksum(this.iconsDictionary[rawManufacturer.Icon]);
+                    if (rawInformationSystem.EqualsTo(vehicle.InformationSystem, this.context) && rawManufacturer.EqualsTo(vehicle.Manufacturer, this.context))
+                    {
+                        reti = vehicle;
+                        break;
+                    }
                 }
             }
             return reti;
@@ -1521,8 +1603,15 @@ namespace SemestralProject.Persistence
             {
                 if (rawDataFile.EqualsTo(dataFile, this.context))
                 {
-                    reti = dataFile;
-                    break;
+                    InformationSystem rawInformationSystem = rawDataFile.InformationSystem;
+                    rawInformationSystem.IconChecksum = this.GetIconChecksum(this.iconsDictionary[rawInformationSystem.Icon]);
+                    Map rawMap = rawDataFile.Map;
+                    rawMap.PictureChecksum = this.GetPictureChecksum(this.picturesDictionary[rawMap.Picture]);
+                    if (rawInformationSystem.EqualsTo(dataFile.InformationSystem, this.context) && rawMap.EqualsTo(dataFile.Map, this.context))
+                    {
+                        reti = dataFile;
+                        break;
+                    }
                 }
             }
             return reti;
@@ -1841,7 +1930,7 @@ namespace SemestralProject.Persistence
             this.OnExportImportLog(new ExportImportLogEventArgs("Smazán adresář " + this.tempDir));
             this.progress = 100;
             this.OnExportImportUpdate(new ExportImportEventArgs(this.progress, "Hotovo"));
-            this.OnExportImportLog(new ExportImportLogEventArgs("Hotovo " + this.tempDir));
+            this.OnExportImportLog(new ExportImportLogEventArgs("Hotovo"));
             this.OnExportImportDone();
         }
 
@@ -1863,7 +1952,7 @@ namespace SemestralProject.Persistence
             reti.Add(new Action(() => { this.LoadInformationDataFileContents(); }));
             reti.Add(new Action(() => { this.ImportIcons(); }));
             reti.Add(new Action(() => { this.ImportPictures(); }));
-            reti.Add(new Action(() => { this.ImportDataFiles(); }));
+            reti.Add(new Action(() => { this.ImportDataFilesContent(); }));
             reti.Add(new Action(() => { this.ImportInformationSystems(); }));
             reti.Add(new Action(() => { this.ImportMaps(); }));
             reti.Add(new Action(() => { this.ImportManufacturers(); }));

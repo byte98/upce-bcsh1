@@ -46,12 +46,19 @@ namespace SemestralProject.Controllers
         private const int EISleepMax = 1000;
 
         /// <summary>
+        /// Reference to main form used to refresh all views
+        /// </summary>
+        private readonly FormMain mainForm;
+
+        /// <summary>
         /// Creates new controller of actions page
         /// </summary>
-        /// <param name="context"></param>
-        public ActionsController(Context context)
+        /// <param name="context">Wrapper of all program resources</param>
+        /// <param name="formMain">Reference to main form for refreshing views</param>
+        public ActionsController(Context context, FormMain formMain)
         {
             this.context = context;
+            this.mainForm = formMain;
             this.exporter = new Exporter(this.context);
             this.importer = new Importer(this.context);
             this.exporter.ExportImport += ExportImportHandler;
@@ -60,6 +67,7 @@ namespace SemestralProject.Controllers
             this.importer.ExportImport += ExportImportHandler;
             this.importer.ExportImportLog += ExportImportLogHandler;
             this.importer.ExportImportDone += ExportImportDoneHandler;
+            this.importer.ExportImportDone += ImportDoneHandler;
         }
 
         /// <summary>
@@ -104,6 +112,18 @@ namespace SemestralProject.Controllers
             }));
             this.formImportExport.BringToFront();
             this.formImportExport.TopMost = true;
+        }
+
+        /// <summary>
+        /// Handles import done event
+        /// </summary>
+        /// <param name="sender">Sender of event</param>
+        private void ImportDoneHandler(object sender)
+        {
+            this.mainForm.Invoke(new MethodInvoker(delegate ()
+            {
+                this.mainForm.RefreshViews();
+            }));
         }
 
 
