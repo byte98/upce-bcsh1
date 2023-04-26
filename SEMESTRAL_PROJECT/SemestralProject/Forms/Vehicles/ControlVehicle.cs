@@ -152,9 +152,49 @@ namespace SemestralProject.Forms.Vehicles
         public InformationSystem? VehicleInformationSystem { get; private set; }
 
         /// <summary>
+        /// Attribute holding path to vehicle
+        /// </summary>
+        private string vehiclePath = string.Empty;
+
+        /// <summary>
+        /// Maximal length of visible path
+        /// </summary>
+        private const int PathMaxLength = 48;
+
+        /// <summary>
         /// Path to directory with vehicle
         /// </summary>
-        public string VehiclePath => this.buttonPath.Text;
+        public string VehiclePath
+        {
+            get
+            {
+                return this.vehiclePath;
+            }
+            private set
+            {
+                this.vehiclePath = value;
+                string displayName = this.vehiclePath;
+                if (this.vehiclePath.StartsWith(this.rootPath))
+                {
+                    this.vehiclePath = this.vehiclePath.Substring(this.rootPath.Length);
+                    if (this.vehiclePath.Length <= 0)
+                    {
+                        this.vehiclePath = new string(Path.DirectorySeparatorChar, 1);
+                    }    
+                }
+                if (displayName.StartsWith(this.rootPath) == false)
+                {
+                    displayName = rootPath + this.vehiclePath;
+                }
+                if (displayName.Length > ControlVehicle.PathMaxLength)
+                {
+                    displayName = "..." + displayName.Substring(
+                        displayName.Length - ControlVehicle.PathMaxLength
+                    );
+                }
+                this.buttonPath.Text = displayName;
+            }
+        }
 
         /// <summary>
         /// Path to root directory with vehicles
@@ -175,7 +215,7 @@ namespace SemestralProject.Forms.Vehicles
             this.VehiclePicture = this.Context.FileStorage.GetPictureChecked(null);
             this.buttonPicture.BackgroundImage = this.VehiclePicture.GetImage();
             this.rootPath = path;
-            this.buttonPath.Text = this.rootPath;
+            this.VehiclePath = this.rootPath;
         }
 
         /// <summary>
@@ -198,7 +238,7 @@ namespace SemestralProject.Forms.Vehicles
             this.comboBoxInformationSystem.SelectedItem = new InformationSystemItem(this.VehicleInformationSystem);
             this.VehiclePicture = vehicle.Picture;
             this.buttonPicture.BackgroundImage = this.VehiclePicture.GetImage();
-            this.buttonPath.Text = vehicle.Path;
+            this.VehiclePath = vehicle.Path;
             this.rootPath = path;
         }
 
@@ -260,7 +300,7 @@ namespace SemestralProject.Forms.Vehicles
             FormFolder dialog = new FormFolder(this.Context, this.rootPath);
             if (dialog.ShowDialog() == DialogResult.OK && dialog.SelectedPath != null && dialog.SelectedPath.Length > 0)
             {
-                this.buttonPath.Text = dialog.SelectedPath;
+                this.VehiclePath = dialog.SelectedPath;
             }
         }
 

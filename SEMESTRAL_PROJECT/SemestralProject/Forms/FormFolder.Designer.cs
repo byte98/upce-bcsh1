@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.labelHeader = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -42,6 +42,7 @@
             this.toolStripMenuItemExplorer = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemExpand = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemCollapse = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelHelp = new System.Windows.Forms.Label();
             this.flowLayoutPanelButtons.SuspendLayout();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -58,28 +59,28 @@
             this.flowLayoutPanelButtons.Location = new System.Drawing.Point(0, 379);
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
             this.flowLayoutPanelButtons.Padding = new System.Windows.Forms.Padding(10);
-            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(473, 71);
+            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(798, 71);
             this.flowLayoutPanelButtons.TabIndex = 0;
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(148, 13);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(148, 43);
-            this.buttonCancel.TabIndex = 0;
-            this.buttonCancel.Text = "Zrušit";
-            this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // buttonOK
             // 
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(302, 13);
+            this.buttonOK.Location = new System.Drawing.Point(627, 13);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(148, 43);
             this.buttonOK.TabIndex = 0;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.Location = new System.Drawing.Point(473, 13);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(148, 43);
+            this.buttonCancel.TabIndex = 0;
+            this.buttonCancel.Text = "Zrušit";
+            this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // panelHeader
             // 
@@ -88,7 +89,7 @@
             this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(473, 48);
+            this.panelHeader.Size = new System.Drawing.Size(798, 48);
             this.panelHeader.TabIndex = 1;
             // 
             // labelHeader
@@ -115,7 +116,7 @@
             // 
             this.treeViewContent.Location = new System.Drawing.Point(12, 54);
             this.treeViewContent.Name = "treeViewContent";
-            this.treeViewContent.Size = new System.Drawing.Size(449, 319);
+            this.treeViewContent.Size = new System.Drawing.Size(774, 299);
             this.treeViewContent.TabIndex = 2;
             this.treeViewContent.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeViewContent_AfterLabelEdit);
             this.treeViewContent.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewContent_AfterSelect);
@@ -173,13 +174,23 @@
             this.toolStripMenuItemCollapse.Text = "Sbalit vše";
             this.toolStripMenuItemCollapse.Click += new System.EventHandler(this.toolStripMenuItemCollapse_Click);
             // 
+            // labelHelp
+            // 
+            this.labelHelp.AutoSize = true;
+            this.labelHelp.Location = new System.Drawing.Point(12, 356);
+            this.labelHelp.Name = "labelHelp";
+            this.labelHelp.Size = new System.Drawing.Size(417, 20);
+            this.labelHelp.TabIndex = 3;
+            this.labelHelp.Text = "Pro zobrazení dostupných akcí klikněte pravým tlačítkem myši";
+            // 
             // FormFolder
             // 
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(473, 450);
+            this.ClientSize = new System.Drawing.Size(798, 450);
+            this.Controls.Add(this.labelHelp);
             this.Controls.Add(this.treeViewContent);
             this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.flowLayoutPanelButtons);
@@ -195,6 +206,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.contextMenuStripNodeMenu.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -213,5 +225,6 @@
         private ToolStripMenuItem toolStripMenuItemExplorer;
         private ToolStripMenuItem toolStripMenuItemExpand;
         private ToolStripMenuItem toolStripMenuItemCollapse;
+        private Label labelHelp;
     }
 }

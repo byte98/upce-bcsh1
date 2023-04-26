@@ -29,7 +29,10 @@ namespace SemestralProject.Visual
         {
             FileInfo fi = new FileInfo(path);
             this.Name = Path.GetFileNameWithoutExtension(fi.FullName);
-            this.data = new Bitmap(path);
+            using (Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                this.data = new Bitmap(stream);
+            }
         }
 
         /// <summary>
@@ -39,7 +42,10 @@ namespace SemestralProject.Visual
         /// <param name="name">Name of picture</param>
         public Picture (string path, string name)
         {
-            this.data = new Bitmap(path);
+            using (Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                this.data = new Bitmap(stream);
+            }
             this.Name = name;
         }
 

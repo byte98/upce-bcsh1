@@ -21,6 +21,11 @@ namespace SemestralProject.Persistence
         public enum DefaultIconType
         {
             /// <summary>
+            /// Any default icon
+            /// </summary>
+            ANY,
+
+            /// <summary>
             /// Icon of information system
             /// </summary>
             IS,
@@ -349,6 +354,7 @@ namespace SemestralProject.Persistence
             Icon reti = new Icon(FileStorage.DefaultIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon + FileStorage.DefaultExt);
             switch (type)
             {
+                case DefaultIconType.ANY:          reti = new Icon(FileStorage.DefaultIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultIcon + FileStorage.DefaultExt);                       break;
                 case DefaultIconType.IS:           reti = new Icon(FileStorage.DefaultISIcon,  this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultISIcon + FileStorage.DefaultExt);                    break;
                 case DefaultIconType.MAP:          reti = new Icon(FileStorage.DefaultMapIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultMapIcon + FileStorage.DefaultExt);                   break;
                 case DefaultIconType.MANUFACTURER: reti = new Icon(FileStorage.DefaultManufacturerIcon, this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[ICONS]" + Path.DirectorySeparatorChar + FileStorage.DefaultManufacturerIcon + FileStorage.DefaultExt); break;
@@ -423,6 +429,36 @@ namespace SemestralProject.Persistence
                 }
             }
             return reti;
+        }
+
+        /// <summary>
+        /// Removes icon from storage
+        /// </summary>
+        /// <param name="icon">Icon which will be removed</param>
+        public void RemoveIcon(Icon icon)
+        {
+            string[] defaultIcons = new string[] {
+                this.GetIcon(FileStorage.DefaultIconType.ANY).Name, this.GetIcon(FileStorage.DefaultIconType.IS).Name,
+                this.GetIcon(FileStorage.DefaultIconType.MAP).Name, this.GetIcon(FileStorage.DefaultIconType.MANUFACTURER).Name,
+                this.GetIcon(FileStorage.DefaultIconType.FILE).Name
+            };
+            if (defaultIcons.Contains(icon.Name) == false)
+            {
+                string? path = this.GetIconPath(icon);
+                if (path != null && File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+                for (int i = 0; i < this.icons.Count; i++)
+                {
+                    if (this.icons[i].Icon.Name == icon.Name)
+                    {
+                        this.icons.RemoveAt(i);
+                        break;
+                    }
+                }
+                this.Save();
+            }
         }
 
         #endregion
@@ -543,6 +579,31 @@ namespace SemestralProject.Persistence
                 }
             }
             return reti;
+        }
+
+        /// <summary>
+        /// Removes picture from storage
+        /// </summary>
+        /// <param name="picture">Picture which will be removed</param>
+        public void RemovePicture(Picture picture)
+        {
+            if (picture.Name != FileStorage.DefaultPicture)
+            {
+                string? path = this.GetPicturePath(picture);
+                if (path != null && File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+                for(int i = 0; i < this.pictures.Count; i++)
+                {
+                    if (this.pictures[i].Picture.Name == picture.Name)
+                    {
+                        this.pictures.RemoveAt(i);
+                        break;
+                    }
+                }
+                this.Save();
+            }
         }
 
         #endregion

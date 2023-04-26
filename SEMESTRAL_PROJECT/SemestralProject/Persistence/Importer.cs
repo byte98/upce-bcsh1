@@ -20,7 +20,7 @@ namespace SemestralProject.Persistence
     /// <summary>
     /// Class which has ability to import data from file
     /// </summary>
-    internal class Importer : AbstracProgress
+    internal class Importer : AbstractProgress
     {
         #region Utility structures
         /// <summary>

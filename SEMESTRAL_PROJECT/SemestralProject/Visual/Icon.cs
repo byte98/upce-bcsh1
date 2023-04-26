@@ -30,7 +30,10 @@ namespace SemestralProject.Visual
         public Icon(string name, string image)
         {
             this.Name = name;
-            this.image = new Bitmap(image);
+            using(Stream stream = new FileStream(image, FileMode.Open, FileAccess.Read))
+            {
+                this.image = new Bitmap(stream);
+            }
         }
 
         /// <summary>

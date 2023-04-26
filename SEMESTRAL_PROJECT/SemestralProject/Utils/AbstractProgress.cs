@@ -9,7 +9,7 @@ namespace SemestralProject.Utils
     /// <summary>
     /// Class abstracting commmon attributes for any process which reports progress
     /// </summary>
-    internal abstract class AbstracProgress
+    internal abstract class AbstractProgress
     {
         /// <summary>
         /// Arguments for progress event

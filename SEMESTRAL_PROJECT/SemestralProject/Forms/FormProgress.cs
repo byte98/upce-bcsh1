@@ -74,7 +74,7 @@ namespace SemestralProject.Forms
         /// <returns>Form which has ability to inform about process of copiing files</returns>
         public static FormProgress CreateCopyForm(Context context)
         {
-            return new FormProgress(context, SemestralProject.Resources.copy32, "Kopírování souborů", "Kopírování souborů");
+            return new FormProgress(context, SemestralProject.Resources.copy32, "Kopírovat soubory", "Kopírování souborů");
         }
 
         /// <summary>
@@ -84,7 +84,17 @@ namespace SemestralProject.Forms
         /// <returns>Form which has ability to inform about process of copiing and replacing files</returns>
         public static FormProgress CreateCopyReplaceForm(Context context)
         {
-            return new FormProgress(context, SemestralProject.Resources.copyr32, "Kopírování a nahrazování souborů", "Kopírování a nahrazování souborů");
+            return new FormProgress(context, SemestralProject.Resources.copyr32, "Kopírovat a nahradit soubory", "Kopírování a nahrazování souborů");
+        }
+
+        /// <summary>
+        /// Creates new form which informs about process of deleting all data and files
+        /// </summary>
+        /// <param name="context">Wrapper of all program resources</param>
+        /// <returns>Form which has ability to inform about process of deleting all data and files</returns>
+        public static FormProgress CreateDeleteForm(Context context)
+        {
+            return new FormProgress(context, SemestralProject.Resources.delete32, "Smazat všechny soubory a data", "Mazání všech souboru a dat");
         }
 
         /// <summary>

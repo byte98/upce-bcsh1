@@ -72,7 +72,7 @@
             this.flowLayoutPanelContent.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelContent.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanelContent.Name = "flowLayoutPanelContent";
-            this.flowLayoutPanelContent.Size = new System.Drawing.Size(395, 661);
+            this.flowLayoutPanelContent.Size = new System.Drawing.Size(439, 661);
             this.flowLayoutPanelContent.TabIndex = 3;
             // 
             // labelName
@@ -88,7 +88,7 @@
             // 
             this.textBoxName.Location = new System.Drawing.Point(3, 23);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(388, 27);
+            this.textBoxName.Size = new System.Drawing.Size(432, 27);
             this.textBoxName.TabIndex = 1;
             // 
             // labelSpace1
@@ -117,7 +117,7 @@
             this.buttonPicture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPicture.Location = new System.Drawing.Point(3, 96);
             this.buttonPicture.Name = "buttonPicture";
-            this.buttonPicture.Size = new System.Drawing.Size(388, 139);
+            this.buttonPicture.Size = new System.Drawing.Size(432, 139);
             this.buttonPicture.TabIndex = 4;
             this.buttonPicture.UseVisualStyleBackColor = true;
             this.buttonPicture.Click += new System.EventHandler(this.buttonPicture_Click);
@@ -145,7 +145,7 @@
             this.comboBoxManufacturer.FormattingEnabled = true;
             this.comboBoxManufacturer.Location = new System.Drawing.Point(3, 281);
             this.comboBoxManufacturer.Name = "comboBoxManufacturer";
-            this.comboBoxManufacturer.Size = new System.Drawing.Size(388, 28);
+            this.comboBoxManufacturer.Size = new System.Drawing.Size(432, 28);
             this.comboBoxManufacturer.TabIndex = 10;
             this.comboBoxManufacturer.SelectedValueChanged += new System.EventHandler(this.comboBoxManufacturer_SelectedValueChanged);
             // 
@@ -173,7 +173,7 @@
             this.comboBoxInformationSystem.FormattingEnabled = true;
             this.comboBoxInformationSystem.Location = new System.Drawing.Point(3, 355);
             this.comboBoxInformationSystem.Name = "comboBoxInformationSystem";
-            this.comboBoxInformationSystem.Size = new System.Drawing.Size(388, 28);
+            this.comboBoxInformationSystem.Size = new System.Drawing.Size(432, 28);
             this.comboBoxInformationSystem.TabIndex = 16;
             this.comboBoxInformationSystem.SelectedValueChanged += new System.EventHandler(this.comboBoxInformationSystem_SelectedValueChanged);
             // 
@@ -201,7 +201,7 @@
             this.buttonPath.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonPath.Location = new System.Drawing.Point(3, 429);
             this.buttonPath.Name = "buttonPath";
-            this.buttonPath.Size = new System.Drawing.Size(388, 34);
+            this.buttonPath.Size = new System.Drawing.Size(432, 34);
             this.buttonPath.TabIndex = 13;
             this.buttonPath.Text = "button1";
             this.buttonPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -232,7 +232,7 @@
             this.textBoxDescription.Location = new System.Drawing.Point(3, 509);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(388, 144);
+            this.textBoxDescription.Size = new System.Drawing.Size(432, 144);
             this.textBoxDescription.TabIndex = 7;
             // 
             // ControlVehicle
@@ -241,7 +241,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanelContent);
             this.Name = "ControlVehicle";
-            this.Size = new System.Drawing.Size(395, 661);
+            this.Size = new System.Drawing.Size(439, 661);
             this.flowLayoutPanelContent.ResumeLayout(false);
             this.flowLayoutPanelContent.PerformLayout();
             this.ResumeLayout(false);

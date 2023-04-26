@@ -98,6 +98,10 @@ namespace SemestralProject.Forms
             if (Directory.Exists(directory))
             {
                 string name = directory.Split(Path.DirectorySeparatorChar)[directory.Split(Path.DirectorySeparatorChar).Length - 1];
+                if (directory == this.rootDirectory)
+                {
+                    name = Path.GetFullPath(this.rootDirectory);
+                }
                 reti = new TreeNode(name);
                 foreach (string dir in Directory.EnumerateDirectories(directory))
                 {
@@ -117,6 +121,14 @@ namespace SemestralProject.Forms
         {
             TreeNode selected = this.treeViewContent.SelectedNode;
             this.SelectedPath = selected.FullPath;
+            if (this.SelectedPath.StartsWith(this.rootDirectory))
+            {
+                int idx = this.SelectedPath.IndexOf(this.rootDirectory);
+                if (idx >= 0)
+                {
+                    this.SelectedPath = this.SelectedPath.Remove(idx, this.rootDirectory.Length);
+                }
+            }
         }
 
         private void treeViewContent_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

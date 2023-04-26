@@ -10,7 +10,7 @@ namespace SemestralProject.Utils
     /// <summary>
     /// Class which copies data files to right directories
     /// </summary>
-    internal class Copier : AbstracProgress
+    internal class Copier : AbstractProgress
     {
         /// <summary>
         /// Wrapper of all program resources

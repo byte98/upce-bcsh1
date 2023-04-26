@@ -7,6 +7,7 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Media.Protection.PlayReady;
 
 namespace SemestralProject.Controllers
 {
@@ -66,6 +67,21 @@ namespace SemestralProject.Controllers
         private readonly Copier copier;
 
         /// <summary>
+        /// Minimal thread sleep (in miliseconds) during data and files deleting
+        /// </summary>
+        private const int DeleteSleepMin = 100;
+
+        /// <summary>
+        /// Maximal thread sleep (in miliseconds) during data and files deleting
+        /// </summary>
+        private const int DeleteSleepMax = 1000;
+
+        /// <summary>
+        /// Object which can delete all files and data
+        /// </summary>
+        private readonly Deleter deleter;
+
+        /// <summary>
         /// Creates new controller of actions page
         /// </summary>
         /// <param name="context">Wrapper of all program resources</param>
@@ -77,16 +93,21 @@ namespace SemestralProject.Controllers
             this.exporter = new Exporter(this.context);
             this.importer = new Importer(this.context);
             this.copier = new Copier(this.context);
+            this.deleter = new Deleter(this.context);
             this.exporter.Progress += ProgressEventHandler;
             this.exporter.ProgressLog += ProgressLogEventhandler;
             this.exporter.ProcessDone += ProgressDoneEventHandler;
             this.importer.Progress += ProgressEventHandler;
             this.importer.ProgressLog += ProgressLogEventhandler;
             this.importer.ProcessDone += ProgressDoneEventHandler;
-            this.importer.ProcessDone += ImportDoneHandler;
+            this.importer.ProcessDone += ProgressDoneRefreshEventHandler;
             this.copier.Progress += ProgressEventHandler;
             this.copier.ProgressLog += ProgressLogEventhandler;
             this.copier.ProcessDone += ProgressDoneEventHandler;
+            this.deleter.Progress += ProgressEventHandler;
+            this.deleter.ProgressLog += ProgressLogEventhandler;
+            this.deleter.ProcessDone += ProgressDoneEventHandler;
+            this.deleter.ProcessDone += ProgressDoneRefreshEventHandler;
         }
 
         /// <summary>
@@ -162,10 +183,42 @@ namespace SemestralProject.Controllers
         }
 
         /// <summary>
-        /// Handles import done event
+        /// Sets root folder for vehicles
+        /// </summary>
+        /// <param name="folder">New root folder for vehicles</param>
+        public void SetVehiclesFolder(string folder)
+        {
+            FormWait wait = new FormWait(() =>
+            {
+                this.context.Configuration.VehiclesRoot = folder;
+                this.context.Configuration.Save();
+            }, this.context);
+            wait.ShowDialog();
+        }
+
+        /// <summary>
+        /// Deletes all data and files
+        /// </summary>
+        public void DeleteAll()
+        {
+            this.formProgress = FormProgress.CreateDeleteForm(this.context);
+            this.formProgress.Show();
+            Random random = new Random();
+            Task.Run(new Action(() =>
+            {
+                foreach (Action action in this.deleter.GetDeleteSequence())
+                {
+                    action();
+                    Thread.Sleep(random.Next(ActionsController.DeleteSleepMin, ActionsController.DeleteSleepMax));
+                }
+            }));
+        }
+
+        /// <summary>
+        /// Refreshes view when progress is done
         /// </summary>
         /// <param name="sender">Sender of event</param>
-        private void ImportDoneHandler(object sender)
+        private void ProgressDoneRefreshEventHandler(object sender)
         {
             this.mainForm.Invoke(new MethodInvoker(delegate ()
             {
@@ -179,7 +232,7 @@ namespace SemestralProject.Controllers
         /// </summary>
         /// <param name="sender">Sender of event</param>
         /// <param name="e">Arguments of event</param>
-        private void ProgressEventHandler(object sender, AbstracProgress.ProgressEventArgs e)
+        private void ProgressEventHandler(object sender, AbstractProgress.ProgressEventArgs e)
         {
             if (this.formProgress!= null)
             {
@@ -204,7 +257,7 @@ namespace SemestralProject.Controllers
         /// </summary>
         /// <param name="sender">Sender of event</param>
         /// <param name="e">Arguments of event</param>
-        private void ProgressLogEventhandler(object sender, AbstracProgress.ProgressLogEventArgs e)
+        private void ProgressLogEventhandler(object sender, AbstractProgress.ProgressLogEventArgs e)
         {
             if (this.formProgress != null)
             {

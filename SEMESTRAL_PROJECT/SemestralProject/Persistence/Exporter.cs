@@ -17,7 +17,7 @@ namespace SemestralProject.Persistence
     /// <summary>
     /// Class representing exporter of current state of program into file
     /// </summary>
-    internal class Exporter: AbstracProgress
+    internal class Exporter: AbstractProgress
     {
         /// <summary>
         /// Wrapper of all program resources

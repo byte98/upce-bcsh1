@@ -277,6 +277,7 @@ namespace SemestralProject.Forms
             this.RefreshManView();
             this.RefreshVehicleView();
             this.RefreshFileView();
+            this.textBoxActionsGeneralVehiclesFolderActual.Text = Path.GetFullPath(this.Context.Configuration.VehiclesRoot);
         }
 
         /// <summary>
@@ -525,6 +526,7 @@ namespace SemestralProject.Forms
         private void buttonDeleteVehicle_Click(object sender, EventArgs e)
         {
             this.vehiclesController.Delete();
+            this.RefreshVehicleView();
         }
 
         private void buttonVehicleSearch_Click(object sender, EventArgs e)
@@ -629,6 +631,27 @@ namespace SemestralProject.Forms
         private void buttonActionCopyReplace_Click(object sender, EventArgs e)
         {
             this.actionsController.Copy(true);
+        }
+
+        private void buttonActionsGeneralVehiclesFolder_Click(object sender, EventArgs e)
+        {
+            this.folderBrowserDialogVehicles.SelectedPath = Path.GetFullPath(this.Context.Configuration.VehiclesRoot);
+            this.folderBrowserDialogVehicles.InitialDirectory = Path.GetFullPath(this.Context.Configuration.VehiclesRoot);
+
+            if (this.folderBrowserDialogVehicles.ShowDialog() == DialogResult.OK)
+            {
+                this.actionsController.SetVehiclesFolder(this.folderBrowserDialogVehicles.SelectedPath);
+                this.textBoxActionsGeneralVehiclesFolderActual.Text = Path.GetFullPath(this.Context.Configuration.VehiclesRoot);
+            }
+        }
+
+        private void buttonActionsDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Opravdu chcete smazat všechna uložená data a soubory?" + Environment.NewLine + 
+                "Tato akce je nevratná.", "Smazat vše", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                this.actionsController.DeleteAll();
+            }
         }
     }
 }
