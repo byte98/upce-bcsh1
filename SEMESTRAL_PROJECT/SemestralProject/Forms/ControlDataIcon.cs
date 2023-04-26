@@ -108,6 +108,7 @@ namespace SemestralProject.Forms
                     {
                         this.DataIcon = this.Context.FileStorage.AddIcon(dialog.SelectedIcon);
                     }, this.Context);
+                    wait.ShowDialog();
                 }
                 else
                 {

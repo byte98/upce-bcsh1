@@ -25,7 +25,7 @@ namespace SemestralProject.Forms
         /// <summary>
         /// Flag, whether <see cref="SelectedIcon"/> contains path (TRUE) or name (FALSE)
         /// </summary>
-        public bool IsPath => content.IsPath;
+        public bool IsPath => content.SelectedIsPath;
 
         public FormIconChooser(Context context): base("Výběr ikony", "Vyberte ikonu", SemestralProject.Resources.icons_chooser, context)
         {

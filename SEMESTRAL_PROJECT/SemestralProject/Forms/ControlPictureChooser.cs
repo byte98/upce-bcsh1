@@ -14,6 +14,9 @@ using System.Windows.Forms;
 
 namespace SemestralProject.Forms
 {
+    /// <summary>
+    /// Control which allows user to choose picture
+    /// </summary>
     internal partial class ControlPictureChooser : UserControl, IControl
     {
         /// <summary>
@@ -52,8 +55,15 @@ namespace SemestralProject.Forms
         /// </summary>
         public bool SelectedIsPath { get; private set; } = false;
 
+        /// <summary>
+        /// Wrapper of all program resources
+        /// </summary>
         public Context Context { get; init; }
 
+        /// <summary>
+        /// Creates new control which allows user to choose picture
+        /// </summary>
+        /// <param name="context">Wrapper of all program resources</param>
         public ControlPictureChooser(Context context)
         {
             this.Context = context;
@@ -90,7 +100,7 @@ namespace SemestralProject.Forms
             if (File.Exists(args.SelectedFile))
             {
                 Picture pic = new Picture(args.SelectedFile);
-                this.pictures.Add((pic, true, args.SelectedFile));
+                this.pictures.Insert(0, (pic, true, args.SelectedFile));
                 this.ShowPictures();
             }
             Button btn = (Button)this.tableLayoutPanelPictureView.Controls[0];

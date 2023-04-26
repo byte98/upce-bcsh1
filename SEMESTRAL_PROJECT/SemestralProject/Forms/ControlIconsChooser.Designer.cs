@@ -3,14 +3,14 @@
     partial class ControlIconsChooser
     {
         /// <summary> 
-        /// Vyžaduje se proměnná návrháře.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary> 
-        /// Uvolněte všechny používané prostředky.
+        /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">hodnota true, když by se měl spravovaný prostředek odstranit; jinak false.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,17 +20,18 @@
             base.Dispose(disposing);
         }
 
-        #region Kód vygenerovaný pomocí Návrháře komponent
+        #region Component Designer generated code
 
         /// <summary> 
-        /// Metoda vyžadovaná pro podporu Návrháře - neupravovat
-        /// obsah této metody v editoru kódu.
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             this.flowLayoutPanelContent = new System.Windows.Forms.FlowLayoutPanel();
             this.labelAvailable = new System.Windows.Forms.Label();
-            this.listViewIcons = new System.Windows.Forms.ListView();
+            this.tableLayoutPanelIconView = new System.Windows.Forms.TableLayoutPanel();
+            this.labelSpace = new System.Windows.Forms.Label();
             this.controlBrowseButtonBrowseIcons = new SemestralProject.Forms.ControlBrowseButton(this.Context);
             this.flowLayoutPanelContent.SuspendLayout();
             this.SuspendLayout();
@@ -38,46 +39,55 @@
             // flowLayoutPanelContent
             // 
             this.flowLayoutPanelContent.Controls.Add(this.labelAvailable);
-            this.flowLayoutPanelContent.Controls.Add(this.listViewIcons);
-            this.flowLayoutPanelContent.Controls.Add(this.controlBrowseButtonBrowseIcons);
+            this.flowLayoutPanelContent.Controls.Add(this.tableLayoutPanelIconView);
+            this.flowLayoutPanelContent.Controls.Add(this.labelSpace);
             this.flowLayoutPanelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelContent.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelContent.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanelContent.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.flowLayoutPanelContent.Name = "flowLayoutPanelContent";
-            this.flowLayoutPanelContent.Size = new System.Drawing.Size(370, 367);
-            this.flowLayoutPanelContent.TabIndex = 0;
+            this.flowLayoutPanelContent.Size = new System.Drawing.Size(510, 473);
+            this.flowLayoutPanelContent.TabIndex = 1;
             // 
             // labelAvailable
             // 
             this.labelAvailable.AutoSize = true;
-            this.labelAvailable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelAvailable.Location = new System.Drawing.Point(3, 0);
             this.labelAvailable.Name = "labelAvailable";
-            this.labelAvailable.Size = new System.Drawing.Size(363, 20);
+            this.labelAvailable.Size = new System.Drawing.Size(112, 20);
             this.labelAvailable.TabIndex = 0;
             this.labelAvailable.Text = "Dostupné ikony";
             // 
-            // listViewIcons
+            // tableLayoutPanelIconView
             // 
-            this.listViewIcons.Location = new System.Drawing.Point(3, 24);
-            this.listViewIcons.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.listViewIcons.MultiSelect = false;
-            this.listViewIcons.Name = "listViewIcons";
-            this.listViewIcons.Size = new System.Drawing.Size(363, 279);
-            this.listViewIcons.TabIndex = 1;
-            this.listViewIcons.UseCompatibleStateImageBehavior = false;
-            this.listViewIcons.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewIcons_ItemSelectionChanged);
+            this.tableLayoutPanelIconView.AutoScroll = true;
+            this.tableLayoutPanelIconView.BackColor = System.Drawing.SystemColors.Window;
+            this.tableLayoutPanelIconView.ColumnCount = 1;
+            this.tableLayoutPanelIconView.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelIconView.Location = new System.Drawing.Point(3, 23);
+            this.tableLayoutPanelIconView.Name = "tableLayoutPanelIconView";
+            this.tableLayoutPanelIconView.Padding = new System.Windows.Forms.Padding(10);
+            this.tableLayoutPanelIconView.RowCount = 1;
+            this.tableLayoutPanelIconView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelIconView.Size = new System.Drawing.Size(492, 341);
+            this.tableLayoutPanelIconView.TabIndex = 1;
             // 
-            // controlBrowseButtonBrowseIcons
+            // labelSpace
+            // 
+            this.labelSpace.AutoSize = true;
+            this.labelSpace.Location = new System.Drawing.Point(3, 367);
+            this.labelSpace.Name = "labelSpace";
+            this.labelSpace.Size = new System.Drawing.Size(13, 20);
+            this.labelSpace.TabIndex = 2;
+            this.labelSpace.Text = " ";
+            // 
+            // controlBrowseButton
             // 
             this.controlBrowseButtonBrowseIcons.FileFilter = "Všechny soubory | *.*";
-            this.controlBrowseButtonBrowseIcons.Location = new System.Drawing.Point(3, 312);
-            this.controlBrowseButtonBrowseIcons.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.controlBrowseButtonBrowseIcons.Name = "controlBrowseButtonBrowseIcons";
-            this.controlBrowseButtonBrowseIcons.Size = new System.Drawing.Size(137, 48);
-            this.controlBrowseButtonBrowseIcons.TabIndex = 2;
-            this.controlBrowseButtonBrowseIcons.FileSelectedEvent += new SemestralProject.Forms.ControlBrowseButton.FileSelectedHandler(this.controlBrowseButtonBrowseIcons_FileSelectedEvent);
+            this.controlBrowseButtonBrowseIcons.Location = new System.Drawing.Point(3, 391);
+            this.controlBrowseButtonBrowseIcons.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.controlBrowseButtonBrowseIcons.Name = "controlBrowseButtonIcons";
+            this.controlBrowseButtonBrowseIcons.Size = new System.Drawing.Size(146, 40);
+            this.controlBrowseButtonBrowseIcons.TabIndex = 3;
             // 
             // ControlIconsChooser
             // 
@@ -86,7 +96,7 @@
             this.Controls.Add(this.flowLayoutPanelContent);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ControlIconsChooser";
-            this.Size = new System.Drawing.Size(370, 367);
+            this.Size = new System.Drawing.Size(498, 435);
             this.flowLayoutPanelContent.ResumeLayout(false);
             this.flowLayoutPanelContent.PerformLayout();
             this.ResumeLayout(false);
@@ -94,10 +104,10 @@
         }
 
         #endregion
-
+        private ControlBrowseButton controlBrowseButtonBrowseIcons;
         private FlowLayoutPanel flowLayoutPanelContent;
         private Label labelAvailable;
-        private ListView listViewIcons;
-        private ControlBrowseButton controlBrowseButtonBrowseIcons;
+        private TableLayoutPanel tableLayoutPanelIconView;
+        private Label labelSpace;
     }
 }

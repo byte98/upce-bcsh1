@@ -96,6 +96,7 @@ namespace SemestralProject.Forms
                     {
                         this.DataPicture = this.Context.FileStorage.AddPicture(dialog.SelectedPicture);
                     }, this.Context);
+                    wait.ShowDialog();
                 }
                 else
                 {
