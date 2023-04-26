@@ -658,5 +658,10 @@ namespace SemestralProject.Forms
         {
             this.Context.Configuration.DeleteTemp();
         }
+
+        private void buttonActionsAbout_Click(object sender, EventArgs e)
+        {
+            this.actionsController.About();
+        }
     }
 }

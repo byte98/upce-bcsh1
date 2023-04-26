@@ -41,5 +41,21 @@ namespace SemestralProject.Utils
             this.DataStorage = dataStorage;
             this.Configuration = configuration;
         }
+
+        /// <summary>
+        /// Creates empty context with no values.
+        /// If used, there will be very much <see cref="NullReferenceException"/>.
+        /// </summary>
+        /// <returns>Empty context with no content</returns>
+        public static Context CreateEmptyContext()
+        {
+            return new Context(
+                new FileStorage(string.Empty, new Configuration(string.Empty)),
+                new DataStorage(string.Empty,
+                    new FileStorage(string.Empty, new Configuration(string.Empty)),
+                    new Configuration(string.Empty)),
+                new Configuration(string.Empty)
+                );
+        }
     }
 }

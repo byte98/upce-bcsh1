@@ -427,6 +427,7 @@ namespace SemestralProject.Forms
             // splitterISControls1
             // 
             this.splitterISControls1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterISControls1.Enabled = false;
             this.splitterISControls1.Location = new System.Drawing.Point(503, 3);
             this.splitterISControls1.Name = "splitterISControls1";
             this.splitterISControls1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
@@ -444,6 +445,7 @@ namespace SemestralProject.Forms
             // splitterISControls2
             // 
             this.splitterISControls2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterISControls2.Enabled = false;
             this.splitterISControls2.Location = new System.Drawing.Point(704, 3);
             this.splitterISControls2.Name = "splitterISControls2";
             this.splitterISControls2.Size = new System.Drawing.Size(1, 104);
@@ -500,6 +502,7 @@ namespace SemestralProject.Forms
             // splitterISControls3
             // 
             this.splitterISControls3.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterISControls3.Enabled = false;
             this.splitterISControls3.Location = new System.Drawing.Point(970, 3);
             this.splitterISControls3.Name = "splitterISControls3";
             this.splitterISControls3.Size = new System.Drawing.Size(1, 104);
@@ -636,6 +639,7 @@ namespace SemestralProject.Forms
             // splitterMapControls1
             // 
             this.splitterMapControls1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterMapControls1.Enabled = false;
             this.splitterMapControls1.Location = new System.Drawing.Point(503, 3);
             this.splitterMapControls1.Name = "splitterMapControls1";
             this.splitterMapControls1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
@@ -653,6 +657,7 @@ namespace SemestralProject.Forms
             // splitterMapControls2
             // 
             this.splitterMapControls2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterMapControls2.Enabled = false;
             this.splitterMapControls2.Location = new System.Drawing.Point(704, 3);
             this.splitterMapControls2.Name = "splitterMapControls2";
             this.splitterMapControls2.Size = new System.Drawing.Size(1, 104);
@@ -709,6 +714,7 @@ namespace SemestralProject.Forms
             // splitterMapControls3
             // 
             this.splitterMapControls3.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterMapControls3.Enabled = false;
             this.splitterMapControls3.Location = new System.Drawing.Point(970, 3);
             this.splitterMapControls3.Name = "splitterMapControls3";
             this.splitterMapControls3.Size = new System.Drawing.Size(1, 104);
@@ -830,6 +836,7 @@ namespace SemestralProject.Forms
             // splitterManufacturerControls1
             // 
             this.splitterManufacturerControls1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterManufacturerControls1.Enabled = false;
             this.splitterManufacturerControls1.Location = new System.Drawing.Point(503, 3);
             this.splitterManufacturerControls1.Name = "splitterManufacturerControls1";
             this.splitterManufacturerControls1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
@@ -847,6 +854,7 @@ namespace SemestralProject.Forms
             // splitterManufacturerControls2
             // 
             this.splitterManufacturerControls2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterManufacturerControls2.Enabled = false;
             this.splitterManufacturerControls2.Location = new System.Drawing.Point(704, 3);
             this.splitterManufacturerControls2.Name = "splitterManufacturerControls2";
             this.splitterManufacturerControls2.Size = new System.Drawing.Size(1, 104);
@@ -903,6 +911,7 @@ namespace SemestralProject.Forms
             // splitterManufacturerControls3
             // 
             this.splitterManufacturerControls3.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterManufacturerControls3.Enabled = false;
             this.splitterManufacturerControls3.Location = new System.Drawing.Point(970, 3);
             this.splitterManufacturerControls3.Name = "splitterManufacturerControls3";
             this.splitterManufacturerControls3.Size = new System.Drawing.Size(1, 104);
@@ -1024,6 +1033,7 @@ namespace SemestralProject.Forms
             // splitterVehicleControls1
             // 
             this.splitterVehicleControls1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterVehicleControls1.Enabled = false;
             this.splitterVehicleControls1.Location = new System.Drawing.Point(503, 3);
             this.splitterVehicleControls1.Name = "splitterVehicleControls1";
             this.splitterVehicleControls1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
@@ -1041,6 +1051,7 @@ namespace SemestralProject.Forms
             // splitterVehicleControls2
             // 
             this.splitterVehicleControls2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterVehicleControls2.Enabled = false;
             this.splitterVehicleControls2.Location = new System.Drawing.Point(704, 3);
             this.splitterVehicleControls2.Name = "splitterVehicleControls2";
             this.splitterVehicleControls2.Size = new System.Drawing.Size(1, 104);
@@ -1097,6 +1108,7 @@ namespace SemestralProject.Forms
             // splitterVehicleControls3
             // 
             this.splitterVehicleControls3.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterVehicleControls3.Enabled = false;
             this.splitterVehicleControls3.Location = new System.Drawing.Point(970, 3);
             this.splitterVehicleControls3.Name = "splitterVehicleControls3";
             this.splitterVehicleControls3.Size = new System.Drawing.Size(1, 104);
@@ -1218,6 +1230,7 @@ namespace SemestralProject.Forms
             // splitterFileControls1
             // 
             this.splitterFileControls1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterFileControls1.Enabled = false;
             this.splitterFileControls1.Location = new System.Drawing.Point(503, 3);
             this.splitterFileControls1.Name = "splitterFileControls1";
             this.splitterFileControls1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
@@ -1235,6 +1248,7 @@ namespace SemestralProject.Forms
             // splitterFileControls2
             // 
             this.splitterFileControls2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterFileControls2.Enabled = false;
             this.splitterFileControls2.Location = new System.Drawing.Point(704, 3);
             this.splitterFileControls2.Name = "splitterFileControls2";
             this.splitterFileControls2.Size = new System.Drawing.Size(1, 104);
@@ -1291,6 +1305,7 @@ namespace SemestralProject.Forms
             // splitterFileControls3
             // 
             this.splitterFileControls3.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.splitterFileControls3.Enabled = false;
             this.splitterFileControls3.Location = new System.Drawing.Point(970, 3);
             this.splitterFileControls3.Name = "splitterFileControls3";
             this.splitterFileControls3.Size = new System.Drawing.Size(1, 104);
@@ -1330,7 +1345,7 @@ namespace SemestralProject.Forms
             this.panelActionsContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 269F));
             this.panelActionsContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 174F));
             this.panelActionsContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 118F));
-            this.panelActionsContent.Size = new System.Drawing.Size(1250, 715);
+            this.panelActionsContent.Size = new System.Drawing.Size(1310, 715);
             this.panelActionsContent.TabIndex = 0;
             // 
             // panelActionsHeader
@@ -1340,7 +1355,7 @@ namespace SemestralProject.Forms
             this.panelActionsHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelActionsHeader.Location = new System.Drawing.Point(3, 3);
             this.panelActionsHeader.Name = "panelActionsHeader";
-            this.panelActionsHeader.Size = new System.Drawing.Size(1244, 69);
+            this.panelActionsHeader.Size = new System.Drawing.Size(1304, 69);
             this.panelActionsHeader.TabIndex = 0;
             // 
             // labelActionsHeader
@@ -1367,9 +1382,10 @@ namespace SemestralProject.Forms
             // 
             this.splitterActionsHeader.BackColor = System.Drawing.Color.Black;
             this.splitterActionsHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitterActionsHeader.Enabled = false;
             this.splitterActionsHeader.Location = new System.Drawing.Point(3, 78);
             this.splitterActionsHeader.Name = "splitterActionsHeader";
-            this.splitterActionsHeader.Size = new System.Drawing.Size(1244, 1);
+            this.splitterActionsHeader.Size = new System.Drawing.Size(1304, 1);
             this.splitterActionsHeader.TabIndex = 1;
             this.splitterActionsHeader.TabStop = false;
             // 
@@ -1379,7 +1395,7 @@ namespace SemestralProject.Forms
             this.groupBoxActionsDataTransfer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxActionsDataTransfer.Location = new System.Drawing.Point(3, 530);
             this.groupBoxActionsDataTransfer.Name = "groupBoxActionsDataTransfer";
-            this.groupBoxActionsDataTransfer.Size = new System.Drawing.Size(1244, 182);
+            this.groupBoxActionsDataTransfer.Size = new System.Drawing.Size(1304, 182);
             this.groupBoxActionsDataTransfer.TabIndex = 2;
             this.groupBoxActionsDataTransfer.TabStop = false;
             this.groupBoxActionsDataTransfer.Text = "Přesun dat";
@@ -1399,7 +1415,7 @@ namespace SemestralProject.Forms
             this.tableLayoutPanelActionsDataTransfer.RowCount = 2;
             this.tableLayoutPanelActionsDataTransfer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelActionsDataTransfer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelActionsDataTransfer.Size = new System.Drawing.Size(1238, 156);
+            this.tableLayoutPanelActionsDataTransfer.Size = new System.Drawing.Size(1298, 156);
             this.tableLayoutPanelActionsDataTransfer.TabIndex = 0;
             // 
             // buttonActionsExport
@@ -1433,7 +1449,7 @@ namespace SemestralProject.Forms
             this.flowLayoutPanelActionsExport.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelActionsExport.Location = new System.Drawing.Point(123, 3);
             this.flowLayoutPanelActionsExport.Name = "flowLayoutPanelActionsExport";
-            this.flowLayoutPanelActionsExport.Size = new System.Drawing.Size(1112, 72);
+            this.flowLayoutPanelActionsExport.Size = new System.Drawing.Size(1172, 72);
             this.flowLayoutPanelActionsExport.TabIndex = 2;
             // 
             // labelActionsExport1
@@ -1473,7 +1489,7 @@ namespace SemestralProject.Forms
             this.flowLayoutPanelActionsImport.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelActionsImport.Location = new System.Drawing.Point(123, 81);
             this.flowLayoutPanelActionsImport.Name = "flowLayoutPanelActionsImport";
-            this.flowLayoutPanelActionsImport.Size = new System.Drawing.Size(1112, 72);
+            this.flowLayoutPanelActionsImport.Size = new System.Drawing.Size(1172, 72);
             this.flowLayoutPanelActionsImport.TabIndex = 3;
             // 
             // labelActionsImport1
@@ -1510,7 +1526,7 @@ namespace SemestralProject.Forms
             this.groupBoxActionCopy.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxActionCopy.Location = new System.Drawing.Point(3, 356);
             this.groupBoxActionCopy.Name = "groupBoxActionCopy";
-            this.groupBoxActionCopy.Size = new System.Drawing.Size(1244, 168);
+            this.groupBoxActionCopy.Size = new System.Drawing.Size(1304, 168);
             this.groupBoxActionCopy.TabIndex = 3;
             this.groupBoxActionCopy.TabStop = false;
             this.groupBoxActionCopy.Text = "Kopírování souborů";
@@ -1530,7 +1546,7 @@ namespace SemestralProject.Forms
             this.tableLayoutPanelActionCopyContent.RowCount = 2;
             this.tableLayoutPanelActionCopyContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelActionCopyContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelActionCopyContent.Size = new System.Drawing.Size(1238, 142);
+            this.tableLayoutPanelActionCopyContent.Size = new System.Drawing.Size(1298, 142);
             this.tableLayoutPanelActionCopyContent.TabIndex = 0;
             // 
             // flowLayoutPanelActionCopyReplace
@@ -1542,7 +1558,7 @@ namespace SemestralProject.Forms
             this.flowLayoutPanelActionCopyReplace.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelActionCopyReplace.Location = new System.Drawing.Point(123, 74);
             this.flowLayoutPanelActionCopyReplace.Name = "flowLayoutPanelActionCopyReplace";
-            this.flowLayoutPanelActionCopyReplace.Size = new System.Drawing.Size(1112, 65);
+            this.flowLayoutPanelActionCopyReplace.Size = new System.Drawing.Size(1172, 65);
             this.flowLayoutPanelActionCopyReplace.TabIndex = 4;
             // 
             // labelActionCopyReplace1
@@ -1582,7 +1598,7 @@ namespace SemestralProject.Forms
             this.flowLayoutPanelActionCopy.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelActionCopy.Location = new System.Drawing.Point(123, 3);
             this.flowLayoutPanelActionCopy.Name = "flowLayoutPanelActionCopy";
-            this.flowLayoutPanelActionCopy.Size = new System.Drawing.Size(1112, 65);
+            this.flowLayoutPanelActionCopy.Size = new System.Drawing.Size(1172, 65);
             this.flowLayoutPanelActionCopy.TabIndex = 3;
             // 
             // labelActionCopy1
@@ -1641,7 +1657,7 @@ namespace SemestralProject.Forms
             this.groupBoxActionsGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxActionsGeneral.Location = new System.Drawing.Point(3, 87);
             this.groupBoxActionsGeneral.Name = "groupBoxActionsGeneral";
-            this.groupBoxActionsGeneral.Size = new System.Drawing.Size(1244, 263);
+            this.groupBoxActionsGeneral.Size = new System.Drawing.Size(1304, 263);
             this.groupBoxActionsGeneral.TabIndex = 4;
             this.groupBoxActionsGeneral.TabStop = false;
             this.groupBoxActionsGeneral.Text = "Obecné";
@@ -1664,7 +1680,7 @@ namespace SemestralProject.Forms
             this.tableLayoutPanelActionsGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanelActionsGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanelActionsGeneral.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanelActionsGeneral.Size = new System.Drawing.Size(1238, 237);
+            this.tableLayoutPanelActionsGeneral.Size = new System.Drawing.Size(1298, 237);
             this.tableLayoutPanelActionsGeneral.TabIndex = 1;
             // 
             // flowLayoutPanelActionsAbout
@@ -1675,7 +1691,7 @@ namespace SemestralProject.Forms
             this.flowLayoutPanelActionsAbout.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelActionsAbout.Location = new System.Drawing.Point(123, 161);
             this.flowLayoutPanelActionsAbout.Name = "flowLayoutPanelActionsAbout";
-            this.flowLayoutPanelActionsAbout.Size = new System.Drawing.Size(1112, 73);
+            this.flowLayoutPanelActionsAbout.Size = new System.Drawing.Size(1172, 73);
             this.flowLayoutPanelActionsAbout.TabIndex = 7;
             // 
             // labelActionsAbout1
@@ -1706,7 +1722,7 @@ namespace SemestralProject.Forms
             this.flowLayoutPanelActionsDelete.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelActionsDelete.Location = new System.Drawing.Point(123, 82);
             this.flowLayoutPanelActionsDelete.Name = "flowLayoutPanelActionsDelete";
-            this.flowLayoutPanelActionsDelete.Size = new System.Drawing.Size(1112, 73);
+            this.flowLayoutPanelActionsDelete.Size = new System.Drawing.Size(1172, 73);
             this.flowLayoutPanelActionsDelete.TabIndex = 5;
             // 
             // labelActionsDelete1
@@ -1746,7 +1762,7 @@ namespace SemestralProject.Forms
             this.flowLayoutPanelActionsGeneralVehiclesFolder.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelActionsGeneralVehiclesFolder.Location = new System.Drawing.Point(123, 3);
             this.flowLayoutPanelActionsGeneralVehiclesFolder.Name = "flowLayoutPanelActionsGeneralVehiclesFolder";
-            this.flowLayoutPanelActionsGeneralVehiclesFolder.Size = new System.Drawing.Size(1112, 73);
+            this.flowLayoutPanelActionsGeneralVehiclesFolder.Size = new System.Drawing.Size(1172, 73);
             this.flowLayoutPanelActionsGeneralVehiclesFolder.TabIndex = 3;
             // 
             // labelActionsGeneralVehiclesFolder1
@@ -1796,7 +1812,7 @@ namespace SemestralProject.Forms
             this.textBoxActionsGeneralVehiclesFolderActual.Location = new System.Drawing.Point(157, 3);
             this.textBoxActionsGeneralVehiclesFolderActual.Name = "textBoxActionsGeneralVehiclesFolderActual";
             this.textBoxActionsGeneralVehiclesFolderActual.ReadOnly = true;
-            this.textBoxActionsGeneralVehiclesFolderActual.Size = new System.Drawing.Size(923, 27);
+            this.textBoxActionsGeneralVehiclesFolderActual.Size = new System.Drawing.Size(949, 27);
             this.textBoxActionsGeneralVehiclesFolderActual.TabIndex = 3;
             // 
             // buttonActionsGeneralVehiclesFolder
@@ -1830,6 +1846,7 @@ namespace SemestralProject.Forms
             this.buttonActionsAbout.Size = new System.Drawing.Size(114, 73);
             this.buttonActionsAbout.TabIndex = 6;
             this.buttonActionsAbout.UseVisualStyleBackColor = true;
+            this.buttonActionsAbout.Click += new System.EventHandler(this.buttonActionsAbout_Click);
             // 
             // saveFileDialogExport
             // 

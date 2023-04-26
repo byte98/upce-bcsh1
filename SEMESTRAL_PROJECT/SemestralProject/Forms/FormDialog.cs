@@ -66,7 +66,10 @@ namespace SemestralProject.Forms
             }
         }
 
-        public Context Context { get; init; }
+        /// <summary>
+        /// Wrapper of all system resources
+        /// </summary>
+        public Context Context { get; init; } = Context.CreateEmptyContext(); // Here empty context is assigned because of otherwise Visual Studio gets warning 'Possible null reference'
 
         /// <summary>
         /// Creates new dialog

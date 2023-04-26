@@ -30,7 +30,7 @@ namespace SemestralProject.Forms
         /// <summary>
         /// Creates new dialog for choosing pictures
         /// </summary>
-        public FormPictureChooser(Context context): base("Výběr obrázku", "Vyberte obrázek", SemestralProject.Resources.is_default, context)
+        public FormPictureChooser(Context context): base("Výběr obrázku", "Vyberte obrázek", SemestralProject.Resources.pictures_chooser, context)
         {
             this.content = new ControlPictureChooser(this.Context);
             this.AddControl(content);

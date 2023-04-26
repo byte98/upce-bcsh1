@@ -341,36 +341,6 @@ namespace SemestralProject {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap icon_addis {
-            get {
-                object obj = ResourceManager.GetObject("icon_addis", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap icon_default {
-            get {
-                object obj = ResourceManager.GetObject("icon_default", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap icon_iconchooser {
-            get {
-                object obj = ResourceManager.GetObject("icon_iconchooser", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon iconchooser {
@@ -666,6 +636,16 @@ namespace SemestralProject {
         public static System.Drawing.Bitmap picture_default {
             get {
                 object obj = ResourceManager.GetObject("picture_default", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap pictures_chooser {
+            get {
+                object obj = ResourceManager.GetObject("pictures_chooser", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

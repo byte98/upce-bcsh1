@@ -71,6 +71,7 @@ namespace SemestralProject.Forms.DataFiles
         public ControlDataFileView(Context context)
         {
             InitializeComponent();
+            this.visibleData = new List<DataFile>();
             this.Context = context;
         }
 

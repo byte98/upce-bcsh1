@@ -215,6 +215,15 @@ namespace SemestralProject.Controllers
         }
 
         /// <summary>
+        /// Shows about window
+        /// </summary>
+        public void About()
+        {
+            FormAbout about = new FormAbout(this.context);
+            about.ShowDialog();
+        }
+
+        /// <summary>
         /// Refreshes view when progress is done
         /// </summary>
         /// <param name="sender">Sender of event</param>
