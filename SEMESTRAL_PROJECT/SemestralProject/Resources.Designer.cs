@@ -403,6 +403,26 @@ namespace SemestralProject {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap icon_hourglass {
+            get {
+                object obj = ResourceManager.GetObject("icon_hourglass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        public static System.Drawing.Icon icon_hourglass1 {
+            get {
+                object obj = ResourceManager.GetObject("icon_hourglass1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap icon_icons {
             get {
                 object obj = ResourceManager.GetObject("icon_icons", resourceCulture);

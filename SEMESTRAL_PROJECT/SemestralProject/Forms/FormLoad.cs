@@ -85,6 +85,7 @@ namespace SemestralProject.Forms
         /// <param name="parent">Form controlling behaviour of whole application</param>
         public FormLoad(FormMain parent, Context context)
         {
+            this.Icon = SemestralProject.Resources.icon_hourglass1;
             this.Context = context;
             this.loadingSequence = new List<LoadSequenceItem>();
             this.BuildSequence();

@@ -110,6 +110,7 @@ namespace SemestralProject.Forms
             this.HideCancelButton();
             this.DisableButtons();
             this.HideCloseButton();
+            this.Icon = SemestralProject.Resources.icon_hourglass1;
             this.Content = new ControlProgress(this.Context);
             this.AddControl(this.Content);
             this.OnOKClicked(delegate (object? sender, EventArgs e)
