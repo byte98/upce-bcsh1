@@ -96,7 +96,7 @@ namespace SemestralProject.Utils
         private List<DataFile> GetDataFiles(InformationSystem informationSystem)
         {
             List<DataFile> reti = new List<DataFile>();
-            foreach(DataFile dataFile in this.context.DataStorage.DataFiles)
+            foreach (DataFile dataFile in this.context.DataStorage.DataFiles)
             {
                 if (dataFile.InformationSystem.Id == informationSystem.Id)
                 {
@@ -105,7 +105,7 @@ namespace SemestralProject.Utils
             }
             return reti;
         }
-        
+
         /// <summary>
         /// Computes number of all needed copy operations
         /// </summary>
@@ -113,7 +113,7 @@ namespace SemestralProject.Utils
         private int ComputeCopyOperations()
         {
             int reti = 0;
-            foreach(Vehicle vehicle in this.context.DataStorage.Vehicles)
+            foreach (Vehicle vehicle in this.context.DataStorage.Vehicles)
             {
                 reti += this.GetDataFiles(vehicle.InformationSystem).Count;
             }
@@ -137,8 +137,15 @@ namespace SemestralProject.Utils
                     File.Delete(destination);
                     this.OnProgressLog(new ProgressLogEventArgs("Smazán soubor " + destination));
                 }
-                File.Copy(source, destination);
-                this.OnProgressLog(new ProgressLogEventArgs("Zkopírován soubor " + fi.Name + " do vozidla " + item.Vehicle.Name));
+                if (File.Exists(destination) == false)
+                {
+                    File.Copy(source, destination);
+                    this.OnProgressLog(new ProgressLogEventArgs("Zkopírován soubor " + fi.Name + " do vozidla " + item.Vehicle.Name));
+                }
+                else
+                {
+                    this.OnProgressLog(new ProgressLogEventArgs("Soubor " + fi.Name + " ve vozidle " + item.Vehicle.Name + " byl přeskočen (soubor již existuje)"));
+                }
             }
             else
             {
@@ -160,9 +167,9 @@ namespace SemestralProject.Utils
             int steps = this.ComputeCopyOperations();
             ushort progress = 5;
             int counter = 0;
-            foreach(Vehicle vehicle in this.context.DataStorage.Vehicles)
+            foreach (Vehicle vehicle in this.context.DataStorage.Vehicles)
             {
-                foreach(DataFile dataFile in this.GetDataFiles(vehicle.InformationSystem))
+                foreach (DataFile dataFile in this.GetDataFiles(vehicle.InformationSystem))
                 {
                     ushort final = (ushort)(5 + (ushort)Math.Round((double)counter * ((double)portion / (double)steps)));
                     counter++;

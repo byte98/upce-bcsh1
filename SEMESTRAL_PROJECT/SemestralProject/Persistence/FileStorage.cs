@@ -622,6 +622,7 @@ namespace SemestralProject.Persistence
                 reti = this.GenerateUniqueDataFile();
                 string destination = this.configuration.TempDir + Path.DirectorySeparatorChar + "_FS" + Path.DirectorySeparatorChar + "[DATAFILES]" + Path.DirectorySeparatorChar + reti;
                 File.Copy(path, destination, false);
+                this.dataFiles.Add(new DataFileWrapper(reti, destination));
                 this.Save();
             }
             return reti;

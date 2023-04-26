@@ -1303,8 +1303,8 @@ namespace SemestralProject.Persistence
                 Visual.Icon? inSystem = this.GetIcon(icon.Checksum);
                 if (inSystem == null)
                 {
-                    this.iconsDictionary.Add(icon.Name, icon.Name);
-                    this.context.FileStorage.AddIcon(icon.Path);
+                    Visual.Icon newIcon = this.context.FileStorage.AddIcon(this.tempDir + Path.DirectorySeparatorChar + "DATAFILES" + Path.DirectorySeparatorChar + icon.Path);
+                    this.iconsDictionary.Add(icon.Name, newIcon.Name);
                     this.OnProgressLog(new ProgressLogEventArgs("Importována ikona " + icon.Name));
                 }
                 else
@@ -1359,8 +1359,9 @@ namespace SemestralProject.Persistence
                 Visual.Picture? inSystem = this.GetPicture(picture.Checksum);
                 if (inSystem == null)
                 {
-                    this.picturesDictionary.Add(picture.Name, picture.Name);
-                    this.context.FileStorage.AddPicture(picture.Path);
+                    
+                    Picture newPict = this.context.FileStorage.AddPicture(this.tempDir + Path.DirectorySeparatorChar + "PICTURES" + Path.DirectorySeparatorChar + picture.Path);
+                    this.picturesDictionary.Add(picture.Name, newPict.Name);
                     this.OnProgressLog(new ProgressLogEventArgs("Importován obrázek " + picture.Name));
                 }
                 else
@@ -1415,8 +1416,7 @@ namespace SemestralProject.Persistence
                 string? inSystem = this.GetDataFileContent(dataFile.Checksum);
                 if (inSystem == null)
                 {
-                    this.dataFilesDictionary.Add(dataFile.Name, dataFile.Name);
-                    this.context.FileStorage.AddDataFile(dataFile.Path);
+                    this.dataFilesDictionary.Add(dataFile.Name, this.context.FileStorage.AddDataFile(this.tempDir + Path.DirectorySeparatorChar + "DATAFILES" + Path.DirectorySeparatorChar + dataFile.Path));
                     this.OnProgressLog(new ProgressLogEventArgs("Importován obsah datového souboru " + dataFile.Name));
                 }
                 else
@@ -1892,7 +1892,7 @@ namespace SemestralProject.Persistence
                 {
                     Data.DataFile newDataFile = new Data.DataFile(
                         this.GenerateIdentifier(FilesController.IdPrefix, this.context.DataStorage.DataFiles.OfType<AbstractData>().ToList()),
-                        rawDataFile.Name,
+                        this.dataFilesDictionary[rawDataFile.Name],
                         rawDataFile.Description,
                         this.InputPath + Path.DirectorySeparatorChar + "DATAFILES" + Path.DirectorySeparatorChar + fi.Name,
                         this.informationSystemsDictionary[rawDataFile.InformationSystem],
