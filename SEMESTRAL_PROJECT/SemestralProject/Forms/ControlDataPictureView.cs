@@ -30,7 +30,7 @@ namespace SemestralProject.Forms
         private const int LargeWidth = 300;
 
         /// <summary>
-        /// Aspect ration of images
+        /// Aspect ratio of images
         /// </summary>
         private const double AspectRatio = (9f / 16f);
 

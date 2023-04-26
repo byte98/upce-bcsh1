@@ -21,15 +21,21 @@ namespace SemestralProject.Forms
         /// </summary>
         private const int Columns = 2;
 
+
         /// <summary>
         /// Width of pictures in chooser
         /// </summary>
         private const int PictureWidth = 200;
 
         /// <summary>
+        /// Aspect ratio of images
+        /// </summary>
+        private const double AspectRatio = (9f / 16f);
+
+        /// <summary>
         /// Height of pictures in chooser
         /// </summary>
-        private const int PictureHeight = 130;
+        private int PictureHeight => (int)Math.Round((double)ControlPictureChooser.PictureWidth * (double)ControlPictureChooser.AspectRatio);
 
         /// <summary>
         /// List of all available pictures
@@ -101,10 +107,17 @@ namespace SemestralProject.Forms
             this.tableLayoutPanelPictureView.RowCount = rows;
             this.tableLayoutPanelPictureView.ColumnCount = ControlPictureChooser.Columns;
             float pct = (float)Math.Round(((double)1 / (double)this.tableLayoutPanelPictureView.ColumnCount) * (double)100);
+            this.tableLayoutPanelPictureView.ColumnStyles.Clear();
             for (int i = 0; i < this.tableLayoutPanelPictureView.ColumnCount; i++)
             {
                 this.tableLayoutPanelPictureView.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, pct));
             }
+            this.tableLayoutPanelPictureView.RowStyles.Clear();
+            for (int i = 0; i < this.tableLayoutPanelPictureView.RowCount; i++)
+            {
+                this.tableLayoutPanelPictureView.RowStyles.Add(new RowStyle(SizeType.Absolute, this.PictureHeight));
+            }
+
             foreach ((Picture picture, bool isPath, string nameOrPath) picture in pictures)
             {
                 Button button = new Button();
@@ -112,8 +125,8 @@ namespace SemestralProject.Forms
                 button.FlatAppearance.BorderColor = Color.FromKnownColor(KnownColor.Window);
                 button.FlatStyle = FlatStyle.Flat;
                 button.Width = ControlPictureChooser.PictureWidth;
-                button.Height = ControlPictureChooser.PictureHeight;
-                button.MaximumSize = new Size(int.MaxValue, ControlPictureChooser.PictureHeight);
+                button.Height = this.PictureHeight;
+                button.MaximumSize = new Size(int.MaxValue, this.PictureHeight);
                 button.Dock = DockStyle.Fill;
                 button.BackgroundImage = picture.picture.GetImage();
                 button.BackgroundImageLayout = ImageLayout.Stretch;
