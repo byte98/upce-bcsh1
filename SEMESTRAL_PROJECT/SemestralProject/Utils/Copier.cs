@@ -139,6 +139,11 @@ namespace SemestralProject.Utils
                 }
                 if (File.Exists(destination) == false)
                 {
+                    if (Directory.Exists(destination) == false)
+                    {
+                        Directory.CreateDirectory(destination);
+                        this.OnProgressLog(new ProgressLogEventArgs("Vytvořen adresář pro soubor " + fi.Name + " ve vozidle " + item.Vehicle.Name));
+                    }
                     File.Copy(source, destination);
                     this.OnProgressLog(new ProgressLogEventArgs("Zkopírován soubor " + fi.Name + " do vozidla " + item.Vehicle.Name));
                 }
