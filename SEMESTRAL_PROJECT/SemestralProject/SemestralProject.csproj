@@ -9,7 +9,12 @@
     <StartupObject>SemestralProject.Program</StartupObject>
     <Authors>Jiri Skoda &lt;jiri.skoda@student.upce.cz&gt;</Authors>
     <Company>Faculty of Electrical Engineering and Informatics, University of Pardubice</Company>
+    <ApplicationIcon>Resources\icon_default.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\icon_default.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Resources.Designer.cs">

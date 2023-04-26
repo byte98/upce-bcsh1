@@ -30,7 +30,7 @@ namespace SemestralProject.Forms
             this.Context = context;
             InitializeComponent();
             this.action = action;
-            this.Icon = SemestralProject.Resources
+            this.Icon = SemestralProject.Resources.icon_hourglass1;
         }
 
         private async void FormWait_Load(object sender, EventArgs e)
