@@ -653,5 +653,10 @@ namespace SemestralProject.Forms
                 this.actionsController.DeleteAll();
             }
         }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Context.Configuration.DeleteTemp();
+        }
     }
 }

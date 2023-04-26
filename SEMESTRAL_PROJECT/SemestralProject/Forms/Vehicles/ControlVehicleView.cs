@@ -25,6 +25,16 @@ namespace SemestralProject.Forms.Vehicles
         public Context Context { get; init; }
 
         /// <summary>
+        /// Maximal length of displayed path
+        /// </summary>
+        private const int PathMaxLength = 24;
+
+        /// <summary>
+        /// Path to vehicle
+        /// </summary>
+        private readonly string path;
+
+        /// <summary>
         /// Creates new detail viewer of vehcile
         /// </summary>
         /// <param name="context">Wrapper of all program resources</param>
@@ -38,16 +48,27 @@ namespace SemestralProject.Forms.Vehicles
             this.textBoxManufacturer.Text = vehicle.Manufacturer.Name;
             this.pictureBoxInformationSystem.Image = vehicle.InformationSystem.Icon.GetImage();
             this.textBoxInformationSystem.Text = vehicle.InformationSystem.Name;
-            this.textBoxPath.Text = vehicle.Path;
+            string vehiclePath = vehicle.Path;
+            if (vehiclePath.StartsWith(this.Context.Configuration.VehiclesRoot) == false)
+            {
+                vehiclePath = Path.GetFullPath(this.Context.Configuration.VehiclesRoot + Path.DirectorySeparatorChar + vehicle.Path);
+            }
+            this.path = vehiclePath;
+            this.textBoxPath.Text = this.path;
+            if (this.textBoxPath.Text.Length > ControlVehicleView.PathMaxLength)
+            {
+                this.textBoxPath.Text = "..." + this.textBoxPath.Text.Substring(this.textBoxPath.Text.Length - ControlVehicleView.PathMaxLength);
+            }
             this.labelName.Text = vehicle.Name;
             this.textBoxDescription.Text = vehicle.Description;
             this.textBoxCreated.Text = vehicle.Created.ToString();
             this.textBoxUpdated.Text = vehicle.Updated.ToString();
+            
         }
 
         private void buttonExplorer_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", this.textBoxPath.Text);
+            Process.Start("explorer.exe", this.path);
         }
     }
 }

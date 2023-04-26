@@ -228,6 +228,7 @@ namespace SemestralProject.Forms.Vehicles
         {
             this.InitializeComponent();
             this.Context = context;
+            this.rootPath = path;
             this.InitializeManufacturers();
             this.InitializeInformationSystems();
             this.textBoxName.Text = vehicle.Name;
@@ -239,7 +240,6 @@ namespace SemestralProject.Forms.Vehicles
             this.VehiclePicture = vehicle.Picture;
             this.buttonPicture.BackgroundImage = this.VehiclePicture.GetImage();
             this.VehiclePath = vehicle.Path;
-            this.rootPath = path;
         }
 
         /// <summary>
