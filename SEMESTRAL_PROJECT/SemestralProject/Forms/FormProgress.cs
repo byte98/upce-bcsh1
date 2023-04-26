@@ -114,8 +114,27 @@ namespace SemestralProject.Forms
             this.AddControl(this.Content);
             this.OnOKClicked(delegate (object? sender, EventArgs e)
             {
+                foreach (Form form in Application.OpenForms)
+                {
+                    if (form != this)
+                    {
+                        form.Enabled = true;
+                    }
+                }
                 this.Close();
             });
+            this.Load += FormProgress_Load;
+        }
+
+        private void FormProgress_Load(object? sender, EventArgs e)
+        {
+            foreach(Form form in Application.OpenForms)
+            {
+                if (form != this)
+                {
+                    form.Enabled = false;
+                }
+            }
         }
     }
 }

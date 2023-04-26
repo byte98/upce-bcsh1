@@ -139,13 +139,22 @@ namespace SemestralProject.Utils
                 }
                 if (File.Exists(destination) == false)
                 {
-                    if (Directory.Exists(destination) == false)
+                    string? directory = Path.GetDirectoryName(destination);
+                    if (directory != null)
                     {
-                        Directory.CreateDirectory(destination);
-                        this.OnProgressLog(new ProgressLogEventArgs("Vytvořen adresář pro soubor " + fi.Name + " ve vozidle " + item.Vehicle.Name));
+                        if (Directory.Exists(directory) == false)
+                        {
+                            Directory.CreateDirectory(destination);
+                            this.OnProgressLog(new ProgressLogEventArgs("Vytvořen adresář pro soubor " + fi.Name + " ve vozidle " + item.Vehicle.Name));
+                        }
+                        File.Copy(source, destination);
+                        this.OnProgressLog(new ProgressLogEventArgs("Zkopírován soubor " + fi.Name + " do vozidla " + item.Vehicle.Name));
                     }
-                    File.Copy(source, destination);
-                    this.OnProgressLog(new ProgressLogEventArgs("Zkopírován soubor " + fi.Name + " do vozidla " + item.Vehicle.Name));
+                    else
+                    {
+                        this.OnProgressLog(new ProgressLogEventArgs("CHYBA: Nelze najít adresář pro soubor " + fi.Name + " ve vozidle " + item.Vehicle.Name));
+                    }
+                    
                 }
                 else
                 {
