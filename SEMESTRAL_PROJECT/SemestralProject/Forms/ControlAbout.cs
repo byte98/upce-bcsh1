@@ -33,7 +33,7 @@ namespace SemestralProject.Forms
 
         private void linkLabelAuthorEmail_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("mailto:jiri.skoda@student.upce.cz");
+            //Process.Start("mailto:jiri.skoda@student.upce.cz"); This not works, not shure why
         }
     }
 }
