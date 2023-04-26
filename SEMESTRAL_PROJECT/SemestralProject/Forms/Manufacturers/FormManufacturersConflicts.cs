@@ -29,6 +29,7 @@ namespace SemestralProject.Forms.Manufacturers
             this.content = new ControlManufacturerConflict(vehicles, context);
             this.AddControl(this.content);
             this.Load += this.FormManufacturerConflicts_Load;
+            this.Icon = SemestralProject.Resources.icon_manufacturer1;
         }
 
         private void FormManufacturerConflicts_Load(object? sender, EventArgs e)

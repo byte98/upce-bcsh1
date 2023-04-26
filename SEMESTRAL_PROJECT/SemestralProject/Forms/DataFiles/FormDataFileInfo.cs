@@ -29,6 +29,7 @@ namespace SemestralProject.Forms.DataFiles
             this.content = new ControlDataFileDetail(datafile, context);
             this.AddControl(this.content);
             this.HideCancelButton();
+            this.Icon = SemestralProject.Resources.icon_file1;
         }
     }
 }

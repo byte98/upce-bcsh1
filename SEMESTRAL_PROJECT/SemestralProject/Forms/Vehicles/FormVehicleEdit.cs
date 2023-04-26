@@ -59,6 +59,7 @@ namespace SemestralProject.Forms.Vehicles
         {
             this.content = new ControlVehicle(this.Context, this.Context.Configuration.VehiclesRoot, vehicle);
             this.AddControl(content);
+            this.Icon = SemestralProject.Resources.icon_vehicle1;
         }
     }
 }

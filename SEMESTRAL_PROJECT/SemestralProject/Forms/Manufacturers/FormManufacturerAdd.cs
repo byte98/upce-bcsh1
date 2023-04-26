@@ -41,6 +41,7 @@ namespace SemestralProject.Forms.Manufacturers
         {
             this.content = new ControlDataIcon(context, Persistence.FileStorage.DefaultIconType.MANUFACTURER);
             this.AddControl(this.content);
+            this.Icon = SemestralProject.Resources.icon_manufacturer1;
         }
     }
 }

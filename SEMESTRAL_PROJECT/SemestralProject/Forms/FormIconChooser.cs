@@ -31,7 +31,7 @@ namespace SemestralProject.Forms
         {
             this.content = new ControlIconsChooser(this.Context);
             this.AddControl(this.content);
-            this.Icon = SemestralProject.Resources.iconchooser;
+            this.Icon = SemestralProject.Resources.icon_icons1;
         }
     }
 }

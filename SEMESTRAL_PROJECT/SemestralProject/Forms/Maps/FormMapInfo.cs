@@ -31,6 +31,7 @@ namespace SemestralProject.Forms.Maps
             );
             this.AddControl(this.content);
             this.HideCancelButton();
+            this.Icon = SemestralProject.Resources.icon_map1;
         }
     }
 }

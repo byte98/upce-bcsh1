@@ -30,6 +30,7 @@ namespace SemestralProject.Forms.Vehicles
             this.content = new ControlVehicleView(context, vehicle);
             this.AddControl(this.content);
             this.HideCancelButton();
+            this.Icon = SemestralProject.Resources.icon_vehicle1;
         }
     }
 }

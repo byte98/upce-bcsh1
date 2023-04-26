@@ -29,6 +29,7 @@ namespace SemestralProject.Forms.Maps
             this.content = new ControlMapConflict(files, context);
             this.AddControl(content);
             this.Load += this.FormMapConflict_OnLoad;
+            this.Icon = SemestralProject.Resources.icon_map1;
         }
 
         private void FormMapConflict_OnLoad(object? sender, EventArgs e)

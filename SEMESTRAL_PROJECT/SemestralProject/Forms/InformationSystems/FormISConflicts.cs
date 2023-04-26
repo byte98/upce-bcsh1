@@ -31,6 +31,7 @@ namespace SemestralProject.Forms.InformationSystems
             this.AddControl(this.content);
             this.TopMost = true;
             this.Load+= new EventHandler(this.FormISConflicts_Load);
+            this.Icon = SemestralProject.Resources.icon_is1;
         }
 
         private void FormISConflicts_Load(object? sender, EventArgs e)

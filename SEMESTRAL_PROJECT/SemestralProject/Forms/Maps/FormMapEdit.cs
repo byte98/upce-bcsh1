@@ -38,6 +38,7 @@ namespace SemestralProject.Forms.Maps
         {
             this.content = new ControlDataPicture(context, map);
             this.AddControl(this.content);
+            this.Icon = SemestralProject.Resources.icon_map1;
         }
     }
 }

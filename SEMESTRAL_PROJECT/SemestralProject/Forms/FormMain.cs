@@ -102,6 +102,7 @@ namespace SemestralProject.Forms
             this.vehiclesController = new VehiclesController(this.Context);
             this.filesController = new FilesController(this.Context);
             this.actionsController = new ActionsController(this.Context, this);
+            this.Icon = SemestralProject.Resources.icon_default1;
         }
 
         /// <summary>

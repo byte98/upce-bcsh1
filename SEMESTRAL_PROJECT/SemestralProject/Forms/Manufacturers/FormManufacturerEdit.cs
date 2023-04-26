@@ -46,6 +46,7 @@ namespace SemestralProject.Forms.Manufacturers
         {
             this.content = new ControlDataIcon(this.Context, manufacturer);
             this.AddControl(this.content);
+            this.Icon = SemestralProject.Resources.icon_manufacturer1;
         }
     }
 }

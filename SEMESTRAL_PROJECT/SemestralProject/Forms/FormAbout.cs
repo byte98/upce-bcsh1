@@ -28,6 +28,7 @@ namespace SemestralProject.Forms
             this.AddControl(this.content);
             this.HideCancelButton();
             this.HideCloseButton();
+            this.Icon = SemestralProject.Resources.icon_about1;
         }
     }
 }

@@ -49,6 +49,7 @@ namespace SemestralProject.Forms.DataFiles
         {
             this.content = new ControlDataFile(context, dataFile);
             this.AddControl(this.content);
+            this.Icon = SemestralProject.Resources.icon_file1;
         }
     }
 }

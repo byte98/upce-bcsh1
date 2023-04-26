@@ -68,6 +68,7 @@ namespace SemestralProject.Forms
             this.panelHeader.BackColor = this.Context.Configuration.AccentColor;
             this.panelHeader.ForeColor = this.Context.Configuration.TextColor;
             this.InitializeTreeview();
+            this.Icon = SemestralProject.Resources.icon_folder1;
         }
 
         /// <summary>

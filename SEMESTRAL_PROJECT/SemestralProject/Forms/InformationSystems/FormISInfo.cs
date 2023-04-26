@@ -25,6 +25,7 @@ namespace SemestralProject.Forms.InformationSystems
                 system.Name, system.Description, new Bitmap(system.Icon.GetImage()), system.Created, system.Updated.Date, context);
             this.AddControl(content);
             this.HideCancelButton();
+            this.Icon = SemestralProject.Resources.icon_is1;
         }
     }
 }

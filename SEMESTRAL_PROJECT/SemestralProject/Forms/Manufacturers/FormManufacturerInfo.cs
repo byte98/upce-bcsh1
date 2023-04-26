@@ -35,6 +35,7 @@ namespace SemestralProject.Forms.Manufacturers
             );
             this.AddControl(this.content);
             this.HideCancelButton();
+            this.Icon = SemestralProject.Resources.icon_manufacturer1;
         }
     }
 }

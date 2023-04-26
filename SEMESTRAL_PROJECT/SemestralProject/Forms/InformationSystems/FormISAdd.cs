@@ -42,6 +42,7 @@ namespace SemestralProject.Forms.InformationSystems
         {
             this.content = new ControlDataIcon(context, Persistence.FileStorage.DefaultIconType.IS);
             this.AddControl(content);
+            this.Icon = SemestralProject.Resources.icon_is1;
         }
     }
 }
