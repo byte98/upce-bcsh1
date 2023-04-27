@@ -30,4 +30,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+    <Target Name="CopyDataFiles" AfterTargets="Build">
+        <Message Text="Copiing data files" Importance="high" />
+        <Copy SourceFiles="DB.DAT" DestinationFolder="$(OutputPath)" ContinueOnError="true" />
+        <Copy SourceFiles="FS.DAT" DestinationFolder="$(OutputPath)" ContinueOnError="true" />
+    </Target>
 </Project>

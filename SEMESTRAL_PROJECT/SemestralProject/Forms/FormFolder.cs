@@ -153,15 +153,18 @@ namespace SemestralProject.Forms
         private void toolStripMenuItemCreate_Click(object sender, EventArgs e)
         {
             TreeNode selected = this.treeViewContent.SelectedNode;
-            TreeNode newNode = new TreeNode(this.CreateNewNodeName(selected));
-            newNode.ImageIndex = FormFolder.NodeDefault;
-            newNode.SelectedImageIndex = FormFolder.NodeSelected;
-            this.edited = newNode;
-            selected.Nodes.Add(newNode);
-            this.treeViewContent.LabelEdit = true;
-            selected.ExpandAll();
-            newNode.BeginEdit();
-            selected.ExpandAll();
+            if (selected != null)
+            {
+                TreeNode newNode = new TreeNode(this.CreateNewNodeName(selected));
+                newNode.ImageIndex = FormFolder.NodeDefault;
+                newNode.SelectedImageIndex = FormFolder.NodeSelected;
+                this.edited = newNode;
+                selected.Nodes.Add(newNode);
+                this.treeViewContent.LabelEdit = true;
+                selected.ExpandAll();
+                newNode.BeginEdit();
+                selected.ExpandAll();
+            }
         }
 
         /// <summary>

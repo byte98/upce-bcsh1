@@ -2,6 +2,7 @@
 using SemestralProject.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,11 @@ namespace SemestralProject
         private const string DataStorage = "DB.DAT";
 
         /// <summary>
+        /// Content of default INI file
+        /// </summary>
+        private const string DefaultIni = "VEHICLES_ROOT=./";
+
+        /// <summary>
         /// Context of application
         /// </summary>
         public Context Context { get; init; }
@@ -38,10 +44,22 @@ namespace SemestralProject
         /// </summary>
         public Initializer()
         {
+            this.CheckIfExists();
             Configuration config = new Configuration(Initializer.Configuration);
             FileStorage fileStorage = new FileStorage(Initializer.FileStorage, config);
             DataStorage dataStorage = new DataStorage(Initializer.DataStorage, fileStorage, config);
             this.Context = new Context(fileStorage, dataStorage, config);
+        }
+
+        /// <summary>
+        /// Checks, whether all necessary files exists. If not, creates them.
+        /// </summary>
+        private void CheckIfExists()
+        {
+            if (File.Exists(Initializer.Configuration) == false)
+            {
+                File.WriteAllText(Initializer.Configuration, Initializer.DefaultIni);
+            }
         }
     }
 }

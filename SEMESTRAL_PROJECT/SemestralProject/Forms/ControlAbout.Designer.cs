@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ControlAbout));
             this.tableLayoutPanelContent = new System.Windows.Forms.TableLayoutPanel();
             this.labelHeader1 = new System.Windows.Forms.Label();
             this.labelVersionName = new System.Windows.Forms.Label();
@@ -84,10 +83,10 @@
             this.labelHeader1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelHeader1.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelHeader1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(0)))), ((int)(((byte)(96)))));
-            this.labelHeader1.Location = new System.Drawing.Point(3, 0);
+            this.labelHeader1.Location = new System.Drawing.Point(0, 0);
             this.labelHeader1.Margin = new System.Windows.Forms.Padding(0);
             this.labelHeader1.Name = "labelHeader1";
-            this.labelHeader1.Size = new System.Drawing.Size(563, 128);
+            this.labelHeader1.Size = new System.Drawing.Size(569, 128);
             this.labelHeader1.TabIndex = 0;
             this.labelHeader1.Text = "Správce distribucí\r\ndatových souborů";
             this.labelHeader1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -122,7 +121,7 @@
             this.labelAssembyDateValue.Name = "labelAssembyDateValue";
             this.labelAssembyDateValue.Size = new System.Drawing.Size(279, 24);
             this.labelAssembyDateValue.TabIndex = 3;
-            this.labelAssembyDateValue.Text = "26/04/2023";
+            this.labelAssembyDateValue.Text = "27/04/2023";
             this.labelAssembyDateValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelAuthorValue1
@@ -199,9 +198,8 @@
             this.textBoxLicense.Multiline = true;
             this.textBoxLicense.Name = "textBoxLicense";
             this.textBoxLicense.ReadOnly = true;
-            this.textBoxLicense.Size = new System.Drawing.Size(531, 2005);
+            this.textBoxLicense.Size = new System.Drawing.Size(531, 331);
             this.textBoxLicense.TabIndex = 2;
-            this.textBoxLicense.Text = resources.GetString("textBoxLicense.Text");
             // 
             // tabPageThirdParty
             // 
@@ -221,9 +219,8 @@
             this.textBoxThirdParty.Multiline = true;
             this.textBoxThirdParty.Name = "textBoxThirdParty";
             this.textBoxThirdParty.ReadOnly = true;
-            this.textBoxThirdParty.Size = new System.Drawing.Size(555, 334);
+            this.textBoxThirdParty.Size = new System.Drawing.Size(534, 334);
             this.textBoxThirdParty.TabIndex = 0;
-            this.textBoxThirdParty.Text = "Icons by Icons8\r\nhttps://icons8.com\r\n\r\n";
             // 
             // ControlAbout
             // 

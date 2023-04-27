@@ -27,7 +27,7 @@ namespace SemestralProject.Forms.Vehicles
         /// <summary>
         /// Maximal length of displayed path
         /// </summary>
-        private const int PathMaxLength = 24;
+        private const int PathMaxLength = 16;
 
         /// <summary>
         /// Path to vehicle

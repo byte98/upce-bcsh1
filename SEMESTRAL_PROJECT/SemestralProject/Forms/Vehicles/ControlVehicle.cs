@@ -159,7 +159,7 @@ namespace SemestralProject.Forms.Vehicles
         /// <summary>
         /// Maximal length of visible path
         /// </summary>
-        private const int PathMaxLength = 48;
+        private const int PathMaxLength = 36;
 
         /// <summary>
         /// Path to directory with vehicle
@@ -277,6 +277,7 @@ namespace SemestralProject.Forms.Vehicles
                     {
                         this.VehiclePicture = this.Context.FileStorage.AddPicture(dialog.SelectedPicture);
                     }, this.Context);
+                    wait.ShowDialog();
                 }
                 else
                 {
